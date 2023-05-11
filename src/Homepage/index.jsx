@@ -1,5 +1,4 @@
 import React from 'react'
-import HeroImage from '../assets/Hero.png'
 import YourSolutionImage from '../assets/Your Solution.png'
 import HowItsWork from '../assets/How it Works.png'
 import YourAdvocate from '../assets/YourAdvocate.png'
