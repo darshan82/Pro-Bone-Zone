@@ -1,6 +1,6 @@
 import React from 'react'
 import YourSolutionImage from '../assets/Your Solution.png'
-import HowItsWork from '../assets/How it Works.png'
+import HowItsWork from '../assets/works.png'
 import YourAdvocate from '../assets/YourAdvocate.png'
 import FooterLogo from '../assets/Group 6.png'
 import Location from '../assets/Location.png'
