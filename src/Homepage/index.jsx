@@ -314,7 +314,7 @@ export default function index() {
                 name=""
                 id=""
                 placeholder="How did you hear about Pro Bono Zone?"
-                className="bg-gray-100 p-4  m-auto w-full md:w-96 lg:w-96 h-20 md:m-2"
+                className="bg-gray-100 p-4   md:w-96 lg:w-96 h-20 m-2"
               ></textarea>
             </div>
             <div className=" flex justify-center mt-3 md:justify-center lg:justify-center ">
