@@ -267,7 +267,7 @@ export default function index() {
                 </p>
               </div>
             </div>
-            <div className="py-4">
+            {/* <div className="py-4">
               <h1 className="text-[#061133] font-bold text-2xl">
                 Social Media{" "}
               </h1>
@@ -276,7 +276,7 @@ export default function index() {
                 <img src={Linkedin}></img>
                 <img src={Youtube}></img>
               </div>
-            </div>
+            </div> */}
           </div>
           <div className="w-[100%] md:w-[50%] lg:w-[50%]  ">
             <div className="flex flex-col justify-center md:flex-row lg:flex-row  flex-wrap  ">
@@ -334,7 +334,7 @@ export default function index() {
       </div>
 
       <div className="bg-[#061133] ">
-        <div className="flex flex-row justify-center items-center flex-wrap pt-8  m-2 ">
+        {/* <div className="flex flex-row justify-center items-center flex-wrap pt-8  m-2 ">
           <h1 className="text-2xl font-bold text-white px-5 ">
             Newsletter Sign Up
           </h1>
@@ -347,7 +347,7 @@ export default function index() {
               Register
             </button>
           </div>
-        </div>
+        </div> */}
         <div className="flex flex-row flex-wrap justify-center items-center md:flex-row  md:justify-evenly md:items-start lg:flex-row lg:items-start lg:justify-evenly   mt-5 py-5">
           <div className="text-white w-[250px] sm:[280px]  md:w-auto lg:w-auto">
             <img src={FooterLogo} className="w-20 md:w-40 lg:w-40"></img>
