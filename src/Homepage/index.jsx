@@ -348,7 +348,7 @@ export default function index() {
             </button>
           </div>
         </div> */}
-        <div className="flex flex-row flex-wrap justify-center items-center md:flex-row  md:justify-evenly md:items-start lg:flex-row lg:items-start lg:justify-evenly   mt-5 py-5">
+        <div className="flex flex-row flex-wrap justify-center items-center md:flex-row  md:justify-evenly md:items-start lg:flex-row lg:items-start lg:justify-evenly   py-5">
           <div className="text-white w-[250px] sm:[280px]  md:w-auto lg:w-auto">
             <img src={FooterLogo} className="w-20 md:w-40 lg:w-40"></img>
             <p className="mt-3">
