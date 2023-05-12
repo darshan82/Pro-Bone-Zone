@@ -88,6 +88,9 @@ export default function index() {
           <Button buttonText={"Schedule a Free Consultation"} />
         </div>
       </div>
+
+
+      
       <div className="flex flex-col py-7 bg-[#F0F4FF] items-center">
         <h1 className="text-3xl font-bold">COMMON PROBLEMS</h1>
         <div className="py-6 px-3  items-center flex flex-row justify-center  flex-wrap">
