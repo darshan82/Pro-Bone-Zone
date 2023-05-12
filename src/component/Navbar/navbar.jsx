@@ -1,13 +1,13 @@
 import React from 'react'
-import Logo from '../../assets/Group 6.png'
+import Logo from '../../assets/Group6.png'
 
 export default function navbar() {
   return (
-    <div className='flex flex-row justify-between items-center px-16 py-6 '>
+    <div className='hidden sm:hidden md:flex md:flex-row md:justify-between md:items-center md:px-16 md:py-3 lg:flex lg:flex-row lg:justify-between lg:items-center lg:px-16 lg:py-3 '>
     <div className=''>
       <img src={Logo} className='w-20'></img>
     </div>
-    <div className='flex flex-row justify-center items-center space-x-6 text-white text-sm '>
+    <div className='flex flex-row justify-center items-center space-x-5 text-white text-sm '>
       <p className='cursor-pointer'>Home</p>
       <p className='cursor-pointer'>About us</p>
       <p className='cursor-pointer'>FAQ</p>

@@ -1,9 +1,9 @@
 import React from 'react'
-import HowItsWork from '../../assets/works.png'
+import HowItsWork from '../../assets/HowitWorks.png'
 import Vector1 from '../../assets/Vector1.png'
 import Vector2 from '../../assets/Vector2.png'
 import Immigration from '../../assets/Immigration.png'
-// sds
+
 export default function OfferCard() {
     return (
         <div className='bg-[#F0F4FF] w-[290px] h-96 flex flex-row justify-center p-4  m-3 rounded-sm'>
