@@ -37,7 +37,7 @@ export default function index() {
       <div className="bg-[#061133] py-4" style={{paddingBottom:50}}>
         
         <Navbar />
-        <h1 className="text-center sm:text-center md:text-center lg:text-left font-inter font-bold text-white text-3xl lg:text-4xl leading-10  lg:w-[700px] w-full  my-1 lg:ml-44 pt-10">
+        <h1 className="text-center sm:text-center md:text-center lg:text-left font-inter font-bold text-white text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full  my-1 lg:ml-44 pt-10">
         BUILDING BRIDGES ELEVATING LIVES
         </h1>
         
