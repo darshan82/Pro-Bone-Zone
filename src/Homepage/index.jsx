@@ -4,6 +4,7 @@ import SolutionCard from "../component/SolutionCard/SolutionCard";
 import Button from "../component/button/button";
 import OfferCard from "../component/OfferCard/OfferCard";
 import HeroImage from "../assets/Hero.png";
+import Heading from "../assets/heading.png";
 import YourSolutionImage from "../assets/YourSolution.png";
 import Work from "../assets/Work.jpeg";
 import YourAdvocate from "../assets/YourAdvocate.png";
@@ -35,9 +36,8 @@ export default function index() {
     <>
       <div className="bg-[#061133] py-4">
         <Navbar />
-        <h1 className="text-center sm:text-center md:text-center lg:text-left font-inter font-bold text-white text-3xl lg:text-4xl leading-10  lg:w-[700px] w-full  my-1 lg:ml-44">
-          EQUAL ACCESS TO JUSTICE FOR EVERYONE
-        </h1>
+
+        <img src={Heading} className="w-[350px] mt-5 lg:ml-[60px]" style={{width:800}}></img>
 
         <div className=" flex flex-col-reverse  items-center lg:flex lg:flex-row lg:items-start mx-4 lg:ml-44  ">
           <div>
