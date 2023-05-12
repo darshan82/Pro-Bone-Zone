@@ -17,7 +17,7 @@ import FaceBook from "../assets/Facebook.png";
 import Linkedin from "../assets/Linkedin.png";
 import Time from "../assets/Time.png";
 import Date from "../assets/Date.png";
-import LocationIcon from "../assets/Loc.png";
+import LocationIcon from "../assets/loc.png";
 import PhoneIcon from "../assets/phone-icon.png";
 import EmailIcon from "../assets/em.png";
 import TheProblem from "../assets/TheProblem.png";
