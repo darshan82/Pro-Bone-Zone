@@ -1,5 +1,5 @@
 import React from 'react'
-import HowItsWork from '../../assets/HowitWorks.png'
+import HowItsWork from '../../assets/works.png'
 import Vector1 from '../../assets/Vector1.png'
 import Vector2 from '../../assets/Vector2.png'
 import Immigration from '../../assets/Immigration.png'
