@@ -34,23 +34,23 @@ import AyalaSmithDickens from "../assets/AyalaSmithDickens.png";
 export default function index() {
   return (
     <>
-      <div className="bg-[#061133] py-4">
+      <div className="bg-[#061133] py-4" style={{paddingBottom:50}}>
         
         <Navbar />
-        <h1 className="text-center sm:text-center md:text-center lg:text-left font-inter font-bold text-white text-3xl lg:text-4xl leading-10  lg:w-[700px] w-full  my-1 lg:ml-44">
-          EQUAL ACCESS TO JUSTICE FOR EVERYONE
+        <h1 className="text-center sm:text-center md:text-center lg:text-left font-inter font-bold text-white text-3xl lg:text-4xl leading-10  lg:w-[700px] w-full  my-1 lg:ml-44 pt-10">
+        BUILDING BRIDGES ELEVATING LIVES
         </h1>
         
 
         <div className=" flex flex-col-reverse  items-center lg:flex lg:flex-row lg:items-start mx-4 lg:ml-44  ">
           <div>
 
-          <p className=" text-xs text-white font-normal leading-5 mt-5 w-full  text-center lg:text-left  lg:w-[400px]  ">
+          <p className=" text-md text-white font-normal leading-5 mt-5 w-full  text-center lg:text-left  lg:w-[500px]  ">
             Confronting important legal matters head on can be a daunting task.
             Pro Bono Zone empowers you to explore your options in a safe,
             private and supportive environment. And it is FREE!
           </p>
-        <div className="  flex flex-row justify-center  lg:justify-start mt-3">
+        <div className="  flex flex-row justify-center  lg:justify-start mt-6">
         <Button buttonText={"Schedule a Free Consultation"} /> 
         </div>
           </div>
@@ -65,25 +65,25 @@ export default function index() {
         </div>
         <div className="ml-0 md:ml-16 lg:ml-16   mt-6 ">
           <h1 className="font-bold text-2xl">HOW IT WORKS </h1>
-          <li className="text-xs font-normal leading-5 text-[#414141]">
+          <li className="text-md mt-5 font-normal leading-5 text-[#414141]">
             Select an available 30-minute time slot.
           </li>
-          <li className="text-xs font-normal leading-5 text-[#414141]">
+          <li className="text-md mt-5 font-normal leading-5 text-[#414141]">
             Choose your area of interest.
           </li>
-          <li className="text-xs font-normal leading-5 text-[#414141]">
+          <li className="text-md mt-5 font-normal leading-5 text-[#414141]">
             Prepare your legal questions{" "}
           </li>
-          <li className="text-xs font-normal leading-5 text-[#414141]">
+          <li className="text-md mt-5 font-normal leading-5 text-[#414141]">
             Arrive 15 minutes early.
           </li>
-          <li className="text-xs font-normal leading-5 text-[#414141]">
+          <li className="text-md mt-5 font-normal leading-5 text-[#414141]">
             Meet our friendly staff for orientation.
           </li>
-          <li className="text-xs font-normal leading-5 text-[#414141]">
+          <li className="text-md mt-5 font-normal leading-5 text-[#414141]">
             Consult with an experienced attorney
           </li>
-          <li className="text-xs font-normal leading-5 text-[#414141]">Change your life!</li>
+          <li className="text-md mt-5 mb-5 font-normal leading-5 text-[#414141]">Change your life!</li>
           <div className="mt-4">
           </div>
           <Button buttonText={"Schedule a Free Consultation"} />
@@ -227,7 +227,7 @@ export default function index() {
         <h1 className="text-3xl font-bold mt-4 text-center py-6 ">
           Schedule A Consultation
         </h1>
-        <p className=" text-center  text-sm mt-2 px-5 mb-4 md:px-64 lg:px-64">
+        <p className=" text-center  text-md mt-2 px-4 mb-4 md:px-64 lg:px-41">
           This event will last just 4 hours, so we have limited openings. If you
           need legal advice, don't delay. Take advantage of this opportunity to
           move forward. You owe it to yourself.
@@ -348,7 +348,7 @@ export default function index() {
             </button>
           </div>
         </div> */}
-        <div className="flex flex-row flex-wrap justify-center items-center md:flex-row  md:justify-evenly md:items-start lg:flex-row lg:items-start lg:justify-evenly   py-5">
+        <div className="flex flex-row flex-wrap justify-center items-center md:flex-row  md:justify-evenly md:items-start lg:flex-row lg:items-start lg:justify-evenly   py-5" style={{paddingTop:100}}>
           <div className="text-white w-[250px] sm:[280px]  md:w-auto lg:w-auto">
             <img src={FooterLogo} className="w-20 md:w-40 lg:w-40"></img>
             <p className="mt-3">
