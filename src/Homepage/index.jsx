@@ -356,11 +356,11 @@ export default function index() {
               <br />
               All Rights Reserved{" "}
             </p>
-            {/* <div className="flex fle-row space-x-2 w-6 mt-2">
+            <div className="flex fle-row space-x-2 w-6 mt-2">
               <img src={FaceBookWhite}></img>
               <img src={LinkedinWhite}></img>
               <img src={YoutubeWhite}></img>
-            </div> */}
+            </div>
           </div>
           <div className="text-white  w-[250px] sm:[280px]  md:w-auto lg:w-auto">
             <h1 className="font-semibold">Company</h1>
