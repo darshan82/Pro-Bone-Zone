@@ -34,10 +34,12 @@ export default function index() {
   return (
     <>
       <div className="bg-[#061133] py-4">
+        
         <Navbar />
         <h1 className="text-center sm:text-center md:text-center lg:text-left font-inter font-bold text-white text-3xl lg:text-4xl leading-10  lg:w-[700px] w-full  my-1 lg:ml-44">
           EQUAL ACCESS TO JUSTICE FOR EVERYONE
         </h1>
+        
 
         <div className=" flex flex-col-reverse  items-center lg:flex lg:flex-row lg:items-start mx-4 lg:ml-44  ">
           <div>
@@ -55,9 +57,10 @@ export default function index() {
           <img src={HeroImage} className="w-[350px] mt-5 lg:ml-[60px] lg:mt-[-35px]"></img>
         </div>
       </div>
-      <div className=" flex  flex-col  items-center justify-center  sm:flex-col md:flex-row md:justify-start md:items-start  lg:flex-row lg:justify-start py-6 px-0  md:px-14 md:py-6 lg:px-14 lg:py-6">
+      <div className=" flex  flex-col  items-center justify-center  sm:flex-col md:flex-row md:justify-start md:items-start  lg:flex-row lg:justify-start py-6 px-3  md:px-14 md:py-6 lg:px-16 lg:py-24 ">
         <div className=" ">
-          <img src={Work} className=""></img>
+        <img src={Work} className="  w-[500px]  h-auto object-cover "></img>
+          {/* <img src={Work} className=""></img> */}
         </div>
         <div className="ml-0 md:ml-16 lg:ml-16   mt-6 ">
           <h1 className="font-bold text-2xl">HOW IT WORKS </h1>
