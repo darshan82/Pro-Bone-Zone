@@ -30,7 +30,7 @@ export default function navbar() {
         {isNavOpen && (
           <div className='px-6 pt-3 '>
             <p className='cursor-pointer text-white text-center my-2 block'>Home</p>
-            <p className='cursor-pointer text-white text-center my-2 block'>About us</p>
+            <p className='cursor-pointer text-white text-center my-2 block'>About</p>
             <p className='cursor-pointer text-white text-center my-2 block'>FAQ</p>
             <p className='cursor-pointer text-white text-center my-2 block'>Sponsors</p>
             <p className='cursor-pointer text-white text-center my-2 block'>Contact</p>
@@ -55,7 +55,7 @@ export default function navbar() {
         </div>
         <div className='flex flex-row justify-center items-center space-x-5 text-white text-sm '>
           <p className='cursor-pointer'>Home</p>
-          <p className='cursor-pointer'>About us</p>
+          <p className='cursor-pointer'>About</p>
           <p className='cursor-pointer'>FAQ</p>
           <p className='cursor-pointer'>Sponsors</p>
           <p className='cursor-pointer'>Contact</p>

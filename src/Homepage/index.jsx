@@ -30,41 +30,47 @@ import SmithJones from "../assets/SmithJones.png";
 import McIntoshTronton from "../assets/McIntoshTronton.png";
 import AyalaSmithDickens from "../assets/AyalaSmithDickens.png";
 
-
 export default function index() {
   return (
     <>
-      <div className="bg-[#061133] py-4" style={{paddingBottom:50}}>
-        
+      <div className="bg-[#061133] py-4" style={{ paddingBottom: 50 }}>
         <Navbar />
         <h1 className="text-center sm:text-center md:text-center lg:text-left font-inter font-bold text-white text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full  my-1 lg:ml-44 pt-10">
-        BUILDING BRIDGES ELEVATING LIVES
+          BUILDING BRIDGES ELEVATING LIVES
         </h1>
-        
 
         <div className=" flex flex-col-reverse  items-center lg:flex lg:flex-row lg:items-start mx-4 lg:ml-44  ">
           <div>
-
-          <p className=" text-md text-white font-normal leading-5 mt-5 w-full  text-center lg:text-left  lg:w-[500px]  ">
-            Confronting important legal matters head on can be a daunting task.
-            Pro Bono Zone empowers you to explore your options in a safe,
-            private and supportive environment. And it is FREE!
-          </p>
-        <div className="  flex flex-row justify-center  lg:justify-start mt-6">
-        <Button buttonText={"Schedule a Free Consultation"} /> 
-        </div>
+            <p className=" text-md text-white font-normal leading-5 mt-5 w-full px-16 lg:px-0   text-center lg:text-left  lg:w-[500px]  ">
+              Confronting important legal matters can be a daunting task. Pro
+              Bono Zone&trade; connects you with seasoned attorneys and empowers
+              you to explore your options in a safe, private and supportive
+              environment. And it is FREE!
+            </p>
+            <div className="  flex flex-row justify-center  lg:justify-start mt-14">
+            <button className="bg-[#4270FF]   py-4 px-9 text-white text-sm   rounded-lg">
+            Schedule a Free Consultation
+              </button>
+              {/* <Button buttonText={"Schedule a Free Consultation"} /> */}
+            </div>
           </div>
 
-          <img src={HeroImage} className="w-[500px] mt-5 lg:ml-[60px] lg:mt-[-35px]"></img>
+          <img
+            src={HeroImage}
+            className="w-[500px] lg:w-[35%] mt-5 lg:ml-[60px] lg:mt-[-35px]"
+          ></img>
         </div>
       </div>
-      <div className=" flex  flex-col  items-center justify-center  sm:flex-col md:flex-row md:justify-start md:items-start  lg:flex-row lg:justify-start py-6 px-3  md:px-14 md:py-6 lg:px-16 lg:py-24 ">
+      <div className=" flex  flex-col   items-center justify-center  sm:flex-col md:flex-row md:justify-start md:items-start  lg:flex-row lg:justify-start py-6 px-3  md:pl-14 md:py-6 lg:pl-40 lg:py-24 ">
         <div className=" ">
-        <img src={Work} className="  w-[550px]  h-auto object-cover "></img>
+          <img
+            src={Work}
+            className=" w-[550px] md:w-[500px] lg:w-[550px]  h-auto object-cover "
+          ></img>
           {/* <img src={Work} className=""></img> */}
         </div>
-        <div className="ml-0 md:ml-16 lg:ml-16   mt-6 ">
-          <h1 className="font-bold text-2xl">HOW IT WORKS </h1>
+        <div className="ml-0 md:ml-8 lg:ml-16    mt-6 ">
+          <h1 className="font-bold text-2xl">How It Works </h1>
           <li className="text-md mt-5 font-normal leading-5 text-[#414141]">
             Select an available 30-minute time slot.
           </li>
@@ -83,18 +89,19 @@ export default function index() {
           <li className="text-md mt-5 font-normal leading-5 text-[#414141]">
             Consult with an experienced attorney
           </li>
-          <li className="text-md mt-5 mb-5 font-normal leading-5 text-[#414141]">Change your life!</li>
-          <div className="mt-4">
-          </div>
+          <li className="text-md mt-5 mb-5 font-normal leading-5 text-[#414141]">
+            Change your life!
+          </li>
+          <div className="mt-4"></div>
           <Button buttonText={"Schedule a Free Consultation"} />
         </div>
       </div>
 
-
-      
       <div className="flex flex-col py-7 bg-[#F0F4FF] items-center">
-        <h1 className="text-3xl font-bold">COMMON PROBLEMS</h1>
-        <div className="py-6 px-3  items-center flex flex-row justify-center  flex-wrap">
+        <h1 className="text-2xl sm:text-3xl md:text-3xl lg:text-2xl font-bold mx-2">
+        Common Problems
+        </h1>
+        <div className="py-6 px-3  items-center flex flex-row justify-center lg:space-x-20  flex-wrap">
           <SolutionCard
             icon={TheProblem}
             heading={"ANXIETY"}
@@ -125,9 +132,11 @@ export default function index() {
         </div>
       </div>
 
-      <div className="flex  flex-col items-center justify-center sm:flex-col md:flex-row md:justify-evenly md:items-center lg:flex-row lg:items-center lg:justify-evenly mx-4 px-0 py-0 md:px-8 md:py-20 lg:px-8 lg:py-20">
+      <div className="flex  flex-col items-center justify-center sm:flex-col md:flex-row md:justify-evenly md:items-center lg:flex-row lg:items-center lg:justify-evenly mx-4 px-0 py-0 md:px-8 md:py-20 lg:pl-20 lg:py-20">
         <div className=" sm:w-full md:w-[50%] lg:w-[50%] ">
-          <h1 className="text-2xl font-bold text-center mt-2 md:text-left lg:text-left ">A SMART SOLUTION</h1>
+          <h1 className="text-2xl font-bold text-center mt-2 md:text-left lg:text-left ">
+          A Smart Solution
+          </h1>
           <p className="mt-8 text-[#414141]">
             Fear is a formidable opponent. But we have the power to change our
             trajectory. Pro Bono Zone gives you a convenient way to get valuable
@@ -146,7 +155,6 @@ export default function index() {
               <div className="flex  flex-row items-center flex-wrap  ">
                 <p className=" flex  flex-col items-center justify-center  bg-[#4270FF]  text-white text-2xl  w-4 h-4 rounded-lg ">
                   <img src={Tick} className="p-1"></img>
-
                 </p>
                 <p className="ml-2 text-xs md:text-lg lg:text-lg">
                   Competence{" "}
@@ -155,7 +163,6 @@ export default function index() {
               <div className="flex  flex-row items-center flex-wrap  ">
                 <p className=" flex  flex-col items-center justify-center  bg-[#4270FF]  text-white text-2xl  w-4 h-4 rounded-lg ">
                   <img src={Tick} className="p-1"></img>
-
                 </p>
                 <p className="ml-2 text-xs md:text-lg lg:text-lg">Privacy </p>
               </div>
@@ -165,7 +172,6 @@ export default function index() {
               <div className="flex  flex-row items-center flex-wrap  ">
                 <p className=" flex  flex-col items-center justify-center  bg-[#4270FF]  text-white text-2xl  w-4 h-4 rounded-lg ">
                   <img src={Tick} className="p-1"></img>
-
                 </p>
                 <p className="ml-2 text-xs md:text-lg lg:text-lg">
                   Sensitivity{" "}
@@ -174,7 +180,6 @@ export default function index() {
               <div className="flex  flex-row items-center flex-wrap  ">
                 <p className=" flex  flex-col items-center justify-center  bg-[#4270FF]  text-white text-2xl  w-4 h-4 rounded-lg ">
                   <img src={Tick} className="p-1"></img>
-
                 </p>
                 <p className="ml-2 text-xs md:text-lg lg:text-lg">
                   Affordability (It’s free!)
@@ -184,10 +189,10 @@ export default function index() {
           </div>
           <p className="mt-6 text-[#414141]">
             Ten minutes with a law student at a "free legal aid" community
-            clinic is fine if you want to understand who gets grandma's
+            clinic is fine if you want to understand who inherits grandma's
             furniture, but if you need to take care of something important or
             potentially life-changing, consult with a competent professional.
-            It's free
+            It's free.
           </p>
           <div className=" flex justify-center mt-5 md:mt-8  md:justify-start lg:mt-8 lg:justify-start ">
             <Button buttonText={"Schedule a Free Consultation"} />
@@ -210,22 +215,40 @@ export default function index() {
           {" "}
           Your Advocate
         </h1>
-        <p className=" text-center text-white text-sm mt-4 px-5 md:px-36 lg:px-36">
+        <p className=" text-center  text-white text-lg md:text-xl lg:text-xl mt-4 px-5 md:px-24 lg:px-64">
           Our vetting process ensures that your advocate will be a discrete and
           sensitive attorney from one of the most experienced firms who are
           committed to community service. You will have a full 30 minutes to
           discuss any legal questions on your mind.
         </p>
         <div className="flex flex-row justify-center  flex-wrap  mt-8">
-          <OfferCard image={SmithJones} name={'Smith Jones'} age={'45 years'} hours={'290 pro bono hours'} person={'Immigration'} />
-          <OfferCard image={AyalaSmithDickens} age={'45 years'} name={'Ayala, Smith & Dickens'} hours={'290 pro bono hours'} person={'Immigration'} />
-          <OfferCard image={McIntoshTronton} age={'45 years'} name={'McIntosh & Tronton'} hours={'290 pro bono hours'} person={'general practice'} />
+          <OfferCard
+            image={SmithJones}
+            name={"Smith Jones"}
+            age={"45 years"}
+            hours={"290 pro bono hours"}
+            person={"Immigration"}
+          />
+          <OfferCard
+            image={AyalaSmithDickens}
+            age={"45 years"}
+            name={"Ayala, Smith & Dickens"}
+            hours={"290 pro bono hours"}
+            person={"Immigration"}
+          />
+          <OfferCard
+            image={McIntoshTronton}
+            age={"45 years"}
+            name={"McIntosh & Tronton"}
+            hours={"290 pro bono hours"}
+            person={"general practice"}
+          />
         </div>
       </div>
 
       <div className=" py-16 bg-slate-100  flex  flex-col justify-center items-center ">
-        <h1 className="text-3xl font-bold mt-4 text-center py-6 ">
-          Schedule A Consultation
+        <h1 className="text-2xl font-bold mt-4 text-center py-6 ">
+        Schedule A Consultation
         </h1>
         <p className=" text-center  text-md mt-2 px-4 mb-4 md:px-64 lg:px-41">
           This event will last just 4 hours, so we have limited openings. If you
@@ -235,7 +258,7 @@ export default function index() {
 
         <div className="bg-[#ffff] px-4 py-4 md:py-10 md:px-16 lg:py-10 lg:px-16  w-[100%] md:w-[90%] lg:w-[70%] flex flex-col justify-center items-center sm:flex-col md:flex-row lg:flex-row">
           <div className="w-[100%] md:w-[50%] lg:w-[50%]  ">
-            <h1 className="text-[#061133] font-bold text-2xl">Event Venue </h1>
+            <h1 className="text-[#061133] font-bold text-2xl"> Event Info </h1>
             <div className="flex  flex-row items-center flex-wrap mt-4">
               <p className=" flex  flex-col items-center justify-center w-7  ">
                 <img src={Date}></img>
@@ -253,7 +276,9 @@ export default function index() {
               </p>
               <div className="flex  flex-col ">
                 <p className="ml-2 text-[#414141] text-sm">Time </p>
-                <p className="ml-2 text-[#061133] font-semibold text-sm">10PM - 2AM</p>
+                <p className="ml-2 text-[#061133] font-semibold text-sm">
+                  10PM - 2AM
+                </p>
               </div>
             </div>{" "}
             <div className="flex  flex-row items-center flex-wrap mt-4">
@@ -261,9 +286,31 @@ export default function index() {
                 <img src={Location}></img>
               </p>
               <div className="flex  flex-col ">
-                <p className="ml-2 text-[#414141] text-sm">Location </p>
+                <p className="ml-2 text-[#414141] text-sm">Address1 </p>
                 <p className="ml-2 text-[#061133]  font-semibold text-sm">
-                  Suite 251, 2356 Main Street, Lehi, Utah{" "}
+                  Suite 251
+                </p>
+              </div>
+            </div>
+            <div className="flex  flex-row items-center flex-wrap mt-4">
+              <p className=" flex  flex-col items-center justify-center w-7 ">
+                <img src={Location}></img>
+              </p>
+              <div className="flex  flex-col ">
+                <p className="ml-2 text-[#414141] text-sm">Address2</p>
+                <p className="ml-2 text-[#061133]  font-semibold text-sm">
+                2356 Main Street
+                </p>
+              </div>
+            </div>
+            <div className="flex  flex-row items-center flex-wrap mt-4">
+              <p className=" flex  flex-col items-center justify-center w-7 ">
+                <img src={Location}></img>
+              </p>
+              <div className="flex  flex-col ">
+                <p className="ml-2 text-[#414141] text-sm">City,State</p>
+                <p className="ml-2 text-[#061133]  font-semibold text-sm">
+                Lehi, Utah
                 </p>
               </div>
             </div>
@@ -348,69 +395,66 @@ export default function index() {
             </button>
           </div>
         </div> */}
-        <div className="flex flex-row flex-wrap justify-center items-center md:flex-row  md:justify-evenly md:items-start lg:flex-row lg:items-start lg:justify-evenly   py-5" style={{paddingTop:100}}>
-          <div className="text-white w-[250px] sm:[280px]  md:w-auto lg:w-auto">
+        <div
+          className="flex flex-row flex-wrap justify-center items-center text-center md:text-left lg:text-left md:flex-row  md:justify-evenly md:items-start lg:flex-row lg:items-start lg:justify-evenly   py-5 lg:pb-28"
+          style={{ paddingTop: 100 }}
+        >
+          <div className="text-white flex flex-col items-center md:items-start  lg:items-start    py-4 h-56 w-[250px] sm:[280px]  md:w-auto lg:w-auto">
             <img src={FooterLogo} className="w-20 md:w-40 lg:w-40"></img>
-            <p className="mt-3">
-              © Copyright 2023 - ProBonoZoneTM
+            <p className="mt-3 text-[#727581]">
+            &copy; 2023 Pro Bono Zone&trade;
+              {/* © Copyright 2023 - ProBonoZoneTM */}
               <br />
               All Rights Reserved{" "}
             </p>
-            <div className="flex fle-row space-x-2 w-6 mt-2">
+            <div className="flex flex-row  space-x-2 w-6   ml-[-50px] lg:ml-[0px] mt-2">
               <img src={FaceBookWhite}></img>
               <img src={LinkedinWhite}></img>
               <img src={YoutubeWhite}></img>
             </div>
           </div>
-          <div className="text-white  w-[250px] sm:[280px]  md:w-auto lg:w-auto">
+          <div className="py-4 h-56 w-[250px] sm:[280px]  md:w-auto lg:w-auto text-[#727581]">
             <h1 className="font-semibold">Company</h1>
             <p className="mt-3">Home</p>
-            <p className="mt-3">About us</p>
+            <p className="mt-3">About</p>
             <p className="mt-3">FAQ</p>
-            <p className="mt-3">Sponcers</p>
+            <p className="mt-3">Sponsors</p>
             <p className="mt-3">Contact</p>
           </div>
 
-          <div className="text-white  w-[250px] sm:[280px]  md:w-auto lg:w-auto">
+          <div className=" py-4 h-56  w-[250px] sm:[280px]  md:w-auto lg:w-auto text-[#727581]">
             <h1 className="font-semibold">Support</h1>
             <p className="mt-3">Help Center</p>
             <p className="mt-3">Terms or Service</p>
             <p className="mt-3">Legal</p>
-            <p className="mt-3">Privicy Policy</p>
+            <p className="mt-3">Privacy Policy</p>
           </div>
 
-          <div className="text-white  w-[250px] sm:[280px]  md:w-auto lg:w-auto">
+          <div className=" flex flex-col items-center md:items-start  text-[#727581]  py-4 h-56   w-[250px] sm:[280px]  md:w-auto lg:w-auto">
             <h1 className="font-semibold">Reach us</h1>
-            <div className="flex  flex-row items-center flex-wrap mt-4">
-              <p className=" flex  flex-col items-center justify-center w-4  ">
+            <div className="flex  flex-row  items-center flex-wrap mt-4 text-[#727581]">
+              <p className=" flex  flex-col  items-center justify-center w-4  ">
                 <img src={Email}></img>
               </p>
-              <p className="ml-2 text-white text-sm">hello@PBZ.com </p>
+              <p className="ml-2  text-sm">hello@PBZ.com </p>
             </div>
             <div className="flex  flex-row items-center flex-wrap mt-4">
               <p className=" flex  flex-col items-center justify-center w-4  ">
                 <img src={PhoneIcon}></img>
               </p>
-              <p className="ml-2 text-white text-sm">+1 987 654 3210 </p>
+              <p className="ml-2 text-[#727581] text-sm">+1 987 654 3210 </p>
             </div>
             <div className="flex  flex-row items-center flex-wrap mt-4">
               <p className=" flex  flex-col items-center justify-center w-4  ">
                 <img src={LocationIcon}></img>
               </p>
-              <p className="ml-2 text-white text-sm">
+              <p className="ml-2 text-[#727581] text-sm">
                 SLC Hilton 2345 Skyview Ave. SLC.{" "}
               </p>
             </div>
           </div>
         </div>
-   
-
-
-
-
       </div>
-
-
     </>
   );
 }
