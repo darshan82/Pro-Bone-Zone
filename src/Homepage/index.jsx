@@ -93,7 +93,10 @@ export default function index() {
             Change your life!
           </li>
           <div className="mt-4"></div>
-          <Button buttonText={"Schedule a Free Consultation"} />
+          <button className="bg-[#4270FF]   py-4 px-9 text-white text-sm   rounded-lg">
+            Schedule a Free Consultation
+              </button>
+          {/* <Button buttonText={"Schedule a Free Consultation"} /> */}
         </div>
       </div>
 
