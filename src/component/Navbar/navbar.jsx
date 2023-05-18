@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 // import Logo from '../../assets/Group6.png'
-import Logo from '../../assets/mainLogo.png'
+import Logo from "../../assets/MainLogo.png";
 
 export default function navbar() {
   
@@ -13,7 +13,7 @@ export default function navbar() {
       <nav className='bg-[#EAEFF8] pt py-4 md:hidden'>
         <div className='flex justify-between px-6'>
           <div>
-            <img src={Logo} className='w-16' alt='logo' />
+            <img src={Logo} className='w-44 ' alt='logo' />
           </div>
           <button
             onClick={() => setIsNavOpen(!isNavOpen)}
@@ -52,7 +52,7 @@ export default function navbar() {
       {/* Desktop Navigation */}
       <nav className='hidden md:flex md:flex-row md:justify-between md:items-center md:px-16 md:py-3 lg:flex lg:flex-row lg:justify-between lg:items-center lg:px-16 lg:py-3'>
         <div className=''>
-          <img src={Logo} className='w-20' alt='logo' />
+          <img src={Logo} className='w-44' alt='logo' />
         </div>
         <div className='flex flex-row justify-center items-center space-x-5 text-white text-sm '>
           <p className='cursor-pointer text-black'>Home</p>

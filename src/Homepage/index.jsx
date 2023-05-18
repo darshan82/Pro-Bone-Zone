@@ -3,7 +3,7 @@ import Navbar from "../component/Navbar/navbar";
 import SolutionCard from "../component/SolutionCard/SolutionCard";
 import Button from "../component/button/button";
 import OfferCard from "../component/OfferCard/OfferCard";
-import HeroImage from "../assets/Hero.jpeg";
+import HeroImage from "../assets/Hero.png";
 import Heading from "../assets/heading.png";
 import YourSolutionImage from "../assets/YourSolution.png";
 import Work from "../assets/Work.jpeg";
@@ -29,9 +29,9 @@ import Tick from "../assets/Tick.png";
 import SmithJones from "../assets/SmithJones.png";
 import McIntoshTronton from "../assets/McIntoshTronton.png";
 import AyalaSmithDickens from "../assets/AyalaSmithDickens.png";
-import Logo from "../assets/mainLogo.png";
+import Logo from "../assets/MainLogo.png";
 import YouTube from "react-youtube";
-const videId='vD8X8qvhRxQ'
+const videId = "vD8X8qvhRxQ";
 export default function index() {
   const formRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -46,8 +46,8 @@ export default function index() {
         <Navbar />
         {/* Hero Section */}
         <div className="lg:ml-44">
-          <h1 className="text-center text-[#2E5FB7] sm:text-center md:text-center lg:text-left font-inter font-bold  text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full  my-1  pt-10">
-            CONNECTING, EMPOERING & ELEVATING LIVES
+          <h1 className="text-center text-[#2E5FB7] sm:text-center md:text-center lg:text-left font-inter font-semibold  text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full  my-1  pt-10">
+            Connecting. Empowering. Elevating Lives.
           </h1>
 
           <div className=" flex flex-col-reverse  items-center lg:flex lg:flex-row lg:items-start    ">
@@ -80,21 +80,16 @@ export default function index() {
       {/* How its work Section */}
       <div className=" py-6 md:py-6 lg:py-24 bg-[#2E5FB7] ">
         <div className=" flex  flex-col   items-center justify-center   sm:flex-col md:flex-row md:justify-start md:items-start  lg:flex-row lg:justify-start lg:ml-44 ">
-          
-            
-              <YouTube
-              className= "hidden md:inline-block  "
-              videoId={videId}
-                controls={true}
-              //  playsinline={true}
-                onReady={() => setIsPlaying(true)}
-              />
-              
-            
-           
+          <YouTube
+            className="hidden md:inline-block  "
+            videoId={videId}
+            controls={true}
+            //  playsinline={true}
+            onReady={() => setIsPlaying(true)}
+          />
 
-            {/* <img src={Work} className=""></img> */}
-          
+          {/* <img src={Work} className=""></img> */}
+
           <div className="ml-0 md:ml-8 lg:ml-16    mt-6 ">
             <h1 className="font-bold text-2xl text-white">How It Works </h1>
             <li className="text-md mt-5 font-normal leading-5 text-white">
@@ -408,7 +403,7 @@ export default function index() {
               ></input>
             </div>
             <div className="flex flex-col justify-center md:flex-row lg:flex-row  flex-wrap  ">
-              <select className="py-2 px-10 bg-gray-100 text-sm text-[#414141] rounded-sm m-2">
+              <select className="py-2 px-10  bg-gray-100 text-sm text-[#414141] rounded-sm m-2">
                 <option value="family-law">Family Law</option>
                 <option value="business-law">Business Law</option>
               </select>
@@ -417,7 +412,7 @@ export default function index() {
                 className="py-2 px-3 bg-gray-100  text-sm text-[#414141] rounded-sm m-2"
                 placeholder="Category"
               ></input> */}
-              <select className="py-2 px-8 bg-gray-100 text-sm text-[#414141] rounded-sm m-2">
+              <select className="py-2 px-7  bg-gray-100 text-sm text-[#414141] rounded-sm m-2">
                 <option value="">Select a time slot</option>
                 <option value="10:00">10:00 a.m.</option>
                 <option value="10:30">10:30 a.m.</option>
