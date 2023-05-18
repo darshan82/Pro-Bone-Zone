@@ -29,7 +29,7 @@ import Tick from "../assets/Tick.png";
 import SmithJones from "../assets/SmithJones.png";
 import McIntoshTronton from "../assets/McIntoshTronton.png";
 import AyalaSmithDickens from "../assets/AyalaSmithDickens.png";
-import Logo from "../assets/MainLogo.png";
+import Logo from "../assets/Logo.png";
 import YouTube from "react-youtube";
 const videId = "vD8X8qvhRxQ";
 export default function index() {

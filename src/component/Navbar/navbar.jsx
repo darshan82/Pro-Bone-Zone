@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 // import Logo from '../../assets/Group6.png'
-import Logo from "../../assets/MainLogo.png";
+import Logo from "../../assets/Logo.png";
 
 export default function navbar() {
   
@@ -17,9 +17,9 @@ export default function navbar() {
           </div>
           <button
             onClick={() => setIsNavOpen(!isNavOpen)}
-            className='flex items-center text-white focus:outline-none'
+            className='flex items-center  text-white focus:outline-none'
           >
-            <svg className='h-6 w-6 fill-current' viewBox='0 0 24 24'>
+            <svg className='h-6 w-6 fill-current text-[#EC672C]' viewBox='0 0 24 24'>
               <path
                 fillRule='evenodd'
                 clipRule='evenodd'
