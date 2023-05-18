@@ -1,9 +1,9 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Navbar from "../component/Navbar/navbar";
 import SolutionCard from "../component/SolutionCard/SolutionCard";
 import Button from "../component/button/button";
 import OfferCard from "../component/OfferCard/OfferCard";
-import HeroImage from "../assets/Hero.png";
+import HeroImage from "../assets/Hero.jpeg";
 import Heading from "../assets/heading.png";
 import YourSolutionImage from "../assets/YourSolution.png";
 import Work from "../assets/Work.jpeg";
@@ -29,9 +29,12 @@ import Tick from "../assets/Tick.png";
 import SmithJones from "../assets/SmithJones.png";
 import McIntoshTronton from "../assets/McIntoshTronton.png";
 import AyalaSmithDickens from "../assets/AyalaSmithDickens.png";
-
+import Logo from "../assets/mainLogo.png";
+import YouTube from "react-youtube";
+const videId='vD8X8qvhRxQ'
 export default function index() {
   const formRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const handleClick = () => {
     formRef.current.focus();
@@ -39,17 +42,17 @@ export default function index() {
   };
   return (
     <>
-      <div className="bg-[#061133] pt-4 pb-5">
+      <div className="bg-[#EAEFF8] pt-4 pb-5">
         <Navbar />
         {/* Hero Section */}
         <div className="lg:ml-44">
-          <h1 className="text-center sm:text-center md:text-center lg:text-left font-inter font-bold text-white text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full  my-1  pt-10">
-            BUILDING BRIDGES ELEVATING LIVES
+          <h1 className="text-center text-[#2E5FB7] sm:text-center md:text-center lg:text-left font-inter font-bold  text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full  my-1  pt-10">
+            CONNECTING, EMPOERING & ELEVATING LIVES
           </h1>
 
           <div className=" flex flex-col-reverse  items-center lg:flex lg:flex-row lg:items-start    ">
             <div>
-              <p className=" text-md text-white font-normal leading-5 mt-5 w-full px-16 lg:px-0   text-center lg:text-left  lg:w-[500px]  ">
+              <p className=" text-md text-[#414141] font-normal leading-5 mt-5 w-full px-16 lg:px-0   text-center lg:text-left  lg:w-[500px]  ">
                 Confronting important legal matters can be a daunting task. Pro
                 Bono Zone&trade; connects you with seasoned attorneys and
                 empowers you to explore your options in a safe, private and
@@ -75,41 +78,49 @@ export default function index() {
       </div>
 
       {/* How its work Section */}
-      <div className=" py-6 md:py-6 lg:py-24 ">
+      <div className=" py-6 md:py-6 lg:py-24 bg-[#2E5FB7] ">
         <div className=" flex  flex-col   items-center justify-center   sm:flex-col md:flex-row md:justify-start md:items-start  lg:flex-row lg:justify-start lg:ml-44 ">
-          <div className="">
-            <img
-              src={Work}
-              className=" w-[550px] md:w-[500px] lg:w-[550px]  h-auto object-cover "
-            ></img>
+          
+            
+              <YouTube
+              className= "hidden md:inline-block  "
+              videoId={videId}
+                controls={true}
+              //  playsinline={true}
+                onReady={() => setIsPlaying(true)}
+              />
+              
+            
+           
+
             {/* <img src={Work} className=""></img> */}
-          </div>
+          
           <div className="ml-0 md:ml-8 lg:ml-16    mt-6 ">
-            <h1 className="font-bold text-2xl">How It Works </h1>
-            <li className="text-md mt-5 font-normal leading-5 text-[#414141]">
+            <h1 className="font-bold text-2xl text-white">How It Works </h1>
+            <li className="text-md mt-5 font-normal leading-5 text-white">
               Select an available 30-minute time slot.
             </li>
-            <li className="text-md mt-5 font-normal leading-5 text-[#414141]">
+            <li className="text-md mt-5 font-normal leading-5 text-white">
               Choose your area of interest.
             </li>
-            <li className="text-md mt-5 font-normal leading-5 text-[#414141]">
+            <li className="text-md mt-5 font-normal leading-5 text-white">
               Prepare your legal questions{" "}
             </li>
-            <li className="text-md mt-5 font-normal leading-5 text-[#414141]">
+            <li className="text-md mt-5 font-normal leading-5 text-white">
               Arrive 15 minutes early.
             </li>
-            <li className="text-md mt-5 font-normal leading-5 text-[#414141]">
+            <li className="text-md mt-5 font-normal leading-5 text-white">
               Meet our friendly staff for orientation.
             </li>
-            <li className="text-md mt-5 font-normal leading-5 text-[#414141]">
+            <li className="text-md mt-5 font-normal leading-5 text-white">
               Consult with an experienced attorney
             </li>
-            <li className="text-md mt-5 mb-5 font-normal leading-5 text-[#414141]">
+            <li className="text-md mt-5 mb-5 font-normal leading-5 text-white">
               Change your life!
             </li>
             <div className="mt-4"></div>
             <button
-              className="bg-[#4270FF]   py-4 px-9 text-white text-sm   rounded-lg"
+              className="bg-[#EC672C] py-4 px-9 text-white text-sm   rounded-lg"
               onClick={handleClick}
             >
               Schedule a Free Consultation
@@ -319,7 +330,7 @@ export default function index() {
               <div className="flex  flex-col ">
                 <p className="ml-2 text-[#414141] text-sm">Time </p>
                 <p className="ml-2 text-[#061133] font-semibold text-sm">
-                  10PM - 2AM
+                  10AM - 2PM.
                 </p>
               </div>
             </div>{" "}
@@ -397,16 +408,26 @@ export default function index() {
               ></input>
             </div>
             <div className="flex flex-col justify-center md:flex-row lg:flex-row  flex-wrap  ">
-              <input
+              <select className="py-2 px-10 bg-gray-100 text-sm text-[#414141] rounded-sm m-2">
+                <option value="family-law">Family Law</option>
+                <option value="business-law">Business Law</option>
+              </select>
+              {/* <input
                 type="text"
                 className="py-2 px-3 bg-gray-100  text-sm text-[#414141] rounded-sm m-2"
                 placeholder="Category"
-              ></input>
-              <input
-                type="text"
-                className="py-2 px-3 bg-gray-100  text-sm text-[#414141] rounded-sm m-2"
-                placeholder="Time"
-              ></input>
+              ></input> */}
+              <select className="py-2 px-8 bg-gray-100 text-sm text-[#414141] rounded-sm m-2">
+                <option value="">Select a time slot</option>
+                <option value="10:00">10:00 a.m.</option>
+                <option value="10:30">10:30 a.m.</option>
+                <option value="11:00">11:00 a.m.</option>
+                <option value="11:30">11:30 a.m.</option>
+                <option value="12:00">12:00 p.m.</option>
+                <option value="12:30">12:30 p.m.</option>
+                <option value="13:00">1:00 p.m.</option>
+                <option value="13:30">1:30 p.m.</option>
+              </select>
             </div>
 
             <div className="flex flex-col justify-center md:flex-row lg:flex-row  flex-wrap  ">
@@ -418,7 +439,7 @@ export default function index() {
               ></textarea>
             </div>
             <div className=" flex justify-center mt-3 md:justify-center lg:justify-center ">
-              <button className="bg-[#4270FF] w-full  py-2 rounded-lg text-white text-sm mx-1 lg:mx-4 lg:w-96">
+              <button className="bg-[#EC672C] w-full  py-2 rounded-lg text-white text-sm mx-1 lg:mx-4 lg:w-96">
                 Count Me In
               </button>
             </div>
@@ -446,21 +467,21 @@ export default function index() {
           style={{ paddingTop: 100 }}
         >
           <div className="text-white flex flex-col items-center md:items-start  lg:items-start    py-4 h-56 w-[250px] sm:[280px]  md:w-auto lg:w-auto">
-            <img src={FooterLogo} className="w-20 md:w-40 lg:w-40"></img>
-            <p className="mt-3 text-[#727581]">
+            <img src={Logo} className="w-20 md:w-40 lg:w-40"></img>
+            {/* <p className="mt-3 text-[#727581]">
               &copy; 2023 Pro Bono Zone&trade;
-              {/* © Copyright 2023 - ProBonoZoneTM */}
+             
               <br />
               All Rights Reserved{" "}
-            </p>
-            <div className="flex flex-row  space-x-2 w-6   ml-[-50px] lg:ml-[0px] mt-2">
+            </p> */}
+            {/* <div className="flex flex-row  space-x-2 w-6   ml-[-50px] lg:ml-[0px] mt-2">
               <img src={FaceBookWhite}></img>
               <img src={LinkedinWhite}></img>
               <img src={YoutubeWhite}></img>
-            </div>
+            </div> */}
           </div>
           <div className="py-4 h-56 w-[250px] sm:[280px]  md:w-auto lg:w-auto text-[#727581]">
-            <h1 className="font-semibold">Company</h1>
+            <h1 className="font-semibold">Website</h1>
             <p className="mt-3">Home</p>
             <p className="mt-3">About</p>
             <p className="mt-3">FAQ</p>
@@ -469,34 +490,45 @@ export default function index() {
           </div>
 
           <div className=" py-4 h-56  w-[250px] sm:[280px]  md:w-auto lg:w-auto text-[#727581]">
-            <h1 className="font-semibold">Support</h1>
+            <h1 className="font-semibold">Legal</h1>
             <p className="mt-3">Help Center</p>
-            <p className="mt-3">Terms or Service</p>
-            <p className="mt-3">Legal</p>
+            <p className="mt-3">Terms of Service</p>
+            {/* <p className="mt-3">Legal</p> */}
             <p className="mt-3">Privacy Policy</p>
+            <p className="mt-3 text-[#727581]">
+              &copy; 2023 Pro Bono Zone&trade;
+              <br />
+              All Rights Reserved{" "}
+            </p>
           </div>
 
           <div className=" flex flex-col items-center md:items-start  text-[#727581]  py-4 h-56   w-[250px] sm:[280px]  md:w-auto lg:w-auto">
-            <h1 className="font-semibold">Reach us</h1>
+            <h1 className="font-semibold">Connect</h1>
             <div className="flex  flex-row  items-center flex-wrap mt-4 text-[#727581]">
               <p className=" flex  flex-col  items-center justify-center w-4  ">
                 <img src={Email}></img>
               </p>
-              <p className="ml-2  text-sm">hello@PBZ.com </p>
+              <p className="ml-2  text-sm">contact@probonozone.com </p>
             </div>
-            <div className="flex  flex-row items-center flex-wrap mt-4">
+            {/* <div className="flex  flex-row items-center flex-wrap mt-4">
               <p className=" flex  flex-col items-center justify-center w-4  ">
                 <img src={PhoneIcon}></img>
               </p>
               <p className="ml-2 text-[#727581] text-sm">+1 987 654 3210 </p>
-            </div>
+            </div> */}
+
             <div className="flex  flex-row items-center flex-wrap mt-4">
               <p className=" flex  flex-col items-center justify-center w-4  ">
                 <img src={LocationIcon}></img>
               </p>
               <p className="ml-2 text-[#727581] text-sm">
-                SLC Hilton 2345 Skyview Ave. SLC.{" "}
+                Salt Lake City, Utah.{" "}
               </p>
+            </div>
+            <div className="flex flex-row  space-x-2 w-6   ml-[-50px] lg:ml-[0px] mt-5">
+              <img src={FaceBookWhite}></img>
+              <img src={LinkedinWhite}></img>
+              <img src={YoutubeWhite}></img>
             </div>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
-import Logo from '../../assets/Group6.png'
+// import Logo from '../../assets/Group6.png'
+import Logo from '../../assets/mainLogo.png'
 
 export default function navbar() {
   
@@ -9,7 +10,7 @@ export default function navbar() {
   return (
     <>
       {/* Mobile Navigation */}
-      <nav className='bg-[#061133] py-4 md:hidden'>
+      <nav className='bg-[#EAEFF8] pt py-4 md:hidden'>
         <div className='flex justify-between px-6'>
           <div>
             <img src={Logo} className='w-16' alt='logo' />
@@ -29,18 +30,18 @@ export default function navbar() {
         </div>
         {isNavOpen && (
           <div className='px-6 pt-3 '>
-            <p className='cursor-pointer text-white text-center my-2 block'>Home</p>
-            <p className='cursor-pointer text-white text-center my-2 block'>About</p>
-            <p className='cursor-pointer text-white text-center my-2 block'>FAQ</p>
-            <p className='cursor-pointer text-white text-center my-2 block'>Sponsors</p>
-            <p className='cursor-pointer text-white text-center my-2 block'>Contact</p>
+            <p className='cursor-pointer text-black text-center my-2 block'>Home</p>
+            <p className='cursor-pointer text-black text-center my-2 block'>About</p>
+            <p className='cursor-pointer text-black text-center my-2 block'>FAQ</p>
+            <p className='cursor-pointer text-black text-center my-2 block'>Sponsors</p>
+            <p className='cursor-pointer text-black text-center my-2 block'>Contact</p>
             <div className='flex justify-center '>
-              <button className='bg-[#4270FF] px-8 py-2 w-44 rounded-sm text-white my-2 block'>
+              <button className='bg-[#EC672C] px-8 py-2 w-44 rounded-sm text-white my-2 block'>
                 Register
               </button>
             </div>
             <div className='flex justify-center'>
-              <button className='border border-white px-8 py-2 w-44 rounded-sm text-white my-2 block'>
+              <button className='border border-[#EC672C] px-8 py-2 w-44 rounded-sm text-[#EC672C] my-2 block'>
                 Login
               </button>
             </div>
@@ -54,15 +55,15 @@ export default function navbar() {
           <img src={Logo} className='w-20' alt='logo' />
         </div>
         <div className='flex flex-row justify-center items-center space-x-5 text-white text-sm '>
-          <p className='cursor-pointer'>Home</p>
-          <p className='cursor-pointer'>About</p>
-          <p className='cursor-pointer'>FAQ</p>
-          <p className='cursor-pointer'>Sponsors</p>
-          <p className='cursor-pointer'>Contact</p>
-          <button className='border border-white px-8 py-2 rounded-sm cursor-pointer'>
+          <p className='cursor-pointer text-black'>Home</p>
+          <p className='cursor-pointer text-black'>About</p>
+          <p className='cursor-pointer text-black'>FAQ</p>
+          <p className='cursor-pointer text-black'>Sponsors</p>
+          <p className='cursor-pointer text-black'>Contact</p>
+          <button className='border border-[#EC672C] text-[#EC672C] px-8 py-2 rounded-sm cursor-pointer'>
             Login
           </button>
-          <button className='bg-[#4270FF] px-8 py-2 rounded-sm'>Register</button>
+          <button className='bg-[#EC672C] px-8 py-2 rounded-sm'>Register</button>
         </div>
       </nav>
     </>
