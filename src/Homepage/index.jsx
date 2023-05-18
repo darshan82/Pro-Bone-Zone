@@ -462,7 +462,7 @@ export default function index() {
           style={{ paddingTop: 100 }}
         >
           <div className="text-white flex flex-col items-center md:items-start  lg:items-start    py-4 h-56 w-[250px] sm:[280px]  md:w-auto lg:w-auto">
-            <img src={Logo} className="w-20 md:w-40 lg:w-40"></img>
+            <img src={Logo} className="w-40 md:w-44 lg:w-40"></img>
             {/* <p className="mt-3 text-[#727581]">
               &copy; 2023 Pro Bono Zone&trade;
              
