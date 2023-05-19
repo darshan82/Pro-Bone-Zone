@@ -4,6 +4,7 @@ import SolutionCard from "../component/SolutionCard/SolutionCard";
 import Button from "../component/button/button";
 import OfferCard from "../component/OfferCard/OfferCard";
 import HeroImage from "../assets/Hero.png";
+import HeroImageLessBorder from "../assets/HerolessBorder.png";
 import Heading from "../assets/heading.png";
 import YourSolutionImage from "../assets/YourSolution.png";
 import Work from "../assets/Work.jpeg";
@@ -69,28 +70,41 @@ export default function index() {
               </div>
             </div>
 
-            <img
+           
+             <img
               src={HeroImage}
-              className="w-[500px] lg:w-[35%] mt-5 lg:ml-[60px] lg:mt-[-35px]"
+              className="hidden lg:block md:block md: w-[500px] lg:w-[35%] mt-5 lg:ml-[60px] lg:mt-[-35px]"
+             // className=" w-[500px] lg:w-[35%] mt-5 lg:ml-[60px] lg:mt-[-35px]"
             ></img>
+            <img src={HeroImageLessBorder}
+            className="sm:block sm:w-[500px] md:hidden lg:hidden"
+            />
           </div>
         </div>
       </div>
 
       {/* How its work Section */}
       <div className=" py-6 md:py-6 lg:py-24 bg-[#2E5FB7] ">
-        <div className=" flex  flex-col   items-center justify-center   sm:flex-col md:flex-row md:justify-start md:items-start  lg:flex-row lg:justify-start lg:ml-44 ">
-          <YouTube
-            className="hidden md:inline-block  "
-            videoId={videId}
-            controls={true}
-            //  playsinline={true}
-            onReady={() => setIsPlaying(true)}
-          />
-
+        <div
+          // className="w-full md:w-2/3 lg:w-1/2 xl:w-1/3 mx-auto"
+          className=" flex  flex-col   items-center justify-center   sm:flex-col md:flex-row md:justify-start md:items-start  lg:flex-row lg:justify-start md:ml-20 lg:ml-44 "
+        >
+          <div className="sm:w-96 md:w-[338px] lg:w-[450px]">
+            <YouTube
+              //  className=" max-h-96  max-w-sm"
+              videoId={videId}
+              controls={true}
+              opts={{
+                width: "110%",
+                height: "400px",
+              }}
+              //  playsinline={true}
+              onReady={() => setIsPlaying(true)}
+            />
+          </div>
           {/* <img src={Work} className=""></img> */}
 
-          <div className="ml-0 md:ml-8 lg:ml-16    mt-6 ">
+          <div className="ml-0 md:ml-10 lg:ml-20    mt-6 ">
             <h1 className="font-bold text-2xl text-white">How It Works </h1>
             <li className="text-md mt-5 font-normal leading-5 text-white">
               Select an available 30-minute time slot.
@@ -126,8 +140,8 @@ export default function index() {
       </div>
       {/* Solution Boxes */}
       <div className="flex flex-col py-7  bg-[#F0F4FF] ">
-        <div className=" flex flex-col lg:ml-44 lg:w-[80%]  ">
-          <h1 className="text-2xl font-bold text-center mx-2 sm:text-3xl md:text-3xl lg:text-2xl lg:mx-0 ">
+        <div className=" flex flex-col lg:ml-44 lg:w-[80%] my-6 ">
+          <h1 className="text-[#414141] text-2xl font-bold text-center mx-2 sm:text-3xl md:text-3xl lg:text-2xl lg:mx-0 mb-10 ">
             Common Problems
           </h1>
           <div className="py-6  flex flex-row items-center justify-center   lg:justify-between flex-wrap ">
@@ -135,8 +149,7 @@ export default function index() {
               icon={TheProblem}
               heading={"ANXIETY"}
               para="Why do we hesitate to talk with an attorney? We are embarrassed.
-            We fear judgement and insensitivity. We avoid change and commitment.
-            We worry about the cost."
+            We fear judgement and insensitivity."
             />
             <SolutionCard
               icon={Procrastination}
@@ -156,17 +169,17 @@ export default function index() {
               icon={Solution}
               heading={"EMERGENCY "}
               para=" There may also be times when a legal situation is thrust upon
-            us suddenly and we don't know where to start or who to talk to"
+            us suddenly and we don't know where to start or who to talk to."
             />
           </div>
         </div>
       </div>
 
       {/* A Smart Solution */}
-      <div className="   py-0 px-4 md:px-0  md:py-20 lg:px-0 lg:py-20">
+      <div className="   py-0 px-4 md:px-0  md:py-10 lg:px-0 lg:py-10">
         <div className=" flex  flex-col items-center justify-center lg:ml-44 sm:flex-col md:flex-row md:justify-start  md:items-center lg:flex-row lg:items-center lg:justify-start">
           <div className=" sm:w-full md:w-[50%] lg:w-[50%] ">
-            <h1 className="text-2xl font-bold text-center mt-2 md:text-left lg:text-left ">
+            <h1 className="text-2xl text-[#414141] font-bold text-center mt-2 md:text-left lg:text-left ">
               A Smart Solution
             </h1>
             <p className="mt-8 text-[#414141]">
@@ -183,7 +196,7 @@ export default function index() {
                   <p className=" flex  flex-col items-center justify-center  bg-[#4270FF]  text-white text-2xl  w-4 h-4 rounded-lg ">
                     <img src={Tick} className="p-1"></img>
                   </p>
-                  <p className="ml-2 text-xs md:text-lg lg:text-lg">
+                  <p className="ml-2 text-[#414141] text-xs md:text-lg lg:text-lg">
                     Experience
                   </p>
                 </div>
@@ -191,7 +204,7 @@ export default function index() {
                   <p className=" flex  flex-col items-center justify-center  bg-[#4270FF]  text-white text-2xl  w-4 h-4 rounded-lg ">
                     <img src={Tick} className="p-1"></img>
                   </p>
-                  <p className="ml-2 text-xs md:text-lg lg:text-lg">
+                  <p className="ml-2 text-[#414141] text-xs md:text-lg lg:text-lg">
                     Competence{" "}
                   </p>
                 </div>
@@ -199,7 +212,9 @@ export default function index() {
                   <p className=" flex  flex-col items-center justify-center  bg-[#4270FF]  text-white text-2xl  w-4 h-4 rounded-lg ">
                     <img src={Tick} className="p-1"></img>
                   </p>
-                  <p className="ml-2 text-xs md:text-lg lg:text-lg">Privacy </p>
+                  <p className="ml-2 text-[#414141] text-xs md:text-lg lg:text-lg">
+                    Privacy{" "}
+                  </p>
                 </div>
               </div>
 
@@ -208,7 +223,7 @@ export default function index() {
                   <p className=" flex  flex-col items-center justify-center  bg-[#4270FF]  text-white text-2xl  w-4 h-4 rounded-lg ">
                     <img src={Tick} className="p-1"></img>
                   </p>
-                  <p className="ml-2 text-xs md:text-lg lg:text-lg">
+                  <p className="ml-2 text-[#414141] text-xs md:text-lg lg:text-lg">
                     Sensitivity{" "}
                   </p>
                 </div>
@@ -216,7 +231,7 @@ export default function index() {
                   <p className=" flex  flex-col items-center justify-center  bg-[#4270FF]  text-white text-2xl  w-4 h-4 rounded-lg ">
                     <img src={Tick} className="p-1"></img>
                   </p>
-                  <p className="ml-2 text-xs md:text-lg lg:text-lg">
+                  <p className="ml-2 text-[#414141] text-xs md:text-lg lg:text-lg">
                     Affordability (It’s free!)
                   </p>
                 </div>
@@ -289,14 +304,14 @@ export default function index() {
       </div>
 
       <div
-        className=" py-16 bg-slate-100  flex  flex-col justify-center items-center "
+        className=" py-10 bg-slate-100  flex  flex-col justify-center items-center "
         ref={formRef}
       >
-        <h1 className="text-2xl font-bold mt-4 text-center py-6 ">
+        <h1 className="text-2xl text-[#414141] font-bold mt-2 text-center py-6 ">
           Schedule A Consultation
         </h1>
         <p
-          className="text-center  text-black text-lg md:text-xl lg:text-xl my-4 px-5 md:px-24 lg:px-64"
+          className="text-center  text-[#414141] text-lg md:text-xl lg:text-xl my-4 px-5 md:px-24 lg:px-64"
           // className=" text-center  text-md mt-2 px-4 mb-4 md:px-64 lg:px-41"
         >
           This event will last just 4 hours, so we have limited openings. If you
@@ -306,7 +321,7 @@ export default function index() {
 
         <div className="bg-[#ffff] px-4 py-4 md:py-10 md:px-16 lg:py-10 lg:px-16  w-[100%] md:w-[90%] lg:w-[70%] flex flex-col justify-center items-center sm:flex-col md:flex-row lg:flex-row">
           <div className="w-[100%] md:w-[50%] lg:w-[50%]  ">
-            <h1 className="text-[#061133] font-bold text-2xl"> Event Info </h1>
+            <h1 className="text-[#414141] font-bold text-2xl"> Event Info </h1>
             <div className="flex  flex-row items-center flex-wrap mt-4">
               <p className=" flex  flex-col items-center justify-center w-7  ">
                 <img src={Date}></img>
@@ -462,7 +477,7 @@ export default function index() {
           style={{ paddingTop: 100 }}
         >
           <div className="text-white flex flex-col items-center md:items-start  lg:items-start    py-4 h-56 w-[250px] sm:[280px]  md:w-auto lg:w-auto">
-            <img src={Logo} className="w-40 md:w-44 lg:w-40"></img>
+            <img src={Logo} className="w-52 md:w-44 lg:w-52"></img>
             {/* <p className="mt-3 text-[#727581]">
               &copy; 2023 Pro Bono Zone&trade;
              
@@ -476,7 +491,7 @@ export default function index() {
             </div> */}
           </div>
           <div className="py-4 h-56 w-[250px] sm:[280px]  md:w-auto lg:w-auto text-[#727581]">
-            <h1 className="font-semibold">Website</h1>
+            <h1 className="font-semibold text-lg">Website</h1>
             <p className="mt-3">Home</p>
             <p className="mt-3">About</p>
             <p className="mt-3">FAQ</p>
@@ -485,25 +500,24 @@ export default function index() {
           </div>
 
           <div className=" py-4 h-56  w-[250px] sm:[280px]  md:w-auto lg:w-auto text-[#727581]">
-            <h1 className="font-semibold">Legal</h1>
-            <p className="mt-3">Help Center</p>
+            <h1 className="font-semibold text-lg">Legal</h1>
             <p className="mt-3">Terms of Service</p>
             {/* <p className="mt-3">Legal</p> */}
             <p className="mt-3">Privacy Policy</p>
             <p className="mt-3 text-[#727581]">
               &copy; 2023 Pro Bono Zone&trade;
               <br />
-              All Rights Reserved{" "}
             </p>
+            <p className="mt-3 text-[#727581]">All Rights Reserved </p>
           </div>
 
           <div className=" flex flex-col items-center md:items-start  text-[#727581]  py-4 h-56   w-[250px] sm:[280px]  md:w-auto lg:w-auto">
-            <h1 className="font-semibold">Connect</h1>
+            <h1 className="font-semibold text-lg">Connect</h1>
             <div className="flex  flex-row  items-center flex-wrap mt-4 text-[#727581]">
               <p className=" flex  flex-col  items-center justify-center w-4  ">
                 <img src={Email}></img>
               </p>
-              <p className="ml-2  text-sm">contact@probonozone.com </p>
+              <p className="ml-2  text-md">contact@probonozone.com </p>
             </div>
             {/* <div className="flex  flex-row items-center flex-wrap mt-4">
               <p className=" flex  flex-col items-center justify-center w-4  ">
@@ -516,7 +530,7 @@ export default function index() {
               <p className=" flex  flex-col items-center justify-center w-4  ">
                 <img src={LocationIcon}></img>
               </p>
-              <p className="ml-2 text-[#727581] text-sm">
+              <p className="ml-2 text-[#727581] text-md">
                 Salt Lake City, Utah.{" "}
               </p>
             </div>
