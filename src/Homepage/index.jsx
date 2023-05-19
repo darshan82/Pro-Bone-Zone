@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import emailjs from '@emailjs/browser';
 import Navbar from "../component/Navbar/navbar";
 import SolutionCard from "../component/SolutionCard/SolutionCard";
 import Button from "../component/button/button";
@@ -35,11 +36,29 @@ import YouTube from "react-youtube";
 const videId = "vD8X8qvhRxQ";
 export default function index() {
   const formRef = useRef(null);
+  const form = useRef();
   const [isPlaying, setIsPlaying] = useState(false);
 
   const handleClick = () => {
     formRef.current.focus();
     formRef.current.scrollIntoView();
+  };
+  const sendEmail = (e) => {
+    e.preventDefault();
+  
+    // const formData = new FormData(form.current);
+    // const formValues = Object.fromEntries(formData);
+
+    // // Do something with the form values
+    // console.log(formValues);
+
+
+    emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', form.current, 'YOUR_PUBLIC_KEY')
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });
   };
   return (
     <>
@@ -176,8 +195,8 @@ export default function index() {
       </div>
 
       {/* A Smart Solution */}
-      <div className="   py-0 px-4 md:px-0  md:py-10 lg:px-0 lg:py-10">
-        <div className=" flex  flex-col items-center justify-center lg:ml-44 sm:flex-col md:flex-row md:justify-start  md:items-center lg:flex-row lg:items-center lg:justify-start">
+      <div className=" py-0 px-4 md:px-4   md:py-10 lg:px-2 lg:py-10">
+        <div className=" flex  flex-col items-center justify-center lg:ml-44 sm:flex-col md:flex-row md:justify-start  md:items-center lg:flex-row lg:items-center lg:justify-start ">
           <div className=" sm:w-full md:w-[50%] lg:w-[50%] ">
             <h1 className="text-2xl text-[#414141] font-bold text-center mt-2 md:text-left lg:text-left ">
               A Smart Solution
@@ -393,32 +412,38 @@ export default function index() {
             </div> */}
           </div>
           <div className="w-[100%] md:w-[50%] lg:w-[50%]  ">
-            <div className="flex flex-col justify-center md:flex-row lg:flex-row  flex-wrap  ">
+            <form ref={form} onSubmit={sendEmail}>
+            <div className="flex flex-col justify-center md:flex-row lg:flex-row  flex-wrap   ">
               <input
                 type="text"
-                className="py-2 px-3 bg-gray-100 text-sm text-[#414141] rounded-sm m-2"
+                className="py-2 px-3 bg-gray-100 text-sm text-[#414141] rounded-sm m-2 "
                 placeholder="First Name"
+                name="firstName"
               ></input>
               <input
                 type="text"
                 className="py-2 px-3 bg-gray-100  text-sm text-[#414141] rounded-sm m-2"
                 placeholder="Last Name"
+                name="lastName"
               ></input>
+             
             </div>
             <div className="flex flex-col justify-center md:flex-row lg:flex-row  flex-wrap  ">
               <input
                 type="text"
                 className="py-2 px-3 bg-gray-100  text-sm text-[#414141] rounded-sm m-2"
                 placeholder="Email"
+                name="email"
               ></input>
               <input
                 type="text"
                 className="py-2 px-3 bg-gray-100  text-sm text-[#414141] rounded-sm m-2"
                 placeholder="Phone"
+                name="phone"
               ></input>
             </div>
             <div className="flex flex-col justify-center md:flex-row lg:flex-row  flex-wrap  ">
-              <select className="py-2 px-10  bg-gray-100 text-sm text-[#414141] rounded-sm m-2">
+              <select name="type" className="py-2 px-10  bg-gray-100 text-sm text-[#414141] rounded-sm m-2">
                 <option value="family-law">Family Law</option>
                 <option value="business-law">Business Law</option>
               </select>
@@ -427,7 +452,7 @@ export default function index() {
                 className="py-2 px-3 bg-gray-100  text-sm text-[#414141] rounded-sm m-2"
                 placeholder="Category"
               ></input> */}
-              <select className="py-2 px-7  bg-gray-100 text-sm text-[#414141] rounded-sm m-2">
+              <select name="time" className="py-2 px-7  bg-gray-100 text-sm text-[#414141] rounded-sm m-2">
                 <option value="">Select a time slot</option>
                 <option value="10:00">10:00 a.m.</option>
                 <option value="10:30">10:30 a.m.</option>
@@ -442,18 +467,20 @@ export default function index() {
 
             <div className="flex flex-col justify-center md:flex-row lg:flex-row  flex-wrap  ">
               <textarea
-                name=""
+                name="description"
                 id=""
                 placeholder="How did you hear about Pro Bono Zone?"
                 className="bg-gray-100 p-4   md:w-96 lg:w-96 h-20 m-2"
               ></textarea>
             </div>
             <div className=" flex justify-center mt-3 md:justify-center lg:justify-center ">
-              <button className="bg-[#EC672C] w-full  py-2 rounded-lg text-white text-sm mx-1 lg:mx-4 lg:w-96">
+              <button type="submit"   className="bg-[#EC672C] w-full  py-2 rounded-lg text-white text-sm mx-1 lg:mx-4 lg:w-96">
                 Count Me In
               </button>
             </div>
+            </form>
           </div>
+          
         </div>
       </div>
 
@@ -534,7 +561,7 @@ export default function index() {
                 Salt Lake City, Utah.{" "}
               </p>
             </div>
-            <div className="flex flex-row  space-x-2 w-6   ml-[-50px] lg:ml-[0px] mt-5">
+            <div className="flex flex-row md:ml-2 space-x-2 w-6 ml-[-50px]   lg:ml-[0px] mt-5">
               <img src={FaceBookWhite}></img>
               <img src={LinkedinWhite}></img>
               <img src={YoutubeWhite}></img>
