@@ -34,16 +34,19 @@ import AyalaSmithDickens from "../assets/AyalaSmithDickens.png";
 import Logo from "../assets/Logo.png";
 import YouTube from "react-youtube";
 const videId = "vD8X8qvhRxQ";
-export default function index() {
+export default function index()
+{
   const formRef = useRef(null);
   const form = useRef();
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const handleClick = () => {
+  const handleClick = () =>
+  {
     formRef.current.focus();
     formRef.current.scrollIntoView();
   };
-  const sendEmail = (e) => {
+  const sendEmail = (e) =>
+  {
     e.preventDefault();
     //console.log(e.target);
 
@@ -52,7 +55,6 @@ export default function index() {
 
     // // Do something with the form values
     // console.log(formValues);
-
     emailjs
       .sendForm(
         "service_m7tcc4g",
@@ -61,10 +63,20 @@ export default function index() {
         "2Z-yhu6rbMDiGx-KA"
       )
       .then(
-        (result) => {
-          console.log(result.text);
+        (result) =>
+        {
+          alert("Your registration request has been received successfully. Thank you")
+          form.current.firstName.value = null
+          form.current.lastName.value = null
+          form.current.email.value = null
+          form.current.phone.value = null
+          form.current.type.value = "Select a Category"
+          form.current.time.value = "Select a Time"
+          form.current.description.value = null
+
         },
-        (error) => {
+        (error) =>
+        {
           console.log(error.text);
         }
       );
@@ -101,7 +113,7 @@ export default function index() {
             <img
               src={HeroImage}
               className="hidden lg:block md:block md: w-[500px] lg:w-[35%] mt-5 lg:ml-[60px] lg:mt-[-35px]"
-              // className=" w-[500px] lg:w-[35%] mt-5 lg:ml-[60px] lg:mt-[-35px]"
+            // className=" w-[500px] lg:w-[35%] mt-5 lg:ml-[60px] lg:mt-[-35px]"
             ></img>
             <img
               src={HeroImageLessBorder}
@@ -340,7 +352,7 @@ export default function index() {
         </h1>
         <p
           className="text-center  text-[#414141] text-lg md:text-xl lg:text-xl my-4 px-5 md:px-24 lg:px-64"
-          // className=" text-center  text-md mt-2 px-4 mb-4 md:px-64 lg:px-41"
+        // className=" text-center  text-md mt-2 px-4 mb-4 md:px-64 lg:px-41"
         >
           This event will last just 4 hours, so we have limited openings. If you
           need legal advice, don't delay. Take advantage of this opportunity to
@@ -457,10 +469,10 @@ export default function index() {
                   className="h-10  md:w-[184px] lg:px-3 lg:py-2 bg-gray-100 text-sm text-[#414141] rounded-sm m-2"
                 >
                   <option value="" disabled selected>
-                  Select a Category
+                    Select a Category
                   </option>
                   <option value="family-law">Family Law</option>
-                <option value="business-law">Business Law</option>
+                  <option value="business-law">Business Law</option>
                 </select>
 
                 <select
@@ -520,7 +532,7 @@ export default function index() {
         </div> */}
         <div
           className="flex flex-row flex-wrap justify-center items-center text-center pt-16 md:text-left lg:text-left md:flex-row  md:justify-between md:items-start lg:flex-row lg:items-start lg:justify-between lg:w-[80%]  lg:ml-44 py-5 lg:pb-28"
-          //style={{ paddingTop: 40 }}
+        //style={{ paddingTop: 40 }}
         >
           <div className="text-white flex flex-col items-center md:items-start  lg:items-start    py-4 h-24 w-[250px] sm:[280px]  md:w-auto lg:w-auto">
             <img src={Logo} className="w-52 md:w-44 lg:w-52"></img>
