@@ -457,9 +457,8 @@ export default function index() {
                   className="h-10  md:w-[184px] lg:px-3 lg:py-2 bg-gray-100 text-sm text-[#414141] rounded-sm m-2"
                 >
                   <option value="" disabled selected>
-                    Select a Law
+                  Select a Category
                   </option>
-
                   <option value="family-law">Family Law</option>
                 <option value="business-law">Business Law</option>
                 </select>
