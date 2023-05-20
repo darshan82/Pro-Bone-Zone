@@ -144,8 +144,8 @@ export default function index()
           </div>
           {/* <img src={Work} className=""></img> */}
 
-          <div className="ml-0 md:ml-10 lg:ml-20   ">
-            <h1 className="font-bold text-2xl pl-1 text-white">How It Works </h1>
+          <div className="ml-0 md:ml-10 lg:ml-20  ">
+            <h1 className="font-bold text-2xl pl-1 text-white mt-5 mb-5 ml-1">How It Works </h1>
             <li className="text-md mt-3 font-normal leading-5 pl-2 text-white">
               Select an available 30-minute time slot.
             </li>
