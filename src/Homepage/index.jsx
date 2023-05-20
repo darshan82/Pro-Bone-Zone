@@ -55,31 +55,43 @@ export default function index()
 
     // // Do something with the form values
     // console.log(formValues);
-    emailjs
-      .sendForm(
-        "service_m7tcc4g",
-        "template_ty2kqgc",
-        form.current,
-        "2Z-yhu6rbMDiGx-KA"
-      )
-      .then(
-        (result) =>
-        {
-          alert("Your registration request has been received successfully. Thank you")
-          form.current.firstName.value = null
-          form.current.lastName.value = null
-          form.current.email.value = null
-          form.current.phone.value = null
-          form.current.type.value = "Select a Category"
-          form.current.time.value = "Select a Time"
-          form.current.description.value = null
+    if (form.current.firstName.value &&
+      form.current.lastName.value &&
+      form.current.email.value &&
+      form.current.phone.value &&
+      form.current.type.value &&
+      form.current.time.value &&
+      form.current.description.value)
+      emailjs
+        .sendForm(
+          "service_m7tcc4g",
+          "template_ty2kqgc",
+          form.current,
+          "2Z-yhu6rbMDiGx-KA"
+        )
+        .then(
+          (result) =>
+          {
+            alert("Your registration request has been received successfully. Thank you")
+            form.current.firstName.value = null
+            form.current.lastName.value = null
+            form.current.email.value = null
+            form.current.phone.value = null
+            form.current.description.value = null
+            form.current.type.value = "Select a Category"
+            form.current.time.value = "Select a Time"
 
-        },
-        (error) =>
-        {
-          console.log(error.text);
-        }
-      );
+          },
+          (error) =>
+          {
+            console.log(error.text);
+          }
+        );
+    else
+    {
+      alert("Please fill the complete form. Thank you")
+
+    }
   };
   return (
     <>
