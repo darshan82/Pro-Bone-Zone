@@ -87,7 +87,7 @@ export default function index()
         <Navbar />
         {/* Hero Section */}
         <div className="lg:ml-44">
-          <h1 className="text-center text-[#2E5FB7] sm:text-center md:text-center lg:text-left font-inter font-semibold   text-[22px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full  my-1  pt-10">
+          <h1 className="text-center text-[#2E5FB7] sm:text-center md:text-center lg:text-left font-inter font-semibold   text-[27px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full  my-1  pt-10">
             Connecting. Empowering. Elevating Lives.
           </h1>
 
@@ -144,27 +144,27 @@ export default function index()
           </div>
           {/* <img src={Work} className=""></img> */}
 
-          <div className="ml-0 md:ml-10 lg:ml-20    mt-6 ">
-            <h1 className="font-bold text-2xl text-white">How It Works </h1>
-            <li className="text-md mt-5 font-normal leading-5 text-white">
+          <div className="ml-0 md:ml-10 lg:ml-20   ">
+            <h1 className="font-bold text-2xl pl-1 text-white">How It Works </h1>
+            <li className="text-md mt-3 font-normal leading-5 pl-2 text-white">
               Select an available 30-minute time slot.
             </li>
-            <li className="text-md mt-5 font-normal leading-5 text-white">
+            <li className="text-md mt-3 font-normal leading-5 pl-2 text-white">
               Choose your area of interest.
             </li>
-            <li className="text-md mt-5 font-normal leading-5 text-white">
+            <li className="text-md mt-3 font-normal leading-5 pl-2 text-white">
               Prepare your legal questions{" "}
             </li>
-            <li className="text-md mt-5 font-normal leading-5 text-white">
+            <li className="text-md mt-3 font-normal leading-5 pl-2 text-white">
               Arrive 15 minutes early.
             </li>
-            <li className="text-md mt-5 font-normal leading-5 text-white">
+            <li className="text-md mt-3 font-normal leading-5 pl-2 text-white">
               Meet our friendly staff for orientation.
             </li>
-            <li className="text-md mt-5 font-normal leading-5 text-white">
+            <li className="text-md mt-3 font-normal leading-5 pl-2 text-white">
               Consult with an experienced attorney
             </li>
-            <li className="text-md mt-5 mb-5 font-normal leading-5 text-white">
+            <li className="text-md mt-3 mb-5 font-normal leading-5 pl-2 text-white">
               Change your life!
             </li>
             <div className="mt-4"></div>
@@ -187,7 +187,7 @@ export default function index()
           <div className="py-6  flex flex-row items-center justify-center   lg:justify-between flex-wrap ">
             <SolutionCard
               icon={TheProblem}
-              heading={"ANXIETY"}
+              heading={"ANXIETY."}
               para="Why do we hesitate to talk with an attorney? We are embarrassed.
             We fear judgement and insensitivity. We avoid change and commitment. We worry about the cost"
             />
