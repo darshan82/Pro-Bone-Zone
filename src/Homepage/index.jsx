@@ -112,7 +112,7 @@ export default function index()
                 supportive environment. And it is FREE!
               </p>
               <div className="  flex flex-row justify-center  lg:justify-start mt-14">
-                {/* <button className="bg-[#4270FF]   py-4 px-9 text-white text-sm   rounded-lg">
+                {/* <button className="bg-[#2E5FB7]   py-4 px-9 text-white text-sm   rounded-lg">
                   Schedule a Free Consultation
                 </button> */}
                 <Button
@@ -245,7 +245,7 @@ export default function index()
             <div className=" w-72 sm:w-96 md:w-96 lg:w-96 mt-6   flex flex-row justify-between ">
               <div className="space-y-2">
                 <div className="flex  flex-row items-center flex-wrap  ">
-                  <p className=" flex  flex-col items-center justify-center  bg-[#4270FF]  text-white text-2xl  w-4 h-4 rounded-lg ">
+                  <p className=" flex  flex-col items-center justify-center  bg-[#2E5FB7]  text-white text-2xl  w-4 h-4 rounded-lg ">
                     <img src={Tick} className="p-1"></img>
                   </p>
                   <p className="ml-2 text-[#414141] text-xs md:text-lg lg:text-lg">
@@ -253,7 +253,7 @@ export default function index()
                   </p>
                 </div>
                 <div className="flex  flex-row items-center flex-wrap  ">
-                  <p className=" flex  flex-col items-center justify-center  bg-[#4270FF]  text-white text-2xl  w-4 h-4 rounded-lg ">
+                  <p className=" flex  flex-col items-center justify-center  bg-[#2E5FB7]  text-white text-2xl  w-4 h-4 rounded-lg ">
                     <img src={Tick} className="p-1"></img>
                   </p>
                   <p className="ml-2 text-[#414141] text-xs md:text-lg lg:text-lg">
@@ -261,7 +261,7 @@ export default function index()
                   </p>
                 </div>
                 <div className="flex  flex-row items-center flex-wrap  ">
-                  <p className=" flex  flex-col items-center justify-center  bg-[#4270FF]  text-white text-2xl  w-4 h-4 rounded-lg ">
+                  <p className=" flex  flex-col items-center justify-center  bg-[#2E5FB7]  text-white text-2xl  w-4 h-4 rounded-lg ">
                     <img src={Tick} className="p-1"></img>
                   </p>
                   <p className="ml-2 text-[#414141] text-xs md:text-lg lg:text-lg">
@@ -272,7 +272,7 @@ export default function index()
 
               <div className="space-y-2">
                 <div className="flex  flex-row items-center flex-wrap  ">
-                  <p className=" flex  flex-col items-center justify-center  bg-[#4270FF]  text-white text-2xl  w-4 h-4 rounded-lg ">
+                  <p className=" flex  flex-col items-center justify-center  bg-[#2E5FB7]  text-white text-2xl  w-4 h-4 rounded-lg ">
                     <img src={Tick} className="p-1"></img>
                   </p>
                   <p className="ml-2 text-[#414141] text-xs md:text-lg lg:text-lg">
@@ -280,7 +280,7 @@ export default function index()
                   </p>
                 </div>
                 <div className="flex  flex-row items-center flex-wrap  ">
-                  <p className=" flex  flex-col items-center justify-center  bg-[#4270FF]  text-white text-2xl  w-4 h-4 rounded-lg ">
+                  <p className=" flex  flex-col items-center justify-center  bg-[#2E5FB7]  text-white text-2xl  w-4 h-4 rounded-lg ">
                     <img src={Tick} className="p-1"></img>
                   </p>
                   <p className="ml-2 text-[#414141] text-xs md:text-lg lg:text-lg">
@@ -537,7 +537,7 @@ export default function index()
               placeholder="Enter your email here..."
               className="w-48 sm:w-72 md:w-72 lg:w-72 h-12 px-4 text-sm text-[#FFFFFF] placeholder:text-white bg-transparent border-none outline-none"
             />
-            <button className="bg-[#4270FF] rounded-md px-5 py-2  text-sm text-white">
+            <button className="bg-[#2E5FB7] rounded-md px-5 py-2  text-sm text-white">
               Register
             </button>
           </div>
