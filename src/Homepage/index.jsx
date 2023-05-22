@@ -99,7 +99,7 @@ export default function index()
         <Navbar />
         {/* Hero Section */}
         <div className="lg:ml-44">
-          <h1 className="text-center text-[#2E5FB7] sm:text-center md:text-center lg:text-left font-inter font-semibold   text-[27px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full  my-1  pt-10">
+          <h1 className="text-center text-[#2E5FB7] sm:text-center md:text-center lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full  my-1  pt-5 ">
             Connecting. Empowering. Elevating Lives.
           </h1>
 
@@ -199,9 +199,9 @@ export default function index()
           <div className="py-6  flex flex-row items-center justify-center   lg:justify-between flex-wrap ">
             <SolutionCard
               icon={TheProblem}
-              heading={"ANXIETY."}
+              heading={"ANXIETY"}
               para="Why do we hesitate to talk with an attorney? We are embarrassed.
-            We fear judgement and insensitivity. We avoid change and commitment. We worry about the cost"
+            We fear judgement and insensitivity. We avoid change and commitment. We worry about the cost."
             />
             <SolutionCard
               icon={Procrastination}
@@ -380,7 +380,7 @@ export default function index()
               </p>
               <div className="flex  flex-col ">
                 <p className="ml-2 text-[#414141] text-sm">Date </p>
-                <p className="ml-2 text-[#061133] font-semibold text-sm">
+                <p className="ml-2 text-[#061133] text-sm">
                   Friday, June 23rd{" "}
                 </p>
               </div>
@@ -391,7 +391,7 @@ export default function index()
               </p>
               <div className="flex  flex-col ">
                 <p className="ml-2 text-[#414141] text-sm">Time </p>
-                <p className="ml-2 text-[#061133] font-semibold text-sm">
+                <p className="ml-2 text-[#061133] text-sm">
                   10AM - 2PM.
                 </p>
               </div>
@@ -402,7 +402,7 @@ export default function index()
               </p>
               <div className="flex  flex-col ">
                 <p className="ml-2 text-[#414141] text-sm">Location </p>
-                <p className="ml-2 text-[#061133]  font-semibold text-sm">
+                <p className="ml-2 text-[#061133]  text-sm">
                   Suite 251
                   <br />
                   2356 Main Street
