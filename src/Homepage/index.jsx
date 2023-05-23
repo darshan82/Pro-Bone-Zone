@@ -34,19 +34,18 @@ import AyalaSmithDickens from "../assets/AyalaSmithDickens.png";
 import Logo from "../assets/Logo.png";
 import YouTube from "react-youtube";
 const videId = "vD8X8qvhRxQ";
-export default function index()
-{
+export default function index() {
   const formRef = useRef(null);
   const form = useRef();
   const [isPlaying, setIsPlaying] = useState(false);
-
-  const handleClick = () =>
-  {
+  const [chooseDate, setSelectedDate] = useState("Sat June 17th");
+  const handleChangeEventDate = (event) =>
+    setSelectedDate(event?.target?.value);
+  const handleClick = () => {
     formRef.current.focus();
     formRef.current.scrollIntoView();
   };
-  const sendEmail = (e) =>
-  {
+  const sendEmail = (e) => {
     e.preventDefault();
     //console.log(e.target);
 
@@ -55,13 +54,15 @@ export default function index()
 
     // // Do something with the form values
     // console.log(formValues);
-    if (form.current.firstName.value &&
+    if (
+      form.current.firstName.value &&
       form.current.lastName.value &&
       form.current.email.value &&
       form.current.phone.value &&
       form.current.type.value &&
       form.current.time.value &&
-      form.current.description.value)
+      form.current.description.value
+    )
       emailjs
         .sendForm(
           "service_m7tcc4g",
@@ -70,36 +71,33 @@ export default function index()
           "2Z-yhu6rbMDiGx-KA"
         )
         .then(
-          (result) =>
-          {
-            alert("Your registration request has been received successfully. Thank you")
-            form.current.firstName.value = null
-            form.current.lastName.value = null
-            form.current.email.value = null
-            form.current.phone.value = null
-            form.current.description.value = null
-            form.current.type.value = "Select a Category"
-            form.current.time.value = "Select a Time"
-
+          (result) => {
+            alert(
+              "Your registration request has been received successfully. Thank you"
+            );
+            form.current.firstName.value = null;
+            form.current.lastName.value = null;
+            form.current.email.value = null;
+            form.current.phone.value = null;
+            form.current.description.value = null;
+            form.current.type.value = "Select a Category";
+            form.current.time.value = "Select a Time";
           },
-          (error) =>
-          {
+          (error) => {
             console.log(error.text);
           }
         );
-    else
-    {
-      alert("Please fill the complete form. Thank you")
-
+    else {
+      alert("Please fill the complete form. Thank you");
     }
   };
   return (
     <>
-      <div className="bg-[#EAEFF8] pt-4 pb-5">
-        <Navbar />
+      <div className="bg-[#EAEFF8] pt-2 pb-5">
+        {/* <Navbar /> */}
         {/* Hero Section */}
-        <div className="lg:ml-44">
-          <h1 className="text-center text-[#2E5FB7] sm:text-center md:text-center lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full  my-1  pt-5 ">
+        <div className="lg:ml-44  ">
+          <h1 className="text-center  text-[#2E5FB7] sm:text-center md:text-center lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5  ">
             Connecting. Empowering. Elevating Lives.
           </h1>
 
@@ -125,7 +123,7 @@ export default function index()
             <img
               src={HeroImage}
               className="hidden lg:block md:block md: w-[500px] lg:w-[35%] mt-5 lg:ml-[60px] lg:mt-[-35px]"
-            // className=" w-[500px] lg:w-[35%] mt-5 lg:ml-[60px] lg:mt-[-35px]"
+              // className=" w-[500px] lg:w-[35%] mt-5 lg:ml-[60px] lg:mt-[-35px]"
             ></img>
             <img
               src={HeroImageLessBorder}
@@ -157,7 +155,9 @@ export default function index()
           {/* <img src={Work} className=""></img> */}
 
           <div className="ml-0 md:ml-10 lg:ml-20  ">
-            <h1 className="font-bold text-2xl pl-1 text-white mt-5 mb-5 ml-1">How It Works </h1>
+            <h1 className="font-bold text-2xl pl-1 text-white mt-5 mb-5 ml-1">
+              How It Works{" "}
+            </h1>
             <li className="text-md mt-3 font-normal leading-5 pl-2 text-white">
               Select an available 30-minute time slot.
             </li>
@@ -364,7 +364,7 @@ export default function index()
         </h1>
         <p
           className="text-center  text-[#414141] text-lg md:text-xl lg:text-xl my-4 px-5 md:px-24 lg:px-64"
-        // className=" text-center  text-md mt-2 px-4 mb-4 md:px-64 lg:px-41"
+          // className=" text-center  text-md mt-2 px-4 mb-4 md:px-64 lg:px-41"
         >
           This event will last just 4 hours, so we have limited openings. If you
           need legal advice, don't delay. Take advantage of this opportunity to
@@ -381,7 +381,8 @@ export default function index()
               <div className="flex  flex-col ">
                 <p className="ml-2 text-[#414141] text-sm">Date </p>
                 <p className="ml-2 text-[#061133] text-sm">
-                  Friday, June 23rd{" "}
+                  {chooseDate}
+                  {/* Friday, June 23rd{" "} */}
                 </p>
               </div>
             </div>
@@ -391,9 +392,7 @@ export default function index()
               </p>
               <div className="flex  flex-col ">
                 <p className="ml-2 text-[#414141] text-sm">Time </p>
-                <p className="ml-2 text-[#061133] text-sm">
-                  10AM - 2PM.
-                </p>
+                <p className="ml-2 text-[#061133] text-sm">10AM - 2PM.</p>
               </div>
             </div>{" "}
             <div className="flex  flex-row items-center flex-wrap mt-4">
@@ -403,11 +402,11 @@ export default function index()
               <div className="flex  flex-col ">
                 <p className="ml-2 text-[#414141] text-sm">Location </p>
                 <p className="ml-2 text-[#061133]  text-sm">
-                  Suite 251
+                  Keller Williams Office
                   <br />
-                  2356 Main Street
+                  998 North 1200 West
                   <br />
-                  Lehi, Utan
+                  Orem, Utah 84057
                 </p>
               </div>
             </div>
@@ -446,6 +445,25 @@ export default function index()
           </div>
           <div className="w-[100%] md:w-[50%] lg:w-[50%]  ">
             <form ref={form} onSubmit={sendEmail}>
+              <div className="flex flex-col justify-center  md:flex-row lg:flex-row  flex-wrap  ">
+                <select
+                  name="date"
+                  className="h-10  md:w-[184px] lg:px-3 lg:py-2 bg-gray-100 text-sm text-[#414141] rounded-sm m-2"
+                  onChange={handleChangeEventDate}
+                >
+                  <option value="Sat, June 17th" disabled selected>
+                    Select a Date
+                  </option>
+                  <option value="Sat, June 17th">Sat, June 17th</option>
+                  <option value="Sat June 24th">Sat June 24th</option>
+                </select>
+                {/* <input
+                  type="date"
+                  className="py-2 px-3 bg-gray-100 flex text-sm text-[#414141] rounded-sm m-2 w-full md:w-[182px]"
+                  placeholder=""
+                  name="date"
+                ></input> */}
+              </div>
               <div className="flex flex-col justify-center  md:flex-row lg:flex-row  flex-wrap   ">
                 <input
                   type="text"
@@ -544,7 +562,7 @@ export default function index()
         </div> */}
         <div
           className="flex flex-row flex-wrap justify-center items-center text-center pt-16 md:text-left lg:text-left md:flex-row  md:justify-between md:items-start lg:flex-row lg:items-start lg:justify-between lg:w-[80%]  lg:ml-44 py-5 lg:pb-28"
-        //style={{ paddingTop: 40 }}
+          //style={{ paddingTop: 40 }}
         >
           <div className="text-white flex flex-col items-center md:items-start  lg:items-start    py-4 h-24 w-[250px] sm:[280px]  md:w-auto lg:w-auto">
             <img src={Logo} className="w-52 md:w-44 lg:w-52"></img>
