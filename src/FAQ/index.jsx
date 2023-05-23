@@ -74,7 +74,7 @@ const faqData = [
     answer: 'Yes, when you register for an event, we highly recommend that select a legal area of interest (e.g. immigration, family law, business, etc.). Different attorneys tend to specialize in specific areas of the law. Yes, it is true many lawyers are knowledgeable on a variety of topics; however, by talking to someone who has expertise in your particular area of interest, you are more likely to get the best possible advice.',
   },
   {
-    question: 'How did  Pro Bono Zone™&trade; start? ',
+    question: 'How did  Pro Bono Zone™ start? ',
     answer: 'Pro Bono Zone™ is the brainchild of Kevin Cannon and SarahAnne Pryor. Their personal experiences led them to the conclusion that there were many people who could benefit greatly from a service like this. You can read their story in the "About" section.',
   },
 ];
