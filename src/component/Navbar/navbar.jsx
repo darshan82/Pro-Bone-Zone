@@ -2,6 +2,7 @@ import React, { useState } from "react";
 // import Logo from '../../assets/Group6.png'
 import Logo from "../../assets/Logo.png";
 import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 export default function navbar() {
   const [isNavOpen, setIsNavOpen] = useState(false);
