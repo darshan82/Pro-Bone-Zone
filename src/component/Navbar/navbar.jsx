@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 // import Logo from '../../assets/Group6.png'
 import Logo from "../../assets/Logo.png";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 export default function navbar() {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -32,21 +32,21 @@ export default function navbar() {
         </div>
         {isNavOpen && (
           <div className="px-6 pt-3 ">
-            <Link to={"/"}>
+            {/* <Link to={"/"}> */}
               <p className="cursor-pointer text-[#414141] text-center my-2 block">
                 Home
               </p>
-            </Link>
-            <Link to={'/about'}>
+            {/* </Link> */}
+            {/* <Link to={'/about'}> */}
               <p className="cursor-pointer text-[#414141] text-center my-2 block">
                 About
               </p>
-            </Link>
-            <Link to={'/solution'}>
+            {/* </Link> */}
+            {/* <Link to={'/solution'}> */}
               <p className="cursor-pointer text-[#414141] text-center my-2 block">
                 FAQ
               </p>
-            </Link>
+            {/* </Link> */}
             <p className="cursor-pointer text-[#414141] text-center my-2 block">
               Sponsors
             </p>
@@ -73,15 +73,15 @@ export default function navbar() {
           <img src={Logo} className="w-60" alt="logo" />
         </div>
         <div className="flex flex-row justify-center items-center space-x-5 text-white text-sm ">
-          <Link to={"/"}>
+          {/* <Link to={"/"}> */}
             <p className="cursor-pointer text-[#414141]">Home</p>
-          </Link>
-          <Link to={"/about"}>
+          {/* </Link> */}
+          {/* <Link to={"/about"}> */}
             <p className="cursor-pointer text-[#414141]">About</p>
-          </Link>
-          <Link to={"/solution"}>
+          {/* </Link> */}
+          {/* <Link to={"/solution"}> */}
             <p className="cursor-pointer text-[#414141]">FAQ</p>
-          </Link>
+          {/* </Link> */}
 
           <p className="cursor-pointer text-[#414141]">Sponsors</p>
 
