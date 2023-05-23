@@ -155,10 +155,45 @@ export default function index() {
       {/* A Smart Solution */}
       <div className=" py-0 px-4 md:px-4   md:py-10 lg:px-2 lg:py-10">
       <div className="max-w-2xl mx-auto">
-      {faqData.map((faq, index) => (
-        <div key={index} className="border-b border-gray-300 py-4">
+      To make the question text start from the left when it exceeds one line, you can modify the code as follows:
+
+
+{faqData.map((faq, index) => (
+  <div key={index} className="border-b border-gray-300 py-4">
+    <button
+      className="flex justify-start w-full focus:outline-none"
+      onClick={() => toggleAccordion(index)}
+    >
+      <h3 className="text-lg font-medium text-left">
+        {faq.question}
+      </h3>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className={`h-5 w-5 transition-transform ${
+          activeIndex === index ? 'transform rotate-90' : ''
+        }`}
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fillRule="evenodd"
+          d="M6.293 6.293a1 1 0 011.414 0L10 8.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+          clipRule="evenodd"
+        />
+      </svg>
+    </button>
+    {activeIndex === index && (
+      <p className="mt-4 text-gray-600">{faq.answer}</p>
+    )}
+  </div>
+))}
+
+
+
+      {/* {faqData.map((faq, index) => (
+        <div key={index} className="border-b border-gray-300 py-4 ">
           <button
-            className="flex justify-between items-center w-full focus:outline-none"
+            className="flex  justify-start w-full  focus:outline-none"
             onClick={() => toggleAccordion(index)}
           >
             <h3 className="text-lg font-medium">{faq.question}</h3>
@@ -181,7 +216,7 @@ export default function index() {
             <p className="mt-4 text-gray-600">{faq.answer}</p>
           )}
         </div>
-      ))}
+      ))} */}
     </div>
 
       </div>

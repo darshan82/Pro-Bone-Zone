@@ -33,6 +33,7 @@ import McIntoshTronton from "../assets/McIntoshTronton.png";
 import AyalaSmithDickens from "../assets/AyalaSmithDickens.png";
 import Logo from "../assets/Logo.png";
 import YouTube from "react-youtube";
+import ArrowRight from "../assets/ArrowRight.png";
 const videId = "vD8X8qvhRxQ";
 export default function index() {
   return (
@@ -44,9 +45,15 @@ export default function index() {
           <h1 className="text-center text-[#2E5FB7] sm:text-center sm:text-3xl md:text-center lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-3xl leading-10  lg:w-[450px] w-full  my-1 mb-5 lg:pt-5 ">
             Your Story is Our Story
           </h1>
+          <div className="flex flex-row  justify-center sm:justify-center md:justify-center lg:justify-start items-center mt-8 mb-12 ml-4 md:ml-4 ">
+            <h2 className="text-md ">About</h2>
+            <img src={ArrowRight} alt="Arrow Right" className="mx-3" />
+            <h2 className="text-md ">Solutions</h2>
+          </div>
         </div>
+       
       </div>
-
+    
       {/* How its work Section */}
 
       {/* Solution Boxes */}
