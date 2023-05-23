@@ -74,7 +74,7 @@ const faqData = [
     answer: 'Yes, when you register for an event, we highly recommend that select a legal area of interest (e.g. immigration, family law, business, etc.). Different attorneys tend to specialize in specific areas of the law. Yes, it is true many lawyers are knowledgeable on a variety of topics; however, by talking to someone who has expertise in your particular area of interest, you are more likely to get the best possible advice.',
   },
   {
-    question: 'How did PBZ start?',
+    question: 'How did  Pro Bono Zone&trade; start? ',
     answer: 'Pro Bono Zone™ is the brainchild of Kevin Cannon and SarahAnne Pryor. Their personal experiences led them to the conclusion that there were many people who could benefit greatly from a service like this. You can read their story in the "About" section.',
   },
 ];
@@ -93,7 +93,7 @@ export default function index()
       setActiveIndex(index);
     }
   };
-  document.title = "Faq"
+  document.title = "FAQ"
 
   return (
     <>
@@ -103,12 +103,12 @@ export default function index()
 
         <div className="flex flex-col  ml-10  md:ml-20 lg:ml-44  sm:ml-10 sm:justify-center md: items-start justify-center ">
           <h1 className="text-[#2E5FB7] ml-4 md:text-left lg:text-left font-inter font-bold md:text-[27px] text-[23px] md:text-3xl lg:text-[40px] leading-10 lg:w-[450px]  my-1 mb-5 lg:pt-5 sm:ml-4 ">
-            A Smart Solution
+           Frequent Questions 
           </h1>
           <div className="flex flex-row items-center mt-8 mb-12 ml-4 md:ml-4 ">
-            <h2 className="text-md ">FAQ</h2>
+            <h2 className="text-md ">Home</h2>
             <img src={ArrowRight} alt="Arrow Right" className="mx-3" />
-            <h2 className="text-md ">Solutions</h2>
+            <h2 className="text-md ">FAQ</h2>
           </div>
           {/* <div className=" flex flex-col-reverse  items-center lg:flex lg:flex-row lg:items-start    ">
             <div>
@@ -161,9 +161,6 @@ export default function index()
       {/* A Smart Solution */}
       <div className=" bg-white p-2   pr-5 lg:pr-9 lg:ml-44">
         <div className="max-w-2xl  mb-10 ">
-          To make the question text start from the left when it exceeds one line, you can modify the code as follows
-
-
           {faqData.map((faq, index) => (
             <div key={index} className="border-b border-gray-300 py-4">
               <button
