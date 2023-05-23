@@ -41,7 +41,7 @@ export default function index() {
         {/* <Navbar /> */}
         {/* Hero Section */}
         <div className="lg:ml-44  ">
-          <h1 className="text-center text-[#2E5FB7] sm:text-center md:text-center lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-3xl leading-10  lg:w-[450px] w-full  my-1 mb-5 lg:pt-5 ">
+          <h1 className="text-center text-[#2E5FB7] sm:text-center sm:text-3xl md:text-center lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-3xl leading-10  lg:w-[450px] w-full  my-1 mb-5 lg:pt-5 ">
             Your Story is Our Story
           </h1>
         </div>
@@ -56,7 +56,7 @@ export default function index() {
       {/* Offer Boxes */}
 
    
-      <div className="bg-white p-2 pr-5 lg:pr-9 lg:ml-44">
+      <div className="bg-white p-2   pr-5 lg:pr-9 lg:ml-44">
         <div className=" mx-auto text-left">
           <p className="text-gray-700 text-lg leading-relaxed">
             They say the best businesses are created by those who are trying to solve their own problems. There may be some truth to that. In any case, our own personal experience was, in fact, our motivator to launch Pro Bono Zone&trade;. We went through some very difficult challenges when we needed sound legal and business advice.

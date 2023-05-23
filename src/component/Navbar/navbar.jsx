@@ -9,7 +9,7 @@ export default function navbar() {
   return (
     <>
       {/* Mobile Navigation */}
-      <nav className="bg-[#EAEFF8] pt py-4 md:hidden">
+      <nav className="bg-[#EAEFF8]  py-4 md:hidden ">
         <div className="flex justify-between px-6">
           <div>
             <img src={Logo} className="w-52 " alt="logo" />
@@ -42,14 +42,16 @@ export default function navbar() {
                 About
               </p>
             </Link>
-            <Link to={'/solution'}>
+            <Link to={'/faq'}>
               <p className="cursor-pointer text-[#414141] text-center my-2 block">
                 FAQ
               </p>
             </Link>
+            <Link to={'/solution'}>
             <p className="cursor-pointer text-[#414141] text-center my-2 block">
               Sponsors
             </p>
+            </Link>
             <p className="cursor-pointer text-[#414141] text-center my-2 block">
               Contact
             </p>
@@ -68,7 +70,7 @@ export default function navbar() {
       </nav>
 
       {/* Desktop Navigation */}
-      <nav className="hidden md:flex md:flex-row md:justify-between md:items-center md:px-16 md:py-3 lg:flex lg:flex-row lg:justify-between lg:items-center  lg:px-16 bg-[#EAEFF8] ">
+      <nav className="hidden md:flex md:flex-row md:justify-between md:items-center md:px-16 md:py-3 lg:flex lg:flex-row lg:justify-between lg:items-center  lg:pl-44 bg-[#EAEFF8] lg:pt-9  ">
         <div className="">
           <img src={Logo} className="w-60" alt="logo" />
         </div>
@@ -79,12 +81,12 @@ export default function navbar() {
           <Link to={"/about"}>
             <p className="cursor-pointer text-[#414141]">About</p>
           </Link>
-          <Link to={"/solution"}>
+          <Link to={"/faq"}>
             <p className="cursor-pointer text-[#414141]">FAQ</p>
           </Link>
-
+     <Link to={'/solution'}>
           <p className="cursor-pointer text-[#414141]">Sponsors</p>
-
+          </Link>
           <p className="cursor-pointer text-[#414141]">Contact</p>
           <button className="bg-[#f8f9fd] border  border-[#414141] text-[#EC672C] px-8 py-2 rounded-md cursor-pointer">
             Login

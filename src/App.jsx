@@ -2,6 +2,7 @@ import './App.css'
 import HomwPage from './Homepage/index'
 import About from './About/index'
 import SmartSol from './SmartSol/index'
+import FAQ from './FAQ/index'
 import Navbar from "./component/Navbar/navbar";
 import { BrowserRouter as Router, Routes, Route, } from 'react-router-dom';
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<HomwPage />} />
         <Route path="/about" element={<About />} />
         <Route path="/solution" element={<SmartSol />} />
+        <Route path="/faq" element={<FAQ />} />
         {/* <Route path="/about" element={<About />} />
         <Route path="/privacy" element={<Privacy />} /> */}
       </Routes>

@@ -98,14 +98,14 @@ export default function index() {
       <div className="bg-[#EAEFF8] pt-4 pb-5">
         {/* <Navbar /> */}
         {/* Hero Section */}
-        <div className="lg:ml-44  ">
-          <h1 className=" text-[#2E5FB7] ml-4 md:text-center lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-5xl leading-10  lg:w-[450px] w-full  my-1 mb-5 lg:pt-5 sm:ml-16">
+        <div className="flex flex-col  ml-10  md:ml-20 lg:ml-44  sm:ml-10 sm:justify-center md: items-start justify-center ">
+          <h1 className="text-[#2E5FB7] ml-4 md:text-left lg:text-left font-inter font-bold md:text-[27px] text-[23px] md:text-3xl lg:text-[40px] leading-10 lg:w-[450px]  my-1 mb-5 lg:pt-5 sm:ml-4 ">
             A Smart Solution
           </h1>
-          <div className="flex flex-row items-center  mt-8 mb-12 ml-16">
+          <div className="flex flex-row items-center mt-8 mb-12 ml-4 md:ml-4 ">
             <h2 className="text-md ">Home</h2>
             <img src={ArrowRight} alt="Arrow Right" className="mx-3" />
-            <h2 className="text-md">Solutions</h2>
+            <h2 className="text-md ">Solutions</h2>
           </div>
           {/* <div className=" flex flex-col-reverse  items-center lg:flex lg:flex-row lg:items-start    ">
             <div>
@@ -136,10 +136,10 @@ export default function index() {
           </div> */}
         </div>
       </div>
-      <div className=" py-0 px-4 md:px-4   md:py-10 lg:px-2 lg:py-10">
+      <div className=" py-0 px-4 md:px-24   md:py-10 lg:px-2 lg:py-10">
         <div className=" flex  flex-col items-center justify-center lg:ml-44 sm:flex-col md:flex-row md:justify-start  md:items-center lg:flex-row lg:items-center lg:justify-start ">
           <div className=" sm:w-full md:w-[50%] lg:w-[50%] ">
-            <h1 className="text-2xl text-[#414141] font-bold text-center mt-2 md:text-left lg:text-left lg:text-4xl ">
+            <h1 className="text-2xl text-[#414141] font-bold text-center mt-2 md:text-left lg:text-left lg:text-3xl ">
               A Smart Solution
             </h1>
             <p className="mt-8 text-[#414141]">
@@ -153,7 +153,7 @@ export default function index() {
             <div className=" w-72 sm:w-96 md:w-96 lg:w-96 mt-6   flex flex-row justify-between ">
               <div className="space-y-2">
                 <div className="flex  flex-row items-center flex-wrap  ">
-                <img src={Star} className="p-1 "></img>
+                  <img src={Star} className="p-1 "></img>
                   {/* <p className=" flex  flex-col items-center justify-center  bg-white  text-white text-2xl  w-4 h-4 rounded-lg ">
                     <img src={Star} className="p-1 w-40 h-40"></img>
                   </p> */}
@@ -162,7 +162,7 @@ export default function index() {
                   </p>
                 </div>
                 <div className="flex  flex-row items-center flex-wrap  ">
-                <img src={Star} className="p-1 "></img>
+                  <img src={Star} className="p-1 "></img>
                   {/* <p className=" flex  flex-col items-center justify-center  bg-[#2E5FB7]  text-white text-2xl  w-4 h-4 rounded-lg ">
                     <img src={Tick} className="p-1"></img>
                   </p> */}
@@ -171,7 +171,7 @@ export default function index() {
                   </p>
                 </div>
                 <div className="flex  flex-row items-center flex-wrap  ">
-                <img src={Star} className="p-1 "></img>
+                  <img src={Star} className="p-1 "></img>
                   {/* <p className=" flex  flex-col items-center justify-center  bg-[#2E5FB7]  text-white text-2xl  w-4 h-4 rounded-lg ">
                     <img src={Tick} className="p-1"></img>
                   </p> */}
@@ -180,7 +180,7 @@ export default function index() {
                   </p>
                 </div>
                 <div className="flex  flex-row items-center flex-wrap  ">
-                <img src={Star} className="p-1 "></img>
+                  <img src={Star} className="p-1 "></img>
                   {/* <p className=" flex  flex-col items-center justify-center  bg-[#2E5FB7]  text-white text-2xl  w-4 h-4 rounded-lg ">
                     <img src={Tick} className="p-1"></img>
                   </p> */}
@@ -222,6 +222,25 @@ export default function index() {
                 onClick={handleClick}
               /> */}
             </div>{" "}
+            <h1 className="text-2xl text-[#414141] font-bold text-center mt-2 md:text-left lg:text-left lg:text-3xl ">
+              This is subtitle
+            </h1>
+            <p className="mt-8 text-[#414141]">
+              Fear is a formidable opponent. But we have the power to change our
+              trajectory. Pro Bono Zone gives you a convenient way to get
+              valuable insights into your circumstances in a private and safe
+              environment. Any legal issue can be covered in your FREE 30-minute
+              consultation. You deserve an opinion. We offer the following at a
+              neutral venue:
+            </p>
+            <p className="mt-8 text-[#414141]">
+              Fear is a formidable opponent. But we have the power to change our
+              trajectory. Pro Bono Zone gives you a convenient way to get
+              valuable insights into your circumstances in a private and safe
+              environment. Any legal issue can be covered in your FREE 30-minute
+              consultation. You deserve an opinion. We offer the following at a
+              neutral venue:
+            </p>
           </div>
           <div className="ml-0  w-full md:w-[40%] md:ml-3 mt-4 lg:w-[40%] flex flex-col justify-center items-center lg:ml-8  ">
             <img
@@ -235,7 +254,7 @@ export default function index() {
        <h1 className="my-4 text-5xl font-bold text-[#414141]">A Smart Solution</h1>
       </div> */}
       {/* How its work Section */}
-         <div className="bg-[#061133] p-2">
+      <div className="bg-[#061133] p-2">
         {/* <div className="flex flex-row justify-center items-center flex-wrap pt-8  m-2 ">
           <h1 className="text-2xl font-bold text-white px-5 ">
             Newsletter Sign Up
