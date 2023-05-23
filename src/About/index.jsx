@@ -36,6 +36,7 @@ import YouTube from "react-youtube";
 import ArrowRight from "../assets/ArrowRight.png";
 const videId = "vD8X8qvhRxQ";
 export default function index() {
+  document.title="About"
   return (
     <>
       <div className="bg-[#EAEFF8] pt-3 pb-2">
@@ -89,7 +90,7 @@ export default function index() {
             We wish you well in your journey forward.
           </p>
 
-          <p className="mt-4 text-gray-700 text-lg font-semibold">
+          <p className="mt-4 text-gray-700 text-lg font-semibold mt-10 mb-10">
             Kevin Cannon
             SarahAnne Pryor
           </p>
