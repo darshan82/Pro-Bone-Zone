@@ -47,9 +47,9 @@ export default function index() {
             Your Story is Our Story
           </h1>
           <div className="flex flex-row  justify-center sm:justify-center md:justify-center lg:justify-start items-center mt-8 mb-12 ml-4 md:ml-4 ">
-            <h2 className="text-md ">About</h2>
+            <h2 className="text-md ">Home</h2>
             <img src={ArrowRight} alt="Arrow Right" className="mx-3" />
-            <h2 className="text-md ">Solutions</h2>
+            <h2 className="text-md ">About</h2>
           </div>
         </div>
        
