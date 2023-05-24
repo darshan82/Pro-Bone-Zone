@@ -33,6 +33,7 @@ import McIntoshTronton from "../assets/McIntoshTronton.png";
 import AyalaSmithDickens from "../assets/AyalaSmithDickens.png";
 import Logo from "../assets/Logo.png";
 import YouTube from "react-youtube";
+import { Link } from "react-router-dom";
 const videId = "vD8X8qvhRxQ";
 export default function index() {
   const formRef = useRef(null);
@@ -580,18 +581,31 @@ export default function index() {
           </div>
           <div className="py-4 h-56 w-[250px] sm:[280px] mb-12  md:w-auto lg:w-auto text-[#727581]">
             <h1 className="font-semibold text-lg">Website</h1>
+            <Link to={'/'}>
             <p className="mt-3">Home</p>
+            </Link>
+            <Link to={'/about'}>
             <p className="mt-3">About</p>
+            </Link>
+            <Link to={'/faq'}>
             <p className="mt-3">FAQ</p>
+            </Link>
+            <Link to={'/solution'}>
             <p className="mt-3">Sponsors</p>
+            </Link>
             <p className="mt-3">Contact</p>
           </div>
 
           <div className=" py-4 h-56   w-[250px] sm:[280px]  md:w-auto lg:w-auto text-[#727581]">
             <h1 className="font-semibold text-lg">Legal</h1>
-            <p className="mt-3">Terms of Service</p>
+            <Link to={'/terms'}>
+              <p className="mt-3">Terms of Service</p>
+            </Link>
             {/* <p className="mt-3">Legal</p> */}
-            <p className="mt-3">Privacy Policy</p>
+            <Link to={"/privacy"}>
+              <p className="mt-3">Privacy Policy</p>
+            </Link>
+
             <p className="mt-3 text-[#727581]">
               &copy; 2023 Pro Bono Zone&trade;
               <br />

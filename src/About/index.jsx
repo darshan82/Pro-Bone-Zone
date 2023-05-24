@@ -34,6 +34,7 @@ import AyalaSmithDickens from "../assets/AyalaSmithDickens.png";
 import Logo from "../assets/Logo.png";
 import YouTube from "react-youtube";
 import ArrowRight from "../assets/ArrowRight.png";
+import { Link } from "react-router-dom";
 const videId = "vD8X8qvhRxQ";
 export default function index()
 {
@@ -43,16 +44,48 @@ export default function index()
       <div className="bg-[#EAEFF8] pt-3 pb-2">
         {/* <Navbar /> */}
         {/* Hero Section */}
-        <div className="lg:ml-44  ">
-          <h1 className="text-center text-[#2E5FB7] sm:text-center sm:text-3xl md:text-center lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-3xl leading-10  lg:w-[450px] w-full  my-1 mb-5 lg:pt-5 ml-3 ">
-            About
+        <div className="flex flex-col  ml-10  md:ml-20 lg:ml-44  sm:ml-10 sm:justify-center md: items-start justify-center ">
+          <h1 
+           className=" text-[#2E5FB7] font-inter font-semibold text-3xl leading-10 w-full mb-5"
+        //  className="text-center  text-[#2E5FB7] sm:text-center md:text-center lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5"
+          //className="text-[#2E5FB7] ml-4 md:text-left lg:text-left font-inter font-bold md:text-[27px] text-[23px] md:text-3xl lg:text-[40px] leading-10 lg:w-[450px]  my-1 mb-5 lg:pt-5 sm:ml-4 "
+          >
+           About
           </h1>
-          <div className="flex flex-row  justify-center sm:justify-center md:justify-center lg:justify-start items-center mt-8 mb-12 ml-4 md:ml-4 ">
+          <div className="flex flex-row items-center mt-8 mb-12 ml-4 md:ml-4 ">
             <h2 className="text-md ">Home</h2>
             <img src={ArrowRight} alt="Arrow Right" className="mx-3" />
             <h2 className="text-md ">About</h2>
           </div>
+          {/* <div className=" flex flex-col-reverse  items-center lg:flex lg:flex-row lg:items-start    ">
+            <div>
+              <p className=" text-md text-[#414141] font-normal leading-5 mt-5 w-full px-16 lg:px-0   text-center lg:text-left  lg:w-[500px]  ">
+                Confronting important legal matters can be a daunting task. Pro
+                Bono Zone&trade; connects you with seasoned attorneys and
+                empowers you to explore your options in a safe, private and
+                supportive environment. And it is FREE!
+              </p>
+              <div className="  flex flex-row justify-center  lg:justify-start mt-14">
+               
+                <Button
+                  buttonText={"Schedule a Free Consultation"}
+                  onClick={handleClick}
+                />
+              </div>
+            </div>
+
+            <img
+              src={HeroImage}
+              className="hidden lg:block md:block md: w-[500px] lg:w-[35%] mt-5 lg:ml-[60px] lg:mt-[-35px]"
+              // className=" w-[500px] lg:w-[35%] mt-5 lg:ml-[60px] lg:mt-[-35px]"
+            ></img>
+            <img
+              src={HeroImageLessBorder}
+              className="sm:block sm:w-[500px] md:hidden lg:hidden"
+            />
+          </div> */}
         </div>
+
 
       </div>
 
@@ -134,18 +167,31 @@ export default function index()
           </div>
           <div className="py-4 h-56 w-[250px] sm:[280px] mb-12  md:w-auto lg:w-auto text-[#727581]">
             <h1 className="font-semibold text-lg">Website</h1>
+            <Link to={'/'}>
             <p className="mt-3">Home</p>
+            </Link>
+            <Link to={'/about'}>
             <p className="mt-3">About</p>
+            </Link>
+            <Link to={'/faq'}>
             <p className="mt-3">FAQ</p>
+            </Link>
+            <Link to={'/solution'}>
             <p className="mt-3">Sponsors</p>
+            </Link>
             <p className="mt-3">Contact</p>
           </div>
 
           <div className=" py-4 h-56   w-[250px] sm:[280px]  md:w-auto lg:w-auto text-[#727581]">
             <h1 className="font-semibold text-lg">Legal</h1>
-            <p className="mt-3">Terms of Service</p>
+            <Link to={'/terms'}>
+              <p className="mt-3">Terms of Service</p>
+            </Link>
             {/* <p className="mt-3">Legal</p> */}
-            <p className="mt-3">Privacy Policy</p>
+            <Link to={"/privacy"}>
+              <p className="mt-3">Privacy Policy</p>
+            </Link>
+
             <p className="mt-3 text-[#727581]">
               &copy; 2023 Pro Bono Zone&trade;
               <br />

@@ -35,6 +35,7 @@ import Logo from "../assets/Logo.png";
 import YouTube from "react-youtube";
 import ArrowRight from "../assets/ArrowRight.png";
 import Star from "../assets/Star.png";
+import { Link } from "react-router-dom";
 const videId = "vD8X8qvhRxQ";
 export default function index() {
   const formRef = useRef(null);
@@ -99,13 +100,17 @@ export default function index() {
         {/* <Navbar /> */}
         {/* Hero Section */}
         <div className="flex flex-col  ml-10  md:ml-20 lg:ml-44  sm:ml-10 sm:justify-center md: items-start justify-center ">
-          <h1 className="text-[#2E5FB7] ml-4 md:text-left lg:text-left font-inter font-bold md:text-[27px] text-[23px] md:text-3xl lg:text-[40px] leading-10 lg:w-[450px]  my-1 mb-5 lg:pt-5 sm:ml-4 ">
-            A Smart Solution
+          <h1 
+           className=" text-[#2E5FB7] font-inter font-semibold text-3xl leading-10 w-full mb-5"
+        //  className="text-center  text-[#2E5FB7] sm:text-center md:text-center lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5"
+          //className="text-[#2E5FB7] ml-4 md:text-left lg:text-left font-inter font-bold md:text-[27px] text-[23px] md:text-3xl lg:text-[40px] leading-10 lg:w-[450px]  my-1 mb-5 lg:pt-5 sm:ml-4 "
+          >
+          A Smart Solution 
           </h1>
           <div className="flex flex-row items-center mt-8 mb-12 ml-4 md:ml-4 ">
             <h2 className="text-md ">Home</h2>
             <img src={ArrowRight} alt="Arrow Right" className="mx-3" />
-            <h2 className="text-md ">Solutions</h2>
+            <h2 className="text-md ">Solution</h2>
           </div>
           {/* <div className=" flex flex-col-reverse  items-center lg:flex lg:flex-row lg:items-start    ">
             <div>
@@ -135,6 +140,7 @@ export default function index() {
             />
           </div> */}
         </div>
+
       </div>
       <div className=" py-0 px-4 md:px-24   md:py-10 lg:px-2 lg:py-10">
         <div className=" flex  flex-col items-center justify-center lg:ml-44 sm:flex-col md:flex-row md:justify-start  md:items-center lg:flex-row lg:items-center lg:justify-start ">
@@ -289,18 +295,31 @@ export default function index() {
           </div>
           <div className="py-4 h-56 w-[250px] sm:[280px] mb-12  md:w-auto lg:w-auto text-[#727581]">
             <h1 className="font-semibold text-lg">Website</h1>
+            <Link to={'/'}>
             <p className="mt-3">Home</p>
+            </Link>
+            <Link to={'/about'}>
             <p className="mt-3">About</p>
+            </Link>
+            <Link to={'/faq'}>
             <p className="mt-3">FAQ</p>
+            </Link>
+            <Link to={'/solution'}>
             <p className="mt-3">Sponsors</p>
+            </Link>
             <p className="mt-3">Contact</p>
           </div>
 
           <div className=" py-4 h-56   w-[250px] sm:[280px]  md:w-auto lg:w-auto text-[#727581]">
             <h1 className="font-semibold text-lg">Legal</h1>
-            <p className="mt-3">Terms of Service</p>
+            <Link to={'/terms'}>
+              <p className="mt-3">Terms of Service</p>
+            </Link>
             {/* <p className="mt-3">Legal</p> */}
-            <p className="mt-3">Privacy Policy</p>
+            <Link to={"/privacy"}>
+              <p className="mt-3">Privacy Policy</p>
+            </Link>
+
             <p className="mt-3 text-[#727581]">
               &copy; 2023 Pro Bono Zone&trade;
               <br />
