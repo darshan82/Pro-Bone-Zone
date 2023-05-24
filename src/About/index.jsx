@@ -45,12 +45,12 @@ export default function index()
         {/* <Navbar /> */}
         {/* Hero Section */}
         <div className="flex flex-col  ml-10  md:ml-20 lg:ml-44  sm:ml-10 sm:justify-center md: items-start justify-center ">
-          <h1 
-           className=" text-[#2E5FB7] font-inter font-semibold text-3xl leading-10 w-full mb-5"
-        //  className="text-center  text-[#2E5FB7] sm:text-center md:text-center lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5"
+          <h1
+            className=" text-[#2E5FB7] font-inter font-semibold text-3xl leading-10 w-full mb-5"
+          //  className="text-center  text-[#2E5FB7] sm:text-center md:text-center lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5"
           //className="text-[#2E5FB7] ml-4 md:text-left lg:text-left font-inter font-bold md:text-[27px] text-[23px] md:text-3xl lg:text-[40px] leading-10 lg:w-[450px]  my-1 mb-5 lg:pt-5 sm:ml-4 "
           >
-           About
+            About
           </h1>
           <div className="flex flex-row items-center mt-8 mb-12 ml-0 md:ml-0 ">
             <h2 className="text-md ">Home</h2>
@@ -168,16 +168,16 @@ export default function index()
           <div className="py-4 h-56 w-[250px] sm:[280px] mb-12  md:w-auto lg:w-auto text-[#727581]">
             <h1 className="font-semibold text-lg">Website</h1>
             <Link to={'/'}>
-            <p className="mt-3">Home</p>
+              <p className="mt-3">Home</p>
             </Link>
             <Link to={'/about'}>
-            <p className="mt-3">About</p>
+              <p className="mt-3">About</p>
             </Link>
             <Link to={'/faq'}>
-            <p className="mt-3">FAQ</p>
+              <p className="mt-3">FAQ</p>
             </Link>
             <Link to={'/solution'}>
-            <p className="mt-3">Sponsors</p>
+              <p className="mt-3">Sponsors</p>
             </Link>
             <p className="mt-3">Contact</p>
           </div>
@@ -223,9 +223,27 @@ export default function index()
               </p>
             </div>
             <div className="flex flex-row md:ml-2 space-x-2 w-6 ml-[-50px]   lg:ml-[0px] mt-5">
-              <img src={FaceBookWhite}></img>
-              <img src={LinkedinWhite}></img>
-              <img src={YoutubeWhite}></img>
+              {/* <div > */}
+              <img
+                onClick={() =>
+                {
+                  window.open("https://www.facebook.com/probonozone", "_blank");
+                }}
+                src={FaceBookWhite}></img>
+              {/* </div> */}
+
+              <img
+                onClick={() =>
+                {
+                  window.open("https://www.linkedin.com/company/pro-bono-zone", "_blank");
+                }}
+                src={LinkedinWhite}></img>
+              <img
+                onClick={() =>
+                {
+                  window.open("https://www.youtube.com/@ProBonoZone", "_blank");
+                }}
+                src={YoutubeWhite}></img>
             </div>
           </div>
         </div>

@@ -37,7 +37,8 @@ import YouTube from "react-youtube";
 import { Link } from "react-router-dom";
 const videId = "vD8X8qvhRxQ";
 
-export default function index() {
+export default function index()
+{
   document.title = "Terms";
 
   return (
@@ -49,7 +50,7 @@ export default function index() {
         <div className="flex flex-col  ml-10  md:ml-20 lg:ml-44  sm:ml-10 sm:justify-center md: items-start justify-center ">
           <h1
             className=" text-[#2E5FB7] lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5"
-            //className="text-[#2E5FB7] ml-4 md:text-left lg:text-left font-inter font-bold md:text-[27px] text-[23px] md:text-3xl lg:text-[40px] leading-10 lg:w-[450px]  my-1 mb-5 lg:pt-5 sm:ml-4 "
+          //className="text-[#2E5FB7] ml-4 md:text-left lg:text-left font-inter font-bold md:text-[27px] text-[23px] md:text-3xl lg:text-[40px] leading-10 lg:w-[450px]  my-1 mb-5 lg:pt-5 sm:ml-4 "
           >
             Terms And Conditions
           </h1>
@@ -68,10 +69,10 @@ export default function index() {
             <h2 class="text-2xl font-bold mb-4 pl-8  sm:pl-5 sm:ml-1 md:pl-[55px] lg:pl-0">Usage Agreement</h2>
           </div>
           <div class="bg-gray-100 p-6 mb-6  sm:pl-2 md:pl-4">
-           
+
             <div class="mb-4">
               <p class="font-bold mb-2">
-              1.  We Provide Our Sites for Your Convenience Only!
+                1.  We Provide Our Sites for Your Convenience Only!
               </p>
               <p>
                 Our Sites are provided to you without charge as a convenience
@@ -290,7 +291,7 @@ export default function index() {
 
           <div class="bg-gray-100 p-6 mb-6">
             <h2 class="text-xl font-bold mb-4">
-             9. You are Bound by Changes in these Terms and Conditions
+              9. You are Bound by Changes in these Terms and Conditions
             </h2>
             <p class="mb-4">
               We may at any time revise these Terms and Conditions by updating
@@ -305,7 +306,7 @@ export default function index() {
 
           <div class="bg-gray-100 p-6 mb-6">
             <h2 class="text-xl font-bold mb-4">
-            10.  You Agree to Indemnify Us for Using Our Sites
+              10.  You Agree to Indemnify Us for Using Our Sites
             </h2>
             <p class="mb-4">
               their respective officers, directors, owners, agents, employees,
@@ -334,7 +335,7 @@ export default function index() {
 
           <div class="bg-gray-100 p-6 mb-6">
             <h2 class="text-xl font-bold mb-4">
-           11.   Third Parties May Have Rights Under This Agreement
+              11.   Third Parties May Have Rights Under This Agreement
             </h2>
             <p class="mb-4">
               Some of the provisions of these Terms and Conditions are for the
@@ -346,7 +347,7 @@ export default function index() {
           </div>
           <div class="bg-gray-100 p-6 mb-6">
             <h2 class="text-xl font-bold mb-4">
-           12.   How This Agreement May Be Terminated
+              12.   How This Agreement May Be Terminated
             </h2>
             <p class="mb-4">
               These Terms and Conditions may be terminated by either party
@@ -430,7 +431,7 @@ export default function index() {
       <div className="bg-[#061133] p-2">
         <div
           className="flex flex-row flex-wrap justify-center items-center text-center pt-16 md:text-left lg:text-left md:flex-row  md:justify-between md:items-start lg:flex-row lg:items-start lg:justify-between lg:w-[80%]  lg:ml-44 py-5 lg:pb-28"
-          //style={{ paddingTop: 40 }}
+        //style={{ paddingTop: 40 }}
         >
           <div className="text-white flex flex-col items-center md:items-start  lg:items-start    py-4 h-24 w-[250px] sm:[280px]  md:w-auto lg:w-auto">
             <img src={Logo} className="w-52 md:w-44 lg:w-52"></img>
@@ -438,16 +439,16 @@ export default function index() {
           <div className="py-4 h-56 w-[250px] sm:[280px] mb-12  md:w-auto lg:w-auto text-[#727581]">
             <h1 className="font-semibold text-lg">Website</h1>
             <Link to={'/'}>
-            <p className="mt-3">Home</p>
+              <p className="mt-3">Home</p>
             </Link>
             <Link to={'/about'}>
-            <p className="mt-3">About</p>
+              <p className="mt-3">About</p>
             </Link>
             <Link to={'/faq'}>
-            <p className="mt-3">FAQ</p>
+              <p className="mt-3">FAQ</p>
             </Link>
             <Link to={'/solution'}>
-            <p className="mt-3">Sponsors</p>
+              <p className="mt-3">Sponsors</p>
             </Link>
             <p className="mt-3">Contact</p>
           </div>
@@ -493,9 +494,27 @@ export default function index() {
               </p>
             </div>
             <div className="flex flex-row md:ml-2 space-x-2 w-6 ml-[-50px]   lg:ml-[0px] mt-5">
-              <img src={FaceBookWhite}></img>
-              <img src={LinkedinWhite}></img>
-              <img src={YoutubeWhite}></img>
+              {/* <div > */}
+              <img
+                onClick={() =>
+                {
+                  window.open("https://www.facebook.com/probonozone", "_blank");
+                }}
+                src={FaceBookWhite}></img>
+              {/* </div> */}
+
+              <img
+                onClick={() =>
+                {
+                  window.open("https://www.linkedin.com/company/pro-bono-zone", "_blank");
+                }}
+                src={LinkedinWhite}></img>
+              <img
+                onClick={() =>
+                {
+                  window.open("https://www.youtube.com/@ProBonoZone", "_blank");
+                }}
+                src={YoutubeWhite}></img>
             </div>
           </div>
         </div>

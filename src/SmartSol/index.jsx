@@ -147,7 +147,7 @@ export default function index() {
       </h1>
       <div className="bg-white p-2 mb-5  pr-5 lg:pr-9 lg:ml-44">
         <div className=" mx-auto text-left">
-          <p className="text-gray-700 text-lg leading-relaxed">
+          <p className="text-gray-700 text-lg leading-relaxed pb-10">
           Pro Bono Zone™ events have proven to be a tremendous and often life-changing benefit to many people. These events could not come to fruition without the time, talents, input and generous support of many partners in the community —including attorneys, corporate promoters, venues, and many more. We thank those who have contributed so much to give back.  
           </p>
 
@@ -251,9 +251,27 @@ export default function index() {
               </p>
             </div>
             <div className="flex flex-row md:ml-2 space-x-2 w-6 ml-[-50px]   lg:ml-[0px] mt-5">
-              <img src={FaceBookWhite}></img>
-              <img src={LinkedinWhite}></img>
-              <img src={YoutubeWhite}></img>
+              {/* <div > */}
+              <img
+                onClick={() =>
+                {
+                  window.open("https://www.facebook.com/probonozone", "_blank");
+                }}
+                src={FaceBookWhite}></img>
+              {/* </div> */}
+
+              <img
+                onClick={() =>
+                {
+                  window.open("https://www.linkedin.com/company/pro-bono-zone", "_blank");
+                }}
+                src={LinkedinWhite}></img>
+              <img
+                onClick={() =>
+                {
+                  window.open("https://www.youtube.com/@ProBonoZone", "_blank");
+                }}
+                src={YoutubeWhite}></img>
             </div>
           </div>
         </div>

@@ -567,9 +567,27 @@ export default function index() {
               </p>
             </div>
             <div className="flex flex-row md:ml-2 space-x-2 w-6 ml-[-50px]   lg:ml-[0px] mt-5">
-              <img src={FaceBookWhite}></img>
-              <img src={LinkedinWhite}></img>
-              <img src={YoutubeWhite}></img>
+              {/* <div > */}
+              <img
+                onClick={() =>
+                {
+                  window.open("https://www.facebook.com/probonozone", "_blank");
+                }}
+                src={FaceBookWhite}></img>
+              {/* </div> */}
+
+              <img
+                onClick={() =>
+                {
+                  window.open("https://www.linkedin.com/company/pro-bono-zone", "_blank");
+                }}
+                src={LinkedinWhite}></img>
+              <img
+                onClick={() =>
+                {
+                  window.open("https://www.youtube.com/@ProBonoZone", "_blank");
+                }}
+                src={YoutubeWhite}></img>
             </div>
           </div>
         </div>
