@@ -249,10 +249,10 @@ export default function index() {
             </p>
           </div>
           <div className="ml-0  w-full md:w-[40%] md:ml-3 mt-4 lg:w-[40%] flex flex-col justify-center items-center lg:ml-8  ">
-            <img
+            {/* <img
               src={YourSolutionImage}
               className="w-[250px] h-[250px] md:w-[250px] md:h-[250px] lg:w-[300px] lg:h-[300px]  "
-            ></img>
+            ></img> */}
           </div>
         </div>
       </div>
