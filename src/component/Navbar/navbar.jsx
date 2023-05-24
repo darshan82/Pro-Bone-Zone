@@ -4,7 +4,8 @@ import Logo from "../../assets/Logo.png";
 import { Link } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
-export default function navbar() {
+export default function navbar()
+{
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   return (
@@ -13,7 +14,10 @@ export default function navbar() {
       <nav className="bg-[#EAEFF8]  py-4 md:hidden ">
         <div className="flex justify-between px-6">
           <div>
-            <img src={Logo} className="w-52 " alt="logo" />
+            <Link to={"/"}>
+              <img src={Logo} className="w-52 " alt="logo" />
+            </Link>
+
           </div>
           <button
             onClick={() => setIsNavOpen(!isNavOpen)}
@@ -49,9 +53,9 @@ export default function navbar() {
               </p>
             </Link>
             <Link to={'/solution'}>
-            <p className="cursor-pointer text-[#414141] text-center my-2 block">
-              Sponsors
-            </p>
+              <p className="cursor-pointer text-[#414141] text-center my-2 block">
+                Sponsors
+              </p>
             </Link>
             <p className="cursor-pointer text-[#414141] text-center my-2 block">
               Contact
@@ -73,7 +77,11 @@ export default function navbar() {
       {/* Desktop Navigation */}
       <nav className="hidden md:flex md:flex-row md:justify-between md:items-center md:px-16 md:py-3 lg:flex lg:flex-row lg:justify-between lg:items-center  lg:pl-44 bg-[#EAEFF8] lg:pt-9  ">
         <div className="">
-          <img src={Logo} className="w-60" alt="logo" />
+          <Link to={"/"}>
+
+            <img src={Logo} className="w-60" alt="logo" />
+          </Link>
+
         </div>
         <div className="flex flex-row justify-center items-center space-x-5 text-white text-sm ">
           <Link to={"/"}>
@@ -85,8 +93,8 @@ export default function navbar() {
           <Link to={"/faq"}>
             <p className="cursor-pointer text-[#414141]">FAQ</p>
           </Link>
-     <Link to={'/solution'}>
-          <p className="cursor-pointer text-[#414141]">Sponsors</p>
+          <Link to={'/solution'}>
+            <p className="cursor-pointer text-[#414141]">Sponsors</p>
           </Link>
           <p className="cursor-pointer text-[#414141]">Contact</p>
           <button className="bg-[#f8f9fd] border  border-[#414141] text-[#EC672C] px-8 py-2 rounded-md cursor-pointer">
