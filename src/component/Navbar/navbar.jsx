@@ -4,7 +4,7 @@ import Logo from "../../assets/Logo.png";
 import { Link } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
-export default function navbar()
+export default function navbar({ handleClick })
 {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
@@ -61,12 +61,17 @@ export default function navbar()
               Contact
             </p>
             <div className="flex justify-center ">
-              <button className="bg-[#EC672C] px-8 py-2 w-44 rounded-sm text-white my-2 block">
+              <button
+                onClick={handleClick}
+                className="bg-[#EC672C] px-8 py-2 w-44 rounded-sm text-white my-2 block">
                 Register
               </button>
             </div>
             <div className="flex justify-center">
-              <button className="bg-[#f8f9fd] border  border-[#414141] text-[#EC672C] px-8 py-2 rounded-md cursor-pointer">
+              <button
+                onClick={handleClick}
+
+                className="bg-[#f8f9fd] border  border-[#414141] text-[#EC672C] px-8 py-2 rounded-md cursor-pointer">
                 Login
               </button>
             </div>
@@ -97,10 +102,16 @@ export default function navbar()
             <p className="cursor-pointer text-[#414141]">Sponsors</p>
           </Link>
           <p className="cursor-pointer text-[#414141]">Contact</p>
-          <button className="bg-[#f8f9fd] border  border-[#414141] text-[#EC672C] px-8 py-2 rounded-md cursor-pointer">
+          <button
+            onClick={handleClick}
+
+            className="bg-[#f8f9fd] border  border-[#414141] text-[#EC672C] px-8 py-2 rounded-md cursor-pointer">
             Login
           </button>
-          <button className="bg-[#EC672C] px-8 py-2 rounded-sm">
+          <button
+            onClick={handleClick}
+
+            className="bg-[#EC672C] px-8 py-2 rounded-sm">
             Register
           </button>
         </div>

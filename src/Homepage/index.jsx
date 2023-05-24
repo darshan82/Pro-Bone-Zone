@@ -35,18 +35,16 @@ import Logo from "../assets/Logo.png";
 import YouTube from "react-youtube";
 import { Link } from "react-router-dom";
 const videId = "vD8X8qvhRxQ";
-export default function index() {
-  const formRef = useRef(null);
+export default function index({ formRef, handleClick })
+{
   const form = useRef();
   const [isPlaying, setIsPlaying] = useState(false);
   const [chooseDate, setSelectedDate] = useState("Sat June 17th");
   const handleChangeEventDate = (event) =>
     setSelectedDate(event?.target?.value);
-  const handleClick = () => {
-    formRef.current.focus();
-    formRef.current.scrollIntoView();
-  };
-  const sendEmail = (e) => {
+
+  const sendEmail = (e) =>
+  {
     e.preventDefault();
     //console.log(e.target);
 
@@ -72,7 +70,8 @@ export default function index() {
           "2Z-yhu6rbMDiGx-KA"
         )
         .then(
-          (result) => {
+          (result) =>
+          {
             alert(
               "Your registration request has been received successfully. Thank you"
             );
@@ -84,11 +83,13 @@ export default function index() {
             form.current.type.value = "Select a Category";
             form.current.time.value = "Select a Time";
           },
-          (error) => {
+          (error) =>
+          {
             console.log(error.text);
           }
         );
-    else {
+    else
+    {
       alert("Please fill the complete form. Thank you");
     }
   };
@@ -124,7 +125,7 @@ export default function index() {
             <img
               src={HeroImage}
               className="hidden lg:block md:block md: w-[500px] lg:w-[35%] mt-5 lg:ml-[60px] lg:mt-[-35px]"
-              // className=" w-[500px] lg:w-[35%] mt-5 lg:ml-[60px] lg:mt-[-35px]"
+            // className=" w-[500px] lg:w-[35%] mt-5 lg:ml-[60px] lg:mt-[-35px]"
             ></img>
             <img
               src={HeroImageLessBorder}
@@ -365,7 +366,7 @@ export default function index() {
         </h1>
         <p
           className="text-center  text-[#414141] text-lg md:text-xl lg:text-xl my-4 px-5 md:px-24 lg:px-64"
-          // className=" text-center  text-md mt-2 px-4 mb-4 md:px-64 lg:px-41"
+        // className=" text-center  text-md mt-2 px-4 mb-4 md:px-64 lg:px-41"
         >
           This event will last just 4 hours, so we have limited openings. If you
           need legal advice, don't delay. Take advantage of this opportunity to
@@ -563,7 +564,7 @@ export default function index() {
         </div> */}
         <div
           className="flex flex-row flex-wrap justify-center items-center text-center pt-16 md:text-left lg:text-left md:flex-row  md:justify-between md:items-start lg:flex-row lg:items-start lg:justify-between lg:w-[80%]  lg:ml-44 py-5 lg:pb-28"
-          //style={{ paddingTop: 40 }}
+        //style={{ paddingTop: 40 }}
         >
           <div className="text-white flex flex-col items-center md:items-start  lg:items-start    py-4 h-24 w-[250px] sm:[280px]  md:w-auto lg:w-auto">
             <img src={Logo} className="w-52 md:w-44 lg:w-52"></img>
@@ -582,16 +583,16 @@ export default function index() {
           <div className="py-4 h-56 w-[250px] sm:[280px] mb-12  md:w-auto lg:w-auto text-[#727581]">
             <h1 className="font-semibold text-lg">Website</h1>
             <Link to={'/'}>
-            <p className="mt-3">Home</p>
+              <p className="mt-3">Home</p>
             </Link>
             <Link to={'/about'}>
-            <p className="mt-3">About</p>
+              <p className="mt-3">About</p>
             </Link>
             <Link to={'/faq'}>
-            <p className="mt-3">FAQ</p>
+              <p className="mt-3">FAQ</p>
             </Link>
             <Link to={'/solution'}>
-            <p className="mt-3">Sponsors</p>
+              <p className="mt-3">Sponsors</p>
             </Link>
             <p className="mt-3">Contact</p>
           </div>
