@@ -154,7 +154,7 @@ export default function index() {
 
       {/* A Smart Solution */}
       <div className=" py-0 px-4 md:px-4   md:py-10 lg:px-2 lg:py-10">
-      <div className="max-w-2xl mx-auto">
+      <div className="max-w-2xl pl-9 pr-2 mt-4  mx-auto">
       To make the question text start from the left when it exceeds one line, you can modify the code as follows:
 
 
