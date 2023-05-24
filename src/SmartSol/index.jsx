@@ -105,12 +105,12 @@ export default function index() {
         //  className="text-center  text-[#2E5FB7] sm:text-center md:text-center lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5"
           //className="text-[#2E5FB7] ml-4 md:text-left lg:text-left font-inter font-bold md:text-[27px] text-[23px] md:text-3xl lg:text-[40px] leading-10 lg:w-[450px]  my-1 mb-5 lg:pt-5 sm:ml-4 "
           >
-          A Smart Solution 
+          Sponsors
           </h1>
           <div className="flex flex-row items-center mt-8 mb-12 ml-0 md:ml-0 ">
             <h2 className="text-md ">Home</h2>
             <img src={ArrowRight} alt="Arrow Right" className="mx-3" />
-            <h2 className="text-md ">Solution</h2>
+            <h2 className="text-md ">Sponsors</h2>
           </div>
           {/* <div className=" flex flex-col-reverse  items-center lg:flex lg:flex-row lg:items-start    ">
             <div>
@@ -142,118 +142,18 @@ export default function index() {
         </div>
 
       </div>
-      <div className=" py-0 px-4 md:px-24   md:py-10 lg:px-2 lg:py-10">
-        <div className=" flex  flex-col items-center justify-center lg:ml-44 sm:flex-col md:flex-row md:justify-start  md:items-center lg:flex-row lg:items-center lg:justify-start ">
-          <div className=" sm:w-full md:w-[50%] lg:w-[50%] ">
-            <h1 className="text-2xl text-[#414141] font-bold text-center mt-2 md:text-left lg:text-left lg:text-3xl ">
-              A Smart Solution
-            </h1>
-            <p className="mt-8 text-[#414141]">
-              Fear is a formidable opponent. But we have the power to change our
-              trajectory. Pro Bono Zone gives you a convenient way to get
-              valuable insights into your circumstances in a private and safe
-              environment. Any legal issue can be covered in your FREE 30-minute
-              consultation. You deserve an opinion. We offer the following at a
-              neutral venue:
-            </p>
-            <div className=" w-72 sm:w-96 md:w-96 lg:w-96 mt-6   flex flex-row justify-between ">
-              <div className="space-y-2">
-                <div className="flex  flex-row items-center flex-wrap  ">
-                  <img src={Star} className="p-1 "></img>
-                  {/* <p className=" flex  flex-col items-center justify-center  bg-white  text-white text-2xl  w-4 h-4 rounded-lg ">
-                    <img src={Star} className="p-1 w-40 h-40"></img>
-                  </p> */}
-                  <p className="ml-2 text-[#414141] text-xs md:text-lg lg:text-lg">
-                    Experience
-                  </p>
-                </div>
-                <div className="flex  flex-row items-center flex-wrap  ">
-                  <img src={Star} className="p-1 "></img>
-                  {/* <p className=" flex  flex-col items-center justify-center  bg-[#2E5FB7]  text-white text-2xl  w-4 h-4 rounded-lg ">
-                    <img src={Tick} className="p-1"></img>
-                  </p> */}
-                  <p className="ml-2 text-[#414141] text-xs md:text-lg lg:text-lg">
-                    Competence{" "}
-                  </p>
-                </div>
-                <div className="flex  flex-row items-center flex-wrap  ">
-                  <img src={Star} className="p-1 "></img>
-                  {/* <p className=" flex  flex-col items-center justify-center  bg-[#2E5FB7]  text-white text-2xl  w-4 h-4 rounded-lg ">
-                    <img src={Tick} className="p-1"></img>
-                  </p> */}
-                  <p className="ml-2 text-[#414141] text-xs md:text-lg lg:text-lg">
-                    Privacy{" "}
-                  </p>
-                </div>
-                <div className="flex  flex-row items-center flex-wrap  ">
-                  <img src={Star} className="p-1 "></img>
-                  {/* <p className=" flex  flex-col items-center justify-center  bg-[#2E5FB7]  text-white text-2xl  w-4 h-4 rounded-lg ">
-                    <img src={Tick} className="p-1"></img>
-                  </p> */}
-                  <p className="ml-2 text-[#414141] text-xs md:text-lg lg:text-lg">
-                    Sensitivity{" "}
-                  </p>
-                </div>
-              </div>
+      <h1 className="text-center text-[#414141] sm:text-center sm:text-3xl md:text-center lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-3xl leading-10  lg:w-[450px] w-full  my-1 mb-5 lg:pt-5 pr-5 lg:pr-9 lg:ml-44 pl-1">
+      Our Generous Sponsors
+      </h1>
+      <div className="bg-white p-2 mb-5  pr-5 lg:pr-9 lg:ml-44">
+        <div className=" mx-auto text-left">
+          <p className="text-gray-700 text-lg leading-relaxed">
+          Pro Bono Zone™ events have proven to be a tremendous and often life-changing benefit to many people. These events could not come to fruition without the time, talents, input and generous support of many partners in the community —including attorneys, corporate promoters, venues, and many more. We thank those who have contributed so much to give back.  
+          </p>
 
-              {/* <div className="space-y-2">
-                <div className="flex  flex-row items-center flex-wrap  ">
-                  <p className=" flex  flex-col items-center justify-center  bg-[#2E5FB7]  text-white text-2xl  w-4 h-4 rounded-lg ">
-                    <img src={Tick} className="p-1"></img>
-                  </p>
-                  <p className="ml-2 text-[#414141] text-xs md:text-lg lg:text-lg">
-                    Sensitivity{" "}
-                  </p>
-                </div>
-                <div className="flex  flex-row items-center flex-wrap  ">
-                  <p className=" flex  flex-col items-center justify-center  bg-[#2E5FB7]  text-white text-2xl  w-4 h-4 rounded-lg ">
-                    <img src={Tick} className="p-1"></img>
-                  </p>
-                  <p className="ml-2 text-[#414141] text-xs md:text-lg lg:text-lg">
-                    Affordability (It’s free!)
-                  </p>
-                </div>
-              </div> */}
-            </div>
-            <p className="mt-6 text-[#414141]">
-              Ten minutes with a law student at a "free legal aid" community
-              clinic is fine if you want to understand who inherits grandma's
-              furniture, but if you need to take care of something important or
-              potentially life-changing, consult with a competent professional.
-              It's free.
-            </p>
-            <div className=" flex justify-center mt-5 md:mt-8  md:justify-start lg:mt-8 lg:justify-start ">
-              {/* <Button
-                buttonText={"Schedule a Free Consultation"}
-                onClick={handleClick}
-              /> */}
-            </div>{" "}
-            <h1 className="text-2xl text-[#414141] font-bold text-center mt-2 md:text-left lg:text-left lg:text-3xl ">
-              This is subtitle
-            </h1>
-            <p className="mt-8 text-[#414141]">
-              Fear is a formidable opponent. But we have the power to change our
-              trajectory. Pro Bono Zone gives you a convenient way to get
-              valuable insights into your circumstances in a private and safe
-              environment. Any legal issue can be covered in your FREE 30-minute
-              consultation. You deserve an opinion. We offer the following at a
-              neutral venue:
-            </p>
-            <p className="mt-8 text-[#414141]">
-              Fear is a formidable opponent. But we have the power to change our
-              trajectory. Pro Bono Zone gives you a convenient way to get
-              valuable insights into your circumstances in a private and safe
-              environment. Any legal issue can be covered in your FREE 30-minute
-              consultation. You deserve an opinion. We offer the following at a
-              neutral venue:
-            </p>
-          </div>
-          <div className="ml-0  w-full md:w-[40%] md:ml-3 mt-4 lg:w-[40%] flex flex-col justify-center items-center lg:ml-8  ">
-            {/* <img
-              src={YourSolutionImage}
-              className="w-[250px] h-[250px] md:w-[250px] md:h-[250px] lg:w-[300px] lg:h-[300px]  "
-            ></img> */}
-          </div>
+        
+
+         
         </div>
       </div>
       {/* <div className="bg-white p-2 pr-5 lg:pr-9 lg:ml-44">
