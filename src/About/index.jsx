@@ -35,25 +35,27 @@ import Logo from "../assets/Logo.png";
 import YouTube from "react-youtube";
 import ArrowRight from "../assets/ArrowRight.png";
 const videId = "vD8X8qvhRxQ";
-export default function index() {
+export default function index()
+{
+  document.title = "About"
   return (
     <>
       <div className="bg-[#EAEFF8] pt-3 pb-2">
         {/* <Navbar /> */}
         {/* Hero Section */}
         <div className="lg:ml-44  ">
-          <h1 className="text-center text-[#2E5FB7] sm:text-center sm:text-3xl md:text-center lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-3xl leading-10  lg:w-[450px] w-full  my-1 mb-5 lg:pt-5 ">
-            Your Story is Our Story
+          <h1 className="text-center text-[#2E5FB7] sm:text-center sm:text-3xl md:text-center lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-3xl leading-10  lg:w-[450px] w-full  my-1 mb-5 lg:pt-5 ml-3 ">
+            About
           </h1>
           <div className="flex flex-row  justify-center sm:justify-center md:justify-center lg:justify-start items-center mt-8 mb-12 ml-4 md:ml-4 ">
-            <h2 className="text-md ">About</h2>
+            <h2 className="text-md ">Home</h2>
             <img src={ArrowRight} alt="Arrow Right" className="mx-3" />
-            <h2 className="text-md ">Solutions</h2>
+            <h2 className="text-md ">About</h2>
           </div>
         </div>
-       
+
       </div>
-    
+
       {/* How its work Section */}
 
       {/* Solution Boxes */}
@@ -62,7 +64,9 @@ export default function index() {
 
       {/* Offer Boxes */}
 
-   
+      <h1 className="text-center text-[#414141] sm:text-center sm:text-3xl md:text-center lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-3xl leading-10  lg:w-[450px] w-full  my-1 mb-5 lg:pt-5 pr-5 lg:pr-9 lg:ml-44 pl-1">
+        Your Story is Our Story
+      </h1>
       <div className="bg-white p-2   pr-5 lg:pr-9 lg:ml-44">
         <div className=" mx-auto text-left">
           <p className="text-gray-700 text-lg leading-relaxed">
@@ -89,8 +93,8 @@ export default function index() {
             We wish you well in your journey forward.
           </p>
 
-          <p className="mt-4 text-gray-700 text-lg font-semibold">
-            Kevin Cannon
+          <p className="mt-4 text-gray-700 text-lg font-semibold mt-10 mb-14">
+            Kevin Cannon,
             SarahAnne Pryor
           </p>
         </div>
@@ -112,7 +116,7 @@ export default function index() {
         </div> */}
         <div
           className="flex flex-row flex-wrap justify-center items-center text-center pt-16 md:text-left lg:text-left md:flex-row  md:justify-between md:items-start lg:flex-row lg:items-start lg:justify-between lg:w-[80%]  lg:ml-44 py-5 lg:pb-28"
-          //style={{ paddingTop: 40 }}
+        //style={{ paddingTop: 40 }}
         >
           <div className="text-white flex flex-col items-center md:items-start  lg:items-start    py-4 h-24 w-[250px] sm:[280px]  md:w-auto lg:w-auto">
             <img src={Logo} className="w-52 md:w-44 lg:w-52"></img>
