@@ -107,7 +107,7 @@ export default function index() {
           >
           A Smart Solution 
           </h1>
-          <div className="flex flex-row items-center mt-8 mb-12 ml-4 md:ml-4 ">
+          <div className="flex flex-row items-center mt-8 mb-12 ml-0 md:ml-0 ">
             <h2 className="text-md ">Home</h2>
             <img src={ArrowRight} alt="Arrow Right" className="mx-3" />
             <h2 className="text-md ">Solution</h2>
