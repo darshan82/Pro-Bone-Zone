@@ -7,11 +7,21 @@ import Privacy from './Privacy/index'
 import Term from './Terms/index'
 import Navbar from "./component/Navbar/navbar";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 function App()
 {
   const formRef = useRef(null);
 
+  const [width, setWidth] = useState(window.innerWidth)
+
+
+  useEffect(() =>
+  {
+    window.addEventListener('resize', () =>
+    {
+      setWidth(window.innerWidth)
+    })
+  }, [])
   const handleClick = () =>
   {
     setTimeout(() =>
@@ -22,7 +32,7 @@ function App()
     }, 500)
   };
   return (
-    <>
+    <div style={{ marginLeft: width > 1000 && - 90 }}>
       <Router>
         <Navbar handleClick={handleClick} />
         <Routes>
@@ -35,7 +45,7 @@ function App()
           <Route path="/terms" element={<Term />} />
         </Routes>
       </Router>
-    </>
+    </div>
   )
 }
 export default App
