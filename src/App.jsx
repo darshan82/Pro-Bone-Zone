@@ -33,8 +33,6 @@ function App()
           <Route path="/faq" element={<FAQ />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Term />} />
-          {/* <Route path="/about" element={<About />} />
-        <Route path="/privacy" element={<Privacy />} /> */}
         </Routes>
       </Router>
     </>
