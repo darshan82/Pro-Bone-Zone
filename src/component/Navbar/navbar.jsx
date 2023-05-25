@@ -55,9 +55,9 @@ export default function navbar({ handleClick })
                 Sponsors
               </p>
             </Link>
-            <p className="cursor-pointer text-[#414141] text-center my-2 block">
+            {/* <p className="cursor-pointer text-[#414141] text-center my-2 block">
               Contact
-            </p>
+            </p> */}
             <div className="flex justify-center ">
               <button
                 onClick={() =>
@@ -106,7 +106,7 @@ export default function navbar({ handleClick })
           <Link to={'/solution'}>
             <p className="cursor-pointer text-[#414141]">Sponsors</p>
           </Link>
-          <p className="cursor-pointer text-[#414141]">Contact</p>
+          {/* <p className="cursor-pointer text-[#414141]">Contact</p> */}
           <button
             onClick={() =>
             {

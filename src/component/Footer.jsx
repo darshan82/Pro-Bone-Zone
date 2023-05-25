@@ -33,7 +33,7 @@ const Footer = () =>
                     <Link to={'/solution'}>
                         <p className="mt-3">Sponsors</p>
                     </Link>
-                    <p className="mt-3">Contact</p>
+                    {/* <p className="mt-3">Contact</p> */}
                 </div>
 
                 <div className=" py-4 h-56   w-[250px] sm:[280px]  md:w-auto lg:w-auto text-[#727581]">
