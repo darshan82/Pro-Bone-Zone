@@ -335,9 +335,9 @@ export default function index({ formRef, handleClick })
             <OfferCard
               image={SmithJones}
               name={"Smith Jones"}
-              age={"45 years"}
-              hours={"290 pro bono hours"}
-              person={"Immigration"}
+              age={"39 years"}
+              hours={"520 pro bono hours"}
+              person={"Family Law"}
             />
             <OfferCard
               image={AyalaSmithDickens}
@@ -348,10 +348,10 @@ export default function index({ formRef, handleClick })
             />
             <OfferCard
               image={McIntoshTronton}
-              age={"45 years"}
+              age={"32 years"}
               name={"McIntosh & Tronton"}
-              hours={"290 pro bono hours"}
-              person={"general practice"}
+              hours={"1200 pro bono hours"}
+              person={"Business Law"}
             />
           </div>
         </div>
