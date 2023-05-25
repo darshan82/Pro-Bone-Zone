@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 // import Logo from '../../assets/Group6.png'
 import Logo from "../../assets/Logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
 export default function navbar({ handleClick })
 {
   const [isNavOpen, setIsNavOpen] = useState(false);
+  let navigation = useNavigate()
 
   return (
     <>
@@ -62,14 +63,22 @@ export default function navbar({ handleClick })
             </p>
             <div className="flex justify-center ">
               <button
-                onClick={handleClick}
+                onClick={() =>
+                {
+                  navigation("/")
+                  handleClick()
+                }}
                 className="bg-[#EC672C] px-8 py-2 w-44 rounded-sm text-white my-2 block">
                 Register
               </button>
             </div>
             <div className="flex justify-center">
               <button
-                onClick={handleClick}
+                onClick={() =>
+                {
+                  navigation("/")
+                  handleClick()
+                }}
 
                 className="bg-[#f8f9fd] border  border-[#414141] text-[#EC672C] px-8 py-2 rounded-md cursor-pointer">
                 Login
@@ -103,13 +112,21 @@ export default function navbar({ handleClick })
           </Link>
           <p className="cursor-pointer text-[#414141]">Contact</p>
           <button
-            onClick={handleClick}
+            onClick={() =>
+            {
+              navigation("/")
+              handleClick()
+            }}
 
             className="bg-[#f8f9fd] border  border-[#414141] text-[#EC672C] px-8 py-2 rounded-md cursor-pointer">
             Login
           </button>
           <button
-            onClick={handleClick}
+            onClick={() =>
+            {
+              navigation("/")
+              handleClick()
+            }}
 
             className="bg-[#EC672C] px-8 py-2 rounded-sm">
             Register

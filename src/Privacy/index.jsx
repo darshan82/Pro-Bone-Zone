@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import Navbar from "../component/Navbar/navbar";
 import SolutionCard from "../component/SolutionCard/SolutionCard";
@@ -37,9 +37,14 @@ import YouTube from "react-youtube";
 import { Link } from "react-router-dom";
 const videId = "vD8X8qvhRxQ";
 
-export default function index() {
+export default function index()
+{
   document.title = "Privacy";
 
+  useEffect(() =>
+  {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <>
       <div className="bg-[#EAEFF8] pt-2 pb-5">
@@ -49,7 +54,7 @@ export default function index() {
         <div className="flex flex-col  ml-10  md:ml-20 lg:ml-44  sm:ml-10 sm:justify-center md: items-start justify-center ">
           <h1
             className=" text-[#2E5FB7]  lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5"
-            //className="text-[#2E5FB7] ml-4 md:text-left lg:text-left font-inter font-bold md:text-[27px] text-[23px] md:text-3xl lg:text-[40px] leading-10 lg:w-[450px]  my-1 mb-5 lg:pt-5 sm:ml-4 "
+          //className="text-[#2E5FB7] ml-4 md:text-left lg:text-left font-inter font-bold md:text-[27px] text-[23px] md:text-3xl lg:text-[40px] leading-10 lg:w-[450px]  my-1 mb-5 lg:pt-5 sm:ml-4 "
           >
             Privacy Notice
           </h1>
@@ -504,7 +509,7 @@ export default function index() {
       <div className="bg-[#061133] p-2">
         <div
           className="flex flex-row flex-wrap justify-center items-center text-center pt-16 md:text-left lg:text-left md:flex-row  md:justify-between md:items-start lg:flex-row lg:items-start lg:justify-between lg:w-[80%]  lg:ml-44 py-5 lg:pb-28"
-          //style={{ paddingTop: 40 }}
+        //style={{ paddingTop: 40 }}
         >
           <div className="text-white flex flex-col items-center md:items-start  lg:items-start    py-4 h-24 w-[250px] sm:[280px]  md:w-auto lg:w-auto">
             <img src={Logo} className="w-52 md:w-44 lg:w-52"></img>
@@ -512,16 +517,16 @@ export default function index() {
           <div className="py-4 h-56 w-[250px] sm:[280px] mb-12  md:w-auto lg:w-auto text-[#727581]">
             <h1 className="font-semibold text-lg">Website</h1>
             <Link to={'/'}>
-            <p className="mt-3">Home</p>
+              <p className="mt-3">Home</p>
             </Link>
             <Link to={'/about'}>
-            <p className="mt-3">About</p>
+              <p className="mt-3">About</p>
             </Link>
             <Link to={'/faq'}>
-            <p className="mt-3">FAQ</p>
+              <p className="mt-3">FAQ</p>
             </Link>
             <Link to={'/solution'}>
-            <p className="mt-3">Sponsors</p>
+              <p className="mt-3">Sponsors</p>
             </Link>
             <p className="mt-3">Contact</p>
           </div>

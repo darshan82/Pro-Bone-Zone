@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import Navbar from "../component/Navbar/navbar";
 import SolutionCard from "../component/SolutionCard/SolutionCard";
@@ -39,6 +39,10 @@ const videId = "vD8X8qvhRxQ";
 export default function index()
 {
   document.title = "About"
+  useEffect(() =>
+  {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <>
       <div className="bg-[#EAEFF8] pt-3 pb-2">

@@ -6,15 +6,20 @@ import FAQ from './FAQ/index'
 import Privacy from './Privacy/index'
 import Term from './Terms/index'
 import Navbar from "./component/Navbar/navbar";
-import { BrowserRouter as Router, Routes, Route, } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useRef } from 'react'
 function App()
 {
   const formRef = useRef(null);
+
   const handleClick = () =>
   {
-    formRef.current.focus();
-    formRef.current.scrollIntoView();
+    setTimeout(() =>
+    {
+
+      formRef.current.focus();
+      formRef.current.scrollIntoView();
+    }, 500)
   };
   return (
     <>

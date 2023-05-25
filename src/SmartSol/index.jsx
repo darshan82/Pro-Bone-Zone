@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import Navbar from "../component/Navbar/navbar";
 import SolutionCard from "../component/SolutionCard/SolutionCard";
@@ -37,18 +37,27 @@ import ArrowRight from "../assets/ArrowRight.png";
 import Star from "../assets/Star.png";
 import { Link } from "react-router-dom";
 const videId = "vD8X8qvhRxQ";
-export default function index() {
+export default function index()
+{
   const formRef = useRef(null);
   const form = useRef();
+
+  useEffect(() =>
+  {
+    window.scrollTo(0, 0)
+  }, [])
+
   const [isPlaying, setIsPlaying] = useState(false);
   const [chooseDate, setSelectedDate] = useState("Sat June 17th");
   const handleChangeEventDate = (event) =>
     setSelectedDate(event?.target?.value);
-  const handleClick = () => {
+  const handleClick = () =>
+  {
     formRef.current.focus();
     formRef.current.scrollIntoView();
   };
-  const sendEmail = (e) => {
+  const sendEmail = (e) =>
+  {
     e.preventDefault();
     //console.log(e.target);
 
@@ -74,7 +83,8 @@ export default function index() {
           "2Z-yhu6rbMDiGx-KA"
         )
         .then(
-          (result) => {
+          (result) =>
+          {
             alert(
               "Your registration request has been received successfully. Thank you"
             );
@@ -86,11 +96,13 @@ export default function index() {
             form.current.type.value = "Select a Category";
             form.current.time.value = "Select a Time";
           },
-          (error) => {
+          (error) =>
+          {
             console.log(error.text);
           }
         );
-    else {
+    else
+    {
       alert("Please fill the complete form. Thank you");
     }
   };
@@ -100,12 +112,12 @@ export default function index() {
         {/* <Navbar /> */}
         {/* Hero Section */}
         <div className="flex flex-col  ml-10  md:ml-20 lg:ml-44  sm:ml-10 sm:justify-center md: items-start justify-center ">
-          <h1 
-           className=" text-[#2E5FB7] font-inter font-semibold text-3xl leading-10 w-full mb-5"
-        //  className="text-center  text-[#2E5FB7] sm:text-center md:text-center lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5"
+          <h1
+            className=" text-[#2E5FB7] font-inter font-semibold text-3xl leading-10 w-full mb-5"
+          //  className="text-center  text-[#2E5FB7] sm:text-center md:text-center lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5"
           //className="text-[#2E5FB7] ml-4 md:text-left lg:text-left font-inter font-bold md:text-[27px] text-[23px] md:text-3xl lg:text-[40px] leading-10 lg:w-[450px]  my-1 mb-5 lg:pt-5 sm:ml-4 "
           >
-          Sponsors
+            Sponsors
           </h1>
           <div className="flex flex-row items-center mt-8 mb-12 ml-0 md:ml-0 ">
             <h2 className="text-md ">Home</h2>
@@ -143,17 +155,17 @@ export default function index() {
 
       </div>
       <h1 className="text-center text-[#414141] sm:text-center sm:text-3xl md:text-center lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-3xl leading-10  lg:w-[450px] w-full  my-1 mb-5 lg:pt-5 pr-5 lg:pr-9 lg:ml-44 pl-1">
-      Our Generous Sponsors
+        Our Generous Sponsors
       </h1>
       <div className="bg-white p-2 mb-5  pr-5 lg:pr-9 lg:ml-44">
         <div className=" mx-auto text-left">
           <p className="text-gray-700 text-lg leading-relaxed pb-10">
-          Pro Bono Zone™ events have proven to be a tremendous and often life-changing benefit to many people. These events could not come to fruition without the time, talents, input and generous support of many partners in the community —including attorneys, corporate promoters, venues, and many more. We thank those who have contributed so much to give back.  
+            Pro Bono Zone™ events have proven to be a tremendous and often life-changing benefit to many people. These events could not come to fruition without the time, talents, input and generous support of many partners in the community —including attorneys, corporate promoters, venues, and many more. We thank those who have contributed so much to give back.
           </p>
 
-        
 
-         
+
+
         </div>
       </div>
       {/* <div className="bg-white p-2 pr-5 lg:pr-9 lg:ml-44">
@@ -177,7 +189,7 @@ export default function index() {
         </div> */}
         <div
           className="flex flex-row flex-wrap justify-center items-center text-center pt-16 md:text-left lg:text-left md:flex-row  md:justify-between md:items-start lg:flex-row lg:items-start lg:justify-between lg:w-[80%]  lg:ml-44 py-5 lg:pb-28"
-          //style={{ paddingTop: 40 }}
+        //style={{ paddingTop: 40 }}
         >
           <div className="text-white flex flex-col items-center md:items-start  lg:items-start    py-4 h-24 w-[250px] sm:[280px]  md:w-auto lg:w-auto">
             <img src={Logo} className="w-52 md:w-44 lg:w-52"></img>
@@ -196,16 +208,16 @@ export default function index() {
           <div className="py-4 h-56 w-[250px] sm:[280px] mb-12  md:w-auto lg:w-auto text-[#727581]">
             <h1 className="font-semibold text-lg">Website</h1>
             <Link to={'/'}>
-            <p className="mt-3">Home</p>
+              <p className="mt-3">Home</p>
             </Link>
             <Link to={'/about'}>
-            <p className="mt-3">About</p>
+              <p className="mt-3">About</p>
             </Link>
             <Link to={'/faq'}>
-            <p className="mt-3">FAQ</p>
+              <p className="mt-3">FAQ</p>
             </Link>
             <Link to={'/solution'}>
-            <p className="mt-3">Sponsors</p>
+              <p className="mt-3">Sponsors</p>
             </Link>
             <p className="mt-3">Contact</p>
           </div>

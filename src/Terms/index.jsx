@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import Navbar from "../component/Navbar/navbar";
 import SolutionCard from "../component/SolutionCard/SolutionCard";
@@ -40,7 +40,10 @@ const videId = "vD8X8qvhRxQ";
 export default function index()
 {
   document.title = "Terms";
-
+  useEffect(() =>
+  {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <>
       <div className="bg-[#EAEFF8] pt-2 pb-5">
@@ -71,9 +74,9 @@ export default function index()
           <div class="bg-gray-100 p-6 mb-6  sm:pl-2 md:pl-4">
 
             <div class="mb-4">
-              <p class="font-bold mb-2">
+              <h2 class="text-xl font-bold mb-4">
                 1.  We Provide Our Sites for Your Convenience Only!
-              </p>
+              </h2>
               <p>
                 Our Sites are provided to you without charge as a convenience
                 and for your information only. By merely providing access to our

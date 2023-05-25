@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import Navbar from "../component/Navbar/navbar";
 import SolutionCard from "../component/SolutionCard/SolutionCard";
@@ -95,7 +95,10 @@ export default function index()
     }
   };
   document.title = "FAQ"
-
+  useEffect(() =>
+  {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <>
       <div className="bg-[#EAEFF8] pt-2 pb-5">
@@ -103,12 +106,12 @@ export default function index()
         {/* Hero Section */}
 
         <div className="flex flex-col  ml-10  md:ml-20 lg:ml-44  sm:ml-10 sm:justify-center md: items-start justify-center ">
-          <h1 
-           className=" text-[#2E5FB7] font-inter font-semibold text-3xl leading-10 w-full mb-5"
-        //  className="text-center  text-[#2E5FB7] sm:text-center md:text-center lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5"
+          <h1
+            className=" text-[#2E5FB7] font-inter font-semibold text-3xl leading-10 w-full mb-5"
+          //  className="text-center  text-[#2E5FB7] sm:text-center md:text-center lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5"
           //className="text-[#2E5FB7] ml-4 md:text-left lg:text-left font-inter font-bold md:text-[27px] text-[23px] md:text-3xl lg:text-[40px] leading-10 lg:w-[450px]  my-1 mb-5 lg:pt-5 sm:ml-4 "
           >
-           Frequent Questions 
+            Frequent Questions
           </h1>
           <div className="flex flex-row items-center mt-8 mb-12 ml-0 md:ml-0 ">
             <h2 className="text-md ">Home</h2>
@@ -165,40 +168,39 @@ export default function index()
 
       {/* A Smart Solution */}
       <div className="bg-white p-2 pr-5 lg:pr-9 lg:ml-44">
-  <div className="max-w-2xl mb-10">
-    {faqData.map((faq, index) => (
-      <div key={index} className="border-b border-gray-300 py-4">
-        <button
-          className="flex justify-start items-center w-full focus:outline-none"
-          onClick={() => toggleAccordion(index)}
-        >
-          <h3 className="text-lg font-medium text-left">
-            {faq.question}
-          </h3>
-          <div className={`ml-3 transition-transform ${
-            activeIndex === index ? 'transform rotate-0' : 'transform rotate-180'
-          }`}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fillRule="evenodd"
-                d="M6.293 6.293a1 1 0 011.414 0L10 8.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </div>
-        </button>
-        {activeIndex === index && (
-          <p className="mt-4 text-gray-600">{faq.answer}</p>
-        )}
+        <div className="max-w-2xl mb-10">
+          {faqData.map((faq, index) => (
+            <div key={index} className="border-b border-gray-300 py-4">
+              <button
+                className="flex justify-start items-center w-full focus:outline-none"
+                onClick={() => toggleAccordion(index)}
+              >
+                <h3 className="text-lg font-medium text-left">
+                  {faq.question}
+                </h3>
+                <div className={`ml-3 transition-transform ${activeIndex === index ? 'transform rotate-0' : 'transform rotate-180'
+                  }`}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M6.293 6.293a1 1 0 011.414 0L10 8.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </button>
+              {activeIndex === index && (
+                <p className="mt-4 text-gray-600">{faq.answer}</p>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
-    ))}
-  </div>
-</div>
 
 
       {/* <div className=" bg-white p-2   pr-5 lg:pr-9 lg:ml-44">
@@ -281,16 +283,16 @@ export default function index()
           <div className="py-4 h-56 w-[250px] sm:[280px] mb-12  md:w-auto lg:w-auto text-[#727581]">
             <h1 className="font-semibold text-lg">Website</h1>
             <Link to={'/'}>
-            <p className="mt-3">Home</p>
+              <p className="mt-3">Home</p>
             </Link>
             <Link to={'/about'}>
-            <p className="mt-3">About</p>
+              <p className="mt-3">About</p>
             </Link>
             <Link to={'/faq'}>
-            <p className="mt-3">FAQ</p>
+              <p className="mt-3">FAQ</p>
             </Link>
             <Link to={'/solution'}>
-            <p className="mt-3">Sponsors</p>
+              <p className="mt-3">Sponsors</p>
             </Link>
             <p className="mt-3">Contact</p>
           </div>

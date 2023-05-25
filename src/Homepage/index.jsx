@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import Navbar from "../component/Navbar/navbar";
 import SolutionCard from "../component/SolutionCard/SolutionCard";
@@ -43,6 +43,11 @@ export default function index({ formRef, handleClick })
   const handleChangeEventDate = (event) =>
     setSelectedDate(event?.target?.value);
 
+
+  useEffect(() =>
+  {
+    window.scrollTo(0, 0)
+  }, [])
   const sendEmail = (e) =>
   {
     e.preventDefault();
@@ -582,7 +587,7 @@ export default function index({ formRef, handleClick })
           </div>
           <div className="py-4 h-56 w-[250px] sm:[280px] mb-12  md:w-auto lg:w-auto text-[#727581]">
             <h1 className="font-semibold text-lg">Website</h1>
-            <Link to={'/'}>
+            <Link to={'/'} >
               <p className="mt-3">Home</p>
             </Link>
             <Link to={'/about'}>
