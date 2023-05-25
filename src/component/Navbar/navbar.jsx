@@ -35,22 +35,34 @@ export default function navbar({ handleClick })
         </div>
         {isNavOpen && (
           <div className="px-6 pt-3 ">
-            <Link to={"/"}>
+            <Link to={"/"}
+              onClick={() => setIsNavOpen(!isNavOpen)}
+
+            >
               <p className="cursor-pointer text-[#414141] text-center my-2 block">
                 Home
               </p>
             </Link>
-            <Link to={'/about'}>
+            <Link to={'/about'}
+              onClick={() => setIsNavOpen(!isNavOpen)}
+
+            >
               <p className="cursor-pointer text-[#414141] text-center my-2 block">
                 About
               </p>
             </Link>
-            <Link to={'/faq'}>
+            <Link to={'/faq'}
+
+              onClick={() => setIsNavOpen(!isNavOpen)}
+            >
               <p className="cursor-pointer text-[#414141] text-center my-2 block">
                 FAQ
               </p>
             </Link>
-            <Link to={'/solution'}>
+            <Link to={'/solution'}
+              onClick={() => setIsNavOpen(!isNavOpen)}
+
+            >
               <p className="cursor-pointer text-[#414141] text-center my-2 block">
                 Sponsors
               </p>
@@ -62,6 +74,8 @@ export default function navbar({ handleClick })
               <button
                 onClick={() =>
                 {
+                  setIsNavOpen(!isNavOpen)
+
                   navigation("/")
                   handleClick()
                 }}
@@ -73,6 +87,8 @@ export default function navbar({ handleClick })
               <button
                 onClick={() =>
                 {
+                  setIsNavOpen(!isNavOpen)
+
                   navigation("/")
                   handleClick()
                 }}
@@ -83,7 +99,7 @@ export default function navbar({ handleClick })
             </div>
           </div>
         )}
-      </nav>
+      </nav >
 
       <nav className="hidden md:flex md:flex-row md:justify-between md:items-center md:px-16 md:py-3 lg:flex lg:flex-row lg:justify-between lg:items-center  lg:pl-44 bg-[#EAEFF8] lg:pt-9  ">
         <div className="">
