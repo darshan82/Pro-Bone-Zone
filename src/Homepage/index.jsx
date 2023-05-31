@@ -30,7 +30,7 @@ export default function index({ formRef, handleClick })
   const handleChangeEventDate = (event) =>
     setSelectedDate(event?.target?.value);
 
-
+  const [disabled, setDisabled] = useState(false)
   useEffect(() =>
   {
     window.scrollTo(0, 0)
@@ -47,6 +47,8 @@ export default function index({ formRef, handleClick })
       form.current.time.value &&
       form.current.description.value
     )
+    {
+      setDisabled(true)
       emailjs
         .sendForm(
           "service_m7tcc4g",
@@ -57,6 +59,8 @@ export default function index({ formRef, handleClick })
         .then(
           (result) =>
           {
+            setDisabled(false)
+
             alert(
               "Your registration request has been received successfully. Thank you"
             );
@@ -70,9 +74,12 @@ export default function index({ formRef, handleClick })
           },
           (error) =>
           {
+            setDisabled(false)
+
             console.log(error.text);
           }
         );
+    }
     else
     {
       alert("Please fill the complete form. Thank you");
@@ -392,8 +399,8 @@ export default function index({ formRef, handleClick })
                 </p>
               </div>
             </div>
-           
-          
+
+
           </div>
           <div className="w-[100%] md:w-[50%] lg:w-[50%]  ">
             <form ref={form} onSubmit={sendEmail}>
@@ -409,7 +416,7 @@ export default function index({ formRef, handleClick })
                   <option value="Sat, June 17th">Sat, June 17th</option>
                   <option value="Sat June 24th">Sat June 24th</option>
                 </select>
-               
+
               </div>
               <div className="flex flex-col justify-center  md:flex-row lg:flex-row  flex-wrap   ">
                 <input
@@ -482,6 +489,7 @@ export default function index({ formRef, handleClick })
               <div className=" flex justify-center mt-3 md:justify-center lg:justify-center ">
                 <button
                   type="submit"
+                  disabled={disabled}
                   className="bg-[#EC672C] w-full  py-2 rounded-lg text-white text-sm mx-1 lg:mx-4 lg:w-96"
                 >
                   Count Me In
@@ -493,7 +501,7 @@ export default function index({ formRef, handleClick })
       </div>
 
       <div className="bg-[#061133] p-2">
-            <Footer />
+        <Footer />
 
       </div>
     </>
