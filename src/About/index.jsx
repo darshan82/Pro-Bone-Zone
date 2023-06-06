@@ -60,7 +60,7 @@ export default function index()
 
           <p className="mt-4 text-gray-700 text-lg font-semibold mt-10 mb-14">
             Kevin Cannon,
-            SarahAnne Pryor
+            SarahAnne Prior
           </p>
         </div>
       </div>

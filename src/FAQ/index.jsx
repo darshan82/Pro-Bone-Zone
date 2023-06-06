@@ -41,7 +41,7 @@ const faqData = [
   },
   {
     question: 'How did  Pro Bono Zone™ start? ',
-    answer: 'Pro Bono Zone™ is the brainchild of Kevin Cannon and SarahAnne Pryor. Their personal experiences led them to the conclusion that there were many people who could benefit greatly from a service like this. You can read their story in the "About" section.',
+    answer: 'Pro Bono Zone™ is the brainchild of Kevin Cannon and SarahAnne Prior. Their personal experiences led them to the conclusion that there were many people who could benefit greatly from a service like this. You can read their story in the "About" section.',
   },
 ];
 
