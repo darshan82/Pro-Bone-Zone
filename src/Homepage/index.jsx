@@ -76,7 +76,6 @@ export default function index({ formRef, handleClick })
           {
             setDisabled(false)
 
-            console.log(error.text);
           }
         );
     }

@@ -1,3 +1,23 @@
 html {
   scroll-behavior: smooth;
 }
+
+.box {
+  width: 70%;
+  padding: 30px;
+  background-color: #f8f9fc;
+  border:1px solid black;
+  min-height: 100px; /* Set a minimum height or adjust as needed */
+}
+.swal-button {
+  border-radius: 2px;
+  background-color: red;
+  font-size: 12px;
+  text-shadow : none;
+  border:none;
+}
+.swal-button:hover{
+  border-radius: 2px;
+  background-color: red;
+  font-size: 12px;
+}
