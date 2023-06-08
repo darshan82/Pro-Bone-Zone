@@ -129,11 +129,11 @@ export default function index({ formRef, handleClick })
         className=" py-10 bg-slate-100  flex  flex-col justify-center items-center "
         ref={formRef}
       >
-        <h1 className="text-2xl text-[#414141] font-bold mt-5 mb-3 text-center py-6 ">
+        <h1 className="text-2xl text-[#414141] font-bold mb-3 text-center ">
           Schedule A Consultation
         </h1>
         <p
-          className="text-center  text-[#414141] text-lg md:text-xl lg:text-xl my-4 px-5 md:px-24 lg:px-64"
+          className="text-center  text-[#414141] text-lg md:text-xl lg:text-xl px-5 md:px-24 lg:px-64 pb-5"
         >
           This event will last just 4 hours, so we have limited openings.
         </p>
