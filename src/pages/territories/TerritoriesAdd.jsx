@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import ArrowRight from "../assets/ArrowRight.png";
-import Footer from "../component/Footer";
+import ArrowRight from "../../assets/ArrowRight.png";
+import Footer from "../../component/Footer";
 import { useLocation } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import Swal from 'sweetalert';
@@ -8,7 +8,8 @@ import Swal from 'sweetalert';
 export default function index()
 {
     const { pathname } = useLocation();
-    document.title = "Privacy";
+    const title = pathname.replace("/" , "").charAt(0).toUpperCase() + pathname.slice(2)
+    document.title = "Add"+" "+title;
 
     const initialValues = {
         name: '',
@@ -37,14 +38,11 @@ export default function index()
             {/* A Smart Solution */}
             <div className="bg-white p-2 pl-3 pr-5 lg:pr-9 lg:ml-44 mb-12">
                 <div className="max-w-full mb-10 ">
-                    <div class="container mx-auto py-8">
+                    <div className="container mx-auto py-8">
                         <h1
                             className=" text-[#2E5FB7]  lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5"
                         >
-                            {pathname.split("/")[1].replace("/", "")}
-                            {
-                                pathname.split("/")[2] != "null" &&
-                                "(#" + pathname.split("/")[2].replace("/", "") + ")"}
+                        {title}
 
                         </h1>
 
@@ -115,8 +113,7 @@ export default function index()
 
                             <div className="flex justify-center">
 
-                                {
-                                    pathname.split("/")[2] == "null" ?
+                                
                                         <React.Fragment>
                                             <button
                                                 type="submit"
@@ -125,40 +122,7 @@ export default function index()
                                                 Add
                                             </button>
                                         </React.Fragment>
-                                        :
-                                        <React.Fragment>
-                                            <button
-                                                type="submit"
-                                                className="bg-[#EC672C] mb-4 mr-2 px-5 py-1 rounded-sm text-white"
-                                            >
-                                                Update
-                                            </button>
-                                            <button
-                                                onClick={() =>
-                                                {
-                                                    Swal({
-                                                        text: 'Do you want to remove this record?',
-                                                        icon: 'warning',
-                                                        showCancelButton: true,
-                                                        confirmButtonColor: 'red',
-                                                        confirmButtonText: 'Delete',
-                                                        cancelButtonText: 'Cancel'
-                                                    }).then((result) =>
-                                                    {
-                                                        if (result)
-                                                        {
-                                                            // Perform the delete operation here
-                                                            console.log('Record deleted');
-                                                        }
-                                                    });
-                                                }}
-                                                className="bg-[#EC672C] mb-4 ml-2 px-5 py-1 rounded-sm text-white"
-                                            >
-                                                Delete
-                                            </button>
-                                        </React.Fragment>
-                                }
-                            </div>
+                                                </div>
                                 </Form>
                             </Formik>
 
