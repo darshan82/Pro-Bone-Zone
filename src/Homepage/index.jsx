@@ -193,7 +193,6 @@ export default function index({ formRef, handleClick })
                       Select a Date
                     </option>
                     <option value="Sat, June 17th">Sat, June 17th</option>
-                    <option value="Sat June 24th">Sat June 24th</option>
                   </select>
 
                 </div>
