@@ -135,7 +135,7 @@ export default function index({ formRef, handleClick })
         <p
           className="text-center  text-[#414141] text-lg md:text-xl lg:text-xl px-5 md:px-24 lg:px-64 pb-5"
         >
-          This event will last just 4 hours, so we have limited openings.
+          This event is now full. Another event is coming soon.
         </p>
 
         <div className="bg-[#ffff] px-4 py-4 md:py-10 md:px-16 lg:py-10 lg:px-16  w-[100%] md:w-[90%] lg:w-[70%]">
@@ -267,7 +267,9 @@ export default function index({ formRef, handleClick })
                 <div className=" flex justify-center mt-3 md:justify-center lg:justify-center ">
                   <button
                     type="submit"
-                    disabled={disabled}
+                    // disabled={disabled}
+                    disabled={true}
+
                     className="bg-[#EC672C] w-full  py-2 rounded-lg text-white text-sm mx-1 lg:mx-4 lg:w-96"
                   >
                     Count Me In
