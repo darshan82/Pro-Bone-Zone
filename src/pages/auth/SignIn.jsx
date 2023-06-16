@@ -1,11 +1,12 @@
-import React, {  useState } from "react";
+import React, {  useEffect, useState } from "react";
 import Footer from "../../component/Footer";
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Formik } from 'formik';
 import Swal from 'sweetalert';
 import axios from "axios";
 import { useContext } from "react";
 import { UserContext } from "../../context/UserContext";
 import { useNavigate } from "react-router-dom"
+import {  userTypes } from "../../constants";
 document.title = "Login"
 export default function index() {
     const history = useNavigate()
@@ -16,6 +17,21 @@ export default function index() {
             ...state,
             [e.target.name]: e.target.value
         })
+    }
+    const setPath = (user) =>{
+        if(userTypes.admin == user.permit){
+            return "/Territories"
+        }
+        else if(userTypes.licensee == user.permit){
+            return "/events"
+        }
+        else if(userTypes.staff == user.permit){
+            return "/promotions"
+        }
+        else {
+            return ""
+        }
+        
     }
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -29,16 +45,15 @@ export default function index() {
                     icon: 'success',
                     timer: 2000,
                 })
+                history(setPath(user))
                 setState({})
-                history(`${user?.permit === "staff" ? "/events" : "resources"}`)
-
+                
             }
         }).catch((err) => {
             Swal({
                 title: err.response?.data?.message,
                 icon: 'error',
                 timer: 4000,
-                confirmButtonColor: 'red',
 
             })
         })

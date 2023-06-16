@@ -22,3 +22,8 @@ html {
   background-color: red;
   font-size: 12px;
 }
+
+
+.dropdown:hover .dropdownContent{
+  display: block;
+}

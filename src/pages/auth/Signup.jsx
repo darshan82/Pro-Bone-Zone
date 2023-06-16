@@ -7,7 +7,7 @@ import { UserContext } from "../../context/UserContext";
 export default function index() {
     const { user } = useContext(UserContext)
     const [state, setState] = useState({
-        permit: user?.permit === "admin" ? "licensees" : "staff"
+        permit: user?.permit === "admin" ? "licensee" : "staff"
     })
 
     const handleChange = (e) => {
