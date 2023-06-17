@@ -5,8 +5,9 @@ html {
 .box {
   width: 70%;
   padding: 30px;
+  min-width: 300px;
   background-color: #f8f9fc;
-  border:1px solid black;
+  border:1px solid #CCCCCC;
   min-height: 100px; /* Set a minimum height or adjust as needed */
 }
 .swal-button {
@@ -20,4 +21,9 @@ html {
   border-radius: 2px;
   background-color: red;
   font-size: 12px;
+}
+
+
+.dropdown:hover .dropdownContent{
+  display: block;
 }

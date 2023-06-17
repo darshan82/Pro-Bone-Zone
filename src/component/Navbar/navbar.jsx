@@ -1,14 +1,24 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Logo from "../../assets/Logo.png";
-import { Link, useNavigate } from "react-router-dom";
-import { GENERAL_NAV_BAR, USER_NAV_BAR } from "../../constants";
+import { Link,useNavigate } from "react-router-dom";
+import { GENERAL_NAV_BAR, USER_NAV_BAR, navBar } from "../../constants";
 import { useLocation } from 'react-router-dom';
-
+import { UserContext } from "../../context/UserContext";
 export default function navbar({ handleClick })
 {
   const [isNavOpen, setIsNavOpen] = useState(false);
   let navigation = useNavigate()
   const { pathname } = useLocation();
+  const {loggedIn , logout,user} = useContext(UserContext)  
+
+  console.log("loggedIn",loggedIn)
+  console.log("loggedIn",user)
+
+
+  const handleLogout = ()=>{
+    logout()
+   
+  }
   return (
     <>
       <nav className="bg-[#EAEFF8]  py-4 md:hidden ">
@@ -39,7 +49,7 @@ export default function navbar({ handleClick })
           <div className="px-6 pt-3 ">
             {
 
-              pathname !== "/list" ?
+              !loggedIn ?
                 <React.Fragment>
                   {
                     GENERAL_NAV_BAR.map((values, index) =>
@@ -57,34 +67,6 @@ export default function navbar({ handleClick })
                       )
                     })
                   }
-                  <div className="flex justify-center ">
-                    <button
-                      onClick={() =>
-                      {
-                        setIsNavOpen(!isNavOpen)
-
-                        navigation("/")
-                        handleClick()
-                      }}
-                      className="bg-[#EC672C] px-8 py-2 w-44 rounded-sm text-white my-2 block">
-                      Register
-                    </button>
-                  </div>
-                  <div className="flex justify-center">
-                    <button
-                      onClick={() =>
-                      {
-                        setIsNavOpen(!isNavOpen)
-
-                        navigation("/")
-                        handleClick()
-                      }}
-
-                      className="bg-[#f8f9fd] border  border-[#414141] text-[#EC672C] px-8 py-2 rounded-md cursor-pointer">
-                      Login
-                    </button>
-                  </div>
-
                 </React.Fragment>
                 :
                 <React.Fragment>
@@ -121,7 +103,7 @@ export default function navbar({ handleClick })
 
         <div className="flex flex-row justify-center items-center space-x-5 text-white text-sm ">
           {
-            USER_NAV_BAR.filter(value => value?.url == pathname).length === 0
+            !loggedIn
               ?
               <React.Fragment>
                 {
@@ -134,36 +116,34 @@ export default function navbar({ handleClick })
                     )
                   })
                 }
-                <button
-                  onClick={() =>
-                  {
-                    navigation("/")
-                    handleClick()
-                  }}
-
-                  className="bg-[#f8f9fd] border  border-[#414141] text-[#EC672C] px-8 py-2 rounded-md cursor-pointer">
-                  Login
-                </button>
-                <button
-                  onClick={() =>
-                  {
-                    navigation("/")
-                    handleClick()
-                  }}
-
-                  className="bg-[#EC672C] px-8 py-2 rounded-sm">
-                  Register
-                </button>
               </React.Fragment>
               :
               <React.Fragment>
                 {
-                  USER_NAV_BAR.map((values, index) =>
+                  navBar(user.permit).map((values, index) =>
                   {
                     return (
+                      <>
+                      {values.subNav ?
+                           (<div className="dropdown relative inline-block">
+                           <span className="cursor-pointer text-[#414141]">{values.name}</span>
+                           <div className=" dropdownContent hidden absolute bg-gray-100 max-w-[100px] shadow-md p-2 z-10" >
+                            {
+                              values.subNav.map((item)=>(
+                      
+                                <Link to={item.url}>
+                                <p onClick={item.name === "Logout" ? handleLogout :""} className="cursor-pointer text-[#414141]">{item.name}</p>
+                              </Link>
+                              ))
+                            }
+                            </div>
+                            </div>)
+                        :
                       <Link to={values?.url} key={index + values?.name}>
                         <p className="cursor-pointer text-[#414141]">{values?.name}</p>
                       </Link>
+                      }
+                      </>
                     )
                   })
                 }
