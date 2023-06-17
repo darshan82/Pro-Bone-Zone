@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom"
 import Navbar from "../../component/Navbar/navbar";
 
 import {  setDefaultPath} from "../../constants";
-document.title = "Login"
+document.title = "Pro Bono Zone"
 export default function index() {
     const history = useNavigate()
     const { login } = useContext(UserContext)
