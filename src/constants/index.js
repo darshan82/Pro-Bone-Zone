@@ -64,3 +64,5 @@ export  const setDefaultPath = (user) =>{
     
 }
 
+export const interests = ["Family Law" , "Business Law" , "Consultant"]
+export const ratings = [1,2,3,4,5] 

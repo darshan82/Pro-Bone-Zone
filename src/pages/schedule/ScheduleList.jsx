@@ -1,15 +1,17 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import ArrowRight from "../../assets/ArrowRight.png"
 import Footer from "../../component/Footer";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
+import { EventContext } from "../../context/EventContext";
 import Navbar from "../../component/Navbar/navbar";
 
 export default function index()
 {
     let navigation = useNavigate()
     const { eventId, date } = useParams()
+    const {updateEvent} = useContext(EventContext)
     const { pathname } = useLocation();
     const title = pathname.replace("/", "").charAt(0).toUpperCase() + pathname.slice(2)
     document.title = title;
@@ -35,6 +37,13 @@ export default function index()
 
         })
     }, [])
+
+    const handleEventDetail = (data)=>{
+        updateEvent(data)
+        navigation(`/appointment/update/${data[`customer-id`]}`)
+    }
+
+
 
     return (
         <>
@@ -94,7 +103,7 @@ export default function index()
                                                 }}
                                                 className="border px-4 py-2 cursor-pointer ">{item?.id}</td>
                                             <td className="border px-4 py-2">{moment(item?.edate).format("LL")}</td>
-                                            <td className="border px-4 py-2 text-purple-600 cursor-pointer">{item["name-first"]+" "+item["name-last"]}</td>
+                                            <td onClick={()=>handleEventDetail(item)} className="border px-4 py-2 text-purple-600 cursor-pointer">{item["name-first"]+" "+item["name-last"]}</td>
                                             <td className="border px-4 py-2">{item[`street1`]+" "+item[`street2`]+" "+item[`city`]}</td>
                                             <td className="border px-4 py-2">{item?.interest}</td>
                                         </tr>
