@@ -5,6 +5,8 @@ import Swal from 'sweetalert';
 import axios from "axios";
 import { UserContext } from "../../context/UserContext";
 import { userTypes } from "../../constants";
+import Navbar from "../../component/Navbar/navbar";
+
 export default function index()
 {
     const { user } = useContext(UserContext)
@@ -55,6 +57,8 @@ export default function index()
 
     return (
         <>
+            <Navbar />
+
             <div className="bg-white p-2 pl-3 pr-5 lg:pr-9 lg:ml-44 mb-12">
                 <div className="max-w-full mb-10 ">
                     <div className="container mx-auto py-8">

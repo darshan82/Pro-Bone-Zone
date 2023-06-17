@@ -1,6 +1,8 @@
 import React, { useEffect, } from "react";
 import ArrowRight from "../assets/ArrowRight.png";
 import Footer from "../component/Footer";
+import Navbar from "../component/Navbar/navbar";
+
 export default function index()
 {
   document.title = "About"
@@ -10,6 +12,8 @@ export default function index()
   }, [])
   return (
     <>
+      <Navbar general={true}/>
+
       <div className="bg-[#EAEFF8] pt-3 pb-2">
         <div className="flex flex-col  ml-10  md:ml-20 lg:ml-44  sm:ml-10 sm:justify-center md: items-start justify-center ">
           <h1

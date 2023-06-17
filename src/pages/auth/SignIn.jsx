@@ -6,6 +6,8 @@ import axios from "axios";
 import { useContext } from "react";
 import { UserContext } from "../../context/UserContext";
 import { useNavigate } from "react-router-dom"
+import Navbar from "../../component/Navbar/navbar";
+
 import {  setDefaultPath} from "../../constants";
 document.title = "Login"
 export default function index() {
@@ -45,6 +47,8 @@ export default function index() {
     };
     return (
         <>
+            <Navbar general={true}/>
+
             <div className="bg-white p-2 pl-3 pr-5 lg:pr-9 lg:ml-44 mb-12">
                 <div className="max-w-full mb-10 ">
                     <div className="container mx-auto py-8">
