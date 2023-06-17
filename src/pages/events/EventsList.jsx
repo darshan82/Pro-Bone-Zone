@@ -45,7 +45,7 @@ export default function index()
                         >
                             {title}
                         </h1>
-                        <div className="flex justify-end">
+                        {/* <div className="flex justify-end">
                             <button
                                 onClick={() =>
                                 {
@@ -55,7 +55,7 @@ export default function index()
                             >
                                 Add
                             </button>
-                        </div>
+                        </div> */}
                         <div className="overflow-x-auto">
                             <table className="table-auto min-w-full ">
                                 <thead>

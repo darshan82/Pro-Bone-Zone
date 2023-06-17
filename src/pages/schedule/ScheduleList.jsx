@@ -53,9 +53,9 @@ export default function index()
                         <h1
                             className=" text-[#2E5FB7]  lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5"
                         >
-                            {title}
+                            Event Schedule
                         </h1>
-                        <div className="flex justify-end">
+                        {/* <div className="flex justify-end">
                             <button
                                 onClick={() =>
                                 {
@@ -65,7 +65,7 @@ export default function index()
                             >
                                 Add
                             </button>
-                        </div>
+                        </div> */}
                         <div className="overflow-x-auto">
                             <table className="table-auto min-w-full">
                                 <thead>
