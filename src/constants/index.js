@@ -2,7 +2,7 @@ const storedUser = JSON.parse(localStorage.getItem("user"))
 export const userType = storedUser?.permit
 export const userTypes = {
     admin: "admin",
-    licensee: "licensee",
+    licensee: "licensees",
     staff: "staff"
 }
 
