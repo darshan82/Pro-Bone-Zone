@@ -118,7 +118,7 @@ export default function index()
                   Schedule a Free Consultation
                 </button> */}
                 <Button
-                  buttonText={"Schedule a Free Consultation"}
+                  buttonText={"Request a Free Consultation "}
                   onClick={handleClick}
                 />
               </div>
@@ -188,7 +188,7 @@ export default function index()
               className="bg-[#EC672C] py-4 px-9 text-white text-sm   rounded-lg"
               onClick={handleClick}
             >
-              Schedule a Free Consultation
+              Request a Free Consultation 
             </button>
           </div>
         </div>
