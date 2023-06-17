@@ -23,17 +23,17 @@ export default function index()
         // Handle form submission
     };
 
-    useEffect(()=>[
-        axios.get("/sponsor/100").then((res)=>{
-            console.log(res,".................res")
+    useEffect(()=>{
+        axios.get("sponsor/100").then((res)=>{
+            console.log(res.data,"...........")
         })
-    ],[])
+    },[])
+
 
 
     useEffect(()=>{
             console.log(event,'................')    
     },[event])
-    console.log(event,'..................')
 
     return (
         <>
