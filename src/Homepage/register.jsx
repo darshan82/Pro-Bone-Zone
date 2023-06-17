@@ -6,8 +6,9 @@ import Footer from "../component/Footer";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
+import Navbar from "../component/Navbar/navbar";
 
-export default function index({ formRef })
+export default function index()
 {
     const form = useRef();
     const handleChangeEventDate = (event, i) =>
@@ -96,6 +97,8 @@ export default function index({ formRef })
 
     return (
         <>
+            <Navbar general={true}/>
+
             <div className="bg-[#EAEFF8] pt-2 pb-5">
                 {/* Hero Section */}
 
@@ -103,7 +106,6 @@ export default function index({ formRef })
 
             <div
                 className=" py-10 bg-slate-100  flex  flex-col justify-center items-center "
-                ref={formRef}
             >
                 <h1 className="text-2xl text-[#414141] font-bold  text-center  ">
                     Schedule A Consultation

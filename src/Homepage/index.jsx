@@ -22,8 +22,12 @@ import AyalaSmithDickens from "../assets/AyalaSmithDickens.png";
 import YouTube from "react-youtube";
 import Footer from "../component/Footer";
 const videId = "vD8X8qvhRxQ";
-export default function index({ formRef, handleClick })
+import Navbar from "../component/Navbar/navbar";
+
+export default function index()
 {
+  const formRef = useRef(null);
+
   const form = useRef();
   const [isPlaying, setIsPlaying] = useState(false);
   const [chooseDate, setSelectedDate] = useState("Sat June 17th");
@@ -35,6 +39,16 @@ export default function index({ formRef, handleClick })
   {
     window.scrollTo(0, 0)
   }, [])
+  const handleClick = () =>
+  {
+    setTimeout(() =>
+    {
+
+      formRef.current.focus();
+      formRef.current.scrollIntoView();
+    }, 500)
+  };
+
   const sendEmail = (e) =>
   {
     e.preventDefault();
@@ -82,6 +96,8 @@ export default function index({ formRef, handleClick })
   };
   return (
     <>
+      <Navbar general={true} />
+
       <div className="bg-[#EAEFF8] pt-2 pb-5">
         {/* Hero Section */}
         <div className="lg:ml-44  ">

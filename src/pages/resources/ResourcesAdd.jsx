@@ -1,6 +1,7 @@
 import Footer from "../../component/Footer";
 import { useLocation } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
+import Navbar from "../../component/Navbar/navbar";
 
 export default function index()
 {
@@ -22,6 +23,8 @@ export default function index()
 
     return (
         <>
+            <Navbar />
+
             <div className="bg-[#EAEFF8] pt-2 pb-5">
                 {/* <Navbar /> */}
                 {/* Hero Section */}

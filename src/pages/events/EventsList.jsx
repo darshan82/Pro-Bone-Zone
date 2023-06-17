@@ -3,6 +3,7 @@ import Footer from "../../component/Footer";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import moment from "moment/moment";
+import Navbar from "../../component/Navbar/navbar";
 
 export default function index()
 {

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import ArrowRight from "../assets/ArrowRight.png";
 import Footer from "../component/Footer";
+import Navbar from "../component/Navbar/navbar";
 
 export default function index()
 {
@@ -12,6 +13,8 @@ export default function index()
   }, [])
   return (
     <>
+            <Navbar general={true}/>
+
       <div className="bg-[#EAEFF8] pt-2 pb-5">
         {/* <Navbar /> */}
         {/* Hero Section */}
