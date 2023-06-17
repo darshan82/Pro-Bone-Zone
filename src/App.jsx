@@ -1,5 +1,6 @@
 import './App.css'
 import HomwPage from './Homepage/index'
+import Registration from './Homepage/register'
 import About from './About/index'
 import SmartSol from './SmartSol/index'
 import FAQ from './FAQ/index'
@@ -52,6 +53,7 @@ function App(props)
         <Routes>
 
           <Route path="/" element={<HomwPage handleClick={handleClick} formRef={formRef} />} />
+          <Route path="/register/:id" element={<Registration handleClick={handleClick} formRef={formRef} />} />
           <Route path="/about" element={<About />} />
           <Route path="/solution" element={<SmartSol />} />
           <Route path="/faq" element={<FAQ />} />
