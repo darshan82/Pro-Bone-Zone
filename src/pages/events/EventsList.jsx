@@ -45,7 +45,7 @@ export default function index()
                         >
                             {title}
                         </h1>
-                        <div className="flex justify-end">
+                        {/* <div className="flex justify-end">
                             <button
                                 onClick={() =>
                                 {
@@ -55,7 +55,7 @@ export default function index()
                             >
                                 Add
                             </button>
-                        </div>
+                        </div> */}
                         <div className="overflow-x-auto">
                             <table className="table-auto min-w-full ">
                                 <thead>
@@ -76,7 +76,7 @@ export default function index()
 
                                             <tr>
                                                 <td
-                                                    // text-purple-600
+                                                    // 
                                                     className="border px-4 py-2 cursor-pointer ">{item?.id}</td>
                                                 <td className="border px-4 py-2">{item?.etype}</td>
 

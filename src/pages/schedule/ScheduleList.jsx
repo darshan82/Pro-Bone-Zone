@@ -22,13 +22,13 @@ export default function index()
 
     useEffect(() =>
     {
-        axios.get(`/appointment`).then((res) =>
+        axios.get(`/appointment?eventId=${eventId}`).then((res) =>
         {
             const data = res.data?.appointments
             if (data && data.length !== 0)
             {
-                const updatedData = data?.filter((item) => item[`event-id`] == eventId && true)
-                setScheduleList(updatedData)
+                // const updatedData = data?.filter((item) => item[`event-id`] == eventId && true)
+                setScheduleList(data)
             }
 
 
@@ -53,9 +53,9 @@ export default function index()
                         <h1
                             className=" text-[#2E5FB7]  lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5"
                         >
-                            {title}
+                            Event Schedule
                         </h1>
-                        <div className="flex justify-end">
+                        {/* <div className="flex justify-end">
                             <button
                                 onClick={() =>
                                 {
@@ -65,23 +65,18 @@ export default function index()
                             >
                                 Add
                             </button>
-                        </div>
+                        </div> */}
                         <div className="overflow-x-auto">
                             <table className="table-auto min-w-full">
                                 <thead>
                                     <tr>
-                                        <th className="border px-4 py-2 text-left">Id</th> {/* Empty first column */}
-                                        <th className="border px-4 py-2 text-left">event-id</th>
-                                        <th className="border px-4 py-2 text-left">customer-id</th>
-                                        <th className="border px-4 py-2 text-left">timeslot</th>
-                                        <th className="border px-4 py-2 text-left">interest</th>
-                                        <th className="border px-4 py-2 text-left">company-id</th>
-                                        <th className="border px-4 py-2 text-left">consultant</th>
-                                        <th className="border px-4 py-2 text-left">rating</th>
-                                        <th className="border px-4 py-2 text-left">feedback</th>
-                                        <th className="border px-4 py-2 text-left">advance</th>
-                                        <th className="border px-4 py-2 text-left">updated</th>
-                                        <th className="border px-4 py-2 text-left">edit-id</th>
+                                        <th className="border px-4 py-2 text-left">ID</th> {/* Empty first column */}
+                                        <th className="border px-4 py-2 text-left">Date</th>
+                                        <th className="border px-4 py-2 text-left">Customer Name</th>
+
+                                        <th className="border px-4 py-2 text-left">Address</th>
+
+                                        <th className="border px-4 py-2 text-left">Focus</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -94,18 +89,11 @@ export default function index()
                                                     navigation("/Territories/1/?id=add");
 
                                                 }}
-                                                className="border px-4 py-2 cursor-pointer text-purple-600">{item?.id}</td>
-                                            <td className="border px-4 py-2 ">{item[`event-id`]}</td>
-                                            <td className="border px-4 py-2">{item?.[`customer-id`]}</td>
-                                            <td className="border px-4 py-2">{item?.timeslot}</td>
+                                                className="border px-4 py-2 cursor-pointer ">{item?.id}</td>
+                                            <td className="border px-4 py-2">{moment(item?.edate).format("LL")}</td>
+                                            <td className="border px-4 py-2 text-purple-600 cursor-pointer">{item["name-first"]+" "+item["name-last"]}</td>
+                                            <td className="border px-4 py-2">{item[`street1`]+" "+item[`street2`]+" "+item[`city`]}</td>
                                             <td className="border px-4 py-2">{item?.interest}</td>
-                                            <td className="border px-4 py-2">{item?.[`company-id`]}</td>
-                                            <td className="border px-4 py-2">{item?.consultant}</td>
-                                            <td className="border px-4 py-2">{item?.rating}</td>
-                                            <td className="border px-4 py-2">{item?.feedback}</td>
-                                            <td className="border px-4 py-2">{item?.advance}</td>
-                                            <td className="border px-4 py-2">{moment(item?.updated).format("LL")}</td>
-                                            <td className="border px-4 py-2">{item[`edit-id`]}</td>
                                         </tr>
 
                                     ))
