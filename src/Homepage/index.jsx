@@ -362,7 +362,7 @@ export default function index()
         ref={formRef}
       >
         <h1 className="text-2xl text-[#414141] font-bold   text-center ">
-          Request A Consultation
+          Request A Free Consultation
         </h1>
         <p
           className="text-center  text-[#414141] text-lg md:text-xl lg:text-xl my-4 pb-1 md:px-24 lg:px-64"

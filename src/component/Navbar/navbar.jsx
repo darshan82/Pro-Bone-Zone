@@ -16,6 +16,9 @@ export default function navbar({ handleClick, general = false })
   const handleLogout = () =>
   {
     logout()
+    setTimeout(()=>{
+      navigation("/")
+    },500)
   }
   return (
     <>
