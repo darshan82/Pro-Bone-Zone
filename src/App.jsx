@@ -12,7 +12,7 @@ import { useContext, useEffect, useRef, useState } from 'react'
 import { NAV_BAR, setDefaultPath} from './constants'
 import { setBaseUrl } from './helpingFunctions'
 import { UserContext, UserProvider } from './context/UserContext'
-import { ScheduleAdd, ScheduleList } from './pages/schedule'
+import { AppointmentUpdate, ScheduleAdd, ScheduleList } from './pages/schedule'
 import { ResourcesAdd, ResourcesList } from './pages/resources'
 import { EventList } from './pages/events'
 import { Signin, Signup } from './pages/auth'
@@ -62,6 +62,7 @@ function App(props)
           <Route path="/register" element={<Signup />} />
           <Route path="/schedule/:eventId/:date"  element={<ScheduleList/>} />
           <Route path="/schedule/add"  element={<ScheduleAdd/>} />
+          <Route path="/appointment/update/:customerId"  element={<AppointmentUpdate/>} />
 
           <Route path={`/${NAV_BAR[0].name}`} element={<TerritoriesList />} />
           <Route path={`/${NAV_BAR[1].name}`} element={< ResourcesList/>} />
