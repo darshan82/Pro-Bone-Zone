@@ -1,19 +1,20 @@
 import { createContext, useEffect, useState } from "react";
-
 export const UserContext = createContext()
 
-export const UserProvider = (props) => {
+export const UserProvider = (props) =>
+{
     const [user, setUser] = useState(null)
     const [loggedIn, setLoggedIn] = useState(false)
     const [token, setAuthToken] = useState(null)
-
-    useEffect(() => {
+    useEffect(() =>
+    {
 
         const storedToken = localStorage.getItem("token")
         const storedUser = localStorage.getItem("user")
-            
-        if (storedToken && storedUser) {
-            
+
+        if (storedToken && storedUser)
+        {
+
             setAuthToken(storedToken)
             setUser(JSON.parse(storedUser))
             setLoggedIn(true)
@@ -21,7 +22,8 @@ export const UserProvider = (props) => {
 
     }, [])
 
-    const login = (user, token) => {
+    const login = (user, token) =>
+    {
 
         localStorage.setItem("token", token)
         localStorage.setItem("user", JSON.stringify(user))
@@ -31,12 +33,14 @@ export const UserProvider = (props) => {
         setLoggedIn(true)
     }
 
-    const logout = () => {
+    const logout = () =>
+    {
         setUser(null)
         setLoggedIn(false)
         setAuthToken(null)
         localStorage.removeItem("token")
         localStorage.removeItem("user")
+        props?.navigate?.push("/login")
     }
 
     return (

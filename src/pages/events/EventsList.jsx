@@ -29,7 +29,7 @@ export default function index()
     return (
         <>
             <div className="bg-[#EAEFF8] pt-2 pb-5">
-                {/* <Navbar /> */}
+                <Navbar />
                 {/* Hero Section */}
 
                 <div className="flex flex-col  ml-10  md:ml-20 lg:ml-44  sm:ml-10 sm:justify-center md: items-start justify-center ">

@@ -96,7 +96,7 @@ export default function index()
   };
   return (
     <>
-      <Navbar general={true} />
+      <Navbar general={true} handleClick={handleClick} />
 
       <div className="bg-[#EAEFF8] pt-2 pb-5">
         {/* Hero Section */}
@@ -118,7 +118,7 @@ export default function index()
                   Schedule a Free Consultation
                 </button> */}
                 <Button
-                  buttonText={"Schedule a Free Consultation"}
+                  buttonText={"Request a Free Consultation "}
                   onClick={handleClick}
                 />
               </div>
@@ -137,90 +137,7 @@ export default function index()
         </div>
       </div>
 
-      <div
-        className=" py-10 bg-slate-100  flex  flex-col justify-center items-center "
-        ref={formRef}
-      >
-        <h1 className="text-2xl text-[#414141] font-bold   text-center ">
-          Request A Consultation
-        </h1>
-        <p
-          className="text-center  text-[#414141] text-lg md:text-xl lg:text-xl my-4 pb-1 md:px-24 lg:px-64"
-        >
-          We will notify you of upcoming events.
-        </p>
 
-        <div className="bg-[#ffff] px-4 py-4 md:py-10 md:px-16 lg:py-10 lg:px-16  w-[100%] md:w-[90%] lg:w-[70%]">
-          <div className=" flex flex-col justify-center items-center sm:flex-col md:flex-row lg:flex-row">
-
-            <div className="w-[100%] md:w-[50%] lg:w-[50%]  ">
-              <form ref={form} onSubmit={sendEmail}>
-                <div className="flex flex-col justify-center  md:flex-row lg:flex-row  flex-wrap  ">
-                </div>
-                <div className="flex flex-col justify-center  md:flex-row lg:flex-row  flex-wrap   ">
-                  <input
-                    type="text"
-                    className="py-2 px-3 bg-gray-100 text-sm text-[#414141] rounded-sm m-2 "
-                    placeholder="Full Name"
-                    name="firstName"
-                  ></input>
-                  <input
-                    type="text"
-                    className="py-2 px-3 bg-gray-100  text-sm text-[#414141] rounded-sm m-2"
-                    placeholder="Phone"
-                    name="phone"
-                  ></input>
-                </div>
-                <div className="flex flex-col justify-center  md:flex-row lg:flex-row  flex-wrap  ">
-                  <input
-                    type="text"
-                    className="py-2 px-3 bg-gray-100  text-sm text-[#414141] rounded-sm m-2"
-                    placeholder="Email"
-                    name="email"
-                  ></input>
-                  <select
-                    name="type"
-                    className="h-10  md:w-[184px] lg:px-3 lg:py-2 bg-gray-100 text-sm text-[#414141] rounded-sm m-2"
-                  >
-                    <option value="" disabled selected>
-                      Select a Interest
-                    </option>
-                    <option value="family-law">Family Law</option>
-                    <option value="business-law">Business Law</option>
-                  </select>
-
-                </div>
-
-
-
-                <div className="flex flex-col justify-center md:flex-row lg:flex-row  flex-wrap  ">
-                  <textarea
-                    name="description"
-                    id=""
-                    placeholder="Comments"
-                    className="bg-gray-100 p-4   md:w-96 lg:w-96 h-20 m-2"
-                  ></textarea>
-                </div>
-                <div className=" flex justify-center mt-3 md:justify-center lg:justify-center ">
-                  <button
-                    type="submit"
-                    // disabled={disabled}
-                    disabled={true}
-
-                    className="bg-[#EC672C] w-full  py-2 rounded-lg text-white text-sm mx-1 lg:mx-4 lg:w-96"
-                  >
-                    Submit
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-          <div className="mt-5 mb-5 pt-5">
-
-            <h1 className="text-center font-bold text-xl">Questions? Call us at 800 626 1195</h1>
-          </div>
-        </div>
-      </div>
       {/* How its work Section */}
       <div className=" py-6 md:py-6 lg:py-24 bg-[#2E5FB7] ">
         <div
@@ -271,7 +188,7 @@ export default function index()
               className="bg-[#EC672C] py-4 px-9 text-white text-sm   rounded-lg"
               onClick={handleClick}
             >
-              Schedule a Free Consultation
+              Request a Free Consultation 
             </button>
           </div>
         </div>
@@ -384,7 +301,7 @@ export default function index()
             </p>
             <div className=" flex justify-center mt-5 md:mt-8  md:justify-start lg:mt-8 lg:justify-start ">
               <Button
-                buttonText={"Schedule a Free Consultation"}
+                buttonText={"Request a Free Consultation"}
                 onClick={handleClick}
               />
             </div>{" "}
@@ -440,7 +357,90 @@ export default function index()
         </div>
       </div> */}
 
+      <div
+        className=" py-10 bg-slate-100  flex  flex-col justify-center items-center "
+        ref={formRef}
+      >
+        <h1 className="text-2xl text-[#414141] font-bold   text-center ">
+          Request A Free Consultation
+        </h1>
+        <p
+          className="text-center  text-[#414141] text-lg md:text-xl lg:text-xl my-4 pb-1 md:px-24 lg:px-64"
+        >
+          We will notify you of upcoming events.
+        </p>
 
+        <div className="bg-[#ffff] px-4 py-4 md:py-10 md:px-16 lg:py-10 lg:px-16  w-[100%] md:w-[90%] lg:w-[70%]">
+          <div className=" flex flex-col justify-center items-center sm:flex-col md:flex-row lg:flex-row">
+
+            <div className="w-[100%] md:w-[50%] lg:w-[50%]  ">
+              <form ref={form} onSubmit={sendEmail}>
+                <div className="flex flex-col justify-center  md:flex-row lg:flex-row  flex-wrap  ">
+                </div>
+                <div className="flex flex-col justify-center  md:flex-row lg:flex-row  flex-wrap   ">
+                  <input
+                    type="text"
+                    className="py-2 px-3 bg-gray-100 text-sm text-[#414141] rounded-sm m-2 "
+                    placeholder="Full Name"
+                    name="firstName"
+                  ></input>
+                  <input
+                    type="text"
+                    className="py-2 px-3 bg-gray-100  text-sm text-[#414141] rounded-sm m-2"
+                    placeholder="Phone"
+                    name="phone"
+                  ></input>
+                </div>
+                <div className="flex flex-col justify-center  md:flex-row lg:flex-row  flex-wrap  ">
+                  <input
+                    type="text"
+                    className="py-2 px-3 bg-gray-100  text-sm text-[#414141] rounded-sm m-2"
+                    placeholder="Email"
+                    name="email"
+                  ></input>
+                  <select
+                    name="type"
+                    className="h-10  md:w-[184px] lg:px-3 lg:py-2 bg-gray-100 text-sm text-[#414141] rounded-sm m-2"
+                  >
+                    <option value="" disabled selected>
+                      Select a Interest
+                    </option>
+                    <option value="family-law">Family Law</option>
+                    <option value="business-law">Business Law</option>
+                  </select>
+
+                </div>
+
+
+
+                <div className="flex flex-col justify-center md:flex-row lg:flex-row  flex-wrap  ">
+                  <textarea
+                    name="description"
+                    id=""
+                    placeholder="Comments"
+                    className="bg-gray-100 p-4   md:w-96 lg:w-96 h-20 m-2"
+                  ></textarea>
+                </div>
+                <div className=" flex justify-center mt-3 md:justify-center lg:justify-center ">
+                  <button
+                    type="submit"
+                    // disabled={disabled}
+                    disabled={true}
+
+                    className="bg-[#EC672C] w-full  py-2 rounded-lg text-white text-sm mx-1 lg:mx-4 lg:w-96"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div className="mt-5 mb-5 pt-5">
+
+            <h1 className="text-center font-bold text-xl">Questions? Call us at 800 626 1195</h1>
+          </div>
+        </div>
+      </div>
 
       <div className="bg-[#061133] p-2">
         <Footer />

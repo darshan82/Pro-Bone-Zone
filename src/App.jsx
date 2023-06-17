@@ -72,6 +72,20 @@ function App(props)
           <Route path={`/${NAV_BAR[4].name}/:value`} element={<TerritoriesUpdate />} />
           <Route path={`/${NAV_BAR[5].name}/:value`} element={<TerritoriesUpdate />} />
 
+
+          <Route path={`/staff`} element={<center><h1>UNDER DEVELOPMENT</h1></center>} />
+          <Route path={`/sponsors`} element={<center><h1>UNDER DEVELOPMENT</h1></center>} />
+          <Route path={`/customers`} element={<center><h1>UNDER DEVELOPMENT</h1></center>} />
+          <Route path={`/training`} element={<center><h1>UNDER DEVELOPMENT</h1></center>} />
+          <Route path={`/marketing`} element={<center><h1>UNDER DEVELOPMENT</h1></center>} />
+          <Route path={`/profile`} element={<center><h1>UNDER DEVELOPMENT</h1></center>} />
+
+
+
+
+
+
+
         </Routes>
       </Router>
     </div>

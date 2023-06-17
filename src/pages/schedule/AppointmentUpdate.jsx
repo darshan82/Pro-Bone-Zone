@@ -7,39 +7,48 @@ import Swal from 'sweetalert';
 import { EventContext } from "../../context/EventContext";
 import axios from "axios";
 import { interests, ratings } from "../../constants";
+import Navbar from "../../component/Navbar/navbar";
 
-export default function index() {
+export default function index()
+{
     const event = useContext(EventContext)
     const { pathname } = useLocation();
     document.title = "Appointment";
 
     const [state, setState] = useState({})
 
-    const handleChange = (e) => {
+    const handleChange = (e) =>
+    {
         setState({
             ...state,
             [e.target.name]: e.target.value
         })
         console.log(state, ".............")
     }
-    const handleSubmit = (values) => {
+    const handleSubmit = (values) =>
+    {
         // Handle form submission
     };
 
-    useEffect(() => {
-        axios.get("sponsor/100").then((res) => {
+    useEffect(() =>
+    {
+        axios.get("sponsor/100").then((res) =>
+        {
             console.log(res.data, "...........")
         })
     }, [])
 
 
 
-    useEffect(() => {
+    useEffect(() =>
+    {
         console.log(event, '................')
     }, [event])
 
     return (
         <>
+            <Navbar />
+
             <div className="bg-[#EAEFF8] pt-2 pb-5">
                 {/* <Navbar /> */}
                 {/* Hero Section */}
@@ -251,7 +260,8 @@ export default function index() {
                                                 Update
                                             </button>
                                             <button
-                                                onClick={() => {
+                                                onClick={() =>
+                                                {
                                                     Swal({
                                                         text: 'to remove this record?',
                                                         icon: 'success',
