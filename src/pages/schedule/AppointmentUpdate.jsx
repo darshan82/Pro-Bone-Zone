@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import ArrowRight from "../../assets/ArrowRight.png";
 import Footer from "../../component/Footer";
 import { useLocation } from "react-router-dom";
@@ -6,34 +6,37 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import Swal from 'sweetalert';
 import { EventContext } from "../../context/EventContext";
 import axios from "axios";
+import { interests, ratings } from "../../constants";
 
-export default function index()
-{
+export default function index() {
     const event = useContext(EventContext)
     const { pathname } = useLocation();
     document.title = "Appointment";
 
-    const [state , setState] =useState({})
+    const [state, setState] = useState({})
 
-    const handleChange = ()=>{
-        // manage state
+    const handleChange = (e) => {
+        setState({
+            ...state,
+            [e.target.name]: e.target.value
+        })
+        console.log(state, ".............")
     }
-    const handleSubmit = (values) =>
-    {
+    const handleSubmit = (values) => {
         // Handle form submission
     };
 
-    useEffect(()=>{
-        axios.get("sponsor/100").then((res)=>{
-            console.log(res.data,"...........")
+    useEffect(() => {
+        axios.get("sponsor/100").then((res) => {
+            console.log(res.data, "...........")
         })
-    },[])
+    }, [])
 
 
 
-    useEffect(()=>{
-            console.log(event,'................')    
-    },[event])
+    useEffect(() => {
+        console.log(event, '................')
+    }, [event])
 
     return (
         <>
@@ -65,31 +68,58 @@ export default function index()
                                     <div className="flex flex-wrap">
                                         <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="name" className="block mb-2">
-                                                Name:
+                                                First Name:
                                             </label>
                                             <Field
                                                 type="text"
-                                                id="name"
-                                                name="name"
+                                                id="firstName"
+                                                name="firstName"
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
-                                                onChange= {handleChange}
-                                                value={state.name}
+                                                onChange={handleChange}
+                                                value={state.firstName}
                                             />
-                                            <ErrorMessage name="name" component="div" className="text-red-500" />
+                                            <ErrorMessage name="firstName" component="div" className="text-red-500" />
+                                        </div>
+                                        <div className="w-full md:w-1/2 px-2 mb-4">
+                                            <label htmlFor="name" className="block mb-2">
+                                                Last Name:
+                                            </label>
+                                            <Field
+                                                type="text"
+                                                id="lastName"
+                                                name="lastName"
+                                                className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                                required
+                                                onChange={handleChange}
+                                                value={state.lastName}
+                                            />
+                                            <ErrorMessage name="lastName" component="div" className="text-red-500" />
                                         </div>
                                         <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="name" className="block mb-2">
                                                 Interest:
                                             </label>
-                                            <Field
-                                                type="text"
-                                                id="interest"
-                                                name="interest"
-                                                className="w-full border border-gray-300 px-3 py-2 rounded-sm"
-                                                onChange= {handleChange}
-                                                required
-                                            />
+
+                                            <div className="w-64">
+
+                                                <select
+                                                    id="select"
+                                                    name="interest"
+                                                    value={state.interest}
+                                                    onChange={handleChange}
+                                                    className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                                    required
+                                                >
+                                                    {
+                                                        interests?.map((option) => (
+
+                                                            <option value={option}>{option}</option>
+                                                        ))
+                                                    }
+
+                                                </select>
+                                            </div>
                                             <ErrorMessage name="interest" component="div" className="text-red-500" />
                                         </div>  <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="name" className="block mb-2">
@@ -101,7 +131,7 @@ export default function index()
                                                 name="timeslot"
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
-                                                onChange= {handleChange}
+                                                onChange={handleChange}
                                             />
                                             <ErrorMessage name="timeslot" component="div" className="text-red-500" />
                                         </div>  <div className="w-full md:w-1/2 px-2 mb-4">
@@ -114,7 +144,7 @@ export default function index()
                                                 name="consultant"
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
-                                                onChange= {handleChange}
+                                                onChange={handleChange}
                                             />
                                             <ErrorMessage name="consultant" component="div" className="text-red-500" />
                                         </div>  <div className="w-full md:w-1/2 px-2 mb-4">
@@ -127,7 +157,7 @@ export default function index()
                                                 name="companyId"
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
-                                                onChange= {handleChange}
+                                                onChange={handleChange}
                                             />
                                             <ErrorMessage name="company" component="div" className="text-red-500" />
                                         </div>  <div className="w-full md:w-1/2 px-2 mb-4">
@@ -140,7 +170,7 @@ export default function index()
                                                 name="status"
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
-                                                onChange= {handleChange}
+                                                onChange={handleChange}
                                             />
                                             <ErrorMessage name="status" component="div" className="text-red-500" />
                                         </div>  <div className="w-full md:w-1/2 px-2 mb-4">
@@ -153,21 +183,30 @@ export default function index()
                                                 name="advance"
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
-                                                onChange= {handleChange}
+                                                onChange={handleChange}
                                             />
                                             <ErrorMessage name="advance" component="div" className="text-red-500" />
-                                        </div>  <div className="w-full md:w-1/2 px-2 mb-4">
+                                        </div>
+                                        <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="name" className="block mb-2">
                                                 Rating:
                                             </label>
-                                            <Field
-                                                type="text"
-                                                id="rating"
+                                            <select
+                                                id="select"
                                                 name="rating"
+                                                value={state.rating}
+                                                onChange={handleChange}
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
-                                                onChange= {handleChange}
-                                            />
+                                            >
+                                                {
+                                                    ratings?.map((option) => (
+
+                                                        <option value={option}>{option}</option>
+                                                    ))
+                                                }
+
+                                            </select>
                                             <ErrorMessage name="rating" component="div" className="text-red-500" />
                                         </div>
 
@@ -186,11 +225,11 @@ export default function index()
                                             <ErrorMessage name="feedback" component="div" className="text-red-500" />
                                         </div>
 
-                                        
+
 
                                         <div className="w-full px-2 mb-4">
                                             <label htmlFor="description" className="block mb-2">
-                                                Staff notes:
+                                                Staff Notes:
                                             </label>
                                             <Field
                                                 as="textarea"
@@ -205,9 +244,9 @@ export default function index()
                                     </div>
 
 
-                            <div className="flex justify-center">
+                                    <div className="flex justify-center">
 
-                                                                 <React.Fragment>
+                                        <React.Fragment>
                                             <button
                                                 type="submit"
                                                 className="bg-[#EC672C] mb-4 mr-2 px-5 py-1 rounded-sm text-white"
@@ -215,12 +254,11 @@ export default function index()
                                                 Update
                                             </button>
                                             <button
-                                                onClick={() =>
-                                                {
+                                                onClick={() => {
                                                     Swal({
                                                         text: 'to remove this record?',
                                                         icon: 'success',
-                                                        timer:2000
+                                                        timer: 2000
                                                         // showCancelButton: true,
                                                         // confirmButtonColor: 'red',
                                                         // confirmButtonText: 'Delete',
@@ -232,8 +270,8 @@ export default function index()
                                                 Delete
                                             </button>
                                         </React.Fragment>
-                                
-                            </div>
+
+                                    </div>
                                 </Form>
                             </Formik>
 
