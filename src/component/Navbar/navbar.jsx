@@ -16,9 +16,10 @@ export default function navbar({ handleClick, general = false })
   const handleLogout = () =>
   {
     logout()
-    setTimeout(()=>{
+    setTimeout(() =>
+    {
       navigation("/")
-    },500)
+    }, 500)
   }
   return (
     <>
@@ -57,7 +58,16 @@ export default function navbar({ handleClick, general = false })
                     {
                       return (
                         <Link to={values?.url}
-                          onClick={() => setIsNavOpen(!isNavOpen)}
+                          onClick={() =>
+                          {
+                            console.log("asds")
+
+                            setIsNavOpen(!isNavOpen)
+                            if (values?.name === "Contact")
+                            {
+                              handleClick()
+                            }
+                          }}
 
                         >
                           <p className="cursor-pointer text-[#414141] text-center my-2 block">
@@ -76,7 +86,13 @@ export default function navbar({ handleClick, general = false })
                     {
                       return (
                         <Link to={values?.url}
-                          onClick={() => setIsNavOpen(!isNavOpen)}
+                          onClick={() =>
+                          {
+                            setIsNavOpen(!isNavOpen)
+
+
+                          }}
+
 
                         >
                           <p className="cursor-pointer text-[#414141] text-center my-2 block">
@@ -111,7 +127,20 @@ export default function navbar({ handleClick, general = false })
                   GENERAL_NAV_BAR.map((values, index) =>
                   {
                     return (
-                      <Link to={values?.url} key={index + values?.name}>
+                      <Link
+                        onClick={() =>
+                        {
+                          
+                          if (values?.name === "Contact")
+                          {
+                            console.log("handleClick")
+                            setTimeout(()=>{
+
+                              handleClick()
+                            },2000)
+                          }
+                        }}
+                        to={values?.url} key={index + values?.name}>
                         <p className="cursor-pointer text-[#414141]">{values?.name}</p>
                       </Link>
                     )

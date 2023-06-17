@@ -96,7 +96,7 @@ export default function index()
   };
   return (
     <>
-      <Navbar general={true} />
+      <Navbar general={true} handleClick={handleClick} />
 
       <div className="bg-[#EAEFF8] pt-2 pb-5">
         {/* Hero Section */}
