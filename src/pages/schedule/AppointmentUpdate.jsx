@@ -100,9 +100,6 @@ export default function index() {
                                             <label htmlFor="name" className="block mb-2">
                                                 Interest:
                                             </label>
-
-                                            <div className="w-64">
-
                                                 <select
                                                     id="select"
                                                     name="interest"
@@ -119,9 +116,9 @@ export default function index() {
                                                     }
 
                                                 </select>
-                                            </div>
                                             <ErrorMessage name="interest" component="div" className="text-red-500" />
-                                        </div>  <div className="w-full md:w-1/2 px-2 mb-4">
+                                            </div>
+                                          <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="name" className="block mb-2">
                                                 Time:
                                             </label>
@@ -188,11 +185,11 @@ export default function index() {
                                             <ErrorMessage name="advance" component="div" className="text-red-500" />
                                         </div>
                                         <div className="w-full md:w-1/2 px-2 mb-4">
-                                            <label htmlFor="name" className="block mb-2">
+                                            <label htmlFor="rating" className="block mb-2">
                                                 Rating:
                                             </label>
                                             <select
-                                                id="select"
+                                                id="raitng"
                                                 name="rating"
                                                 value={state.rating}
                                                 onChange={handleChange}
