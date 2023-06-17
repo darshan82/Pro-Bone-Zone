@@ -8,21 +8,23 @@ export default function index()
 {
     let navigation = useNavigate()
     const { pathname } = useLocation();
-    const title = pathname.replace("/" , "").charAt(0).toUpperCase() + pathname.slice(2)
+    const title = pathname.replace("/", "").charAt(0).toUpperCase() + pathname.slice(2)
     document.title = title;
-    const [eventList , setEventList] = useState(null)
+    const [eventList, setEventList] = useState(null)
 
     useEffect(() =>
     {
         window.scrollTo(0, 0)
     }, [])
 
-    useEffect(()=>{
-        axios.get(`/event`).then((res)=>{
+    useEffect(() =>
+    {
+        axios.get(`/event`).then((res) =>
+        {
             const data = res.data
             setEventList(data)
         })
-    },[])
+    }, [])
     return (
         <>
             <div className="bg-[#EAEFF8] pt-2 pb-5">
@@ -54,58 +56,44 @@ export default function index()
                                 Add
                             </button>
                         </div>
-                                <div className="overflow-x-auto">
-                        <table className="table-auto min-w-full ">
-                            <thead>
-                                <tr>
-                                    <th className="border px-4 py-2 text-left">Id</th> {/* Empty first column */}
-                                    <th className="border px-4 py-2 text-left">Territory id</th>
-                                    <th className="border px-4 py-2 text-left">etype</th>
-                                    <th className="border px-4 py-2 text-left">edate</th>
-                                    <th className="border px-4 py-2 text-left">capacity</th>
-                                    <th className="border px-4 py-2 text-left">time-start</th>
-                                    <th className="border px-4 py-2 text-left">time-end</th>
-                                    <th className="border px-4 py-2 text-left">City</th>
-                                    <th className="border px-4 py-2 text-left">Street1</th>
-                                    <th className="border px-4 py-2 text-left">Street2</th>
-                                    <th className="border px-4 py-2 text-left">Street3</th>
-                                    <th className="border px-4 py-2 text-left">Attendees</th>
-                                    <th className="border px-4 py-2 text-left">Updated</th>
-                                    <th className="border px-4 py-2 text-left">edit_id</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {
-                                    eventList && eventList.length !==0 ? eventList?.map((item)=>(
-                                        
-                                        
-                                        <tr>
-                                    <td
-                                        
-                                        className="border px-4 py-2 cursor-pointer text-purple-600">{item?.id}</td>
-                                    <td className="border px-4 py-2 ">{item?.territory_id}</td>
-                                    <td className="border px-4 py-2">{item?.etype}</td>
+                        <div className="overflow-x-auto">
+                            <table className="table-auto min-w-full ">
+                                <thead>
+                                    <tr>
+                                        <th className="border px-4 py-2 text-left">ID</th> {/* Empty first column */}
+                                        <th className="border px-4 py-2 text-left" style={{ width: 130 }}>Event Type</th>
+                                        <th className="border px-4 py-2 text-left">Event Date</th>
+                                        <th className="border px-4 py-2 text-left">capacity</th>
+                                        <th className="border px-4 py-2 text-left">Time Start</th>
+                                        <th className="border px-4 py-2 text-left">Time End</th>
+                                        <th className="border px-4 py-2 text-left">Attendees</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        eventList && eventList.length !== 0 ? eventList?.map((item) => (
 
-                                    <td
-                                    onClick={()=>{navigation(`/schedule/${item?.id}`)}} className="border px-4 py-2 cursor-pointer text-purple-600">{moment(item?.edate).format("LL")}</td>
-                                    <td className="border px-4 py-2">{item?.capacity}</td>
-                                    <td className="border px-4 py-2">{item['time-start']}</td>
-                                    <td className="border px-4 py-2">{item['time-end']}</td>
-                                    <td className="border px-4 py-2">{item?.city}</td>
-                                    <td className="border px-4 py-2">{item?.street1}</td>
-                                    <td className="border px-4 py-2">{item?.street2}</td>
-                                    <td className="border px-4 py-2">{item?.street3}</td>
-                                    <td className="border px-4 py-2">{item?.attendees}</td>
-                                    <td className="border px-4 py-2">{moment(item?.updated).format("LL")}</td>
-                                    <td className="border px-4 py-2">{item?.edit_id}</td>
-                                </tr>
-                                    ))
-                                    
-                                    :""}
-                            </tbody>
-                        </table>
 
-                                        </div>
+                                            <tr>
+                                                <td
+                                                    // text-purple-600
+                                                    className="border px-4 py-2 cursor-pointer ">{item?.id}</td>
+                                                <td className="border px-4 py-2">{item?.etype}</td>
+
+                                                <td
+                                                    onClick={() => { navigation(`/schedule/${item?.id}/${item['time-start']}`) }} className="border px-4 py-2 cursor-pointer text-purple-600">{moment(item?.edate).format("LL")}</td>
+                                                <td className="border px-4 py-2">{item?.capacity}</td>
+                                                <td className="border px-4 py-2">{item['time-start']}</td>
+                                                <td className="border px-4 py-2">{item['time-end']}</td>
+                                                <td className="border px-4 py-2">{item?.attendees}</td>
+                                            </tr>
+                                        ))
+
+                                            : ""}
+                                </tbody>
+                            </table>
+
+                        </div>
                     </div>
                 </div>
             </div>

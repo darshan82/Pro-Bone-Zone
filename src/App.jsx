@@ -61,7 +61,7 @@ function App(props)
           <Route path="/terms" element={<Term />} />
           <Route path="/login" element={<Signin />} />
           <Route path="/register" element={<Signup />} />
-          <Route path="/schedule/:eventId"  element={<ScheduleList/>} />
+          <Route path="/schedule/:eventId/:date"  element={<ScheduleList/>} />
           <Route path="/schedule/add"  element={<ScheduleAdd/>} />
 
           <Route path={`/${NAV_BAR[0].name}`} element={<TerritoriesList />} />

@@ -5,24 +5,29 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
 
-export default function index() {
+export default function index()
+{
     let navigation = useNavigate()
-    const { eventId } = useParams()
+    const { eventId, date } = useParams()
     const { pathname } = useLocation();
     const title = pathname.replace("/", "").charAt(0).toUpperCase() + pathname.slice(2)
     document.title = title;
     const [scheduleList, setScheduleList] = useState([])
 
-    useEffect(() => {
+    useEffect(() =>
+    {
         window.scrollTo(0, 0)
     }, [])
 
 
-    useEffect(() => {
-        axios.get(`/appointment`).then((res) => {
+    useEffect(() =>
+    {
+        axios.get(`/appointment`).then((res) =>
+        {
             const data = res.data?.appointments
-            if (data && data.length !== 0) {
-                const updatedData = data?.filter((item) => item[`event-id`] == eventId)
+            if (data && data.length !== 0)
+            {
+                const updatedData = data?.filter((item) => item[`event-id`] == eventId && true)
                 setScheduleList(updatedData)
             }
 
@@ -52,7 +57,8 @@ export default function index() {
                         </h1>
                         <div className="flex justify-end">
                             <button
-                                onClick={() => {
+                                onClick={() =>
+                                {
                                     navigation("/Territories/null/?id=add");
                                 }}
                                 className="bg-[#EC672C] mb-4 px-5 py-1 rounded-sm text-white"
@@ -61,52 +67,53 @@ export default function index() {
                             </button>
                         </div>
                         <div className="overflow-x-auto">
-                        <table className="table-auto min-w-full">
-                            <thead>
-                                <tr>
-                                    <th className="border px-4 py-2 text-left">Id</th> {/* Empty first column */}
-                                    <th className="border px-4 py-2 text-left">event-id</th>
-                                    <th className="border px-4 py-2 text-left">customer-id</th>
-                                    <th className="border px-4 py-2 text-left">timeslot</th>
-                                    <th className="border px-4 py-2 text-left">interest</th>
-                                    <th className="border px-4 py-2 text-left">company-id</th>
-                                    <th className="border px-4 py-2 text-left">consultant</th>
-                                    <th className="border px-4 py-2 text-left">rating</th>
-                                    <th className="border px-4 py-2 text-left">feedback</th>
-                                    <th className="border px-4 py-2 text-left">advance</th>
-                                    <th className="border px-4 py-2 text-left">updated</th>
-                                    <th className="border px-4 py-2 text-left">edit-id</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {scheduleList && scheduleList.length !== 0 ? scheduleList.map((item) => (
-
+                            <table className="table-auto min-w-full">
+                                <thead>
                                     <tr>
-                                        <td
-                                            onClick={() => {
-                                                navigation("/Territories/1/?id=add");
-
-                                            }}
-                                            className="border px-4 py-2 cursor-pointer text-purple-600">{item?.id}</td>
-                                        <td className="border px-4 py-2 ">{item[`event-id`]}</td>
-                                        <td className="border px-4 py-2">{item?.[`customer-id`]}</td>
-                                        <td className="border px-4 py-2">{item?.timeslot}</td>
-                                        <td className="border px-4 py-2">{item?.interest}</td>
-                                        <td className="border px-4 py-2">{item?.[`company-id`]}</td>
-                                        <td className="border px-4 py-2">{item?.consultant}</td>
-                                        <td className="border px-4 py-2">{item?.rating}</td>
-                                        <td className="border px-4 py-2">{item?.feedback}</td>
-                                        <td className="border px-4 py-2">{item?.advance}</td>
-                                        <td className="border px-4 py-2">{moment(item?.updated).format("LL")}</td>
-                                        <td className="border px-4 py-2">{item[`edit-id`]}</td>
+                                        <th className="border px-4 py-2 text-left">Id</th> {/* Empty first column */}
+                                        <th className="border px-4 py-2 text-left">event-id</th>
+                                        <th className="border px-4 py-2 text-left">customer-id</th>
+                                        <th className="border px-4 py-2 text-left">timeslot</th>
+                                        <th className="border px-4 py-2 text-left">interest</th>
+                                        <th className="border px-4 py-2 text-left">company-id</th>
+                                        <th className="border px-4 py-2 text-left">consultant</th>
+                                        <th className="border px-4 py-2 text-left">rating</th>
+                                        <th className="border px-4 py-2 text-left">feedback</th>
+                                        <th className="border px-4 py-2 text-left">advance</th>
+                                        <th className="border px-4 py-2 text-left">updated</th>
+                                        <th className="border px-4 py-2 text-left">edit-id</th>
                                     </tr>
+                                </thead>
+                                <tbody>
+                                    {scheduleList && scheduleList.length !== 0 ? scheduleList.map((item) => (
 
-                                ))
+                                        <tr>
+                                            <td
+                                                onClick={() =>
+                                                {
+                                                    navigation("/Territories/1/?id=add");
 
-                                    : ""}
-                            </tbody>
-                        </table>
-                                            </div>
+                                                }}
+                                                className="border px-4 py-2 cursor-pointer text-purple-600">{item?.id}</td>
+                                            <td className="border px-4 py-2 ">{item[`event-id`]}</td>
+                                            <td className="border px-4 py-2">{item?.[`customer-id`]}</td>
+                                            <td className="border px-4 py-2">{item?.timeslot}</td>
+                                            <td className="border px-4 py-2">{item?.interest}</td>
+                                            <td className="border px-4 py-2">{item?.[`company-id`]}</td>
+                                            <td className="border px-4 py-2">{item?.consultant}</td>
+                                            <td className="border px-4 py-2">{item?.rating}</td>
+                                            <td className="border px-4 py-2">{item?.feedback}</td>
+                                            <td className="border px-4 py-2">{item?.advance}</td>
+                                            <td className="border px-4 py-2">{moment(item?.updated).format("LL")}</td>
+                                            <td className="border px-4 py-2">{item[`edit-id`]}</td>
+                                        </tr>
+
+                                    ))
+
+                                        : ""}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
