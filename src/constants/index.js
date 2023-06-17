@@ -21,6 +21,8 @@ export const navBar = (type) =>
     else if (userTypes.licensee == type)
     {
         return [{ name: "Promotions", url: "/Promotions" },
+        { name: "Events", url: "/Events" },
+
         { name: "Personel", subNav: [{ name: "Staff", url: "/staff" }, { name: "Sponsors", url: "/sponsors" }, { name: "Customers", url: "/customers" }] },
         { name: "Resources", subNav: [{ name: "Training", url: "/training" }, { name: "Marketing", url: "/marketing" }] },
         { name: "Settings", subNav: [{ name: "Profile", url: "/profile" }, { name: "Logout" }] }
@@ -29,7 +31,8 @@ export const navBar = (type) =>
     else if (userTypes.staff == type)
     {
         return [
-            { name: "Personel", subNav: [{ name: "Staff", url: "/staff" }, { name: "Sponsors", url: "/sponsors" }, { name: "Customers", url: "/customers" }] },
+            { name: "Events", url: "/Events" },
+            // { name: "Personel", subNav: [{ name: "Staff", url: "/staff" }, { name: "Sponsors", url: "/sponsors" }, { name: "Customers", url: "/customers" }] },
             { name: "Resources", subNav: [{ name: "Training", url: "/training" }, { name: "Marketing", url: "/marketing" }] },
             { name: "Settings", subNav: [{ name: "Profile", url: "/profile" }, { name: "Logout" }] }
         ];
@@ -41,28 +44,33 @@ export const navBar = (type) =>
 
 }
 
-export const GENERAL_NAV_BAR = [{ name: "Home", url: "/", key: 0 }, { name: "About", url: "/about" }, { name: "FAQ", url: "/faq" }, { name: "Sponsors", url: "/solution" },{ name: "Contact" }]
+export const GENERAL_NAV_BAR = [{ name: "Home", url: "/", key: 0 }, { name: "About", url: "/about" }, { name: "FAQ", url: "/faq" }, { name: "Sponsors", url: "/solution" }, { name: "Contact" }]
 export const NAV_BAR = [{ name: "Territories", url: "/Territories" }, { name: "Promotions", url: "/Promotions" }, { name: "Events", url: "/Events" }, { name: "Personel", url: "/Personel" }, { name: "Resources", url: "/Resources" }, { name: "Settings", url: "/Settings" }];
 export const USER_NAV_BAR = navBar()
 
 
 
 
-export  const setDefaultPath = (user) =>{
-    if(userTypes.admin == user.permit){
+export const setDefaultPath = (user) =>
+{
+    if (userTypes.admin == user.permit)
+    {
         return "/Territories"
     }
-    else if(userTypes.licensee == user.permit){
-        return "/events"
-    }
-    else if(userTypes.staff == user.permit){
+    else if (userTypes.licensee == user.permit)
+    {
         return "/promotions"
     }
-    else {
+    else if (userTypes.staff == user.permit)
+    {
+        return "/events"
+    }
+    else
+    {
         return ""
     }
-    
+
 }
 
-export const interests = ["Family Law" , "Business Law" , "Consultant"]
-export const ratings = [1,2,3,4,5] 
+export const interests = ["Family Law", "Business Law", "Consultant"]
+export const ratings = [1, 2, 3, 4, 5] 
