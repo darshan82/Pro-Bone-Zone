@@ -1,16 +1,17 @@
-import React, { useEffect } from "react";
-import Footer from "../../component/Footer";
+import React, { useEffect, useRef, useState } from "react";
+import ArrowRight from "../assets/ArrowRight.png";
+import Footer from "../component/Footer";
 import { useLocation, useNavigate } from "react-router-dom";
 
-export default function index() {
+export default function index()
+{
     let navigation = useNavigate()
 
     const { pathname } = useLocation();
-    const title = pathname.replace("/", "").charAt(0).toUpperCase() + pathname.slice(2)
-    document.title = title + "" + "List";
+    document.title = "Privacy";
 
-
-    useEffect(() => {
+    useEffect(() =>
+    {
         window.scrollTo(0, 0)
     }, [])
     return (
@@ -27,15 +28,16 @@ export default function index() {
             {/* A Smart Solution */}
             <div className="bg-white p-2 pl-3 pr-5 lg:pr-9 lg:ml-44 mb-12">
                 <div className="max-w-full mb-10 ">
-                    <div className="container mx-auto py-8">
+                    <div class="container mx-auto py-8">
                         <h1
                             className=" text-[#2E5FB7]  lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5"
                         >
-                            {title}
+                            {pathname.replace("/", "")}
                         </h1>
                         <div className="flex justify-end">
                             <button
-                                onClick={() => {
+                                onClick={() =>
+                                {
                                     navigation("/Territories/null/?id=add");
                                 }}
                                 className="bg-[#EC672C] mb-4 px-5 py-1 rounded-sm text-white"
@@ -47,17 +49,17 @@ export default function index() {
                         <table className="w-full">
                             <thead>
                                 <tr>
-                                    <th className="border px-4 py-2 text-left">Territory</th> {/* Empty first column */}
-                                    <th className="border px-4 py-2 text-left">Licensee</th>
-                                    <th className="border px-4 py-2 text-left">Staff</th>
-                                    <th className="border px-4 py-2 text-left">Sponsors</th>
-                                    <th className="border px-4 py-2 text-left">Promotions</th>
+                                    <th className="border px-4 py-2 text-left">ID</th> {/* Empty first column */}
+                                    <th className="border px-4 py-2 text-left">Email</th>
+                                    <th className="border px-4 py-2 text-left">Phone</th>
+                                    <th className="border px-4 py-2 text-left">Email</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td
-                                        onClick={() => {
+                                        onClick={() =>
+                                        {
                                             navigation("/Territories/1/?id=add");
 
                                         }}
