@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import Logo from "../../assets/Logo.png";
 import { Link,useNavigate } from "react-router-dom";
-import { GENERAL_NAV_BAR, USER_NAV_BAR } from "../../constants";
+import { GENERAL_NAV_BAR, USER_NAV_BAR, navBar } from "../../constants";
 import { useLocation } from 'react-router-dom';
 import { UserContext } from "../../context/UserContext";
 export default function navbar({ handleClick })
@@ -9,7 +9,10 @@ export default function navbar({ handleClick })
   const [isNavOpen, setIsNavOpen] = useState(false);
   let navigation = useNavigate()
   const { pathname } = useLocation();
-  const {loggedIn , logout} = useContext(UserContext)  
+  const {loggedIn , logout,user} = useContext(UserContext)  
+
+  console.log("loggedIn",loggedIn)
+  console.log("loggedIn",user)
 
 
   const handleLogout = ()=>{
@@ -64,34 +67,6 @@ export default function navbar({ handleClick })
                       )
                     })
                   }
-                  <div className="flex justify-center ">
-                    <button
-                      onClick={() =>
-                      {
-                        setIsNavOpen(!isNavOpen)
-
-                        navigation("/")
-                        handleClick()
-                      }}
-                      className="bg-[#EC672C] px-8 py-2 w-44 rounded-sm text-white my-2 block">
-                      Register
-                    </button>
-                  </div>
-                  <div className="flex justify-center">
-                    <button
-                      onClick={() =>
-                      {
-                        setIsNavOpen(!isNavOpen)
-
-                        navigation("/login")
-                        handleClick()
-                      }}
-
-                      className="bg-[#f8f9fd] border  border-[#414141] text-[#EC672C] px-8 py-2 rounded-md cursor-pointer">
-                      Login
-                    </button>
-                  </div>
-
                 </React.Fragment>
                 :
                 <React.Fragment>
@@ -141,31 +116,11 @@ export default function navbar({ handleClick })
                     )
                   })
                 }
-                <button
-                  onClick={() =>
-                  {
-                    navigation("/login")
-                    handleClick()
-                  }}
-
-                  className="bg-[#f8f9fd] border  border-[#414141] text-[#EC672C] px-8 py-2 rounded-md cursor-pointer">
-                  Login
-                </button>
-                <button
-                  onClick={() =>
-                  {
-                    navigation("/")
-                    handleClick()
-                  }}
-
-                  className="bg-[#EC672C] px-8 py-2 rounded-sm">
-                  Register
-                </button>
               </React.Fragment>
               :
               <React.Fragment>
                 {
-                  USER_NAV_BAR?.map((values, index) =>
+                  navBar(user.permit).map((values, index) =>
                   {
                     return (
                       <>

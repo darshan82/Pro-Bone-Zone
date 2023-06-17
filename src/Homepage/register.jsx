@@ -4,44 +4,96 @@ import Time from "../assets/Time.png";
 import Date from "../assets/Date.png";
 import Footer from "../component/Footer";
 import { useParams } from "react-router-dom";
+import axios from "axios";
+import moment from "moment";
+
 export default function index({ formRef })
 {
     const form = useRef();
-    const [chooseDate, setSelectedDate] = useState("Sat June 17th");
-    const handleChangeEventDate = (event) =>
-        setSelectedDate(event?.target?.value);
+    const handleChangeEventDate = (event, i) =>
+    {
+        if (promotion && promotion?.events && promotion?.events.length)
+        {
+            let e = promotion.events[event?.target?.value]
+            setEvent(e)
+            console.log("eee", e)
+            setSelectedDate(moment(e?.edate)
+                .format("ddd MMMM Do"));
+        }
+    }
     const { id } = useParams()
-    console.log("id", id)
     const [disabled, setDisabled] = useState(false)
     useEffect(() =>
     {
         window.scrollTo(0, 0)
     }, [])
-    const sendEmail = (e) =>
+    const [promotion, setPromotion] = useState([]);
+    const [event, setEvent] = useState(null);
+
+    const [date, setSelectedDate] = useState(null);
+
+    useEffect(() =>
+    {
+        axios.get(`/promotion/detail/${id}`).then((res) =>
+        {
+            const data = res.data
+            setPromotion(data)
+            if (data?.events && data?.events.length > 0)
+            {
+                // setSelectedDate(moment(data?.events[0]?.edate).format("ddd MMMM Do"))
+                setEvent(data?.events[0])
+
+            }
+        })
+    }, [])
+    const sendEmail = async (e) =>
     {
         e.preventDefault();
-        if (
-            form.current.firstName.value &&
-            form.current.lastName.value &&
-            form.current.email.value &&
-            form.current.phone.value &&
-            form.current.type.value &&
-            form.current.time.value &&
-            form.current.description.value
-        )
+
+        const firstName = form.current.firstName.value;
+        const lastName = form.current.lastName.value;
+        const email = form.current.email.value;
+        const phone = form.current.phone.value;
+        const type = form.current.type.value;
+        const time = form.current.time.value;
+        const description = form.current.description.value;
+
+        const data = {
+            eventId: event.id,
+            promotionId: id,
+            date,
+            firstName,
+            lastName,
+            email,
+            phone,
+            type,
+            time,
+            description,
+        };
+
+        try
         {
             setDisabled(true)
-            setDisabled(false)
-            alert(
-                "Your registration request has been received successfully. Thank you"
-            );
 
-        }
-        else
+            await axios.post('/appointment/add', data);
+            alert('Your registration request has been received successfully. Thank you');
+            setDisabled(false)
+
+            form.current.firstName.value = null;
+            form.current.lastName.value = null;
+            form.current.email.value = null;
+            form.current.phone.value = null;
+            form.current.description.value = null;
+            form.current.type.value = '';
+            form.current.time.value = '';
+            setSelectedDate(null);
+        } catch (error)
         {
-            alert("Please fill the complete form. Thank you");
+            console.error('Error sending email:', error);
+            alert('An error occurred while sending the email. Please try again later.');
         }
     };
+
     return (
         <>
             <div className="bg-[#EAEFF8] pt-2 pb-5">
@@ -53,11 +105,11 @@ export default function index({ formRef })
                 className=" py-10 bg-slate-100  flex  flex-col justify-center items-center "
                 ref={formRef}
             >
-                <h1 className="text-2xl text-[#414141] font-bold mt-5 mb-3 text-center py-6 ">
+                <h1 className="text-2xl text-[#414141] font-bold  text-center  ">
                     Schedule A Consultation
                 </h1>
                 <p
-                    className="text-center  text-[#414141] text-lg md:text-xl lg:text-xl my-4 px-5 md:px-24 lg:px-64"
+                    className="text-center  text-[#414141] text-lg md:text-xl lg:text-xl mb-4 px-5 md:px-24 lg:px-64"
                 >
                     This event will last just 4 hours, so we have limited openings.
                 </p>
@@ -73,7 +125,7 @@ export default function index({ formRef })
                                 <div className="flex  flex-col ">
                                     <p className="ml-2 text-[#414141] text-sm">Date </p>
                                     <p className="ml-2 text-[#061133] text-sm">
-                                        {chooseDate}
+                                        {date}
                                         {/* Friday, June 23rd{" "} */}
                                     </p>
                                 </div>
@@ -84,7 +136,7 @@ export default function index({ formRef })
                                 </p>
                                 <div className="flex  flex-col ">
                                     <p className="ml-2 text-[#414141] text-sm">Time </p>
-                                    <p className="ml-2 text-[#061133] text-sm">10AM - 2PM.</p>
+                                    <p className="ml-2 text-[#061133] text-sm uppercase">{event && event["time-start"]} - {event && event["time-end"]}</p>
                                 </div>
                             </div>{" "}
                             <div className="flex  flex-row items-center flex-wrap mt-4">
@@ -94,11 +146,11 @@ export default function index({ formRef })
                                 <div className="flex  flex-col ">
                                     <p className="ml-2 text-[#414141] text-sm">Location </p>
                                     <p className="ml-2 text-[#061133]  text-sm">
-                                        Keller Williams Office
+                                        {event && event["street1"]}
                                         <br />
-                                        998 North 1200 West
+                                        {event && event["street2"]}
                                         <br />
-                                        Orem, Utah 84057
+                                        {event && event["city"]}
                                     </p>
                                 </div>
                             </div>
@@ -113,11 +165,21 @@ export default function index({ formRef })
                                         className="h-10  md:w-[184px] lg:px-3 lg:py-2 bg-gray-100 text-sm text-[#414141] rounded-sm m-2"
                                         onChange={handleChangeEventDate}
                                     >
-                                        <option value="Sat, June 17th" disabled selected>
+                                        <option value={null} disabled selected>
                                             Select a Date
                                         </option>
-                                        <option value="Sat, June 17th">Sat, June 17th</option>
-                                        <option value="Sat June 24th">Sat June 24th</option>
+                                        {
+                                            promotion && promotion?.events && promotion?.events.length &&
+                                            promotion.events.map((value, index) =>
+                                            {
+                                                let d = moment(value?.edate)
+                                                    .format("ddd MMMM Do");
+
+                                                return (
+                                                    <option value={index}>{d}</option>
+                                                )
+                                            })
+                                        }
                                     </select>
 
                                 </div>
@@ -137,7 +199,7 @@ export default function index({ formRef })
                                 </div>
                                 <div className="flex flex-col justify-center  md:flex-row lg:flex-row  flex-wrap  ">
                                     <input
-                                        type="text"
+                                        type="email"
                                         className="py-2 px-3 bg-gray-100  text-sm text-[#414141] rounded-sm m-2"
                                         placeholder="Email"
                                         name="email"
@@ -169,15 +231,16 @@ export default function index({ formRef })
                                         <option value="" disabled selected>
                                             Select a Time
                                         </option>
+                                        {
+                                            promotion && promotion.availability && promotion.availability.length &&
+                                            promotion.availability.filter(value => value["event_id"] == event.id).map(value =>
+                                            {
+                                                return (
+                                                    <option className="uppercase" value={value.timeslot}>{value.timeslot}</option>
 
-                                        <option value="10:00">10:00 a.m.</option>
-                                        <option value="10:30">10:30 a.m.</option>
-                                        <option value="11:00">11:00 a.m.</option>
-                                        <option value="11:30">11:30 a.m.</option>
-                                        <option value="12:00">12:00 p.m.</option>
-                                        <option value="12:30">12:30 p.m.</option>
-                                        <option value="13:00">1:00 p.m.</option>
-                                        <option value="13:30">1:30 p.m.</option>
+                                                )
+                                            })
+                                        }
                                     </select>
                                 </div>
 
