@@ -6,7 +6,7 @@ import axios from "axios";
 import { useContext } from "react";
 import { UserContext } from "../../context/UserContext";
 import { useNavigate } from "react-router-dom"
-import {  userTypes } from "../../constants";
+import {  setDefaultPath} from "../../constants";
 document.title = "Login"
 export default function index() {
     const history = useNavigate()
@@ -18,21 +18,6 @@ export default function index() {
             [e.target.name]: e.target.value
         })
     }
-    const setPath = (user) =>{
-        if(userTypes.admin == user.permit){
-            return "/Territories"
-        }
-        else if(userTypes.licensee == user.permit){
-            return "/events"
-        }
-        else if(userTypes.staff == user.permit){
-            return "/promotions"
-        }
-        else {
-            return ""
-        }
-        
-    }
     const handleSubmit = (e) => {
         e.preventDefault()
         axios.post("user/login", state).then((res) => {
@@ -40,13 +25,13 @@ export default function index() {
                 const token = res?.data?.token
                 const user = res?.data?.user
                 login(user, token)
+                history(setDefaultPath(user))
+                setState({})
                 Swal({
                     text: "succeffuly Logged in",
                     icon: 'success',
                     timer: 2000,
                 })
-                history(setPath(user))
-                setState({})
                 
             }
         }).catch((err) => {

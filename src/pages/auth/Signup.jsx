@@ -4,14 +4,24 @@ import { Formik } from 'formik';
 import Swal from 'sweetalert';
 import axios from "axios";
 import { UserContext } from "../../context/UserContext";
+import { userTypes } from "../../constants";
 export default function index()
 {
     const { user } = useContext(UserContext)
-    const [state, setState] = useState({
-        permit: user?.permit === "admin" ? "licensee" : "staff",
-        territoryId: 100,
-        licenseeId: user?.permit === "licensee" ? user.id : null
-    })
+    const [state, setState] = useState({})
+
+    useEffect(()=>{
+            if(user){
+                setState({
+                    ...state ,
+                    permit:user.permit === "admin" ? userTypes.licensee : userTypes.staff,
+                    territoryId:100,
+                    licenseeId:user.permit === userTypes.licensee ? user.id : undefined,
+
+
+                })
+            }
+        },[user])
 
     const handleChange = (e) =>
     {

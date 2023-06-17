@@ -48,5 +48,19 @@ export const USER_NAV_BAR = navBar()
 
 
 
-
+export  const setDefaultPath = (user) =>{
+    if(userTypes.admin == user.permit){
+        return "/Territories"
+    }
+    else if(userTypes.licensee == user.permit){
+        return "/events"
+    }
+    else if(userTypes.staff == user.permit){
+        return "/promotions"
+    }
+    else {
+        return ""
+    }
+    
+}
 

@@ -7,11 +7,11 @@ import FAQ from './FAQ/index'
 import Privacy from './Privacy/index'
 import Term from './Terms/index'
 import Navbar from "./component/Navbar/navbar";
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { useEffect, useRef, useState } from 'react'
-import { NAV_BAR} from './constants'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { useContext, useEffect, useRef, useState } from 'react'
+import { NAV_BAR, setDefaultPath} from './constants'
 import { setBaseUrl } from './helpingFunctions'
-import { UserProvider } from './context/UserContext'
+import { UserContext, UserProvider } from './context/UserContext'
 import { ScheduleAdd, ScheduleList } from './pages/schedule'
 import { ResourcesAdd, ResourcesList } from './pages/resources'
 import { EventList } from './pages/events'
@@ -21,6 +21,7 @@ import { TerritoriesAdd, TerritoriesList, TerritoriesUpdate } from './pages/terr
 
 function App(props)
 {
+  const {user , loggedIn} =useContext(UserContext)
   const formRef = useRef(null);
 
   const [width, setWidth] = useState(window.innerWidth)
@@ -45,8 +46,6 @@ function App(props)
 
   setBaseUrl()
   return (
-    <UserProvider>
-
     <div style={{ marginLeft: width > 1000 && - 90 }}>
       <Router>
         <Navbar handleClick={handleClick} />
@@ -59,7 +58,7 @@ function App(props)
           <Route path="/faq" element={<FAQ />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Term />} />
-          <Route path="/login" element={<Signin />} />
+          <Route path="/login" element={loggedIn ? <Navigate to={setDefaultPath(user)} />  :<Signin />} />
           <Route path="/register" element={<Signup />} />
           <Route path="/schedule/:eventId/:date"  element={<ScheduleList/>} />
           <Route path="/schedule/add"  element={<ScheduleAdd/>} />
@@ -88,7 +87,6 @@ function App(props)
         </Routes>
       </Router>
     </div>
-    </UserProvider>
   )
 }
 export default App
