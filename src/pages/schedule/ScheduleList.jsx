@@ -91,7 +91,7 @@ export default function index()
                                                 }}
                                                 className="border px-4 py-2 cursor-pointer ">{item?.id}</td>
                                             <td className="border px-4 py-2">{moment(item?.edate).format("LL")}</td>
-                                            <td className="border px-4 py-2 text-purple-600">{item["name-first"]+" "+item["name-last"]}</td>
+                                            <td className="border px-4 py-2 text-purple-600 cursor-pointer">{item["name-first"]+" "+item["name-last"]}</td>
                                             <td className="border px-4 py-2">{item[`street1`]+" "+item[`street2`]+" "+item[`city`]}</td>
                                             <td className="border px-4 py-2">{item?.interest}</td>
                                         </tr>
