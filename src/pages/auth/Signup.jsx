@@ -66,7 +66,7 @@ export default function index() {
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
                                                 >
-                                                <option value="licensees">Licensees</option>
+                                                <option value="licensee">licensee</option>
                                                 <option value="staff">Staff</option>
                                             </select>
                                         </div>
