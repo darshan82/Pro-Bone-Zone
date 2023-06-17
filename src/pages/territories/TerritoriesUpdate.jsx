@@ -4,6 +4,7 @@ import Footer from "../../component/Footer";
 import { useLocation } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import Swal from 'sweetalert';
+import Navbar from "../../component/Navbar/navbar";
 
 export default function index()
 {
@@ -24,6 +25,8 @@ export default function index()
 
     return (
         <>
+            <Navbar />
+
             <div className="bg-[#EAEFF8] pt-2 pb-5">
                 {/* <Navbar /> */}
                 {/* Hero Section */}
@@ -112,9 +115,9 @@ export default function index()
                                     </div>
 
 
-                            <div className="flex justify-center">
+                                    <div className="flex justify-center">
 
-                                                                 <React.Fragment>
+                                        <React.Fragment>
                                             <button
                                                 type="submit"
                                                 className="bg-[#EC672C] mb-4 mr-2 px-5 py-1 rounded-sm text-white"
@@ -127,7 +130,7 @@ export default function index()
                                                     Swal({
                                                         text: 'to remove this record?',
                                                         icon: 'success',
-                                                        timer:2000
+                                                        timer: 2000
                                                         // showCancelButton: true,
                                                         // confirmButtonColor: 'red',
                                                         // confirmButtonText: 'Delete',
@@ -139,8 +142,8 @@ export default function index()
                                                 Delete
                                             </button>
                                         </React.Fragment>
-                                
-                            </div>
+
+                                    </div>
                                 </Form>
                             </Formik>
 

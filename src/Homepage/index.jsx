@@ -22,8 +22,12 @@ import AyalaSmithDickens from "../assets/AyalaSmithDickens.png";
 import YouTube from "react-youtube";
 import Footer from "../component/Footer";
 const videId = "vD8X8qvhRxQ";
-export default function index({ formRef, handleClick })
+import Navbar from "../component/Navbar/navbar";
+
+export default function index()
 {
+  const formRef = useRef(null);
+
   const form = useRef();
   const [isPlaying, setIsPlaying] = useState(false);
   const [chooseDate, setSelectedDate] = useState("Sat June 17th");
@@ -35,6 +39,16 @@ export default function index({ formRef, handleClick })
   {
     window.scrollTo(0, 0)
   }, [])
+  const handleClick = () =>
+  {
+    setTimeout(() =>
+    {
+
+      formRef.current.focus();
+      formRef.current.scrollIntoView();
+    }, 500)
+  };
+
   const sendEmail = (e) =>
   {
     e.preventDefault();
@@ -82,6 +96,8 @@ export default function index({ formRef, handleClick })
   };
   return (
     <>
+      <Navbar general={true} />
+
       <div className="bg-[#EAEFF8] pt-2 pb-5">
         {/* Hero Section */}
         <div className="lg:ml-44  ">
@@ -126,17 +142,17 @@ export default function index({ formRef, handleClick })
         ref={formRef}
       >
         <h1 className="text-2xl text-[#414141] font-bold   text-center ">
-        Request A Consultation        
+          Request A Consultation
         </h1>
         <p
           className="text-center  text-[#414141] text-lg md:text-xl lg:text-xl my-4 pb-1 md:px-24 lg:px-64"
         >
-         We will notify you of upcoming events.
+          We will notify you of upcoming events.
         </p>
 
         <div className="bg-[#ffff] px-4 py-4 md:py-10 md:px-16 lg:py-10 lg:px-16  w-[100%] md:w-[90%] lg:w-[70%]">
           <div className=" flex flex-col justify-center items-center sm:flex-col md:flex-row lg:flex-row">
-          
+
             <div className="w-[100%] md:w-[50%] lg:w-[50%]  ">
               <form ref={form} onSubmit={sendEmail}>
                 <div className="flex flex-col justify-center  md:flex-row lg:flex-row  flex-wrap  ">
@@ -148,7 +164,7 @@ export default function index({ formRef, handleClick })
                     placeholder="Full Name"
                     name="firstName"
                   ></input>
-                 <input
+                  <input
                     type="text"
                     className="py-2 px-3 bg-gray-100  text-sm text-[#414141] rounded-sm m-2"
                     placeholder="Phone"
@@ -162,7 +178,7 @@ export default function index({ formRef, handleClick })
                     placeholder="Email"
                     name="email"
                   ></input>
-                   <select
+                  <select
                     name="type"
                     className="h-10  md:w-[184px] lg:px-3 lg:py-2 bg-gray-100 text-sm text-[#414141] rounded-sm m-2"
                   >
@@ -175,7 +191,7 @@ export default function index({ formRef, handleClick })
 
                 </div>
 
-              
+
 
                 <div className="flex flex-col justify-center md:flex-row lg:flex-row  flex-wrap  ">
                   <textarea
@@ -188,7 +204,9 @@ export default function index({ formRef, handleClick })
                 <div className=" flex justify-center mt-3 md:justify-center lg:justify-center ">
                   <button
                     type="submit"
-                    disabled={disabled}
+                    // disabled={disabled}
+                    disabled={true}
+
                     className="bg-[#EC672C] w-full  py-2 rounded-lg text-white text-sm mx-1 lg:mx-4 lg:w-96"
                   >
                     Submit
@@ -197,10 +215,10 @@ export default function index({ formRef, handleClick })
               </form>
             </div>
           </div>
-            <div className="mt-5 mb-5 pt-5">
+          <div className="mt-5 mb-5 pt-5">
 
-              <h1 className="text-center font-bold text-xl">Questions? Call us at 800 626 1195</h1>
-            </div>
+            <h1 className="text-center font-bold text-xl">Questions? Call us at 800 626 1195</h1>
+          </div>
         </div>
       </div>
       {/* How its work Section */}
