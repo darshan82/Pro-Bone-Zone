@@ -4,36 +4,43 @@ import { Formik } from 'formik';
 import Swal from 'sweetalert';
 import axios from "axios";
 import { UserContext } from "../../context/UserContext";
-export default function index() {
+export default function index()
+{
     const { user } = useContext(UserContext)
     const [state, setState] = useState({
-        permit: user?.permit === "admin" ? "licensee" : "staff"
+        permit: user?.permit === "admin" ? "licensee" : "staff",
+        territoryId: 100,
+        licenseeId: user?.permit === "licensee" ? user.id : null
     })
 
-    const handleChange = (e) => {
+    const handleChange = (e) =>
+    {
         setState({
             ...state,
             [e.target.name]: e.target.value
         })
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e) =>
+    {
         e.preventDefault()
 
-        axios.post(`/user/signup`, state).then((res) => {
+        axios.post(`/user/signup`, state).then((res) =>
+        {
             setState({})
             Swal({
                 title: state.permit + " " + "cretaed successfully",
                 icon: 'success',
                 timer: 2000,
             })
-        }).catch((err) => {
+        }).catch((err) =>
+        {
             Swal({
                 title: err?.response?.data?.message,
                 icon: 'error',
                 timer: 2000,
             })
-        })  
+        })
     };
 
     return (
