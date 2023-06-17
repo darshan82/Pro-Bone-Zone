@@ -301,7 +301,7 @@ export default function index()
             </p>
             <div className=" flex justify-center mt-5 md:mt-8  md:justify-start lg:mt-8 lg:justify-start ">
               <Button
-                buttonText={"Schedule a Free Consultation"}
+                buttonText={"Request a Free Consultation"}
                 onClick={handleClick}
               />
             </div>{" "}
