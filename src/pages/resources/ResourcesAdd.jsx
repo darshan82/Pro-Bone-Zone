@@ -18,7 +18,6 @@ export default function index()
     const handleSubmit = (values) =>
     {
         // Handle form submission
-        console.log(values);
     };
 
     return (

@@ -15,12 +15,10 @@ export default function index()
     const handleSubmit = (values) =>
     {
         // Handle form submission
-        console.log(values);
     };
 
     const handleChange = (e)=>{
             setState({...state, [e.target.name]:e.target.value})
-            console.log(state)
     }
 
     return (
