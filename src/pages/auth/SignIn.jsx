@@ -30,7 +30,7 @@ export default function index() {
                 history(setDefaultPath(user))
                 setState({})
                 Swal({
-                    text: "succeffuly Logged in",
+                    text: "Succeffuly Logged In",
                     icon: 'success',
                     timer: 2000,
                 })

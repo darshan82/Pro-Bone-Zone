@@ -263,7 +263,7 @@ export default function index()
                                                 onClick={() =>
                                                 {
                                                     Swal({
-                                                        text: 'to remove this record?',
+                                                        text: 'Are you sure to remove this record ?',
                                                         icon: 'success',
                                                         timer: 2000
                                                         // showCancelButton: true,

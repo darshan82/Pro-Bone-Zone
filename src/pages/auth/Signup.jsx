@@ -41,7 +41,7 @@ export default function index()
         {
             setState({})
             Swal({
-                title: state.permit + " " + "cretaed successfully",
+                title: state.permit + " " + "Created Successfully",
                 icon: 'success',
                 timer: 2000,
             })
