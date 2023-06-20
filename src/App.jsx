@@ -16,7 +16,7 @@ import { ResourcesAdd, ResourcesList } from './pages/resources'
 import { EventList } from './pages/events'
 import { Signin, Signup } from './pages/auth'
 import { TerritoriesAdd, TerritoriesList, TerritoriesUpdate } from './pages/territories'
-
+import { createBrowserHistory } from 'history';
 
 function App(props)
 {
@@ -34,9 +34,11 @@ function App(props)
   }, [])
 
   setBaseUrl()
+  const history = createBrowserHistory();
+
   return (
     <div style={{ marginLeft: width > 1000 && - 90 }}>
-      <Router>
+      <Router history={history}>
         <Routes>
           <Route path="/" element={<HomwPage />} />
           <Route path="/register/:id" element={<Registration />} />
@@ -45,9 +47,9 @@ function App(props)
           <Route path="/faq" element={<FAQ />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Term />} />
-          <Route path="/login" element={loggedIn ? <Navigate to={setDefaultPath(user)} />  :<Signin />} />
+          <Route path="/login" element={loggedIn ? <Navigate to={setDefaultPath(user)} /> : <Signin />} />
           <Route path="/register" element={<Signup />} />
-          <Route path="/appointment/update/:customerId"  element={<AppointmentUpdate/>} />
+          <Route path="/appointment/update/:customerId" element={<AppointmentUpdate />} />
 
           <Route path="/schedule/:eventId/:date" element={<ScheduleList />} />
           <Route path="/schedule/add" element={<ScheduleAdd />} />
