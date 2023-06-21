@@ -72,5 +72,5 @@ export const setDefaultPath = (user) =>
 
 }
 
-export const interests = ["Family Law", "Business Law", "Consultant"]
-export const ratings = [1, 2, 3, 4, 5] 
+export const interests = [{label:"Family Law" , value:"family-law"} ,{ label:"Business Law",value:"business-law"} ]
+export const ratings = [1,2,3,4,5] 

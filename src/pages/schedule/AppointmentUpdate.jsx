@@ -1,7 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import ArrowRight from "../../assets/ArrowRight.png";
 import Footer from "../../component/Footer";
-import { useLocation } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import Swal from 'sweetalert';
 import { EventContext } from "../../context/EventContext";
@@ -9,41 +7,114 @@ import axios from "axios";
 import { interests, ratings } from "../../constants";
 import Navbar from "../../component/Navbar/navbar";
 
-export default function index()
-{
-    const event = useContext(EventContext)
-    const { pathname } = useLocation();
+export default function index() {
+    const { event } = useContext(EventContext)
     document.title = "Appointment";
 
-    const [state, setState] = useState({})
+    const [state, setState] = useState({ advance: "No", status: "No" })
+    const [sponsor, setSponsor] = useState([])
+    const [timeslots, setTimeSlots] = useState([])
+    const [appointmentId, setAppointmentId] = useState(null)
+    const [customerId, setcustomerId] = useState(null)
 
-    const handleChange = (e) =>
-    {
+
+    const handleChange = (e) => {
         setState({
             ...state,
             [e.target.name]: e.target.value
         })
-        console.log(state, ".............")
     }
-    const handleSubmit = (values) =>
-    {
-        // Handle form submission
-    };
 
-    useEffect(() =>
-    {
-        axios.get("sponsor/100").then((res) =>
-        {
-            console.log(res.data, "...........")
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        axios.put(`appointment/${appointmentId}/${customerId}`, state).then((res) => {
+            if (!res.data.error) {
+                setState({})
+                Swal({
+                    text: "Appointment updated successfully.",
+                    icon: 'success',
+                    timer: 2000,
+                })
+                history.go(-1)
+
+            }
+            else {
+                Swal({
+                    text: res?.data?.message,
+                    icon: 'error',
+                    timer: 2000,
+                })
+            }
+
+        }).catch((err) => {
+            Swal({
+                title: err.response?.data?.message,
+                icon: 'error',
+                timer: 4000,
+
+            })
+        })
+    }
+
+    useEffect(() => {
+        axios.get("sponsor/100").then((res) => {
+            setSponsor(res.data?.sponsors)
         })
     }, [])
 
 
 
-    useEffect(() =>
-    {
-        console.log(event, '................')
+    useEffect(() => {
+        if (event) {
+            setTimeSlots(event?.timeslots)
+            setState({
+                ...state,
+                firstName: event[`name-first`],
+                lastName: event[`name-last`],
+                interest: event?.interest,
+                timeslot: event?.timeslot,
+                consultant: event?.consultant,
+                companyId: event[`company-id`],
+                rating: event.rating,
+                feedback: event.feedback,
+                notes: event?.notes,
+                advance: event?.advance,
+
+
+            })
+            setAppointmentId(event?.id)
+            setcustomerId(event?.[`customer-id`])
+        }
+
     }, [event])
+
+    const handleDelete = () => {
+        axios.delete(`appointment/delete/${appointmentId}`).then((res) => {
+            if (!res.data.error) {
+                Swal({
+                    text: res.data.message,
+                    icon: 'success',
+                    timer: 2000,
+                })
+                history.go(-1)
+            }
+            else {
+                Swal({
+                    text: res?.data?.message,
+                    icon: 'error',
+                    timer: 2000,
+                })
+            }
+
+        }).catch((err) => {
+            Swal({
+                title: err.response?.data?.message,
+                icon: 'error',
+                timer: 4000,
+
+            })
+        })
+    }
 
     return (
         <>
@@ -72,11 +143,11 @@ export default function index()
 
 
                         <div className="box  ">
-                            <Formik initialValues={state} onSubmit={handleSubmit}>
-                                <Form>
+                            <Formik initialValues={state} onSubmit={handleSubmit} >
+                                <Form onSubmit={handleSubmit} >
                                     <div className="flex flex-wrap">
                                         <div className="w-full md:w-1/2 px-2 mb-4">
-                                            <label htmlFor="name" className="block mb-2">
+                                            <label htmlFor="firstName" className="block mb-2">
                                                 First Name:
                                             </label>
                                             <Field
@@ -91,7 +162,7 @@ export default function index()
                                             <ErrorMessage name="firstName" component="div" className="text-red-500" />
                                         </div>
                                         <div className="w-full md:w-1/2 px-2 mb-4">
-                                            <label htmlFor="name" className="block mb-2">
+                                            <label htmlFor="lastName" className="block mb-2">
                                                 Last Name:
                                             </label>
                                             <Field
@@ -106,42 +177,54 @@ export default function index()
                                             <ErrorMessage name="lastName" component="div" className="text-red-500" />
                                         </div>
                                         <div className="w-full md:w-1/2 px-2 mb-4">
-                                            <label htmlFor="name" className="block mb-2">
+                                            <label htmlFor="interest" className="block mb-2">
                                                 Interest:
                                             </label>
-                                                <select
-                                                    id="select"
-                                                    name="interest"
-                                                    value={state.interest}
-                                                    onChange={handleChange}
-                                                    className="w-full border border-gray-300 px-3 py-2 rounded-sm"
-                                                    required
-                                                >
-                                                    {
-                                                        interests?.map((option) => (
-
-                                                            <option value={option}>{option}</option>
-                                                        ))
-                                                    }
-
-                                                </select>
-                                            <ErrorMessage name="interest" component="div" className="text-red-500" />
-                                            </div>
-                                          <div className="w-full md:w-1/2 px-2 mb-4">
-                                            <label htmlFor="name" className="block mb-2">
-                                                Time:
-                                            </label>
-                                            <Field
-                                                type="text"
-                                                id="timeslot"
-                                                name="timeslot"
+                                            <select
+                                                id="interest"
+                                                name="interest"
+                                                value={state.interest}
+                                                onChange={handleChange}
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
+                                            >
+                                                <option value={null} disabled>{"Select Interest"}</option>
+
+                                                {interests && interests.length !== 0 &&
+                                                    interests?.map((option) => (
+
+                                                        <option value={option.value}>{option.label}</option>
+                                                    ))
+                                                }
+
+                                            </select>
+                                            <ErrorMessage name="interest" component="div" className="text-red-500" />
+                                        </div>
+                                        <div className="w-full md:w-1/2 px-2 mb-4">
+                                            <label htmlFor="timeslot" className="block mb-2">
+                                                Time:
+                                            </label>
+                                            <select
+                                                id="timeslot"
+                                                name="timeslot"
+                                                value={state.timeslot}
                                                 onChange={handleChange}
-                                            />
+                                                className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                                required
+                                            >
+                                                <option value={null} disabled>{"Select Time"}</option>
+
+                                                {timeslots && timeslots.length !== 0 &&
+                                                    timeslots?.map((option) => (
+
+                                                        <option value={option}>{option}</option>
+                                                    ))
+                                                }
+
+                                            </select>
                                             <ErrorMessage name="timeslot" component="div" className="text-red-500" />
                                         </div>  <div className="w-full md:w-1/2 px-2 mb-4">
-                                            <label htmlFor="name" className="block mb-2">
+                                            <label htmlFor="consultant" className="block mb-2">
                                                 Consultant:
                                             </label>
                                             <Field
@@ -150,47 +233,88 @@ export default function index()
                                                 name="consultant"
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
+                                                value={state.consultant}
                                                 onChange={handleChange}
                                             />
                                             <ErrorMessage name="consultant" component="div" className="text-red-500" />
                                         </div>  <div className="w-full md:w-1/2 px-2 mb-4">
-                                            <label htmlFor="name" className="block mb-2">
+                                            <label htmlFor="companyId" className="block mb-2">
                                                 Company:
                                             </label>
-                                            <Field
-                                                type="text"
+                                            <select
                                                 id="companyId"
                                                 name="companyId"
+                                                value={state.companyId}
+                                                onChange={handleChange}
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
-                                                onChange={handleChange}
-                                            />
+                                            >
+                                                <option value={null} disabled>{"Select Company"}</option>
+
+                                                {sponsor && sponsor.length !== 0 &&
+                                                    sponsor?.map((option) => (
+
+                                                        <option value={option?.id}>{option?.[`organization-name`]}</option>
+                                                    ))
+                                                }
+
+                                            </select>
+
                                             <ErrorMessage name="company" component="div" className="text-red-500" />
                                         </div>  <div className="w-full md:w-1/2 px-2 mb-4">
-                                            <label htmlFor="name" className="block mb-2">
+                                            <label htmlFor="status" className="block mb-2">
                                                 Status:
                                             </label>
-                                            <Field
-                                                type="text"
-                                                id="status"
-                                                name="status"
-                                                className="w-full border border-gray-300 px-3 py-2 rounded-sm"
-                                                required
-                                                onChange={handleChange}
-                                            />
-                                            <ErrorMessage name="status" component="div" className="text-red-500" />
+                                            <label className="mr-4">
+                                                <input
+                                                    type="radio"
+                                                    name="status"
+                                                    value={"Yes"}
+                                                    checked={state.status === 'Yes'}
+                                                    onChange={handleChange}
+                                                    className="mr-2"
+                                                />
+                                                Yes
+                                            </label>
+                                            <label>
+                                                <input
+                                                    type="radio"
+                                                    name="status"
+                                                    value="No"
+                                                    checked={state.status === 'No'}
+                                                    onChange={handleChange}
+                                                    className="mr-2"
+                                                />
+                                                No
+                                            </label>                                            <ErrorMessage name="status" component="div" className="text-red-500" />
                                         </div>  <div className="w-full md:w-1/2 px-2 mb-4">
-                                            <label htmlFor="name" className="block mb-2">
+                                            <label htmlFor="advance" className="block mb-2">
                                                 Advance:
                                             </label>
-                                            <Field
-                                                type="text"
-                                                id="advance"
-                                                name="advance"
-                                                className="w-full border border-gray-300 px-3 py-2 rounded-sm"
-                                                required
-                                                onChange={handleChange}
-                                            />
+                                            <div className="flex items-center">
+                                                <label className="mr-4">
+                                                    <input
+                                                        type="radio"
+                                                        name="advance"
+                                                        value={"Yes"}
+                                                        checked={state.advance === 'Yes'}
+                                                        onChange={handleChange}
+                                                        className="mr-2"
+                                                    />
+                                                    Yes
+                                                </label>
+                                                <label>
+                                                    <input
+                                                        type="radio"
+                                                        name="advance"
+                                                        value="No"
+                                                        checked={state.advance === 'No'}
+                                                        onChange={handleChange}
+                                                        className="mr-2"
+                                                    />
+                                                    No
+                                                </label>
+                                            </div>
                                             <ErrorMessage name="advance" component="div" className="text-red-500" />
                                         </div>
                                         <div className="w-full md:w-1/2 px-2 mb-4">
@@ -198,14 +322,16 @@ export default function index()
                                                 Rating:
                                             </label>
                                             <select
-                                                id="raitng"
+                                                id="rating"
                                                 name="rating"
-                                                value={state.rating}
+                                                value={state.rating || "Select Rating"}
                                                 onChange={handleChange}
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
                                             >
-                                                {
+                                                <option value={null} disabled>{"Select Rating"}</option>
+
+                                                {ratings && ratings.length !== 0 &&
                                                     ratings?.map((option) => (
 
                                                         <option value={option}>{option}</option>
@@ -217,7 +343,7 @@ export default function index()
                                         </div>
 
                                         <div className="w-full md:w-1/2 px-2 mb-4">
-                                            <label htmlFor="email" className="block mb-2">
+                                            <label htmlFor="feedback" className="block mb-2">
                                                 Feedback:
                                             </label>
                                             <Field
@@ -226,6 +352,7 @@ export default function index()
                                                 name="feedback"
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
+                                                value={state.feedback}
                                                 onChange={handleChange}
                                             />
                                             <ErrorMessage name="feedback" component="div" className="text-red-500" />
@@ -234,7 +361,7 @@ export default function index()
 
 
                                         <div className="w-full px-2 mb-4">
-                                            <label htmlFor="description" className="block mb-2">
+                                            <label htmlFor="notes" className="block mb-2">
                                                 Staff Notes:
                                             </label>
                                             <Field
@@ -244,8 +371,10 @@ export default function index()
                                                 rows="4"
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
+                                                onChange={handleChange}
+                                                value={state.notes}
                                             />
-                                            <ErrorMessage name="description" component="div" className="text-red-500" />
+                                            <ErrorMessage name="notes" component="div" className="text-red-500" />
                                         </div>
                                     </div>
 
@@ -260,16 +389,20 @@ export default function index()
                                                 Update
                                             </button>
                                             <button
-                                                onClick={() =>
-                                                {
+                                                onClick={() => {
                                                     Swal({
-                                                        text: 'Are you sure to remove this record ?',
-                                                        icon: 'success',
-                                                        timer: 2000
-                                                        // showCancelButton: true,
-                                                        // confirmButtonColor: 'red',
-                                                        // confirmButtonText: 'Delete',
-                                                        // cancelButtonText: 'Cancel'
+                                                        title: 'Are you sure?',
+                                                        text: "You won't be able to revert this!",
+                                                        icon: 'warning',
+                                                        buttons: 2,
+                                                        showCancelButton: true,
+                                                        confirmButtonColor: 'red',
+                                                        confirmButtonText: 'Delete',
+                                                        cancelButtonText: 'Cancel'
+                                                    }).then((result) => {
+                                                        if (result) {
+                                                            handleDelete()
+                                                        }
                                                     })
                                                 }}
                                                 className="bg-[#EC672C] mb-4 ml-2 px-5 py-1 rounded-sm text-white"
