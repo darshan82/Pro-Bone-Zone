@@ -7,28 +7,33 @@ import axios from "axios";
 import { interests, ratings } from "../../constants";
 import Navbar from "../../component/Navbar/navbar";
 
-export default function index() {
+export default function index()
+{
     const { event } = useContext(EventContext)
     document.title = "Appointment";
 
-    const [state, setState] = useState({ advance: "No", status: "No" })
+    const [state, setState] = useState({ advance: "No", status: "No Show" })
     const [sponsor, setSponsor] = useState([])
     const [timeslots, setTimeSlots] = useState([])
     const [appointmentId, setAppointmentId] = useState(null)
     const [customerId, setcustomerId] = useState(null)
 
 
-    const handleChange = (e) => {
+    const handleChange = (e) =>
+    {
         setState({
             ...state,
             [e.target.name]: e.target.value
         })
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e) =>
+    {
         e.preventDefault()
-        axios.put(`appointment/${appointmentId}/${customerId}`, state).then((res) => {
-            if (!res.data.error) {
+        axios.put(`appointment/${appointmentId}/${customerId}`, state).then((res) =>
+        {
+            if (!res.data.error)
+            {
                 setState({})
                 Swal({
                     text: "Appointment updated successfully.",
@@ -38,7 +43,8 @@ export default function index() {
                 history.go(-1)
 
             }
-            else {
+            else
+            {
                 Swal({
                     text: res?.data?.message,
                     icon: 'error',
@@ -46,7 +52,8 @@ export default function index() {
                 })
             }
 
-        }).catch((err) => {
+        }).catch((err) =>
+        {
             Swal({
                 title: err.response?.data?.message,
                 icon: 'error',
@@ -56,17 +63,43 @@ export default function index() {
         })
     }
 
-    useEffect(() => {
-        axios.get("sponsor/100").then((res) => {
+    useEffect(() =>
+    {
+        axios.get("sponsor/100").then((res) =>
+        {
             setSponsor(res.data?.sponsors)
         })
     }, [])
 
 
 
-    useEffect(() => {
-        if (event) {
-            setTimeSlots(event?.timeslots)
+    useEffect(() =>
+    {
+        if (event)
+        {
+            console.log(event)
+            const sortableTimes = event?.timeslots.map(time =>
+            {
+                const [hour, minute, period] = time.split(/:| /);
+                const isPM = period.toUpperCase() === "PM";
+                const militaryHour = isPM ? parseInt(hour, 10) + 12 : parseInt(hour, 10);
+                return `${militaryHour.toString().padStart(2, "0")}:${minute}`;
+            });
+
+            // Sort the times in ascending order
+            sortableTimes.sort();
+
+            // Convert back to the original format
+            const sortedTimes = sortableTimes.map(time =>
+            {
+                const [hour, minute] = time.split(":");
+                const militaryHour = parseInt(hour, 10);
+                const period = militaryHour >= 12 ? "PM" : "AM";
+                const displayHour = militaryHour > 12 ? militaryHour - 12 : militaryHour;
+                return `${displayHour}:${minute.padStart(2, "0")} ${period}`;
+            });
+
+            setTimeSlots(sortedTimes)
             setState({
                 ...state,
                 firstName: event[`name-first`],
@@ -88,9 +121,12 @@ export default function index() {
 
     }, [event])
 
-    const handleDelete = () => {
-        axios.delete(`appointment/delete/${appointmentId}`).then((res) => {
-            if (!res.data.error) {
+    const handleDelete = () =>
+    {
+        axios.delete(`appointment/delete/${appointmentId}`).then((res) =>
+        {
+            if (!res.data.error)
+            {
                 Swal({
                     text: res.data.message,
                     icon: 'success',
@@ -98,7 +134,8 @@ export default function index() {
                 })
                 history.go(-1)
             }
-            else {
+            else
+            {
                 Swal({
                     text: res?.data?.message,
                     icon: 'error',
@@ -106,7 +143,8 @@ export default function index() {
                 })
             }
 
-        }).catch((err) => {
+        }).catch((err) =>
+        {
             Swal({
                 title: err.response?.data?.message,
                 icon: 'error',
@@ -215,7 +253,7 @@ export default function index() {
                                                 <option value={null} disabled>{"Select Time"}</option>
 
                                                 {timeslots && timeslots.length !== 0 &&
-                                                    timeslots?.map((option) => (
+                                                    timeslots.sort()?.map((option) => (
 
                                                         <option value={option}>{option}</option>
                                                     ))
@@ -241,7 +279,7 @@ export default function index() {
                                             <label htmlFor="companyId" className="block mb-2">
                                                 Company:
                                             </label>
-                                            <select
+                                            <input
                                                 id="companyId"
                                                 name="companyId"
                                                 value={state.companyId}
@@ -249,16 +287,9 @@ export default function index() {
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
                                             >
-                                                <option value={null} disabled>{"Select Company"}</option>
+                                              
 
-                                                {sponsor && sponsor.length !== 0 &&
-                                                    sponsor?.map((option) => (
-
-                                                        <option value={option?.id}>{option?.[`organization-name`]}</option>
-                                                    ))
-                                                }
-
-                                            </select>
+                                            </input>
 
                                             <ErrorMessage name="company" component="div" className="text-red-500" />
                                         </div>  <div className="w-full md:w-1/2 px-2 mb-4">
@@ -269,23 +300,23 @@ export default function index() {
                                                 <input
                                                     type="radio"
                                                     name="status"
-                                                    value={"Yes"}
-                                                    checked={state.status === 'Yes'}
+                                                    value={"Attended"}
+                                                    checked={state.status === 'Attended'}
                                                     onChange={handleChange}
                                                     className="mr-2"
                                                 />
-                                                Yes
+                                                Attended
                                             </label>
                                             <label>
                                                 <input
                                                     type="radio"
                                                     name="status"
-                                                    value="No"
-                                                    checked={state.status === 'No'}
+                                                    value="No Show"
+                                                    checked={state.status === 'No Show'}
                                                     onChange={handleChange}
                                                     className="mr-2"
                                                 />
-                                                No
+                                                No Show 
                                             </label>                                            <ErrorMessage name="status" component="div" className="text-red-500" />
                                         </div>  <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="advance" className="block mb-2">
@@ -342,23 +373,23 @@ export default function index() {
                                             <ErrorMessage name="rating" component="div" className="text-red-500" />
                                         </div>
 
-                                        <div className="w-full md:w-1/2 px-2 mb-4">
-                                            <label htmlFor="feedback" className="block mb-2">
+                                        <div className="w-full px-2 mb-4">
+                                            <label htmlFor="notes" className="block mb-2">
                                                 Feedback:
                                             </label>
                                             <Field
-                                                type="text"
-                                                id="feedback"
-                                                name="feedback"
+                                                as="textarea"
+                                                rows="4"
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                                name="feedback"
                                                 required
+                                                id="feedback"
                                                 value={state.feedback}
                                                 onChange={handleChange}
                                             />
                                             <ErrorMessage name="feedback" component="div" className="text-red-500" />
+
                                         </div>
-
-
 
                                         <div className="w-full px-2 mb-4">
                                             <label htmlFor="notes" className="block mb-2">
@@ -389,7 +420,8 @@ export default function index() {
                                                 Update
                                             </button>
                                             <button
-                                                onClick={() => {
+                                                onClick={() =>
+                                                {
                                                     Swal({
                                                         title: 'Are you sure?',
                                                         text: "You won't be able to revert this!",
@@ -399,8 +431,10 @@ export default function index() {
                                                         confirmButtonColor: 'red',
                                                         confirmButtonText: 'Delete',
                                                         cancelButtonText: 'Cancel'
-                                                    }).then((result) => {
-                                                        if (result) {
+                                                    }).then((result) =>
+                                                    {
+                                                        if (result)
+                                                        {
                                                             handleDelete()
                                                         }
                                                     })
