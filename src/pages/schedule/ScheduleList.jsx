@@ -112,7 +112,7 @@ export default function index()
                             </button>
                         </div> */}
 
-                        <div style={{ overflow: "scroll" }}>
+                        <div style={{ overflowY: "auto" }}>
 
                             Date:  {moment(scheduleList[0]?.data[0]?.edate).format("ddd, MMMM D, YYYY")}
                             <div> Location: {scheduleList[0]?.data[0]?.city}</div>
