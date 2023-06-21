@@ -31,7 +31,39 @@ export default function index()
             if (data && data.length !== 0)
             {
                 // const updatedData = data?.filter((item) => item[`event-id`] == eventId && true)
-                setScheduleList(data)
+
+                function arrangeDataByEdate(data)
+                {
+                    const arrangedData = [];
+
+                    data.forEach((item) =>
+                    {
+                        const edate = item["time-start"]
+                        const existingItem = arrangedData.find((arrangedItem) => arrangedItem.value === edate);
+
+                        if (existingItem)
+                        {
+                            existingItem.data.push(item);
+                        } else
+                        {
+                            arrangedData.push({ value: edate, data: [item] });
+                        }
+                    });
+
+                    arrangedData.forEach((item) =>
+                    {
+                        item.data.sort((a, b) =>
+                        {
+                            const timeStartA = a['time-start'];
+                            const timeStartB = b['time-start'];
+                            return timeStartA.localeCompare(timeStartB, undefined, { numeric: true });
+                        });
+                    });
+
+                    return arrangedData;
+                }
+
+                setScheduleList(arrangeDataByEdate(data))
             }
 
 
@@ -79,7 +111,32 @@ export default function index()
                                 Add
                             </button>
                         </div> */}
-                        <div className="overflow-x-auto">
+
+                        <div style={{ overflow: "scroll" }}>
+
+                            Date:  {moment(scheduleList[0]?.data[0]?.edate).format("ddd, MMMM D, YYYY")}
+                            <div> Location: {scheduleList[0]?.data[0]?.city}</div>
+                            <div>  Focus:  {scheduleList[0]?.data[0]?.interest}</div>
+
+                            {
+                                scheduleList && scheduleList.length !== 0 && scheduleList.map((item) => (
+                                    <React.Fragment>
+                                        <div className="mt-5 capitalize"><b>  {item?.value}</b></div>
+                                        {
+                                            item.data.map(value =>
+                                            {
+                                                return (
+                                                    <div>  {value["name-first"]}{value["name-last"]}</div>
+
+                                                )
+                                            })
+                                        }
+                                    </React.Fragment>
+                                ))
+                            }
+
+                        </div>
+                        {/* <div className="overflow-x-auto">
                             <table className="table-auto min-w-full">
                                 <thead>
                                     <tr>
@@ -107,7 +164,7 @@ export default function index()
                                         : ""}
                                 </tbody>
                             </table>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div >
