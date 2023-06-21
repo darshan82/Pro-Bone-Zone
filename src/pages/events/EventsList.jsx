@@ -61,13 +61,9 @@ export default function index()
                             <table className="table-auto min-w-full ">
                                 <thead>
                                     <tr>
-                                        <th className="border px-4 py-2 text-left">ID</th> {/* Empty first column */}
-                                        <th className="border px-4 py-2 text-left" style={{ width: 130 }}>Event Type</th>
-                                        <th className="border px-4 py-2 text-left">Event Date</th>
-                                        <th className="border px-4 py-2 text-left">capacity</th>
-                                        <th className="border px-4 py-2 text-left">Time Start</th>
-                                        <th className="border px-4 py-2 text-left">Time End</th>
-                                        <th className="border px-4 py-2 text-left">Attendees</th>
+                                        <th className="border px-4 py-2 text-left"> Date</th>
+                                        <th className="border px-4 py-2 text-left">Time </th>
+                                        <th className="border px-4 py-2 text-left"> City</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -76,17 +72,12 @@ export default function index()
 
 
                                             <tr>
-                                                <td
-                                                    // 
-                                                    className="border px-4 py-2 cursor-pointer ">{item?.id}</td>
-                                                <td className="border px-4 py-2">{item?.etype}</td>
+                                                {console.log("item", item)}
 
                                                 <td
-                                                    onClick={() => { navigation(`/schedule/${item?.id}/${item['time-start']}`) }} className="border px-4 py-2 cursor-pointer text-purple-600">{moment(item?.edate).format("LL")}</td>
-                                                <td className="border px-4 py-2">{item?.capacity}</td>
+                                                    onClick={() => { navigation(`/schedule/${item?.id}/${item['time-start']}`) }} className="border px-4 py-2 cursor-pointer text-purple-600">{moment(item?.edate).format("ddd, MMMM D, YYYY")}</td>
                                                 <td className="border px-4 py-2">{item['time-start']}</td>
-                                                <td className="border px-4 py-2">{item['time-end']}</td>
-                                                <td className="border px-4 py-2">{item?.attendees}</td>
+                                                <td className="border px-4 py-2">{item['city']}</td>
                                             </tr>
                                         ))
 

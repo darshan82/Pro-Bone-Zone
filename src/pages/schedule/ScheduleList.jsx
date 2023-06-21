@@ -11,7 +11,7 @@ export default function index()
 {
     let navigation = useNavigate()
     const { eventId, date } = useParams()
-    const {updateEvent} = useContext(EventContext)
+    const { updateEvent } = useContext(EventContext)
     const { pathname } = useLocation();
     const title = pathname.replace("/", "").charAt(0).toUpperCase() + pathname.slice(2)
     document.title = title;
@@ -38,7 +38,8 @@ export default function index()
         })
     }, [])
 
-    const handleEventDetail = (data)=>{
+    const handleEventDetail = (data) =>
+    {
         updateEvent(data)
         navigation(`/appointment/update/${data[`customer-id`]}`)
     }
@@ -82,30 +83,23 @@ export default function index()
                             <table className="table-auto min-w-full">
                                 <thead>
                                     <tr>
-                                        <th className="border px-4 py-2 text-left">ID</th> {/* Empty first column */}
                                         <th className="border px-4 py-2 text-left">Date</th>
                                         <th className="border px-4 py-2 text-left">Customer Name</th>
 
-                                        <th className="border px-4 py-2 text-left">Address</th>
+                                        <th className="border px-4 py-2 text-left">Location</th>
 
                                         <th className="border px-4 py-2 text-left">Focus</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {scheduleList && scheduleList.length !== 0 ? scheduleList.map((item) => (
-
                                         <tr>
-                                            <td
-                                                onClick={() =>
-                                                {
-                                                    navigation("/Territories/1/?id=add");
+                                            {console.log("item", item)}
 
-                                                }}
-                                                className="border px-4 py-2 cursor-pointer ">{item?.id}</td>
-                                            <td className="border px-4 py-2">{moment(item?.edate).format("LL")}</td>
-                                            <td onClick={()=>handleEventDetail(item)} className="border px-4 py-2 text-purple-600 cursor-pointer">{item["name-first"]+" "+item["name-last"]}</td>
-                                            <td className="border px-4 py-2">{item[`street1`]+" "+item[`street2`]+" "+item[`city`]}</td>
-                                            <td className="border px-4 py-2">{item?.interest}</td>
+                                            <td className="border px-4 py-2">{moment(item?.edate).format("ddd, MMMM D, YYYY")}, {" "}{item["time-start"]}</td>
+                                            <td onClick={() => handleEventDetail(item)} className="border px-4 py-2 text-purple-600 cursor-pointer">{item["name-first"] + " " + item["name-last"]}</td>
+                                            <td className="border px-4 py-2">{item[`street1`] + " " + item[`street2`] + " " + item[`city`]}</td>
+                                            <td className="border px-4 py-2">{Boolean(item?.interest) ? item?.interest : ""}</td>
                                         </tr>
 
                                     ))
@@ -116,7 +110,7 @@ export default function index()
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
 
             <Footer />
 
