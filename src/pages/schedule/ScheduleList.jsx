@@ -126,7 +126,7 @@ export default function index()
                                             item.data.map(value =>
                                             {
                                                 return (
-                                                    <div>  {value["name-first"]}{value["name-last"]}</div>
+                                                    <div className=" cursor-pointer" onClick={() => handleEventDetail(value)}>  {value["name-first"]}{value["name-last"]}</div>
 
                                                 )
                                             })
@@ -154,7 +154,7 @@ export default function index()
                                             {console.log("item", item)}
 
                                             <td className="border px-4 py-2">{moment(item?.edate).format("ddd, MMMM D, YYYY")}, {" "}{item["time-start"]}</td>
-                                            <td onClick={() => handleEventDetail(item)} className="border px-4 py-2 text-purple-600 cursor-pointer">{item["name-first"] + " " + item["name-last"]}</td>
+                                            <td  className="border px-4 py-2 text-purple-600 cursor-pointer">{item["name-first"] + " " + item["name-last"]}</td>
                                             <td className="border px-4 py-2">{item[`city`]}</td>
                                             <td className="border px-4 py-2">{Boolean(item?.interest) ? item?.interest : ""}</td>
                                         </tr>
