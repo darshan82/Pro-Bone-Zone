@@ -126,7 +126,7 @@ export default function index()
                                             item.data.map(value =>
                                             {
                                                 return (
-                                                    <div className=" cursor-pointer" onClick={() => handleEventDetail(value)}>  {value["name-first"]}{value["name-last"]}</div>
+                                                    <div className=" cursor-pointer" onClick={() => handleEventDetail(value)}>  {value["name-first"]} {" "}{value["name-last"]}</div>
 
                                                 )
                                             })

@@ -112,6 +112,8 @@ export default function index()
                 feedback: event.feedback,
                 notes: event?.notes,
                 advance: event?.advance,
+                status: event?.status,
+
 
 
             })
@@ -196,6 +198,7 @@ export default function index()
                                                 required
                                                 onChange={handleChange}
                                                 value={state.firstName}
+                                                disabled={true}
                                             />
                                             <ErrorMessage name="firstName" component="div" className="text-red-500" />
                                         </div>
@@ -211,6 +214,8 @@ export default function index()
                                                 required
                                                 onChange={handleChange}
                                                 value={state.lastName}
+                                                disabled={true}
+
                                             />
                                             <ErrorMessage name="lastName" component="div" className="text-red-500" />
                                         </div>
@@ -287,7 +292,7 @@ export default function index()
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
                                             >
-                                              
+
 
                                             </input>
 
@@ -316,7 +321,7 @@ export default function index()
                                                     onChange={handleChange}
                                                     className="mr-2"
                                                 />
-                                                No Show 
+                                                No Show
                                             </label>                                            <ErrorMessage name="status" component="div" className="text-red-500" />
                                         </div>  <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="advance" className="block mb-2">
