@@ -76,7 +76,7 @@ export default function index()
         navigation(`/appointment/update/${data[`customer-id`]}`)
     }
 
-
+    document.title = "Event Schedule"
 
     return (
         <>
