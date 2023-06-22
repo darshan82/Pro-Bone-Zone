@@ -51,7 +51,7 @@ export default function navbar({ handleClick, general = false })
           <div className="px-6 pt-3 ">
             {
 
-              !loggedIn || general ?
+              !loggedIn && general ?
                 <React.Fragment>
                   {
                     GENERAL_NAV_BAR.map((values, index) =>
@@ -82,7 +82,7 @@ export default function navbar({ handleClick, general = false })
                 :
                 <React.Fragment>
                   {
-                    USER_NAV_BAR.map((values, index) =>
+                    user?.permit && navBar(user?.permit).map((values, index) =>
                     {
                       return (
                         <Link to={values?.url}
@@ -118,9 +118,10 @@ export default function navbar({ handleClick, general = false })
 
         </div>
 
+        {console.log("general", general)}
         <div className="flex flex-row justify-center items-center space-x-5 text-white text-sm ">
           {
-            !loggedIn || general
+            !loggedIn && general
               ?
               <React.Fragment>
                 {
@@ -130,14 +131,15 @@ export default function navbar({ handleClick, general = false })
                       <Link
                         onClick={() =>
                         {
-                          
+
                           if (values?.name === "Contact")
                           {
                             console.log("handleClick")
-                            setTimeout(()=>{
+                            setTimeout(() =>
+                            {
 
                               handleClick()
-                            },2000)
+                            }, 2000)
                           }
                         }}
                         to={values?.url} key={index + values?.name}>
@@ -150,6 +152,7 @@ export default function navbar({ handleClick, general = false })
               :
               <React.Fragment>
                 {
+                  user?.permit &&
                   navBar(user.permit).map((values, index) =>
                   {
                     return (

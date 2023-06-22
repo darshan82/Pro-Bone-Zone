@@ -160,19 +160,10 @@ export default function index()
         <>
             <Navbar />
 
-            <div className="bg-[#EAEFF8] pt-2 pb-5">
-                {/* <Navbar /> */}
-                {/* Hero Section */}
-
-                <div className="flex flex-col  ml-10  md:ml-20 lg:ml-44  sm:ml-10 sm:justify-center md: items-start justify-center ">
-
-                </div>
-            </div>
-
             {/* A Smart Solution */}
-            <div className="bg-white p-2 pl-3 pr-5 lg:pr-9 lg:ml-44 mb-12">
-                <div className="max-w-full mb-10 ">
-                    <div className="container mx-auto py-8">
+            <div className="bg-white pl-3 pr-5 lg:pr-9 lg:ml-44">
+                <div className="max-w-full mb-2 ">
+                    <div className="container mx-auto py-4">
                         <h1
                             className=" text-[#2E5FB7]  lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5"
                         >
