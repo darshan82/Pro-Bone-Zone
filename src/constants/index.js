@@ -74,3 +74,4 @@ export const setDefaultPath = (user) =>
 
 export const interests = [{ label: "Family Law", value: "family-law" }, { label: "Business Law", value: "business-law" }]
 export const ratings = [1, 2, 3, 4, 5] 
+export const PromotionTypes = [{label:"Law" , value:"law"},{label:"Business" , value:"business"},{label:"Finance" , value:"Finance"}]
