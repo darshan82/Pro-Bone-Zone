@@ -45,7 +45,6 @@ export default function index()
     },[licenseeDetails])
     const handleDelete = (e) =>
     {
-        e.stopPropagation()
         axios.delete(`/user/licensee/delete/${id}`).then((res) =>
         {
             if (!res.data.error)
@@ -140,7 +139,7 @@ export default function index()
 
                         <div className="box  ">
                             <Formik initialValues={state} onSubmit={handleSubmit} >
-                                <Form onSubmit={handleSubmit} >
+                                <Form  >
                                 <div className="flex flex-wrap">
                                         <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="name_first" className="block mb-2">
