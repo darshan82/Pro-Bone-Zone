@@ -18,7 +18,6 @@ export default function index() {
         window.scrollTo(0, 0)
         getTerritories()
     }, [])
-    console.log(territories,'........')
 
     return (
         <>

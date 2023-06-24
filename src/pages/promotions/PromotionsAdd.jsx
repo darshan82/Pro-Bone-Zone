@@ -4,6 +4,7 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import Swal from 'sweetalert';
 import axios from "axios";
 import Navbar from "../../component/Navbar/navbar";
+import { PromotionTypes } from "../../constants";
 
 export default function index()
 {
@@ -100,7 +101,7 @@ export default function index()
                                     <div className="flex flex-wrap">
                                         <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="country" className="block mb-2">
-                                                Country:
+                                            Territory:
                                             </label>
                                             <Field
                                                 type="text"
@@ -116,64 +117,122 @@ export default function index()
                                         </div>
                                         
                                         <div className="w-full md:w-1/2 px-2 mb-4">
-                                            <label htmlFor="state" className="block mb-2">
-                                                State:
+                                            <label htmlFor="ptype" className="block mb-2">
+                                            Promotion Type:
                                             </label>
                                             <select
-                                                id="state"
-                                                name="state"
-                                                value={state.state}
+                                                id="ptype"
+                                                name="ptype"
+                                                value={state.ptype}
                                                 onChange={handleChange}
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
                                             >
                                                 <option value={null} disabled>{"Select State"}</option>
 
-                                                {stateOptions && stateOptions.length !== 0 &&
-                                                    stateOptions?.map((option) => (
+                                                {PromotionTypes && PromotionTypes.length !== 0 &&
+                                                    PromotionTypes?.map((option) => (
 
-                                                        <option value={option.id}>{option.name}</option>
+                                                        <option value={option.value}>{option.label}</option>
                                                     ))
                                                 }
 
                                             </select>
-                                            <ErrorMessage name="state" component="div" className="text-red-500" />
+                                            <ErrorMessage name="ptype" component="div" className="text-red-500" />
                                         </div>
-                                         <div className="w-full md:w-1/2 px-2 mb-4">
-                                            <label htmlFor="county" className="block mb-2">
-                                            County:
-                                            </label>
-                                            <Field
-                                                type="text"
-                                                id="county"
-                                                name="county"
-                                                className="w-full border border-gray-300 px-3 py-2 rounded-sm"
-                                                required
-                                                value={state.county}
-                                                onChange={handleChange}
-                                            />
-                                            <ErrorMessage name="county" component="div" className="text-red-500" />
-                                        </div>  <div className="w-full md:w-1/2 px-2 mb-4">
-                                            <label htmlFor="defaultUrl" className="block mb-2">
-                                                URL:
-                                            </label>
-                                            <input
-                                                id="defaultUrl"
-                                                name="defaultUrl"
-                                                value={state.defaultUrl}
-                                                onChange={handleChange}
-                                                className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                       
+
+                                        
+                                    </div>
+
+                                    <div className="flex justify-center">
+
+                                        <React.Fragment>
+                                            <button
+                                                type="submit"
+                                                className="bg-[#EC672C] mb-4 mr-2 px-5 py-1 rounded-sm text-white"
                                             >
+                                               ADD
+                                            </button>
+
+                                        </React.Fragment>
+
+                                    </div>
+                                </Form>
+                            </Formik>
+
+                        </div>
+                    </div>
 
 
-                                            </input>
+                    <div className="max-w-full mb-2 ">
+                    <div className="container mx-auto py-4">
+                        <h1
+                            className=" text-[#2E5FB7]  lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5"
+                        >
+                          Events in Promotion
 
-                                            <ErrorMessage name="defaultUrl" component="div" className="text-red-500" />
-                                        </div>  
+                        </h1>
+
+
+
+                        <div className="box  ">
+                            <Formik initialValues={state} onSubmit={handleSubmit} >
+                                <Form onSubmit={handleSubmit} >
+                                    <div className="flex flex-wrap">
+                                    
                                            
                                         <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="licenseeId" className="block mb-2">
-                                            Licensee:
+                                            Date:
+                                            </label>
+                                            <select
+                                                id="licenseeId"
+                                                name="licenseeId"
+                                                value={state.licenseeId || "Select Rating"}
+                                                onChange={handleChange}
+                                                className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                                required
+                                            >
+                                                <option value={null} disabled>{"Select Licensee"}</option>
+
+                                                {licensee && licensee.length !== 0 &&
+                                                    licensee?.map((option) => (
+
+                                                        <option value={option?.id}>{option?.[`name-first`] + " "+ option?.[`name-last`]}</option>
+                                                    ))
+                                                }
+
+                                            </select>
+                                            <ErrorMessage name="rating" component="div" className="text-red-500" />
+                                        </div>
+                                        <div className="w-full md:w-1/2 px-2 mb-4">
+                                            <label htmlFor="licenseeId" className="block mb-2">
+                                            Time:
+                                            </label>
+                                            <select
+                                                id="licenseeId"
+                                                name="licenseeId"
+                                                value={state.licenseeId || "Select Rating"}
+                                                onChange={handleChange}
+                                                className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                                required
+                                            >
+                                                <option value={null} disabled>{"Select Licensee"}</option>
+
+                                                {licensee && licensee.length !== 0 &&
+                                                    licensee?.map((option) => (
+
+                                                        <option value={option?.id}>{option?.[`name-first`] + " "+ option?.[`name-last`]}</option>
+                                                    ))
+                                                }
+
+                                            </select>
+                                            <ErrorMessage name="rating" component="div" className="text-red-500" />
+                                        </div>
+                                        <div className="w-full md:w-1/2 px-2 mb-4">
+                                            <label htmlFor="licenseeId" className="block mb-2">
+                                            City:
                                             </label>
                                             <select
                                                 id="licenseeId"
@@ -196,23 +255,6 @@ export default function index()
                                             <ErrorMessage name="rating" component="div" className="text-red-500" />
                                         </div>
 
-                                        <div className="w-full px-2 mb-4">
-                                            <label htmlFor="notes" className="block mb-2">
-                                                Notes:
-                                            </label>
-                                            <Field
-                                                as="textarea"
-                                                rows="4"
-                                                className="w-full border border-gray-300 px-3 py-2 rounded-sm"
-                                                name="notes"
-                                                required
-                                                id="notes"
-                                                value={state.notes}
-                                                onChange={handleChange}
-                                            />
-                                            <ErrorMessage name="notes" component="div" className="text-red-500" />
-
-                                        </div>
 
                                         
                                     </div>
@@ -236,6 +278,9 @@ export default function index()
                         </div>
                     </div>
                 </div>
+                
+                </div>
+                
             </div >
 
             <Footer />

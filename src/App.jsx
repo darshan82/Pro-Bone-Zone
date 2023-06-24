@@ -19,7 +19,7 @@ import { TerritoriesAdd, TerritoriesList, TerritoriesUpdate } from './pages/terr
 import { createBrowserHistory } from 'history';
 import { LicenseesAdd, LicenseesList, LicenseesUpdate } from './pages/Licensee'
 import { PromotionsAdd, PromotionsList, PromotionsUpdate } from './pages/promotions'
-import { SponsorsList } from './pages/sponsors'
+import { SponsorAdd, SponsorUpdate, SponsorsList } from './pages/sponsors'
 import { StaffAdd, StaffUpdate, StaffsList } from './pages/staff'
 
 function App(props)
@@ -61,6 +61,8 @@ function App(props)
           <Route path="/staff/:id" element={<StaffUpdate />} />
           <Route path="/staff" element={<StaffsList />} />
           <Route path="/sponsors" element={<SponsorsList />} />
+          <Route path="/sponsors/add" element={<SponsorAdd />} />
+          <Route path="/sponsors/:id" element={<SponsorUpdate />} />
           
           <Route path="/schedule/:eventId/:date" element={<ScheduleList />} />
           <Route path="/schedule/add" element={<ScheduleAdd />} />
