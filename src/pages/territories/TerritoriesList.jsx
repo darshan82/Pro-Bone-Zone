@@ -1,19 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../../component/Footer";
-import { useLocation, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import Navbar from "../../component/Navbar/navbar";
+import axios from "axios";
 
 export default function index() {
     let navigation = useNavigate()
 
-    const { pathname } = useLocation();
-    const title = pathname.replace("/", "").charAt(0).toUpperCase() + pathname.slice(2)
-    document.title = title + "" + "List";
+    const [territories , setTerritories ] =  useState([])
+    document.title = "Territories";
 
+    const getTerritories = ()=>{
+            axios.get("/territory").then((res)=>setTerritories(res?.data))
+    }
 
     useEffect(() => {
         window.scrollTo(0, 0)
+        getTerritories()
     }, [])
+    console.log(territories,'........')
+
     return (
         <>
             <Navbar />
@@ -34,12 +40,13 @@ export default function index() {
                         <h1
                             className=" text-[#2E5FB7]  lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5"
                         >
-                            {title}
+                            Territories
+                            {/* {title} */}
                         </h1>
                         <div className="flex justify-end">
                             <button
                                 onClick={() => {
-                                    navigation("/Territories/null/?id=add");
+                                    navigation("/Territories/add");
                                 }}
                                 className="bg-[#EC672C] mb-4 px-5 py-1 rounded-sm text-white"
                             >
@@ -58,17 +65,17 @@ export default function index() {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td
-                                        onClick={() => {
-                                            navigation("/Territories/1/?id=add");
+                                {territories && territories?.length !==0 && 
+                                territories?.map((item)=>(
 
-                                        }}
-                                        className="border px-4 py-2 cursor-pointer text-purple-600">Row 1</td>
-                                    <td className="border px-4 py-2 ">Data 1</td>
-                                    <td className="border px-4 py-2">Data 2</td>
-                                    <td className="border px-4 py-2">Data 3</td>
+                                    <tr>
+                                    <td onClick={()=>navigation(`/territories/${item?.id}`)} className="border px-4 py-2 cursor-pointer text-purple-600">{item?.state+", "+ item?.county}</td>
+                                    <td onClick={()=>navigation(`/licensee`,{state:{licenseeId:item?.[`licensee-id`]}})} className="border px-4 py-2 cursor-pointer text-purple-600 ">{item?.[`name-first`] +" "+ item?.[`name-last`] }</td>
+                                    <td onClick={()=>navigation(`/staff`,{state:{tId:item?.id}})} className="border px-4 py-2 cursor-pointer text-purple-600">Staff</td>
+                                    <td onClick={()=>navigation(`/sponsors`,{state:{tId:item?.id}})} className="border px-4 py-2 cursor-pointer text-purple-600">Sponsors</td>
+                                    <td onClick={()=>navigation(`/promotions`,{state:{tId:item?.id}})} className="border px-4 py-2 cursor-pointer text-purple-600">Promotions</td>
                                 </tr>
+                                    ))}
 
                             </tbody>
                         </table>
