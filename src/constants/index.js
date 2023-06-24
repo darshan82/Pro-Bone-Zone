@@ -77,3 +77,8 @@ export const ratings = [1, 2, 3, 4, 5]
 export const PromotionTypes = [{label:"Law" , value:"law"},{label:"Business" , value:"business"},{label:"Finance" , value:"finance"}]
 export const consultantCategory = [{label:"Law" , value:"law"},{label:"Business" , value:"business"},{label:"Finance" , value:"finance"}]
 export const promoterCategory=[{label:"Business" , value:"business"},{label:"Government" , value:"government"},{label:"Non-Profit" , value:"non-profit"},{label:"Other" , value:"other"}] 
+
+
+// resources Selections
+export const resourceViewers=[{label:"Admin" , value:"admin"},{label:"Licensee" , value:"licensee"},{label:"Staff" , value:"staff"},{label:"Public" , value:"public"}] 
+export const resourceCategory=[{label:"Quick Start" , value:"quick-start"},{label:"Training" , value:"training"},{label:"Messaging" , value:"messaging"},{label:"Marketing" , value:"marketing"} ,{label:"Other" , value:"other"} ] 

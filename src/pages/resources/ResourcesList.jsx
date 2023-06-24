@@ -1,20 +1,31 @@
-import React, {  useEffect} from "react";
+import React, {  useEffect, useState} from "react";
 import Footer from "../../component/Footer";
-import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../component/Navbar/navbar";
+import axios from "axios";
+import { useNavigation } from "react-router-dom";
 
 export default function index()
-{
-    let navigation = useNavigate()
-    const { pathname } = useLocation();
-    const title = pathname.replace("/" , "").charAt(0).toUpperCase() + pathname.slice(2)
-    document.title = title+""+"List";
-
+{  
+    document.title ="Resources";
+    const [resourcesList , setResourcesList] = useState([])
+    const navigation = useNavigation()
+    
     useEffect(() =>
     {
         window.scrollTo(0, 0)
     }, [])
-    return (
+
+    const getResources = ()=>{
+        axios.get(`/resource`).then((res)=>{
+            setResourcesList(res.data)
+        })
+    }
+
+    useEffect(()=>{
+            getResources()  
+        },[])
+        console.log(resourcesList,'..............') 
+        return (
         <>
             <Navbar />
 
@@ -34,13 +45,13 @@ export default function index()
                         <h1
                             className=" text-[#2E5FB7]  lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5"
                         >
-                            {title}
+                            Resources 
                         </h1>
                         <div className="flex justify-end">
                             <button
                                 onClick={() =>
                                 {
-                                    navigation("/Territories/null/?id=add");
+                                    navigation("/resource/add");
                                 }}
                                 className="bg-[#EC672C] mb-4 px-5 py-1 rounded-sm text-white"
                             >
@@ -52,29 +63,20 @@ export default function index()
                         <table className="table-auto min-w-full">
                             <thead>
                                 <tr>
-                                    <th className="border px-4 py-2 text-left">Id</th> {/* Empty first column */}
                                     <th className="border px-4 py-2 text-left">Category</th>
-                                    <th className="border px-4 py-2 text-left">Viwers</th>
                                     <th className="border px-4 py-2 text-left">Type</th>
-                                    <th className="border px-4 py-2 text-left">Filepath</th>
-                                    <th className="border px-4 py-2 text-left">Status</th>
+                                    <th className="border px-4 py-2 text-left">Title</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                    {resourcesList && resourcesList?.length !==0 && resourcesList?.map((item)=>(
                                 <tr>
-                                    <td
-                                        onClick={() =>
-                                        {
-                                            navigation("/Territories/1/?id=add");
 
-                                        }}
-                                        className="border px-4 py-2 cursor-pointer text-purple-600">Row 1</td>
-                                    <td className="border px-4 py-2 ">Data 1</td>
-                                    <td className="border px-4 py-2">Data 2</td>
-                                    <td className="border px-4 py-2">Data 2</td>
-                                    <td className="border px-4 py-2">Data 2</td>
-                                    <td className="border px-4 py-2">Data 3</td>
-                                </tr>
+                                    <td className="border px-4 py-2">{item?.category}</td>
+                                    <td  className="border px-4 py-2 cursor-pointer text-purple-600">{item?.type}</td>
+                                    <td onClick={()=>navigation(`/resources/${id}`)} className="border px-4 py-2 cursor-pointer text-purple-600">{item?.title}</td>
+s                                </tr>
+                                ))}
 
                             </tbody>
                         </table>

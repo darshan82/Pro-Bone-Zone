@@ -1,36 +1,69 @@
-import React, {  useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Footer from "../../component/Footer";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import Swal from 'sweetalert';
 import axios from "axios";
 import Navbar from "../../component/Navbar/navbar";
 import { resourceCategory, resourceViewers } from "../../constants";
+import { useParams } from "react-router-dom";
 
-export default function index() {
-    document.title = "Add Resource";
-    const [state, setState] = useState({ type: "file", editId: 1, status: "pending", category: "quick-start", viewers: "admin" })
-    const handleChange = (e) => {
+export default function index()
+{
+    document.title = "Resource";
+    const {id} = useParams()
+    const [state, setState] = useState({})
+    const [resourceDetails , setResourceDetails] =useState({}) 
+    const handleChange = (e) =>
+    {
         setState({
             ...state,
             [e.target.name]: e.target.value
         })
     }
 
+    useEffect(()=>{
+        if(id){
+                axios.get(`/resource/${id}`).then((res)=>{
+                    setResourceDetails(res?.data)
+                })
+        }
+    },[id])
 
-    const handleSubmit = (e) => {
+
+    useEffect(()=>{
+            if(resourceDetails && resourceDetails.length !==0){
+                const {title , category , viewers , type , status , filepath} = resourceDetails
+
+                setState({
+                    ...state,
+                    title,
+                    category,
+                    viewers,
+                    type,
+                    status,
+                    filepath,
+                })
+            }
+    },[resourceDetails])
+ 
+    const handleSubmit = (e) =>
+    {
         e.preventDefault()
-        axios.post(`/resource/add`, state).then((res) => {
-            if (!res.data.error) {
+        axios.put(`/resource/${id}`, state).then((res) =>
+        {
+            if (!res.data.error)
+            {
                 setState({})
                 Swal({
-                    text: "Resources added successfully.",
+                    text: "Resources Updated successfully.",
                     icon: 'success',
                     timer: 2000,
                 })
                 // history.go(-1)
 
             }
-            else {
+            else
+            {
                 Swal({
                     text: res?.data?.message,
                     icon: 'error',
@@ -38,7 +71,8 @@ export default function index() {
                 })
             }
 
-        }).catch((err) => {
+        }).catch((err) =>
+        {
             Swal({
                 title: err.response?.data?.message,
                 icon: 'error',
@@ -48,33 +82,45 @@ export default function index() {
         })
     }
 
-    const handleUpload = (e) => {
-
-        const file = e.target.files[0]
-        if (file) {
-            const formData = new FormData()
-            formData.append("file", file)
-
-            axios.post(`/upload`, formData).then((res) => {
-                setState({
-                    ...state, filepath: res?.data?.file?.filename
+    const handleDelete = () =>
+    {
+        axios.delete(`/resource/${id}`).then((res) =>
+        {
+            if (!res.data.error)
+            {
+                Swal({
+                    text: res.data.message,
+                    icon: 'success',
+                    timer: 2000,
                 })
+                navigation("/Territories")
+            }
+            else
+            {
+                Swal({
+                    text: res?.data?.message,
+                    icon: 'error',
+                    timer: 2000,
+                })
+                
+            }
 
-            }).catch((err) => {
-                console.log(err)
+        }).catch((err) =>
+        {
+            Swal({
+                title: err.response?.data?.message,
+                icon: 'error',
+                timer: 4000,
+
             })
-        }
-        else {
-            console.error("no file")
-            return
-        }
+        })
     }
 
 
 
+ 
 
-
-
+ 
     return (
         <>
             <Navbar />
@@ -86,15 +132,15 @@ export default function index() {
                         <h1
                             className=" text-[#2E5FB7]  lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5"
                         >
-                            Add Resource
+                          Resource {`(#${id})`}
 
                         </h1>
 
 
 
                         <div className="box  ">
-                            <Formik initialValues={state}  >
-                                <Form onSubmit={handleSubmit}>
+                            <Formik initialValues={state} >
+                                <Form  onSubmit={handleSubmit}>
                                     <div className="flex flex-wrap">
                                         <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="title" className="block mb-2">
@@ -111,10 +157,10 @@ export default function index() {
                                             />
                                             <ErrorMessage name="title" component="div" className="text-red-500" />
                                         </div>
-
+                                        
                                         <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="viewers" className="block mb-2">
-                                                Viewers:
+                                            Viewers:
                                             </label>
                                             <select
                                                 id="viewers"
@@ -136,7 +182,7 @@ export default function index() {
                                         </div>
                                         <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="category" className="block mb-2">
-                                                Category:
+                                            Category:
                                             </label>
                                             <select
                                                 id="category"
@@ -171,7 +217,7 @@ export default function index() {
                                                         onChange={handleChange}
                                                         className="mr-2"
                                                     />
-                                                    File
+                                                   File
                                                 </label>
                                                 <label>
                                                     <input
@@ -187,41 +233,41 @@ export default function index() {
                                             </div>
                                             <ErrorMessage name="type" component="div" className="text-red-500" />
                                         </div>
-                                        {
-                                            state.type === "file" ?
+                                    {
+                                        state.type === "file" ?
 
-                                                <div className="w-full md:w-1/2 px-2 mb-4">
-                                                    <label htmlFor="filepath" className="block mb-2">
-                                                        Upload:
-                                                    </label>
-                                                    <Field
-                                                        type="file"
-                                                        id="filepath"
-                                                        name="filepath"
-                                                        className="w-full border border-gray-300 px-3 py-2 rounded-sm"
-                                                        required
-                                                        onChange={handleUpload}
-                                                    // value={state.filepath}
-                                                    />
-                                                    <ErrorMessage name="filepath" component="div" className="text-red-500" />
-                                                </div>
-                                                :
-                                                <div className="w-full md:w-1/2 px-2 mb-4">
-                                                    <label htmlFor="filepath" className="block mb-2">
-                                                        URL:
-                                                    </label>
-                                                    <Field
-                                                        type="text"
-                                                        id="filepath"
-                                                        name="filepath"
-                                                        className="w-full border border-gray-300 px-3 py-2 rounded-sm"
-                                                        required
-                                                        onChange={handleChange}
-                                                        value={state.filepath}
-                                                    />
-                                                    <ErrorMessage name="filepath" component="div" className="text-red-500" />
-                                                </div>
-                                        }
+                                        <div className="w-full md:w-1/2 px-2 mb-4">
+                                            <label htmlFor="filepath" className="block mb-2">
+                                                Upload:
+                                            </label>
+                                            <Field
+                                                type="file"
+                                                id="filepath"
+                                                name="filepath"
+                                                className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                                required
+                                                onChange={handleChange}
+                                                // value={state.filepath}
+                                            />
+                                            <ErrorMessage name="filepath" component="div" className="text-red-500" />
+                                        </div>
+                                        :
+                                        <div className="w-full md:w-1/2 px-2 mb-4">
+                                            <label htmlFor="filepath" className="block mb-2">
+                                                URL:
+                                            </label>
+                                            <Field
+                                                type="text"
+                                                id="filepath"
+                                                name="filepath"
+                                                className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                                required
+                                                onChange={handleChange}
+                                                value={state.filepath}
+                                            />
+                                            <ErrorMessage name="filepath" component="div" className="text-red-500" />
+                                        </div>
+                                            }
                                         <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="status" className="block mb-2">
                                                 Status:
@@ -236,7 +282,7 @@ export default function index() {
                                                         onChange={handleChange}
                                                         className="mr-2"
                                                     />
-                                                    Pending
+                                                   Pending
                                                 </label>
                                                 <label>
                                                     <input
@@ -252,20 +298,37 @@ export default function index() {
                                             </div>
                                             <ErrorMessage name="status" component="div" className="text-red-500" />
                                         </div>
-
-
+                                          
+                                        
                                     </div>
 
                                     <div className="flex justify-center">
 
-                                        <React.Fragment>
+                                    <React.Fragment>
                                             <button
                                                 type="submit"
                                                 className="bg-[#EC672C] mb-4 mr-2 px-5 py-1 rounded-sm text-white"
                                             >
-                                                ADD
+                                                Update
                                             </button>
-
+                                            <button
+                                                 onClick={() =>
+                                                    {
+                                                        Swal({
+                                                            text: 'Are you sure to remove this record ?',
+                                                            icon: 'warning',
+                                                            showCancelButton: true,
+                                                            confirmButtonColor: 'red',
+                                                            confirmButtonText: 'Delete',
+                                                            cancelButtonText: 'Cancel'
+                                                        }).then((result)=>{
+                                                                handleDelete()
+                                                        })
+                                                    }}
+                                                className="bg-[#EC672C] mb-4 ml-2 px-5 py-1 rounded-sm text-white"
+                                            >
+                                                Delete
+                                            </button>
                                         </React.Fragment>
 
                                     </div>

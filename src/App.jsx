@@ -12,7 +12,7 @@ import { NAV_BAR, setDefaultPath } from './constants'
 import { setBaseUrl } from './helpingFunctions'
 import { UserContext, UserProvider } from './context/UserContext'
 import { AppointmentUpdate, ScheduleAdd, ScheduleList } from './pages/schedule'
-import { ResourcesAdd, ResourcesList } from './pages/resources'
+import { ResourceUpdate, ResourcesAdd, ResourcesList } from './pages/resources'
 import { EventList } from './pages/events'
 import { Signin, Signup } from './pages/auth'
 import { TerritoriesAdd, TerritoriesList, TerritoriesUpdate } from './pages/territories'
@@ -21,7 +21,6 @@ import { LicenseesAdd, LicenseesList, LicenseesUpdate } from './pages/Licensee'
 import { PromotionsAdd, PromotionsList, PromotionsUpdate } from './pages/promotions'
 import { SponsorAdd, SponsorUpdate, SponsorsList } from './pages/sponsors'
 import { StaffAdd, StaffUpdate, StaffsList } from './pages/staff'
-
 function App(props)
 {
   const { user, loggedIn } = useContext(UserContext)
@@ -84,12 +83,10 @@ function App(props)
           <Route path={`/${NAV_BAR[1].name}/:id`} element={<PromotionsUpdate />} />
           <Route path={`/${NAV_BAR[2].name}/:value`} element={<TerritoriesUpdate />} />
           <Route path={`/${NAV_BAR[3].name}/:value`} element={<TerritoriesUpdate />} />
-          <Route path={`/${NAV_BAR[4].name}/:value`} element={<TerritoriesUpdate />} />
+          <Route path={`/${NAV_BAR[4].name}/:id`} element={<ResourceUpdate />} />
           <Route path={`/${NAV_BAR[5].name}/:value`} element={<TerritoriesUpdate />} />
 
 
-          <Route path={`/staff`} element={<center><h1>UNDER DEVELOPMENT</h1></center>} />
-          <Route path={`/sponsors`} element={<center><h1>UNDER DEVELOPMENT</h1></center>} />
           <Route path={`/customers`} element={<center><h1>UNDER DEVELOPMENT</h1></center>} />
           <Route path={`/training`} element={<center><h1>UNDER DEVELOPMENT</h1></center>} />
           <Route path={`/marketing`} element={<center><h1>UNDER DEVELOPMENT</h1></center>} />
