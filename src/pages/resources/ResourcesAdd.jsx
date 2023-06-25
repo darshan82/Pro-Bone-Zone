@@ -5,9 +5,11 @@ import Swal from 'sweetalert';
 import axios from "axios";
 import Navbar from "../../component/Navbar/navbar";
 import { resourceCategory, resourceViewers } from "../../constants";
+import { useNavigate } from "react-router-dom";
 
 export default function index() {
     document.title = "Add Resource";
+    const navigation = useNavigate()
     const [state, setState] = useState({ type: "file", editId: 1, status: "pending", category: "quick-start", viewers: "admin" })
     const handleChange = (e) => {
         setState({
@@ -27,7 +29,7 @@ export default function index() {
                     icon: 'success',
                     timer: 2000,
                 })
-                // history.go(-1)
+                navigation("/resources")
 
             }
             else {

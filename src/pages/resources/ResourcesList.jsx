@@ -2,13 +2,13 @@ import React, {  useEffect, useState} from "react";
 import Footer from "../../component/Footer";
 import Navbar from "../../component/Navbar/navbar";
 import axios from "axios";
-import { useNavigation } from "react-router-dom";
+import { useNavigate, useNavigation } from "react-router-dom";
 
 export default function index()
 {  
     document.title ="Resources";
     const [resourcesList , setResourcesList] = useState([])
-    const navigation = useNavigation()
+    const navigation = useNavigate()
     
     useEffect(() =>
     {
@@ -51,7 +51,7 @@ export default function index()
                             <button
                                 onClick={() =>
                                 {
-                                    navigation("/resource/add");
+                                    navigation("/resources/add");
                                 }}
                                 className="bg-[#EC672C] mb-4 px-5 py-1 rounded-sm text-white"
                             >
@@ -73,9 +73,9 @@ export default function index()
                                 <tr>
 
                                     <td className="border px-4 py-2">{item?.category}</td>
-                                    <td  className="border px-4 py-2 cursor-pointer text-purple-600">{item?.type}</td>
-                                    <td onClick={()=>navigation(`/resources/${id}`)} className="border px-4 py-2 cursor-pointer text-purple-600">{item?.title}</td>
-s                                </tr>
+                                    <td  className="border px-4 py-2 cursor-pointer text-purple-600"><a href={item?.filepath} download={item?.type == "file" ? true : false} target="_blank">{item?.type}</a></td>
+                                    <td onClick={()=>navigation(`/resources/${item?.id}`)} className="border px-4 py-2 cursor-pointer text-purple-600">{item?.title}</td>
+                                </tr>
                                 ))}
 
                             </tbody>

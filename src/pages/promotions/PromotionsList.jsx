@@ -77,7 +77,7 @@ export default function index() {
                         <div className="flex justify-end">
                             <button
                                 onClick={() => {
-                                    navigation("/Territories/add");
+                                    navigation("/promotions/add");
                                 }}
                                 className="bg-[#EC672C] mb-4 px-5 py-1 rounded-sm text-white"
                             >

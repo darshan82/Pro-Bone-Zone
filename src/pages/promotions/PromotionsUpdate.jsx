@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, {  useEffect,  useState } from "react";
 import Footer from "../../component/Footer";
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Formik,  Form, ErrorMessage } from 'formik';
 import Swal from 'sweetalert';
 import axios from "axios";
 import Navbar from "../../component/Navbar/navbar";
-import { useNavigate, useNavigation, useParams } from "react-router-dom";
+import { useNavigate,  useParams } from "react-router-dom";
 import { PromotionTypes } from "../../constants";
 
 export default function index()
@@ -12,7 +12,7 @@ export default function index()
     document.title = "Promotion";
     const navigation = useNavigate()
     const {id} = useParams()
-    const [state, setState] = useState({})
+    const [state, setState] = useState({locked:false})
     const [pormotionDetail , setPromotionDetail] = useState({})
     const handleChange = (e) =>
     {
@@ -44,7 +44,7 @@ export default function index()
                     icon: 'success',
                     timer: 2000,
                 })
-                navigation("/licensee")
+                navigation("/promotions")
             }
             else
             {
@@ -82,7 +82,7 @@ export default function index()
                     timer: 2000,
                 })
                 
-                navigation("/licensee")
+                navigation("/promotions")
             }
             else
             {
@@ -195,7 +195,7 @@ export default function index()
 
                                         <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="email" className="block mb-2">
-                                                Email:
+                                            Attendees:
                                             </label>
                                             <div className="mt-1">
                                                 <input
@@ -212,42 +212,37 @@ export default function index()
                                         </div>
 
                                         <div className="w-full md:w-1/2 px-2 mb-4">
-                                            <label htmlFor="password" className="block mb-2">
-                                                Password:
+                                            <label htmlFor="locked" className="block mb-2">
+                                                Lock:
                                             </label>
-                                            <div className="mt-1">
-                                                <input
-                                                    type="password"
-                                                    id="password"
-                                                    name="pass"
-                                                    value={state.pass}
-                                                    onChange={handleChange}
-                                                    autoComplete="new-password"
-                                                    className="w-full border border-gray-300 px-3 py-2 rounded-sm"
-                                                    required
-                                                />
+                                            <div className="flex items-center">
+                                                <label className="mr-4">
+                                                    <input
+                                                        type="radio"
+                                                        name="locked"
+                                                        value={true}
+                                                        checked={state.locked === true}
+                                                        onChange={handleChange}
+                                                        className="mr-2"
+                                                    />
+                                                    Yes
+                                                </label>
+                                                <label>
+                                                    <input
+                                                        type="radio"
+                                                        name="locked"
+                                                        value={false}
+                                                        checked={state.locked === false}
+                                                        onChange={handleChange}
+                                                        className="mr-2"
+                                                    />
+                                                    No
+                                                </label>
                                             </div>
+                                            <ErrorMessage name="type" component="div" className="text-red-500" />
                                         </div>
-
-                                    </div>
-                                    <div className="w-full md:w-1/2 px-2 mb-4">
-                                        <label htmlFor="notes" className="block mb-2">
-                                            Notes:
-                                        </label>
-                                        <div className="mt-1">
-                                            <textarea
-                                                id="notes"
-                                                name="notes"
-                                                value={state.notes}
-                                                onChange={handleChange}
-                                                className="w-full border border-gray-300 px-3 py-2 rounded-sm"
-                                                required
-                                            ></textarea>
-                                        </div>
-                                    </div>
-
-
-
+                                            </div>
+                                    
 
                                     <div className="flex justify-center">
 

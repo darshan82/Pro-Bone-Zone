@@ -5,11 +5,13 @@ import Swal from 'sweetalert';
 import axios from "axios";
 import Navbar from "../../component/Navbar/navbar";
 import { resourceCategory, resourceViewers } from "../../constants";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function index()
 {
+
     document.title = "Resource";
+    const navigation = useNavigate()
     const {id} = useParams()
     const [state, setState] = useState({})
     const [resourceDetails , setResourceDetails] =useState({}) 
@@ -59,7 +61,7 @@ export default function index()
                     icon: 'success',
                     timer: 2000,
                 })
-                // history.go(-1)
+                navigation("/resources")
 
             }
             else
@@ -93,7 +95,7 @@ export default function index()
                     icon: 'success',
                     timer: 2000,
                 })
-                navigation("/Territories")
+                navigation("/resources")
             }
             else
             {

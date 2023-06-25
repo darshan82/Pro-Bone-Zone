@@ -5,11 +5,12 @@ import Swal from 'sweetalert';
 import axios from "axios";
 import Navbar from "../../component/Navbar/navbar";
 import { PromotionTypes } from "../../constants";
+import Checkbox from "./checkBox";
 
 export default function index()
 {
-    document.title = "Add Territory";
-    const [state, setState] = useState({country:"USA" , editId:2})
+    document.title = "Add Promotion";
+    const [state, setState] = useState({territoryId:1 , editId:2 , eventId1:1, locked:false})
     const [stateOptions , setStateOptions] = useState([])
     const [licensee , setLicensee] = useState([])
     const handleChange = (e) =>
@@ -20,32 +21,16 @@ export default function index()
         })
     }
 
-    const getStates = ()=>{
-        axios.get(`/global/states`).then((res)=>{
-            setStateOptions(res?.data)
-        })
-    }
-
-    const getLicensees = ()=>{
-        axios.get(`/user/licensee`).then((res)=>{
-            setLicensee(res?.data)
-        })
-    }
-    useEffect(()=>{
-            getStates()
-            getLicensees()
-        
-    },[])
     const handleSubmit = (e) =>
     {
         e.preventDefault()
-        axios.post(`/territory/add`, state).then((res) =>
+        axios.post(`/promotion/add`, state).then((res) =>
         {
             if (!res.data.error)
             {
                 setState({})
                 Swal({
-                    text: "Territory added successfully.",
+                    text: "Promotion added successfully.",
                     icon: 'success',
                     timer: 2000,
                 })
@@ -89,7 +74,7 @@ export default function index()
                         <h1
                             className=" text-[#2E5FB7]  lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5"
                         >
-                          Add Territory
+                          Add Promotion
 
                         </h1>
 
@@ -100,17 +85,13 @@ export default function index()
                                 <Form onSubmit={handleSubmit} >
                                     <div className="flex flex-wrap">
                                         <div className="w-full md:w-1/2 px-2 mb-4">
-                                            <label htmlFor="country" className="block mb-2">
+                                            <label  className="block mb-2">
                                             Territory:
                                             </label>
                                             <Field
-                                                type="text"
-                                                id="country"
-                                                name="country"
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
-                                                onChange={handleChange}
-                                                value={state.country}
+                                                value={"state, county"}
                                                 disabled={true}
                                             />
                                             <ErrorMessage name="country" component="div" className="text-red-500" />
@@ -143,8 +124,40 @@ export default function index()
                                        
 
                                         
-                                    </div>
+                                    <div className="w-full md:w-1/2 px-2 mb-4">
+                                            <label htmlFor="pUrl" className="block mb-2">
+                                                URL:
+                                            </label>
+                                            <div className="mt-1">
+                                                <input
+                                                    type="text"
+                                                    id="pUrl"
+                                                    name="pUrl"
+                                                    value={state.pUrl}
+                                                    onChange={handleChange}
+                                                    className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                                    required
+                                                />
+                                            </div>
+                                        </div>
 
+                                        <div className="w-full md:w-1/2 px-2 mb-4">
+                                            <label htmlFor="attendees" className="block mb-2">
+                                            Attendees:
+                                            </label>
+                                            <div className="mt-1">
+                                                <input
+                                                    type="attendees"
+                                                    id="attendees"
+                                                    name="attendees"
+                                                    value={state.attendees}
+                                                    onChange={handleChange}
+                                                    className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                                    required
+                                                />
+                                            </div>
+                                                    </div>
+                                        </div>
                                     <div className="flex justify-center">
 
                                         <React.Fragment>
@@ -175,103 +188,17 @@ export default function index()
                         </h1>
 
 
-
                         <div className="box  ">
                             <Formik initialValues={state} onSubmit={handleSubmit} >
                                 <Form onSubmit={handleSubmit} >
-                                    <div className="flex flex-wrap">
-                                    
-                                           
-                                        <div className="w-full md:w-1/2 px-2 mb-4">
-                                            <label htmlFor="licenseeId" className="block mb-2">
-                                            Date:
-                                            </label>
-                                            <select
-                                                id="licenseeId"
-                                                name="licenseeId"
-                                                value={state.licenseeId || "Select Rating"}
-                                                onChange={handleChange}
-                                                className="w-full border border-gray-300 px-3 py-2 rounded-sm"
-                                                required
-                                            >
-                                                <option value={null} disabled>{"Select Licensee"}</option>
+                                <Checkbox city={100} date={20} time={10}/>
+                                <Checkbox/>
+                                <Checkbox/>
+                                <Checkbox/>
+                                                
+                                                
 
-                                                {licensee && licensee.length !== 0 &&
-                                                    licensee?.map((option) => (
-
-                                                        <option value={option?.id}>{option?.[`name-first`] + " "+ option?.[`name-last`]}</option>
-                                                    ))
-                                                }
-
-                                            </select>
-                                            <ErrorMessage name="rating" component="div" className="text-red-500" />
-                                        </div>
-                                        <div className="w-full md:w-1/2 px-2 mb-4">
-                                            <label htmlFor="licenseeId" className="block mb-2">
-                                            Time:
-                                            </label>
-                                            <select
-                                                id="licenseeId"
-                                                name="licenseeId"
-                                                value={state.licenseeId || "Select Rating"}
-                                                onChange={handleChange}
-                                                className="w-full border border-gray-300 px-3 py-2 rounded-sm"
-                                                required
-                                            >
-                                                <option value={null} disabled>{"Select Licensee"}</option>
-
-                                                {licensee && licensee.length !== 0 &&
-                                                    licensee?.map((option) => (
-
-                                                        <option value={option?.id}>{option?.[`name-first`] + " "+ option?.[`name-last`]}</option>
-                                                    ))
-                                                }
-
-                                            </select>
-                                            <ErrorMessage name="rating" component="div" className="text-red-500" />
-                                        </div>
-                                        <div className="w-full md:w-1/2 px-2 mb-4">
-                                            <label htmlFor="licenseeId" className="block mb-2">
-                                            City:
-                                            </label>
-                                            <select
-                                                id="licenseeId"
-                                                name="licenseeId"
-                                                value={state.licenseeId || "Select Rating"}
-                                                onChange={handleChange}
-                                                className="w-full border border-gray-300 px-3 py-2 rounded-sm"
-                                                required
-                                            >
-                                                <option value={null} disabled>{"Select Licensee"}</option>
-
-                                                {licensee && licensee.length !== 0 &&
-                                                    licensee?.map((option) => (
-
-                                                        <option value={option?.id}>{option?.[`name-first`] + " "+ option?.[`name-last`]}</option>
-                                                    ))
-                                                }
-
-                                            </select>
-                                            <ErrorMessage name="rating" component="div" className="text-red-500" />
-                                        </div>
-
-
-                                        
-                                    </div>
-
-                                    <div className="flex justify-center">
-
-                                        <React.Fragment>
-                                            <button
-                                                type="submit"
-                                                className="bg-[#EC672C] mb-4 mr-2 px-5 py-1 rounded-sm text-white"
-                                            >
-                                               ADD
-                                            </button>
-
-                                        </React.Fragment>
-
-                                    </div>
+                                 
                                 </Form>
                             </Formik>
 
