@@ -1,5 +1,4 @@
-const storedUser = JSON.parse(localStorage.getItem("user"))
-export const userType = storedUser?.permit
+
 export const userTypes = {
     admin: "admin",
     licensee: "licensee",
@@ -15,7 +14,7 @@ export const navBar = (type) =>
             { name: "Promotions", url: "/Promotions" },
             { name: "Events", url: "/Events" },
             { name: "Personnel", subNav: [{ name: "Staff", url: "/staff" }, { name: "Sponsors", url: "/sponsors" }, { name: "Customers", url: "/customers" }] },
-            { name: "Resources", subNav: [{ name: "Training", url: "/training" }, { name: "Marketing", url: "/marketing" }] },
+            { name: "Resources", subNav: [{ name: "Training", url: "/training" }, { name: "Marketing", url: "/marketing" } , { name: "Blogs", url: "/blogs" }] },
             { name: "Settings", subNav: [{ name: "Profile", url: "/profile" }, { name: "Logout" }] }];
     }
     else if (userTypes.licensee == type)

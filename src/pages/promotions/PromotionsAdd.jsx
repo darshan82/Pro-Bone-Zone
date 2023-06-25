@@ -86,8 +86,6 @@ export default function index() {
 
 
 
-    useEffect(() => {
-    }, [state])
 
 
 

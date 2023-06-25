@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function Checkbox({event , eventId , state , setState , key}) {
   const [isChecked, setIsChecked] = useState(false);
@@ -21,6 +21,12 @@ function Checkbox({event , eventId , state , setState , key}) {
         }
       };
         
+
+      useEffect(()=>{
+                if(state?.[event]){
+                    setIsChecked(true)
+                }  
+      },[state])
   
 
   return (

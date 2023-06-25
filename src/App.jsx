@@ -21,6 +21,7 @@ import { LicenseesAdd, LicenseesList, LicenseesUpdate } from './pages/Licensee'
 import { PromotionsAdd, PromotionsList, PromotionsUpdate } from './pages/promotions'
 import { SponsorAdd, SponsorUpdate, SponsorsList } from './pages/sponsors'
 import { StaffAdd, StaffUpdate, StaffsList } from './pages/staff'
+import { BlogAdd, BlogUpdate, BlogsList } from './pages/blogs'
 function App(props)
 {
   const { user, loggedIn } = useContext(UserContext)
@@ -62,6 +63,9 @@ function App(props)
           <Route path="/sponsors" element={<SponsorsList />} />
           <Route path="/sponsors/add" element={<SponsorAdd />} />
           <Route path="/sponsors/:id" element={<SponsorUpdate />} />
+          <Route path="/blogs" element={<BlogsList />} />
+          <Route path="/blogs/add" element={<BlogAdd />} />
+          <Route path="/blogs/:id" element={<BlogUpdate />} />
           
           <Route path="/schedule/:eventId/:date" element={<ScheduleList />} />
           <Route path="/schedule/add" element={<ScheduleAdd />} />

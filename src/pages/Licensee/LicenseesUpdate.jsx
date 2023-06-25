@@ -30,7 +30,7 @@ export default function index()
     },[id])
 
     useEffect(()=>{
-                if(licenseeDetails && licenseeDetails!=={}){
+                if(licenseeDetails){
                     let {email,phone,pass,notes} = licenseeDetails
                     setState({
                     ...state , 

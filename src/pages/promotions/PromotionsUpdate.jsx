@@ -31,27 +31,37 @@ export default function index()
 
 
     useEffect(()=>{
+        if(id){
+
             axios.get(`/promotion/detail/${id}`).then((res)=>{
                     setPromotionDetail(res?.data)
             })
+        }
 
     },[id])
 
     useEffect(()=>{ 
-        if(pormotionDetail){
-                    // console.log(pormotionDetail,'.......')
-                    const {attendees , ptype } = pormotionDetail
+        if(pormotionDetail && pormotionDetail !=={}){
+                    const {attendees , ptype ,locked } = pormotionDetail
 
                     setState({
                         ...state , 
                         attendees,
                         ptype,
-                        // purl
+                        locked,
+                        pUrl:pormotionDetail?.[`p-url`],
+                        eventId1:pormotionDetail?.[`event1-id`],
+                        eventId2:pormotionDetail?.[`event2-id`],
+                        eventId3:pormotionDetail?.[`event3-id`],
+                        eventId4:pormotionDetail?.[`event4-id`],
+                        territoryId:pormotionDetail?.[`territory-id`],
+
 
                     })
                 }
     },[pormotionDetail])
 
+    console.log(state,'........')
     const handleDelete = () =>
     {
         axios.delete(`/promotion/${id}`).then((res) =>
@@ -95,7 +105,7 @@ export default function index()
 
     useEffect(()=>{
         getEvents()
-    })
+    },[])
 
     useEffect(() => {
         let { eventId1, eventId2, eventId3, eventId4 } = state
@@ -112,8 +122,10 @@ export default function index()
     const handleSubmit = (e) =>
     {
         e.preventDefault()
-        axios.put(`/promotion/${id}`, state).then((res) =>
-        {
+        if(eventCheck){
+
+            axios.put(`/promotion/${id}`, state).then((res) =>
+            {
             if (!res.data.error)
             {
                 setState({})
@@ -140,12 +152,22 @@ export default function index()
                 title: err.response?.data?.message,
                 icon: 'error',
                 timer: 4000,
-
+                
             })
         })
     }
-
-
+    else{
+        Swal({
+            title: "Add Event Alert",
+            text:"Please select atleast single event to Update the Promotion",
+            icon: 'error',
+            timer: 4000,
+            
+        })
+    }
+    }
+    
+    
 
 
  
@@ -173,17 +195,13 @@ export default function index()
                                 <Form onSubmit={handleSubmit} >
                                 <div className="flex flex-wrap">
                                         <div className="w-full md:w-1/2 px-2 mb-4">
-                                            <label htmlFor="name_first" className="block mb-2">
+                                            <label className="block mb-2">
                                             Territory:
                                             </label>
                                             <div className="mt-1">
                                                 <input
                                                     type="text"
-                                                    id="name_first"
-                                                    name="name_first"
                                                     value={"teritoryState , counnty"}
-                                                    onChange={handleChange}
-                                                    autoComplete="given-name"
                                                     className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                     required
                                                     disabled
@@ -192,13 +210,13 @@ export default function index()
                                         </div>
 
                                         <div className="w-full md:w-1/2 px-2 mb-4">
-                                            <label htmlFor="licenseeId" className="block mb-2">
+                                            <label htmlFor="ptype" className="block mb-2">
                                             Promotion Type:
                                             </label>
                                             <select
-                                                id="licenseeId"
-                                                name="licenseeId"
-                                                value={state.licenseeId || "Select Rating"}
+                                                id="ptype"
+                                                name="ptype"
+                                                value={state.ptype || "Select Rating"}
                                                 onChange={handleChange}
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
@@ -216,17 +234,16 @@ export default function index()
                                             <ErrorMessage name="rating" component="div" className="text-red-500" />
                                         </div>
                                         <div className="w-full md:w-1/2 px-2 mb-4">
-                                            <label htmlFor="phone" className="block mb-2">
+                                            <label htmlFor="pUrl" className="block mb-2">
                                                 URL:
                                             </label>
                                             <div className="mt-1">
                                                 <input
                                                     type="text"
-                                                    id="phone"
-                                                    name="phone"
-                                                    value={state.phone}
+                                                    id="pUrl"
+                                                    name="pUrl"
+                                                    value={state.pUrl}
                                                     onChange={handleChange}
-                                                    autoComplete="tel"
                                                     className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                     required
                                                     disabled
@@ -235,19 +252,17 @@ export default function index()
                                         </div>
 
                                         <div className="w-full md:w-1/2 px-2 mb-4">
-                                            <label htmlFor="email" className="block mb-2">
+                                            <label htmlFor="attendees" className="block mb-2">
                                             Attendees:
                                             </label>
                                             <div className="mt-1">
                                                 <input
-                                                    type="email"
-                                                    id="email"
-                                                    name="email"
-                                                    value={state.email}
-                                                    onChange={handleChange}
-                                                    autoComplete="email"
+                                                    id="attendees"
+                                                    name="attendees"
+                                                    value={state.attendees}
                                                     className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                     required
+                                                    disabled
                                                 />
                                             </div>
                                         </div>
@@ -261,8 +276,8 @@ export default function index()
                                                     <input
                                                         type="radio"
                                                         name="locked"
-                                                        value={true}
-                                                        checked={state.locked === true}
+                                                        value={1}
+                                                        checked={state.locked === 1}
                                                         onChange={handleChange}
                                                         className="mr-2"
                                                     />
@@ -272,8 +287,8 @@ export default function index()
                                                     <input
                                                         type="radio"
                                                         name="locked"
-                                                        value={false}
-                                                        checked={state.locked === false}
+                                                        value={0}
+                                                        checked={state.locked === 0}
                                                         onChange={handleChange}
                                                         className="mr-2"
                                                     />
@@ -316,15 +331,19 @@ export default function index()
                                     <div className="flex justify-center">
 
                                         <React.Fragment>
-                                            <button
-                                                type="submit"
-                                                className="bg-[#EC672C] mb-4 mr-2 px-5 py-1 rounded-sm text-white"
+                                      {
+                                        !Boolean(state?.locked) ?
+                                        <button
+                                        type="submit"
+                                            className="bg-[#EC672C] mb-4 mr-2 px-5 py-1 rounded-sm text-white"
                                             >
                                                 Update
                                             </button>
+                                        :
+                                        ""}
                                             <button
-                                                 onClick={() =>
-                                                    {
+                                            onClick={() =>
+                                                {
                                                         Swal({
                                                             text: 'Are you sure to remove this record ?',
                                                             icon: 'warning',
@@ -336,7 +355,7 @@ export default function index()
                                                                 handleDelete()
                                                         })
                                                     }}
-                                                className="bg-[#EC672C] mb-4 ml-2 px-5 py-1 rounded-sm text-white"
+                                                    className="bg-[#EC672C] mb-4 ml-2 px-5 py-1 rounded-sm text-white"
                                             >
                                                 Delete
                                             </button>
