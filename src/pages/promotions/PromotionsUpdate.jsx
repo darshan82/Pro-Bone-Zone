@@ -6,12 +6,16 @@ import axios from "axios";
 import Navbar from "../../component/Navbar/navbar";
 import { useNavigate,  useParams } from "react-router-dom";
 import { PromotionTypes } from "../../constants";
+import Checkbox from "./checkBox";
+import moment from "moment";
 
 export default function index()
 {
     document.title = "Promotion";
     const navigation = useNavigate()
     const {id} = useParams()
+    const [events ,setEvents] = useState([])
+    const [eventCheck , setEventCheck ] = useState(false)
     const [state, setState] = useState({locked:false})
     const [pormotionDetail , setPromotionDetail] = useState({})
     const handleChange = (e) =>
@@ -32,6 +36,21 @@ export default function index()
             })
 
     },[id])
+
+    useEffect(()=>{ 
+        if(pormotionDetail){
+                    // console.log(pormotionDetail,'.......')
+                    const {attendees , ptype } = pormotionDetail
+
+                    setState({
+                        ...state , 
+                        attendees,
+                        ptype,
+                        // purl
+
+                    })
+                }
+    },[pormotionDetail])
 
     const handleDelete = () =>
     {
@@ -66,6 +85,28 @@ export default function index()
             })
         })
     }
+
+
+    const getEvents = () => {
+        axios.get(`/event`).then((res) => {
+            setEvents(res.data)
+        })
+    }
+
+    useEffect(()=>{
+        getEvents()
+    })
+
+    useEffect(() => {
+        let { eventId1, eventId2, eventId3, eventId4 } = state
+        if (eventId1 || eventId2 || eventId3 || eventId4) {
+            setEventCheck(true)
+        }
+        else {
+            setEventCheck(false)
+        }
+    }, [state])
+
 
 
     const handleSubmit = (e) =>
@@ -242,7 +283,35 @@ export default function index()
                                             <ErrorMessage name="type" component="div" className="text-red-500" />
                                         </div>
                                             </div>
-                                    
+                                            <div className="w-full  px-2 mb-4">
+                                        <p className="block mb-2">Events in Promotion:</p>
+                                        <div className="overflow-x-auto">
+                                            <table className="table-auto min-w-full">
+                                                <thead>
+
+                                                    <tr>
+
+                                                        <th className="border px-4 py-2 text-left">Select</th>
+                                                        <th className="border px-4 py-2 text-left">Date</th>
+                                                        <th className="border px-4 py-2 text-left">Time</th>
+                                                        <th className="border px-4 py-2 text-left">City</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {events && events.length !== 0 && events?.map((item, i) => (
+
+                                                        <tr>
+                                                            <td className="border px-4 py-2"><Checkbox key={i} event={`eventId${i + 1}`} eventId={item?.id} state={state} setState={setState} /></td>
+                                                            <td className="border px-4 py-2">{moment(item?.edate).format("LL")}</td>
+                                                            <td className="border px-4 py-2">{item?.[`time-start`]}</td>
+                                                            <td className="border px-4 py-2">{item?.city}</td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>   
 
                                     <div className="flex justify-center">
 

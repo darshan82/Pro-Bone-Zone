@@ -30,7 +30,7 @@ export default function index()
     },[id])
 
     useEffect(()=>{
-            if(staffDetails && staffDetails!=={}){  
+            if(staffDetails && staffDetails != {} ){  
                 let {email ,pass,notes,phone } = staffDetails
                 setState({
                     ...state,

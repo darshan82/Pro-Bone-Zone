@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, {  useEffect, useRef, useState } from "react";
 import Footer from "../../component/Footer";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import Swal from 'sweetalert';
@@ -6,63 +6,91 @@ import axios from "axios";
 import Navbar from "../../component/Navbar/navbar";
 import { PromotionTypes } from "../../constants";
 import Checkbox from "./checkBox";
+import moment from "moment";
 
-export default function index()
-{
+export default function index() {
     document.title = "Add Promotion";
-    const [state, setState] = useState({territoryId:1 , editId:2 , eventId1:1, locked:false})
-    const [stateOptions , setStateOptions] = useState([])
-    const [licensee , setLicensee] = useState([])
-    const handleChange = (e) =>
-    {
+    const [state, setState] = useState({ territoryId: 1, editId: 2, locked: 0 })
+    const [events, setEvents] = useState([])
+    const [eventCheck, setEventCheck] = useState(false)
+    const handleChange = (e) => {
         setState({
             ...state,
             [e.target.name]: e.target.value
         })
     }
 
-    const handleSubmit = (e) =>
-    {
+    const getEvents = () => {
+        axios.get(`/event`).then((res) => {
+            setEvents(res.data)
+        })
+    }
+
+    useEffect(() => {
+        let { eventId1, eventId2, eventId3, eventId4 } = state
+        if (eventId1 || eventId2 || eventId3 || eventId4) {
+            setEventCheck(true)
+        }
+        else {
+            setEventCheck(false)
+        }
+    }, [state])
+
+
+    useEffect(() => {
+        getEvents()
+    }, [])
+
+    const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post(`/promotion/add`, state).then((res) =>
-        {
-            if (!res.data.error)
-            {
-                setState({})
-                Swal({
-                    text: "Promotion added successfully.",
-                    icon: 'success',
-                    timer: 2000,
-                })
-                history.go(-1)
+        if (eventCheck) {
 
-            }
-            else
-            {
+            axios.post(`/promotion/add`, state).then((res) => {
+                if (!res.data.error) {
+                    setState({})
+                    Swal({
+                        text: "Promotion added successfully.",
+                        icon: 'success',
+                        timer: 2000,
+                    })
+                    history.go(-1)
+
+                }
+                else {
+                    Swal({
+                        text: res?.data?.message,
+                        icon: 'error',
+                        timer: 2000,
+                    })
+                }
+
+            }).catch((err) => {
                 Swal({
-                    text: res?.data?.message,
+                    title: err.response?.data?.message,
                     icon: 'error',
-                    timer: 2000,
-                })
-            }
+                    timer: 4000,
 
-        }).catch((err) =>
-        {
+                })
+            })
+        }
+        else {
             Swal({
-                title: err.response?.data?.message,
+                title: "Add Event Alert ",
+                text: "Please select atleast one event to create this promotion",
                 icon: 'error',
                 timer: 4000,
 
             })
-        })
+        }
     }
 
 
 
+    useEffect(() => {
+    }, [state])
 
- 
 
- 
+
     return (
         <>
             <Navbar />
@@ -74,7 +102,7 @@ export default function index()
                         <h1
                             className=" text-[#2E5FB7]  lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5"
                         >
-                          Add Promotion
+                            Add Promotion
 
                         </h1>
 
@@ -85,8 +113,8 @@ export default function index()
                                 <Form onSubmit={handleSubmit} >
                                     <div className="flex flex-wrap">
                                         <div className="w-full md:w-1/2 px-2 mb-4">
-                                            <label  className="block mb-2">
-                                            Territory:
+                                            <label className="block mb-2">
+                                                Territory:
                                             </label>
                                             <Field
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
@@ -96,10 +124,10 @@ export default function index()
                                             />
                                             <ErrorMessage name="country" component="div" className="text-red-500" />
                                         </div>
-                                        
+
                                         <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="ptype" className="block mb-2">
-                                            Promotion Type:
+                                                Promotion Type:
                                             </label>
                                             <select
                                                 id="ptype"
@@ -121,10 +149,10 @@ export default function index()
                                             </select>
                                             <ErrorMessage name="ptype" component="div" className="text-red-500" />
                                         </div>
-                                       
 
-                                        
-                                    <div className="w-full md:w-1/2 px-2 mb-4">
+
+
+                                        <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="pUrl" className="block mb-2">
                                                 URL:
                                             </label>
@@ -143,7 +171,7 @@ export default function index()
 
                                         <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="attendees" className="block mb-2">
-                                            Attendees:
+                                                Attendees:
                                             </label>
                                             <div className="mt-1">
                                                 <input
@@ -156,16 +184,45 @@ export default function index()
                                                     required
                                                 />
                                             </div>
-                                                    </div>
                                         </div>
-                                    <div className="flex justify-center">
+                                    </div>
+                                    <div className="w-full  px-2 mb-4">
+                                        <p className="block mb-2">Events in Promotion:</p>
+                                        <div className="overflow-x-auto">
+                                            <table className="table-auto min-w-full">
+                                                <thead>
+
+                                                    <tr>
+
+                                                        <th className="border px-4 py-2 text-left">Select</th>
+                                                        <th className="border px-4 py-2 text-left">Date</th>
+                                                        <th className="border px-4 py-2 text-left">Time</th>
+                                                        <th className="border px-4 py-2 text-left">City</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {events && events.length !== 0 && events?.map((item, i) => (
+
+                                                        <tr>
+                                                            <td className="border px-4 py-2"><Checkbox key={i} event={`eventId${i + 1}`} eventId={item?.id} state={state} setState={setState} /></td>
+                                                            <td className="border px-4 py-2">{moment(item?.edate).format("LL")}</td>
+                                                            <td className="border px-4 py-2">{item?.[`time-start`]}</td>
+                                                            <td className="border px-4 py-2">{item?.city}</td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div className="flex justify-center mt-5">
 
                                         <React.Fragment>
                                             <button
                                                 type="submit"
                                                 className="bg-[#EC672C] mb-4 mr-2 px-5 py-1 rounded-sm text-white"
                                             >
-                                               ADD
+                                                ADD
                                             </button>
 
                                         </React.Fragment>
@@ -179,35 +236,14 @@ export default function index()
 
 
                     <div className="max-w-full mb-2 ">
-                    <div className="container mx-auto py-4">
-                        <h1
-                            className=" text-[#2E5FB7]  lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5"
-                        >
-                          Events in Promotion
+                        <div className="container mx-auto py-4">
 
-                        </h1>
-
-
-                        <div className="box  ">
-                            <Formik initialValues={state} onSubmit={handleSubmit} >
-                                <Form onSubmit={handleSubmit} >
-                                <Checkbox city={100} date={20} time={10}/>
-                                <Checkbox/>
-                                <Checkbox/>
-                                <Checkbox/>
-                                                
-                                                
-
-                                 
-                                </Form>
-                            </Formik>
 
                         </div>
                     </div>
+
                 </div>
-                
-                </div>
-                
+
             </div >
 
             <Footer />

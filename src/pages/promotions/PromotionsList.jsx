@@ -94,6 +94,7 @@ export default function index() {
                                     <th className="border px-4 py-2 text-left">URL</th>
                                 </tr>
                             </thead>
+             
                             <tbody>
                                 {promotions && promotions?.length !==0 && 
                                 promotions?.map((item)=>(

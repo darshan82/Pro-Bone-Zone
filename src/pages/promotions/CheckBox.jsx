@@ -1,23 +1,36 @@
 import React, { useState } from 'react';
 
-function Checkbox({date ,time , city}) {
+function Checkbox({event , eventId , state , setState , key}) {
   const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
-  };
+    updateState()
+  } 
+    const updateState = ()=>{
+        if(!isChecked){
+            setState({
+                ...state,
+                [event]:eventId
+            })}
+            else{
+                setState({
+                    ...state,
+                    [event]:null
+                })
+        }
+      };
+        
+  
 
   return (
-    <label className="flex items-center space-x-2">
+    <label className="flex items-center space-x-2 ">
       <input
         type="checkbox"
         checked={isChecked}
         onChange={handleCheckboxChange}
-        className="form-checkbox text-indigo-600 h-5 w-5"
+        className="form-checkbox text-indigo-600 h-6 w-6"
       />
-      <h1 className="text-gray-1000">{date} </h1>
-      <span className="text-gray-700">{time}</span>
-      <span className="text-gray-700">{city}</span>
     </label>
   );
 }
