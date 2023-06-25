@@ -9,6 +9,7 @@ import { userTypes } from "../../constants";
 
 export default function index()
 {
+    
     document.title = "Staff Member" ;
     const navigation = useNavigate()
     const {id} = useParams()
