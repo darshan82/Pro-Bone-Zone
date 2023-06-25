@@ -1,16 +1,17 @@
-import React, {  useState } from "react";
+import React, {  useEffect, useState } from "react";
 import Footer from "../../component/Footer";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import Swal from 'sweetalert';
 import axios from "axios";
 import Navbar from "../../component/Navbar/navbar";
-import { resourceCategory, resourceViewers } from "../../constants";
+import { blogCategory, businessSubcategories, financialSubcategories, legalSubcategoris } from "../../constants";
 import { useNavigate } from "react-router-dom";
 
 export default function index() {
-    document.title = "Add Resource";
+    document.title = "Blog";
     const navigation = useNavigate()
-    const [state, setState] = useState({ type: "file", editId: 1, status: "pending", category: "quick-start", viewers: "admin" })
+    const [state, setState] = useState({edit_id:2})
+    const [blogSubcategory , setBlogSubcategory] = useState([])
     const handleChange = (e) => {
         setState({
             ...state,
@@ -18,18 +19,29 @@ export default function index() {
         })
     }
 
+    useEffect(()=>{
+            if(state?.category === "legal"){
+                setBlogSubcategory(legalSubcategoris)
+            }
+            else if(state?.category==="business"){
+                setBlogSubcategory(businessSubcategories)
+            }
+            else if(state?.category === "financial"){
+                setBlogSubcategory(financialSubcategories)
+            }
+            
+    },[state.category])
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post(`/resource/add`, state).then((res) => {
+        axios.post(`/blogs/add`, state).then((res) => {
             if (!res.data.error) {
-                setState({})
                 Swal({
-                    text: "Resources added successfully.",
+                    text: "Blog added successfully.",
                     icon: 'success',
                     timer: 2000,
                 })
-                navigation("/resources")
+                navigation("/blogs")
 
             }
             else {
@@ -50,33 +62,6 @@ export default function index() {
         })
     }
 
-    const handleUpload = (e) => {
-
-        const file = e.target.files[0]
-        if (file) {
-            const formData = new FormData()
-            formData.append("file", file)
-
-            axios.post(`/upload`, formData).then((res) => {
-                setState({
-                    ...state, filepath: res?.data?.file?.filename
-                })
-
-            }).catch((err) => {
-                console.log(err)
-            })
-        }
-        else {
-            console.error("no file")
-            return
-        }
-    }
-
-
-
-
-
-
     return (
         <>
             <Navbar />
@@ -88,7 +73,7 @@ export default function index() {
                         <h1
                             className=" text-[#2E5FB7]  lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5"
                         >
-                            Add Resource
+                           Blog {`(#${id})`}
 
                         </h1>
 
@@ -98,44 +83,7 @@ export default function index() {
                             <Formik initialValues={state}  >
                                 <Form onSubmit={handleSubmit}>
                                     <div className="flex flex-wrap">
-                                        <div className="w-full md:w-1/2 px-2 mb-4">
-                                            <label htmlFor="title" className="block mb-2">
-                                                Title:
-                                            </label>
-                                            <Field
-                                                type="text"
-                                                id="title"
-                                                name="title"
-                                                className="w-full border border-gray-300 px-3 py-2 rounded-sm"
-                                                required
-                                                onChange={handleChange}
-                                                value={state.title}
-                                            />
-                                            <ErrorMessage name="title" component="div" className="text-red-500" />
-                                        </div>
-
-                                        <div className="w-full md:w-1/2 px-2 mb-4">
-                                            <label htmlFor="viewers" className="block mb-2">
-                                                Viewers:
-                                            </label>
-                                            <select
-                                                id="viewers"
-                                                name="viewers"
-                                                value={state.viewers}
-                                                onChange={handleChange}
-                                                className="w-full border border-gray-300 px-3 py-2 rounded-sm"
-                                                required
-                                            >
-                                                {resourceViewers && resourceViewers.length !== 0 &&
-                                                    resourceViewers?.map((option) => (
-
-                                                        <option value={option.value}>{option.label}</option>
-                                                    ))
-                                                }
-
-                                            </select>
-                                            <ErrorMessage name="viewers" component="div" className="text-red-500" />
-                                        </div>
+                                       
                                         <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="category" className="block mb-2">
                                                 Category:
@@ -148,82 +96,57 @@ export default function index() {
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
                                             >
-
-                                                {resourceCategory && resourceCategory.length !== 0 &&
-                                                    resourceCategory?.map((option) => (
+                                                {blogCategory && blogCategory.length !== 0 &&
+                                                    blogCategory?.map((option) => (
 
                                                         <option value={option.value}>{option.label}</option>
                                                     ))
                                                 }
 
                                             </select>
-                                            <ErrorMessage name="category" component="div" className="text-red-500" />
+                                            <ErrorMessage name="subcategory" component="div" className="text-red-500" />
                                         </div>
                                         <div className="w-full md:w-1/2 px-2 mb-4">
-                                            <label htmlFor="type" className="block mb-2">
-                                                Type:
+                                            <label htmlFor="subcategory" className="block mb-2">
+                                                Subcategory:
                                             </label>
-                                            <div className="flex items-center">
-                                                <label className="mr-4">
-                                                    <input
-                                                        type="radio"
-                                                        name="type"
-                                                        value={"file"}
-                                                        checked={state.type === 'file'}
-                                                        onChange={handleChange}
-                                                        className="mr-2"
-                                                    />
-                                                    File
-                                                </label>
-                                                <label>
-                                                    <input
-                                                        type="radio"
-                                                        name="type"
-                                                        value="link"
-                                                        checked={state.type === 'link'}
-                                                        onChange={handleChange}
-                                                        className="mr-2"
-                                                    />
-                                                    Link
-                                                </label>
-                                            </div>
-                                            <ErrorMessage name="type" component="div" className="text-red-500" />
-                                        </div>
-                                        {
-                                            state.type === "file" ?
+                                            <select
+                                                id="subcategory"
+                                                name="subcategory"
+                                                value={state.subcategory}
+                                                onChange={handleChange}
+                                                className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                                required
+                                            >
 
-                                                <div className="w-full md:w-1/2 px-2 mb-4">
-                                                    <label htmlFor="filepath" className="block mb-2">
-                                                        Upload:
-                                                    </label>
-                                                    <Field
-                                                        type="file"
-                                                        id="filepath"
-                                                        name="filepath"
-                                                        className="w-full border border-gray-300 px-3 py-2 rounded-sm"
-                                                        required
-                                                        onChange={handleUpload}
-                                                    // value={state.filepath}
-                                                    />
-                                                    <ErrorMessage name="filepath" component="div" className="text-red-500" />
-                                                </div>
-                                                :
-                                                <div className="w-full md:w-1/2 px-2 mb-4">
-                                                    <label htmlFor="filepath" className="block mb-2">
-                                                        URL:
+                                                {blogSubcategory && blogSubcategory.length !== 0 &&
+                                                    blogSubcategory?.map((option) => (
+
+                                                        <option value={option.value}>{option.label}</option>
+                                                    ))
+                                                }
+
+                                            </select>
+                                            <ErrorMessage name="subcategory" component="div" className="text-red-500" />
+                                        </div>
+                                       
+                                        <div className="w-full md:w-1/2 px-2 mb-4">
+                                                    <label htmlFor="author" className="block mb-2">
+                                                        Author:
                                                     </label>
                                                     <Field
                                                         type="text"
-                                                        id="filepath"
-                                                        name="filepath"
+                                                        id="author"
+                                                        name="author"
                                                         className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                         required
                                                         onChange={handleChange}
-                                                        value={state.filepath}
+                                                        value={state.author}
                                                     />
                                                     <ErrorMessage name="filepath" component="div" className="text-red-500" />
                                                 </div>
-                                        }
+                                        
+                                        
                                         <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="status" className="block mb-2">
                                                 Status:
@@ -254,7 +177,39 @@ export default function index() {
                                             </div>
                                             <ErrorMessage name="status" component="div" className="text-red-500" />
                                         </div>
-
+                                        
+                                                <div className="w-full md:w-1/2 px-2 mb-4">
+                                                    <label htmlFor="title" className="block mb-2">
+                                                        Title:
+                                                    </label>
+                                                    <Field
+                                                        type="text"
+                                                        id="title"
+                                                        name="title"
+                                                        className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                                        required
+                                                        onChange={handleChange}
+                                                        value={state.title}
+                                                    />
+                                                    <ErrorMessage name="title" component="div" className="text-red-500" />
+                                                </div>
+                                        
+                                       
+                                                </div>  
+                                                <div className="w-full px-2 mb-4">
+                                            <label htmlFor="blog_text" className="block mb-2">
+                                                Blog-text:
+                                            </label>
+                                            <Field
+                                                as="textarea"
+                                                rows="4"
+                                                className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                                name="blog_text"
+                                                id="blog_text"
+                                                value={state.blog_text}
+                                                onChange={handleChange}
+                                            />
+                                            <ErrorMessage name="blog_text" component="div" className="text-red-500" />
 
                                     </div>
 
