@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useContext, useEffect, useRef, useState } from "react";
 import Footer from "../../component/Footer";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
@@ -293,5 +292,3 @@ export default function index()
         </>
     );
 }
-=======
->>>>>>> 280abf363b575185891cbf775faf5d338e349b44
