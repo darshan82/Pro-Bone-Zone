@@ -1,11 +1,11 @@
 import { createContext, useEffect, useState } from "react";
+import { setAuthToken } from "../helpingFunctions";
 export const UserContext = createContext()
 
 export const UserProvider = (props) =>
 {
     const [user, setUser] = useState(null)
     const [loggedIn, setLoggedIn] = useState(false)
-    const [token, setAuthToken] = useState(null)
     useEffect(() =>
     {
 
@@ -15,7 +15,6 @@ export const UserProvider = (props) =>
         if (storedToken && storedUser)
         {
 
-            setAuthToken(storedToken)
             setUser(JSON.parse(storedUser))
             setLoggedIn(true)
         }
@@ -37,7 +36,6 @@ export const UserProvider = (props) =>
     {
         setUser(null)
         setLoggedIn(false)
-        setAuthToken(null)
         localStorage.removeItem("token")
         localStorage.removeItem("user")
         props?.navigate?.push("/login")
@@ -45,7 +43,7 @@ export const UserProvider = (props) =>
 
     return (
 
-        <UserContext.Provider value={{ user, login, logout, token, loggedIn }}>
+        <UserContext.Provider value={{ user, login, logout,  loggedIn }}>
             {props.children}
         </UserContext.Provider>
     )

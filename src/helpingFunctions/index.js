@@ -6,12 +6,10 @@ export const setBaseUrl = ()=>{
 
 }
 
-
 export const setAuthToken = (token) =>
 {
 	if (token)
-	{
-		// Apply to every request
+	{	
 		axios.defaults.headers.common["Authorization"] = token
 	} else
 	{
