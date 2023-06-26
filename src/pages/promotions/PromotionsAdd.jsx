@@ -5,7 +5,7 @@ import Swal from 'sweetalert';
 import axios from "axios";
 import Navbar from "../../component/Navbar/navbar";
 import { PromotionTypes } from "../../constants";
-import Checkbox from "./checkBox";
+import Checkbox from "./CheckBox";
 import moment from "moment";
 import { useNavigate } from "react-router";
 

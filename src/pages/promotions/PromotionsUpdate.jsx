@@ -6,7 +6,7 @@ import axios from "axios";
 import Navbar from "../../component/Navbar/navbar";
 import { useNavigate, useParams } from "react-router-dom";
 import { PromotionTypes } from "../../constants";
-import Checkbox from "./checkBox";
+import Checkbox from "./CheckBox";
 import moment from "moment";
 
 export default function index() {
