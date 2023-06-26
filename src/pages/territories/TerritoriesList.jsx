@@ -52,8 +52,8 @@ export default function index() {
                                 Add
                             </button>
                         </div>
-
-                        <table className="w-full">
+                        <div className="overflow-x-auto">
+                            <table className="table-auto min-w-full ">  
                             <thead>
                                 <tr>
                                     <th className="border px-4 py-2 text-left">Territory</th> {/* Empty first column */}
@@ -66,7 +66,7 @@ export default function index() {
                             <tbody>
                                 {territories && territories?.length !==0 && 
                                 territories?.map((item)=>(
-
+                                    
                                     <tr>
                                     <td onClick={()=>navigation(`/territories/${item?.id}`)} className="border px-4 py-2 cursor-pointer text-purple-600">{item?.state+", "+ item?.county}</td>
                                     <td onClick={()=>navigation(`/licensee`,{state:{licenseeId:item?.[`licensee-id`]}})} className="border px-4 py-2 cursor-pointer text-purple-600 ">{item?.[`name-first`] +" "+ item?.[`name-last`] }</td>
@@ -79,6 +79,7 @@ export default function index() {
                             </tbody>
                         </table>
 
+                                        </div>
                     </div>
                 </div>
             </div>

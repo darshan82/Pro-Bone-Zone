@@ -7,48 +7,43 @@ import Navbar from "../../component/Navbar/navbar";
 import { useNavigate, useNavigation, useParams } from "react-router-dom";
 import { userTypes } from "../../constants";
 
-export default function index()
-{
+export default function index() {
     document.title = "Licensee";
     const navigation = useNavigate()
-    const {id} = useParams()
-    const [state, setState] = useState({permit: userTypes.licensee , edit_id:2 })
-    const [licenseeDetails , setLicenseeDetails] = useState({})
-    const handleChange = (e) =>
-    {
+    const { id } = useParams()
+    const [state, setState] = useState({ permit: userTypes.licensee, edit_id: 2 })
+    const [licenseeDetails, setLicenseeDetails] = useState({})
+    const handleChange = (e) => {
         setState({
             ...state,
             [e.target.name]: e.target.value
         })
     }
 
-   
-    useEffect(()=>{
-            axios.get(`/user/licensee/${id}`).then((res)=>{
-                setLicenseeDetails(res?.data)
-            })
-    },[id])
 
-    useEffect(()=>{
-                if(licenseeDetails){
-                    let {email,phone,pass,notes} = licenseeDetails
-                    setState({
-                    ...state , 
-                        email,
-                        phone,
-                        pass,
-                        notes,
-                        name_first:licenseeDetails?.[`name-first`],
-                        name_last:licenseeDetails?.[`name-last`]
-                    })
-                }
-    },[licenseeDetails])
-    const handleDelete = (e) =>
-    {
-        axios.delete(`/user/licensee/delete/${id}`).then((res) =>
-        {
-            if (!res.data.error)
-            {
+    useEffect(() => {
+        axios.get(`/user/licensee/${id}`).then((res) => {
+            setLicenseeDetails(res?.data)
+        })
+    }, [id])
+
+    useEffect(() => {
+        if (licenseeDetails) {
+            let { email, phone, pass, notes } = licenseeDetails
+            setState({
+                ...state,
+                email,
+                phone,
+                pass,
+                notes,
+                name_first: licenseeDetails?.[`name-first`],
+                name_last: licenseeDetails?.[`name-last`]
+            })
+        }
+    }, [licenseeDetails])
+    const handleDelete = (e) => {
+        axios.delete(`/user/licensee/delete/${id}`).then((res) => {
+            if (!res.data.error) {
                 Swal({
                     text: res.data.message,
                     icon: 'success',
@@ -56,18 +51,16 @@ export default function index()
                 })
                 navigation("/licensee")
             }
-            else
-            {
+            else {
                 Swal({
                     text: res?.data?.message,
                     icon: 'error',
                     timer: 2000,
                 })
-                
+
             }
 
-        }).catch((err) =>
-        {
+        }).catch((err) => {
             Swal({
                 title: err.response?.data?.message,
                 icon: 'error',
@@ -78,24 +71,19 @@ export default function index()
     }
 
 
-    const handleSubmit = (e) =>
-    {
+    const handleSubmit = (e) => {
         e.preventDefault()
-        axios.put(`/user/licensee/update/${id}`, state).then((res) =>
-        {
-            if (!res.data.error)
-            {
-                setState({})
+        axios.put(`/user/licensee/update/${id}`, state).then((res) => {
+            if (!res.data.error) {
                 Swal({
                     text: "Licensee updated successfully.",
                     icon: 'success',
                     timer: 2000,
                 })
-                
+
                 navigation("/licensee")
             }
-            else
-            {
+            else {
                 Swal({
                     text: res?.data?.message,
                     icon: 'error',
@@ -103,8 +91,7 @@ export default function index()
                 })
             }
 
-        }).catch((err) =>
-        {
+        }).catch((err) => {
             Swal({
                 title: err.response?.data?.message,
                 icon: 'error',
@@ -117,9 +104,9 @@ export default function index()
 
 
 
- 
 
- 
+
+
     return (
         <>
             <Navbar />
@@ -131,22 +118,22 @@ export default function index()
                         <h1
                             className=" text-[#2E5FB7]  lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5"
                         >
-                          Licensee (#{id})
+                            Licensee (#{id})
 
                         </h1>
 
 
 
                         <div className="box  ">
-                            <Formik initialValues={state} onSubmit={handleSubmit} >
-                                <Form  >
-                                <div className="flex flex-wrap">
+                            <Formik initialValues={state}  >
+                                <Form onSubmit={handleSubmit} >
+                                    <div className="flex flex-wrap">
                                         <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="name_first" className="block mb-2">
                                                 First Name:
                                             </label>
                                             <div className="mt-1">
-                                                <input
+                                                <Field
                                                     type="text"
                                                     id="name_first"
                                                     name="name_first"
@@ -164,7 +151,7 @@ export default function index()
                                                 Last Name:
                                             </label>
                                             <div className="mt-1">
-                                                <input
+                                                <Field
                                                     type="text"
                                                     id="name_last"
                                                     name="name_last"
@@ -182,7 +169,7 @@ export default function index()
                                                 Phone:
                                             </label>
                                             <div className="mt-1">
-                                                <input
+                                                <Field
                                                     type="number"
                                                     id="phone"
                                                     name="phone"
@@ -200,7 +187,7 @@ export default function index()
                                                 Email:
                                             </label>
                                             <div className="mt-1">
-                                                <input
+                                                <Field
                                                     type="email"
                                                     id="email"
                                                     name="email"
@@ -218,7 +205,7 @@ export default function index()
                                                 Password:
                                             </label>
                                             <div className="mt-1">
-                                                <input
+                                                <Field
                                                     type="password"
                                                     id="password"
                                                     name="pass"
@@ -232,19 +219,21 @@ export default function index()
                                         </div>
 
                                     </div>
-                                    <div className="w-full md:w-1/2 px-2 mb-4">
+                                    <div className="w-full  px-2 mb-4">
                                         <label htmlFor="notes" className="block mb-2">
                                             Notes:
                                         </label>
                                         <div className="mt-1">
-                                            <textarea
+                                            <Field
+                                                as="textarea"
+                                                rows={4}
                                                 id="notes"
                                                 name="notes"
                                                 value={state.notes}
                                                 onChange={handleChange}
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
-                                            ></textarea>
+                                            ></Field>
                                         </div>
                                     </div>
 
@@ -261,19 +250,19 @@ export default function index()
                                                 Update
                                             </button>
                                             <button
-                                                 onClick={() =>
-                                                    {
-                                                        Swal({
-                                                            text: 'Are you sure to remove this record ?',
-                                                            icon: 'warning',
-                                                            showCancelButton: true,
-                                                            confirmButtonColor: 'red',
-                                                            confirmButtonText: 'Delete',
-                                                            cancelButtonText: 'Cancel'
-                                                        }).then((result)=>{
-                                                                handleDelete()
-                                                        })
-                                                    }}
+                                                type="button"
+                                                onClick={() => {
+                                                    Swal({
+                                                        text: 'Are you sure to remove this record ?',
+                                                        icon: 'warning',
+                                                        showCancelButton: true,
+                                                        confirmButtonColor: 'red',
+                                                        confirmButtonText: 'Delete',
+                                                        cancelButtonText: 'Cancel'
+                                                    }).then((result) => {
+                                                        handleDelete()
+                                                    })
+                                                }}
                                                 className="bg-[#EC672C] mb-4 ml-2 px-5 py-1 rounded-sm text-white"
                                             >
                                                 Delete

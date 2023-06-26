@@ -1,42 +1,50 @@
 import React, { useState } from "react";
 import Footer from "../../component/Footer";
-import { Formik } from 'formik';
+import { Field, Formik } from 'formik';
 import Swal from 'sweetalert';
 import axios from "axios";
 import { userTypes } from "../../constants";
 import Navbar from "../../component/Navbar/navbar";
 
-export default function index()
-{   document.title = "Add Licensee"
-    const [state, setState] = useState({permit:userTypes.licensee , edit_id:2})
+export default function index() {
+    document.title = "Add Licensee"
+    const [state, setState] = useState({ permit: userTypes.licensee, edit_id: 2 })
 
-    const handleChange = (e) =>
-    {
+    const handleChange = (e) => {
         setState({
             ...state,
             [e.target.name]: e.target.value
         })
     }
 
-    const handleSubmit = (e) =>
-    {
+    const handleSubmit = (e) => {
         e.preventDefault()
 
-        axios.post(`/user/licensee/add`, state).then((res) =>
-        {
-            setState({})
-            Swal({
-                title: state.permit + " " + "Created Successfully",
-                icon: 'success',
-                timer: 2000,
-            })
-        }).catch((err) =>
-        {
+        axios.post(`/user/licensee/add`, state).then((res) => {
+            if (!res?.data?.error) {
+                Swal({
+                    title:  "Licensee  Created Successfully",
+                    icon: 'success',
+                    timer: 2000,
+                })
+                navigation("/licensee")
+
+            }
+            else {
+                Swal({
+                    title: res?.data?.message,
+                    icon: 'error',
+                    timer: 2000,
+                })
+                console.log("clicked2")
+            }
+        }).catch((err) => {
             Swal({
                 title: err?.response?.data?.message,
                 icon: 'error',
                 timer: 2000,
             })
+
         })
     };
 
@@ -64,7 +72,7 @@ export default function index()
                                                 First Name:
                                             </label>
                                             <div className="mt-1">
-                                                <input
+                                                <Field
                                                     type="text"
                                                     id="name_first"
                                                     name="name_first"
@@ -82,7 +90,7 @@ export default function index()
                                                 Last Name:
                                             </label>
                                             <div className="mt-1">
-                                                <input
+                                                <Field
                                                     type="text"
                                                     id="name_last"
                                                     name="name_last"
@@ -100,7 +108,7 @@ export default function index()
                                                 Phone:
                                             </label>
                                             <div className="mt-1">
-                                                <input
+                                                <Field
                                                     type="number"
                                                     id="phone"
                                                     name="phone"
@@ -118,7 +126,7 @@ export default function index()
                                                 Email:
                                             </label>
                                             <div className="mt-1">
-                                                <input
+                                                <Field
                                                     type="email"
                                                     id="email"
                                                     name="email"
@@ -136,7 +144,7 @@ export default function index()
                                                 Password:
                                             </label>
                                             <div className="mt-1">
-                                                <input
+                                                <Field
                                                     type="password"
                                                     id="password"
                                                     name="pass"
@@ -150,22 +158,24 @@ export default function index()
                                         </div>
 
                                     </div>
-                                    <div className="w-full md:w-1/2 px-2 mb-4">
+                                    <div className="w-full  px-2 mb-4">
                                         <label htmlFor="notes" className="block mb-2">
                                             Notes:
                                         </label>
                                         <div className="mt-1">
-                                            <textarea
+                                            <Field
+                                                as="textarea"
                                                 id="notes"
+                                                rows={4}
                                                 name="notes"
                                                 value={state.notes}
                                                 onChange={handleChange}
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
-                                            ></textarea>
+                                            />
                                         </div>
-                                    </div>
 
+                                    </div>
                                     <div className="flex justify-center">
                                         <button
                                             type="submit"

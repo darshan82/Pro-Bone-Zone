@@ -62,31 +62,31 @@ export default function index() {
                                 Add
                             </button>
                         </div>
+                        <div className="overflow-x-auto">
+                            <table className="table-auto min-w-full ">
+                                <thead>
+                                    <tr>
+                                        <th className="border px-4 py-2 text-left">ID</th> {/* Empty first column */}
+                                        <th className="border px-4 py-2 text-left">Name</th>
+                                        <th className="border px-4 py-2 text-left">Phone</th>
+                                        <th className="border px-4 py-2 text-left">Email</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {licenseesList && licenseesList?.length !== 0 &&
+                                        licenseesList?.map((item) => (
 
-                        <table className="w-full">
-                            <thead>
-                                <tr>
-                                    <th className="border px-4 py-2 text-left">ID</th> {/* Empty first column */}
-                                    <th className="border px-4 py-2 text-left">Name</th>
-                                    <th className="border px-4 py-2 text-left">Phone</th>
-                                    <th className="border px-4 py-2 text-left">Email</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {licenseesList && licenseesList?.length !== 0 &&
-                                    licenseesList?.map((item) => (
+                                            <tr>
+                                                <td className="border px-4 py-2">{item?.id}</td>
+                                                <td onClick={() => navigation(`/licensee/${item?.id}`)} className="border px-4 py-2 cursor-pointer text-purple-600 ">{item?.[`name-last`] + " " + item?.[`name-first`]}</td>
+                                                <td className="border px-4 py-2">{item?.phone}</td>
+                                                <td className="border px-4 py-2">{item?.email}</td>
+                                            </tr>
+                                        ))}
 
-                                        <tr>
-                                            <td className="border px-4 py-2">{item?.id}</td>
-                                            <td onClick={() => navigation(`/licensee/${item?.id}`)} className="border px-4 py-2 cursor-pointer text-purple-600 ">{item?.[`name-last`] + " " + item?.[`name-first`]}</td>
-                                            <td className="border px-4 py-2">{item?.phone}</td>
-                                            <td className="border px-4 py-2">{item?.email}</td>
-                                        </tr>
-                                    ))}
-
-                            </tbody>
-                        </table>
-
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

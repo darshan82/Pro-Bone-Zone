@@ -83,8 +83,9 @@ export default function index() {
                                 Add
                             </button>
                         </div>
-
-                        <table className="w-full">
+                        <div className="overflow-x-auto">
+                            <table className="table-auto min-w-full ">
+                        
                             <thead>
                                 <tr>
                                     <th className="border px-4 py-2 text-left">ID</th> {/* Empty first column */}
@@ -108,7 +109,7 @@ export default function index() {
 
                             </tbody>
                         </table>
-
+                                    </div>
                     </div>
                 </div>
             </div>

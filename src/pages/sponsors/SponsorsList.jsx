@@ -7,12 +7,12 @@ import axios from "axios";
 export default function index() {
     let navigation = useNavigate()
     const location = useLocation()
-    const [sponsors , setSponsors ] =  useState([])
+    const [sponsors, setSponsors] = useState([])
     document.title = "Sponsors";
 
-    const getSponsors = ()=>{
-        if(location?.state?.tId){
-            axios.get(`/sponsor/${location?.state?.tId}`).then((res)=>setSponsors(res?.data?.sponsors))
+    const getSponsors = () => {
+        if (location?.state?.tId) {
+            axios.get(`/sponsor/${location?.state?.tId}`).then((res) => setSponsors(res?.data?.sponsors))
         }
     }
 
@@ -53,33 +53,34 @@ export default function index() {
                                 Add
                             </button>
                         </div>
+                        <div className="overflow-x-auto">
+                            <table className="table-auto min-w-full ">
 
-                        <table className="w-full">
-                            <thead>
-                                <tr>
-                                    <th className="border px-4 py-2 text-left">ID</th> {/* Empty first column */}
-                                    <th className="border px-4 py-2 text-left">Name</th>
-                                    <th className="border px-4 py-2 text-left">Category</th>
-                                    <th className="border px-4 py-2 text-left">Type</th>
-                                    <th className="border px-4 py-2 text-left">Webpage</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {sponsors && sponsors?.length !==0 && 
-                                sponsors?.map((item)=>(
-
+                                <thead>
                                     <tr>
-                                    <td  className="border px-4 py-2">{item?.id}</td>
-                                    <td onClick={()=>navigation(`/sponsors/${item?.id}`)}  className="border px-4 py-2 cursor-pointer text-purple-600 ">{item?.[`organization-name`]}</td>
-                                    <td  className="border px-4 py-2">{item?.scategory}</td>
-                                    <td  className="border px-4 py-2">{item?.stype}</td>
-                                    <td  className="border px-4 py-2">{item?.webpage}</td>
-                                </tr>
-                                    ))}
+                                        <th className="border px-4 py-2 text-left">ID</th> {/* Empty first column */}
+                                        <th className="border px-4 py-2 text-left">Name</th>
+                                        <th className="border px-4 py-2 text-left">Category</th>
+                                        <th className="border px-4 py-2 text-left">Type</th>
+                                        <th className="border px-4 py-2 text-left">Webpage</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {sponsors && sponsors?.length !== 0 &&
+                                        sponsors?.map((item) => (
 
-                            </tbody>
-                        </table>
+                                            <tr>
+                                                <td className="border px-4 py-2">{item?.id}</td>
+                                                <td onClick={() => navigation(`/sponsors/${item?.id}`)} className="border px-4 py-2 cursor-pointer text-purple-600 ">{item?.[`organization-name`]}</td>
+                                                <td className="border px-4 py-2">{item?.scategory}</td>
+                                                <td className="border px-4 py-2">{item?.stype}</td>
+                                                <td className="border px-4 py-2">{item?.webpage}</td>
+                                            </tr>
+                                        ))}
 
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
