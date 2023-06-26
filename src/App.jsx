@@ -10,7 +10,7 @@ import Term from './Terms/index'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useContext, useEffect, useRef, useState } from 'react'
 import { NAV_BAR, setDefaultPath } from './constants'
-import { setBaseUrl } from './helpingFunctions'
+import {  setAuthToken, setBaseUrl } from './helpingFunctions'
 import { UserContext, UserProvider } from './context/UserContext'
 import { AppointmentUpdate, ScheduleAdd, ScheduleList } from './pages/schedule'
 import { ResourceUpdate, ResourcesAdd, ResourcesList } from './pages/resources'
@@ -40,6 +40,7 @@ function App(props)
 
   setBaseUrl()
   const history = createBrowserHistory();
+  setAuthToken(localStorage.getItem("token"))
 
   return (
     <div style={{ marginLeft: width > 1000 && - 90 }}>
