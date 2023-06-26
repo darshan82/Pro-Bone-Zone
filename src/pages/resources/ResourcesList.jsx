@@ -24,7 +24,6 @@ export default function index()
     useEffect(()=>{
             getResources()  
         },[])
-        console.log(resourcesList,'..............') 
         return (
         <>
             <Navbar />

@@ -151,7 +151,6 @@ export default function index()
                                 <tbody>
                                     {scheduleList && scheduleList.length !== 0 ? scheduleList.map((item) => (
                                         <tr>
-                                            {console.log("item", item)}
 
                                             <td className="border px-4 py-2">{moment(item?.edate).format("ddd, MMMM D, YYYY")}, {" "}{item["time-start"]}</td>
                                             <td  className="border px-4 py-2 text-purple-600 cursor-pointer">{item["name-first"] + " " + item["name-last"]}</td>

@@ -28,7 +28,6 @@ export default function index()
         getBlog()
   },[id])
 
-  console.log(blog)
   return (
     <>
       <Navbar general={true}/>

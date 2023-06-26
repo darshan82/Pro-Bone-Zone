@@ -25,7 +25,6 @@ export default function index() {
         getPromotions()
         getTerritories()
     }, [])
-    console.log(territoris,'........')
 
     return (
         <>

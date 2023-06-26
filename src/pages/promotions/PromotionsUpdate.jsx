@@ -61,7 +61,6 @@ export default function index()
                 }
     },[pormotionDetail])
 
-    console.log(state,'........')
     const handleDelete = () =>
     {
         axios.delete(`/promotion/${id}`).then((res) =>

@@ -60,8 +60,6 @@ export default function navbar({ handleClick, general = false })
                         <Link to={values?.url}
                           onClick={() =>
                           {
-                            console.log("asds")
-
                             setIsNavOpen(!isNavOpen)
                             if (values?.name === "Contact")
                             {
@@ -118,7 +116,6 @@ export default function navbar({ handleClick, general = false })
 
         </div>
 
-        {console.log("general", general)}
         <div className="flex flex-row justify-center items-center space-x-5 text-white text-sm ">
           {
             !loggedIn && general
@@ -134,7 +131,6 @@ export default function navbar({ handleClick, general = false })
 
                           if (values?.name === "Contact")
                           {
-                            console.log("handleClick")
                             setTimeout(() =>
                             {
 

@@ -17,7 +17,6 @@ export default function index()
         {
             let e = promotion.events[event?.target?.value]
             setEvent(e)
-            console.log("eee", e)
             setSelectedDate(moment(e?.edate)
                 .format("ddd MMMM Do"));
         }

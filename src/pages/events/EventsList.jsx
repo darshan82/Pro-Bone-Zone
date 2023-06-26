@@ -72,7 +72,6 @@ export default function index()
 
 
                                             <tr>
-                                                {console.log("item", item)}
 
                                                 <td
                                                     onClick={() => { navigation(`/schedule/${item?.id}/${item['time-start']}`) }} className="border px-4 py-2 cursor-pointer text-purple-600">{moment(item?.edate).format("ddd, MMMM D, YYYY")}</td>

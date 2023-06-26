@@ -77,7 +77,6 @@ export default function index()
     {
         if (event)
         {
-            console.log(event)
             const sortableTimes = event?.timeslots.map(time =>
             {
                 const [hour, minute, period] = time.split(/:| /);

@@ -63,7 +63,7 @@ export default function index() {
                 })
 
             }).catch((err) => {
-                console.log(err)
+                console.error(err)
             })
         }
         else {
