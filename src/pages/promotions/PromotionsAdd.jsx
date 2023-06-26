@@ -7,12 +7,15 @@ import Navbar from "../../component/Navbar/navbar";
 import { PromotionTypes } from "../../constants";
 import Checkbox from "./checkBox";
 import moment from "moment";
+import { useNavigate } from "react-router";
 
 export default function index() {
     document.title = "Add Promotion";
+    const navigation = useNavigate()
     const [state, setState] = useState({ territoryId: 1, editId: 2, locked: 0 })
     const [events, setEvents] = useState([])
     const [eventCheck, setEventCheck] = useState(false)
+   
     const handleChange = (e) => {
         setState({
             ...state,
@@ -53,7 +56,7 @@ export default function index() {
                         icon: 'success',
                         timer: 2000,
                     })
-                    history.go(-1)
+                    navigation("/promotions")
 
                 }
                 else {
@@ -86,9 +89,6 @@ export default function index() {
 
 
 
-
-
-
     return (
         <>
             <Navbar />
@@ -107,7 +107,7 @@ export default function index() {
 
 
                         <div className="box  ">
-                            <Formik initialValues={state} onSubmit={handleSubmit} >
+                            <Formik initialValues={state} >
                                 <Form onSubmit={handleSubmit} >
                                     <div className="flex flex-wrap">
                                         <div className="w-full md:w-1/2 px-2 mb-4">
@@ -127,7 +127,8 @@ export default function index() {
                                             <label htmlFor="ptype" className="block mb-2">
                                                 Promotion Type:
                                             </label>
-                                            <select
+                                            <Field
+                                                as="select"
                                                 id="ptype"
                                                 name="ptype"
                                                 value={state.ptype}
@@ -135,7 +136,7 @@ export default function index() {
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
                                             >
-                                                <option value={null} disabled>{"Select State"}</option>
+                                                <option value={""}>{"Select Promotion Type"}</option>
 
                                                 {PromotionTypes && PromotionTypes.length !== 0 &&
                                                     PromotionTypes?.map((option) => (
@@ -144,7 +145,7 @@ export default function index() {
                                                     ))
                                                 }
 
-                                            </select>
+                                            </Field>
                                             <ErrorMessage name="ptype" component="div" className="text-red-500" />
                                         </div>
 
@@ -155,7 +156,7 @@ export default function index() {
                                                 URL:
                                             </label>
                                             <div className="mt-1">
-                                                <input
+                                                <Field
                                                     type="text"
                                                     id="pUrl"
                                                     name="pUrl"
@@ -172,7 +173,7 @@ export default function index() {
                                                 Attendees:
                                             </label>
                                             <div className="mt-1">
-                                                <input
+                                                <Field
                                                     type="attendees"
                                                     id="attendees"
                                                     name="attendees"
@@ -191,7 +192,6 @@ export default function index() {
                                                 <thead>
 
                                                     <tr>
-
                                                         <th className="border px-4 py-2 text-left">Select</th>
                                                         <th className="border px-4 py-2 text-left">Date</th>
                                                         <th className="border px-4 py-2 text-left">Time</th>

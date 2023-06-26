@@ -1,72 +1,68 @@
-import React, {  useEffect,  useState } from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../../component/Footer";
-import { Formik,  Form, ErrorMessage } from 'formik';
+import { Formik, Form, ErrorMessage, Field } from 'formik';
 import Swal from 'sweetalert';
 import axios from "axios";
 import Navbar from "../../component/Navbar/navbar";
-import { useNavigate,  useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { PromotionTypes } from "../../constants";
 import Checkbox from "./checkBox";
 import moment from "moment";
 
-export default function index()
-{
+export default function index() {
     document.title = "Promotion";
     const navigation = useNavigate()
-    const {id} = useParams()
-    const [events ,setEvents] = useState([])
-    const [eventCheck , setEventCheck ] = useState(false)
-    const [state, setState] = useState({locked:false})
-    const [pormotionDetail , setPromotionDetail] = useState({})
-    const handleChange = (e) =>
-    {
+    const { id } = useParams()
+    const [events, setEvents] = useState([])
+    const [eventCheck, setEventCheck] = useState(false)
+    const [state, setState] = useState({ locked: 0 })
+    const [pormotionDetail, setPromotionDetail] = useState({})
+    const [lock, setLock] = useState(0)
+    const handleChange = (e) => {
         setState({
             ...state,
             [e.target.name]: e.target.value
         })
     }
 
-   
 
 
 
-    useEffect(()=>{
-        if(id){
 
-            axios.get(`/promotion/detail/${id}`).then((res)=>{
-                    setPromotionDetail(res?.data)
+    useEffect(() => {
+        if (id) {
+
+            axios.get(`/promotion/detail/${id}`).then((res) => {
+                setPromotionDetail(res?.data)
             })
         }
 
-    },[id])
+    }, [id])
 
-    useEffect(()=>{ 
-        if(pormotionDetail && pormotionDetail !=={}){
-                    const {attendees , ptype ,locked } = pormotionDetail
+    useEffect(() => {
+        if (pormotionDetail) {
+            const { attendees, ptype, locked } = pormotionDetail
+            setLock(locked)
+            setState({
+                ...state,
+                attendees,
+                ptype,
+                locked,
+                pUrl: pormotionDetail?.[`p-url`],
+                eventId1: pormotionDetail?.[`event1-id`],
+                eventId2: pormotionDetail?.[`event2-id`],
+                eventId3: pormotionDetail?.[`event3-id`],
+                eventId4: pormotionDetail?.[`event4-id`],
+                territoryId: pormotionDetail?.[`territory-id`],
 
-                    setState({
-                        ...state , 
-                        attendees,
-                        ptype,
-                        locked,
-                        pUrl:pormotionDetail?.[`p-url`],
-                        eventId1:pormotionDetail?.[`event1-id`],
-                        eventId2:pormotionDetail?.[`event2-id`],
-                        eventId3:pormotionDetail?.[`event3-id`],
-                        eventId4:pormotionDetail?.[`event4-id`],
-                        territoryId:pormotionDetail?.[`territory-id`],
 
+            })
+        }
+    }, [pormotionDetail])
 
-                    })
-                }
-    },[pormotionDetail])
-
-    const handleDelete = () =>
-    {
-        axios.delete(`/promotion/${id}`).then((res) =>
-        {
-            if (!res.data.error)
-            {
+    const handleDelete = () => {
+        axios.delete(`/promotion/${id}`).then((res) => {
+            if (!res.data.error) {
                 Swal({
                     text: res.data.message,
                     icon: 'success',
@@ -74,18 +70,16 @@ export default function index()
                 })
                 navigation("/promotions")
             }
-            else
-            {
+            else {
                 Swal({
                     text: res?.data?.message,
                     icon: 'error',
                     timer: 2000,
                 })
-                
+
             }
 
-        }).catch((err) =>
-        {
+        }).catch((err) => {
             Swal({
                 title: err.response?.data?.message,
                 icon: 'error',
@@ -102,9 +96,9 @@ export default function index()
         })
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         getEvents()
-    },[])
+    }, [])
 
     useEffect(() => {
         let { eventId1, eventId2, eventId3, eventId4 } = state
@@ -118,60 +112,55 @@ export default function index()
 
 
 
-    const handleSubmit = (e) =>
-    {
+    const handleSubmit = (e) => {
         e.preventDefault()
-        if(eventCheck){
+        if (eventCheck) {
 
-            axios.put(`/promotion/${id}`, state).then((res) =>
-            {
-            if (!res.data.error)
-            {
-                setState({})
+            axios.put(`/promotion/${id}`, state).then((res) => {
+                if (!res.data.error) {
+                    setState({})
+                    Swal({
+                        text: "Licensee updated successfully.",
+                        icon: 'success',
+                        timer: 2000,
+                    })
+
+                    navigation("/promotions")
+                }
+                else {
+                    Swal({
+                        text: res?.data?.message,
+                        icon: 'error',
+                        timer: 2000,
+                    })
+                }
+
+            }).catch((err) => {
                 Swal({
-                    text: "Licensee updated successfully.",
-                    icon: 'success',
-                    timer: 2000,
-                })
-                
-                navigation("/promotions")
-            }
-            else
-            {
-                Swal({
-                    text: res?.data?.message,
+                    title: err.response?.data?.message,
                     icon: 'error',
-                    timer: 2000,
-                })
-            }
+                    timer: 4000,
 
-        }).catch((err) =>
-        {
+                })
+            })
+        }
+        else {
             Swal({
-                title: err.response?.data?.message,
+                title: "Add Event Alert",
+                text: "Please select atleast single event to Update the Promotion",
                 icon: 'error',
                 timer: 4000,
-                
+
             })
-        })
+        }
     }
-    else{
-        Swal({
-            title: "Add Event Alert",
-            text:"Please select atleast single event to Update the Promotion",
-            icon: 'error',
-            timer: 4000,
-            
-        })
-    }
-    }
-    
-    
 
 
- 
 
- 
+
+
+
+
     return (
         <>
             <Navbar />
@@ -183,22 +172,22 @@ export default function index()
                         <h1
                             className=" text-[#2E5FB7]  lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5"
                         >
-                          Promotion (#{id})
+                            Promotion (#{id})
 
                         </h1>
 
 
 
                         <div className="box  ">
-                            <Formik initialValues={state} onSubmit={handleSubmit} >
+                            <Formik initialValues={state}  >
                                 <Form onSubmit={handleSubmit} >
-                                <div className="flex flex-wrap">
+                                    <div className="flex flex-wrap">
                                         <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label className="block mb-2">
-                                            Territory:
+                                                Territory:
                                             </label>
                                             <div className="mt-1">
-                                                <input
+                                                <Field
                                                     type="text"
                                                     value={"teritoryState , counnty"}
                                                     className="w-full border border-gray-300 px-3 py-2 rounded-sm"
@@ -210,9 +199,10 @@ export default function index()
 
                                         <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="ptype" className="block mb-2">
-                                            Promotion Type:
+                                                Promotion Type:
                                             </label>
-                                            <select
+                                            <Field
+                                                as="select"
                                                 id="ptype"
                                                 name="ptype"
                                                 value={state.ptype || "Select Rating"}
@@ -220,7 +210,7 @@ export default function index()
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
                                             >
-                                                <option value={null} disabled>{"Select Promotion Type"}</option>
+                                                <option value={""} >{"Select Promotion Type"}</option>
 
                                                 {PromotionTypes && PromotionTypes.length !== 0 &&
                                                     PromotionTypes?.map((option) => (
@@ -229,7 +219,7 @@ export default function index()
                                                     ))
                                                 }
 
-                                            </select>
+                                            </Field>
                                             <ErrorMessage name="rating" component="div" className="text-red-500" />
                                         </div>
                                         <div className="w-full md:w-1/2 px-2 mb-4">
@@ -237,7 +227,7 @@ export default function index()
                                                 URL:
                                             </label>
                                             <div className="mt-1">
-                                                <input
+                                                <Field
                                                     type="text"
                                                     id="pUrl"
                                                     name="pUrl"
@@ -252,10 +242,10 @@ export default function index()
 
                                         <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="attendees" className="block mb-2">
-                                            Attendees:
+                                                Attendees:
                                             </label>
                                             <div className="mt-1">
-                                                <input
+                                                <Field
                                                     id="attendees"
                                                     name="attendees"
                                                     value={state.attendees}
@@ -265,39 +255,41 @@ export default function index()
                                                 />
                                             </div>
                                         </div>
-
-                                        <div className="w-full md:w-1/2 px-2 mb-4">
-                                            <label htmlFor="locked" className="block mb-2">
-                                                Lock:
-                                            </label>
-                                            <div className="flex items-center">
-                                                <label className="mr-4">
-                                                    <input
-                                                        type="radio"
-                                                        name="locked"
-                                                        value={1}
-                                                        checked={state.locked === 1}
-                                                        onChange={handleChange}
-                                                        className="mr-2"
-                                                    />
-                                                    Yes
-                                                </label>
-                                                <label>
-                                                    <input
-                                                        type="radio"
-                                                        name="locked"
-                                                        value={0}
-                                                        checked={state.locked === 0}
-                                                        onChange={handleChange}
-                                                        className="mr-2"
-                                                    />
-                                                    No
-                                                </label>
-                                            </div>
-                                            <ErrorMessage name="type" component="div" className="text-red-500" />
-                                        </div>
-                                            </div>
-                                            <div className="w-full  px-2 mb-4">
+                                        {
+                                            Boolean(lock) ?
+                                                <div className="w-full md:w-1/2 px-2 mb-4">
+                                                    <label htmlFor="locked" className="block mb-2">
+                                                        Lock:
+                                                    </label>
+                                                    <div className="flex items-center">
+                                                        <label className="mr-4">
+                                                            <Field
+                                                                type="radio"
+                                                                name="locked"
+                                                                value={1}
+                                                                checked={state.locked == 1}
+                                                                onChange={handleChange}
+                                                                className="mr-2"
+                                                            />
+                                                            Yes
+                                                        </label>
+                                                        <label>
+                                                            <Field
+                                                                type="radio"
+                                                                name="locked"
+                                                                value={0}
+                                                                checked={state.locked == 0}
+                                                                onChange={handleChange}
+                                                                className="mr-2"
+                                                            />
+                                                            No
+                                                        </label>
+                                                    </div>
+                                                    <ErrorMessage name="type" component="div" className="text-red-500" />
+                                                </div>
+                                                : ""}
+                                    </div>
+                                    <div className="w-full  px-2 mb-4">
                                         <p className="block mb-2">Events in Promotion:</p>
                                         <div className="overflow-x-auto">
                                             <table className="table-auto min-w-full">
@@ -325,36 +317,36 @@ export default function index()
                                                 </tbody>
                                             </table>
                                         </div>
-                                    </div>   
+                                    </div>
 
                                     <div className="flex justify-center">
 
                                         <React.Fragment>
-                                      {
-                                        !Boolean(state?.locked) ?
-                                        <button
-                                        type="submit"
-                                            className="bg-[#EC672C] mb-4 mr-2 px-5 py-1 rounded-sm text-white"
-                                            >
-                                                Update
-                                            </button>
-                                        :
-                                        ""}
+                                            {
+                                                !Boolean(lock) ?
+                                                    <button
+                                                        type="submit"
+                                                        className="bg-[#EC672C] mb-4 mr-2 px-5 py-1 rounded-sm text-white"
+                                                    >
+                                                        Update
+                                                    </button>
+                                                    :
+                                                    ""}
                                             <button
-                                            onClick={() =>
-                                                {
-                                                        Swal({
-                                                            text: 'Are you sure to remove this record ?',
-                                                            icon: 'warning',
-                                                            showCancelButton: true,
-                                                            confirmButtonColor: 'red',
-                                                            confirmButtonText: 'Delete',
-                                                            cancelButtonText: 'Cancel'
-                                                        }).then((result)=>{
-                                                                handleDelete()
-                                                        })
-                                                    }}
-                                                    className="bg-[#EC672C] mb-4 ml-2 px-5 py-1 rounded-sm text-white"
+                                                type="button"
+                                                onClick={() => {
+                                                    Swal({
+                                                        text: 'Are you sure to remove this record ?',
+                                                        icon: 'warning',
+                                                        showCancelButton: true,
+                                                        confirmButtonColor: 'red',
+                                                        confirmButtonText: 'Delete',
+                                                        cancelButtonText: 'Cancel'
+                                                    }).then((result) => {
+                                                        handleDelete()
+                                                    })
+                                                }}
+                                                className="bg-[#EC672C] mb-4 ml-2 px-5 py-1 rounded-sm text-white"
                                             >
                                                 Delete
                                             </button>
