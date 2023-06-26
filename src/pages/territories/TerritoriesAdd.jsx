@@ -4,55 +4,51 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import Swal from 'sweetalert';
 import axios from "axios";
 import Navbar from "../../component/Navbar/navbar";
+import { useNavigate } from "react-router";
 
-export default function index()
-{
+export default function index() {
     document.title = "Add Territory";
-    const [state, setState] = useState({country:"USA" , editId:2})
-    const [stateOptions , setStateOptions] = useState([])
-    const [licensee , setLicensee] = useState([])
-    const handleChange = (e) =>
-    {
+    const navigation = useNavigate()
+    const [state, setState] = useState({ country: "USA", editId: 2 })
+    const [stateOptions, setStateOptions] = useState([])
+    const [licensee, setLicensee] = useState([])
+    const handleChange = (e) => {
         setState({
             ...state,
             [e.target.name]: e.target.value
         })
     }
 
-    const getStates = ()=>{
-        axios.get(`/global/states`).then((res)=>{
+    const getStates = () => {
+        axios.get(`/global/states`).then((res) => {
             setStateOptions(res?.data)
         })
     }
 
-    const getLicensees = ()=>{
-        axios.get(`/user/licensee`).then((res)=>{
+    const getLicensees = () => {
+        axios.get(`/user/licensee`).then((res) => {
             setLicensee(res?.data)
         })
     }
-    useEffect(()=>{
-            getStates()
-            getLicensees()
-        
-    },[])
-    const handleSubmit = (e) =>
-    {
+    useEffect(() => {
+        getStates()
+        getLicensees()
+
+    }, [])
+    const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post(`/territory/add`, state).then((res) =>
-        {
-            if (!res.data.error)
-            {
+        axios.post(`/territory/add`, state).then((res) => {
+            if (!res.data.error) {
                 setState({})
                 Swal({
                     text: "Territory added successfully.",
                     icon: 'success',
                     timer: 2000,
                 })
-                history.go(-1)
+                navigation("/Territories")
 
             }
-            else
-            {
+            else {
                 Swal({
                     text: res?.data?.message,
                     icon: 'error',
@@ -60,8 +56,7 @@ export default function index()
                 })
             }
 
-        }).catch((err) =>
-        {
+        }).catch((err) => {
             Swal({
                 title: err.response?.data?.message,
                 icon: 'error',
@@ -74,9 +69,9 @@ export default function index()
 
 
 
- 
 
- 
+
+
     return (
         <>
             <Navbar />
@@ -88,14 +83,14 @@ export default function index()
                         <h1
                             className=" text-[#2E5FB7]  lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5"
                         >
-                          Add Territory
+                            Add Territory
 
                         </h1>
 
 
 
                         <div className="box  ">
-                            <Formik initialValues={state} onSubmit={handleSubmit} >
+                            <Formik initialValues={state} >
                                 <Form onSubmit={handleSubmit} >
                                     <div className="flex flex-wrap">
                                         <div className="w-full md:w-1/2 px-2 mb-4">
@@ -114,12 +109,13 @@ export default function index()
                                             />
                                             <ErrorMessage name="country" component="div" className="text-red-500" />
                                         </div>
-                                        
+
                                         <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="state" className="block mb-2">
                                                 State:
                                             </label>
-                                            <select
+                                            <Field
+                                                as="select"
                                                 id="state"
                                                 name="state"
                                                 value={state.state}
@@ -127,7 +123,7 @@ export default function index()
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
                                             >
-                                                <option value={null} disabled>{"Select State"}</option>
+                                                <option value={""} >{"Select State"}</option>
 
                                                 {stateOptions && stateOptions.length !== 0 &&
                                                     stateOptions?.map((option) => (
@@ -136,12 +132,12 @@ export default function index()
                                                     ))
                                                 }
 
-                                            </select>
+                                            </Field>
                                             <ErrorMessage name="state" component="div" className="text-red-500" />
                                         </div>
-                                         <div className="w-full md:w-1/2 px-2 mb-4">
+                                        <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="county" className="block mb-2">
-                                            County:
+                                                County:
                                             </label>
                                             <Field
                                                 type="text"
@@ -157,25 +153,23 @@ export default function index()
                                             <label htmlFor="defaultUrl" className="block mb-2">
                                                 URL:
                                             </label>
-                                            <input
+                                            <Field
                                                 id="defaultUrl"
                                                 name="defaultUrl"
                                                 value={state.defaultUrl}
                                                 onChange={handleChange}
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
-                                            >
-
-
-                                            </input>
+                                            />
 
                                             <ErrorMessage name="defaultUrl" component="div" className="text-red-500" />
-                                        </div>  
-                                           
+                                        </div>
+
                                         <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="licenseeId" className="block mb-2">
-                                            Licensee:
+                                                Licensee:
                                             </label>
-                                            <select
+                                            <Field
+                                                as="select"
                                                 id="licenseeId"
                                                 name="licenseeId"
                                                 value={state.licenseeId || "Select Rating"}
@@ -183,16 +177,16 @@ export default function index()
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
                                             >
-                                                <option value={null} disabled>{"Select Licensee"}</option>
+                                                <option value={""} >{"Select Licensee"}</option>
 
                                                 {licensee && licensee.length !== 0 &&
                                                     licensee?.map((option) => (
 
-                                                        <option value={option?.id}>{option?.[`name-first`] + " "+ option?.[`name-last`]}</option>
+                                                        <option value={option?.id}>{option?.[`name-first`] + " " + option?.[`name-last`]}</option>
                                                     ))
                                                 }
 
-                                            </select>
+                                            </Field>
                                             <ErrorMessage name="rating" component="div" className="text-red-500" />
                                         </div>
 
@@ -205,16 +199,16 @@ export default function index()
                                                 rows="4"
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 name="notes"
-                                                required
                                                 id="notes"
                                                 value={state.notes}
                                                 onChange={handleChange}
+                                                required
                                             />
                                             <ErrorMessage name="notes" component="div" className="text-red-500" />
 
                                         </div>
 
-                                        
+
                                     </div>
 
                                     <div className="flex justify-center">
@@ -224,7 +218,7 @@ export default function index()
                                                 type="submit"
                                                 className="bg-[#EC672C] mb-4 mr-2 px-5 py-1 rounded-sm text-white"
                                             >
-                                               ADD
+                                                ADD
                                             </button>
 
                                         </React.Fragment>

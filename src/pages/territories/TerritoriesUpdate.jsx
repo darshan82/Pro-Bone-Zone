@@ -1,75 +1,70 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, {  useEffect,  useState } from "react";
 import Footer from "../../component/Footer";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import Swal from 'sweetalert';
 import axios from "axios";
 import Navbar from "../../component/Navbar/navbar";
-import { useNavigate, useNavigation, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-export default function index()
-{
+export default function index() {
     document.title = "Territory";
     const navigation = useNavigate()
-    const {id} = useParams()
-    const [state, setState] = useState({country:"USA" })
-    const [stateOptions , setStateOptions] = useState([])
-    const [licensee , setLicensee] = useState([])
-    const [territoryDetails , setTerritoryDetails] = useState({})
-    const handleChange = (e) =>
-    {
+    const { id } = useParams()
+    const [state, setState] = useState({ country: "USA" })
+    const [stateOptions, setStateOptions] = useState([])
+    const [licensee, setLicensee] = useState([])
+    const [territoryDetails, setTerritoryDetails] = useState({})
+    const handleChange = (e) => {
         setState({
             ...state,
             [e.target.name]: e.target.value
         })
     }
 
-    const getStates = ()=>{
-        axios.get(`/global/states`).then((res)=>{
+    const getStates = () => {
+        axios.get(`/global/states`).then((res) => {
             setStateOptions(res?.data)
         })
     }
 
-    const getLicensees = ()=>{
-        axios.get(`/user/licensee`).then((res)=>{
+    const getLicensees = () => {
+        axios.get(`/user/licensee`).then((res) => {
             setLicensee(res?.data)
         })
     }
-    useEffect(()=>{
-            getStates()
-            getLicensees()
-        
-    },[])
+    useEffect(() => {
+        getStates()
+        getLicensees()
 
-    useEffect(()=>{
-            axios.get(`/territory/${id}`).then((res)=>{
-                setTerritoryDetails(res?.data)
+    }, [])
+
+    useEffect(() => {
+        axios.get(`/territory/${id}`).then((res) => {
+            setTerritoryDetails(res?.data)
+        })
+    }, [id])
+
+    useEffect(() => {
+
+        if (territoryDetails) {
+            const { country,  county, notes } = territoryDetails
+            setState({
+                ...state,
+                country,
+                county,
+                state:territoryDetails?.state,
+                defaultUrl: territoryDetails?.[`default-url`],
+                licenseeId: territoryDetails?.[`licensee-id`],
+                notes,
+
+
             })
-    },[id])
+        }
+    }, [territoryDetails])
 
-    useEffect(()=>{
-        
-            if(territoryDetails && territoryDetails !=={}){
-                const updatedlicensee = licensee?.find((item)=>item.id === territoryDetails?.[`licensee-id`]) 
-                const lic2 = {label:updatedlicensee?.[`name-first`] + " "+ updatedlicensee?.[`name-last`],value:updatedlicensee?.id}
-                setState({
-                    ...state,
-                    country:territoryDetails?.country,
-                    state:territoryDetails?.state,
-                    county:territoryDetails?.county,
-                    defaultUrl:territoryDetails?.[`default-url`],
-                    licenseeId:lic2,
-
-
-                })
-            }
-    },[territoryDetails])
-
-    const handleDelete = () =>
-    {
-        axios.delete(`/territory/delete/${id}`).then((res) =>
-        {
-            if (!res.data.error)
-            {
+    const handleDelete = () => {
+        axios.delete(`/territory/delete/${id}`).then((res) => {
+            if (!res.data.error) {
                 Swal({
                     text: res.data.message,
                     icon: 'success',
@@ -77,18 +72,16 @@ export default function index()
                 })
                 navigation("/Territories")
             }
-            else
-            {
+            else {
                 Swal({
                     text: res?.data?.message,
                     icon: 'error',
                     timer: 2000,
                 })
-                
+
             }
 
-        }).catch((err) =>
-        {
+        }).catch((err) => {
             Swal({
                 title: err.response?.data?.message,
                 icon: 'error',
@@ -99,24 +92,19 @@ export default function index()
     }
 
 
-    const handleSubmit = (e) =>
-    {
+    const handleSubmit = (e) => {
         e.preventDefault()
-        axios.put(`territory/update/${id}`, state).then((res) =>
-        {
-            if (!res.data.error)
-            {
-                setState({})
+        axios.put(`territory/update/${id}`, state).then((res) => {
+            if (!res.data.error) {
                 Swal({
                     text: "Territory updated successfully.",
                     icon: 'success',
                     timer: 2000,
                 })
-                
+
                 navigation("/territories")
             }
-            else
-            {
+            else {
                 Swal({
                     text: res?.data?.message,
                     icon: 'error',
@@ -124,8 +112,7 @@ export default function index()
                 })
             }
 
-        }).catch((err) =>
-        {
+        }).catch((err) => {
             Swal({
                 title: err.response?.data?.message,
                 icon: 'error',
@@ -138,9 +125,9 @@ export default function index()
 
 
 
- 
 
- 
+
+
     return (
         <>
             <Navbar />
@@ -152,14 +139,14 @@ export default function index()
                         <h1
                             className=" text-[#2E5FB7]  lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5"
                         >
-                          Territory (#{id})
+                            Territory (#{id})
 
                         </h1>
 
 
 
                         <div className="box  ">
-                            <Formik initialValues={state} onSubmit={handleSubmit} >
+                            <Formik initialValues={state} >
                                 <Form onSubmit={handleSubmit} >
                                     <div className="flex flex-wrap">
                                         <div className="w-full md:w-1/2 px-2 mb-4">
@@ -178,12 +165,13 @@ export default function index()
                                             />
                                             <ErrorMessage name="country" component="div" className="text-red-500" />
                                         </div>
-                                        
+
                                         <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="state" className="block mb-2">
                                                 State:
                                             </label>
-                                            <select
+                                            <Field
+                                                as="select"
                                                 id="state"
                                                 name="state"
                                                 value={state.state}
@@ -191,21 +179,21 @@ export default function index()
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
                                             >
-                                                <option value={null} disabled>{"Select State"}</option>
+                                                <option value={""} >{"Select State"}</option>
 
                                                 {stateOptions && stateOptions.length !== 0 &&
                                                     stateOptions?.map((option) => (
 
-                                                        <option value={option.id}>{option.name}</option>
+                                                        <option value={option.name}>{option.name}</option>
                                                     ))
                                                 }
 
-                                            </select>
+                                            </Field>
                                             <ErrorMessage name="state" component="div" className="text-red-500" />
                                         </div>
-                                         <div className="w-full md:w-1/2 px-2 mb-4">
+                                        <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="county" className="block mb-2">
-                                            County:
+                                                County:
                                             </label>
                                             <Field
                                                 type="text"
@@ -221,26 +209,24 @@ export default function index()
                                             <label htmlFor="defaultUrl" className="block mb-2">
                                                 URL:
                                             </label>
-                                            <input
+                                            <Field
                                                 id="defaultUrl"
                                                 name="defaultUrl"
                                                 value={state.defaultUrl}
                                                 onChange={handleChange}
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
-                                            >
-
-
-                                            </input>
+                                            />
 
                                             <ErrorMessage name="defaultUrl" component="div" className="text-red-500" />
-                                        </div>  
-                                           
+                                        </div>
+
                                         <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="licenseeId" className="block mb-2">
-                                            Licensee:
+                                                Licensee:
                                             </label>
-                                            <select
+                                            <Field
+                                                as="select"
                                                 id="licenseeId"
                                                 name="licenseeId"
                                                 value={state.licenseeId || "Select Rating"}
@@ -248,16 +234,16 @@ export default function index()
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
                                             >
-                                                <option value={null} disabled>{"Select Licensee"}</option>
+                                                <option value={""} >{"Select Licensee"}</option>
 
                                                 {licensee && licensee.length !== 0 &&
                                                     licensee?.map((option) => (
 
-                                                        <option value={option?.id}>{option?.[`name-first`] + " "+ option?.[`name-last`]}</option>
+                                                        <option value={option?.id}>{option?.[`name-first`] + " " + option?.[`name-last`]}</option>
                                                     ))
                                                 }
 
-                                            </select>
+                                            </Field>
                                             <ErrorMessage name="rating" component="div" className="text-red-500" />
                                         </div>
 
@@ -270,19 +256,17 @@ export default function index()
                                                 rows="4"
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 name="notes"
-                                                required
                                                 id="notes"
                                                 value={state.notes}
                                                 onChange={handleChange}
+                                                required
                                             />
                                             <ErrorMessage name="notes" component="div" className="text-red-500" />
 
                                         </div>
 
-                                        
+
                                     </div>
-
-
 
                                     <div className="flex justify-center">
 
@@ -294,19 +278,19 @@ export default function index()
                                                 Update
                                             </button>
                                             <button
-                                                 onClick={() =>
-                                                    {
-                                                        Swal({
-                                                            text: 'Are you sure to remove this record ?',
-                                                            icon: 'warning',
-                                                            showCancelButton: true,
-                                                            confirmButtonColor: 'red',
-                                                            confirmButtonText: 'Delete',
-                                                            cancelButtonText: 'Cancel'
-                                                        }).then((result)=>{
-                                                                handleDelete()
-                                                        })
-                                                    }}
+                                                type="button"
+                                                onClick={() => {
+                                                    Swal({
+                                                        text: 'Are you sure to remove this record ?',
+                                                        icon: 'warning',
+                                                        showCancelButton: true,
+                                                        confirmButtonColor: 'red',
+                                                        confirmButtonText: 'Delete',
+                                                        cancelButtonText: 'Cancel'
+                                                    }).then((result) => {
+                                                        handleDelete()
+                                                    })
+                                                }}
                                                 className="bg-[#EC672C] mb-4 ml-2 px-5 py-1 rounded-sm text-white"
                                             >
                                                 Delete
