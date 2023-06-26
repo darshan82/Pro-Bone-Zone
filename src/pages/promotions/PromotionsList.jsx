@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from "react";
 import Footer from "../../component/Footer";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../component/Navbar/navbar";
 import axios from "axios";
 
 export default function index() {
     let navigation = useNavigate()
-
+    const location = useLocation()
     const [promotions, setPromotions] = useState([])
     const [territoris, setTerritories] = useState([])
     document.title = "Promotions";
 
     const getPromotions = () => {
-        axios.get("/promotion").then((res) => setPromotions(res?.data))
+        if(location.state?.tId){
+            axios.get(`/promotion/detail/${location.state?.tId}`).then((res)=>setPromotions(res?.data))
+        }
+        else{
+
+            axios.get("/promotion").then((res) => setPromotions(res?.data))
+        }
     }
     const getTerritories = () => {
         axios.get(`/territory`).then((res) => {

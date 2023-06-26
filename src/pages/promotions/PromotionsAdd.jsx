@@ -12,7 +12,7 @@ import { useNavigate } from "react-router";
 export default function index() {
     document.title = "Add Promotion";
     const navigation = useNavigate()
-    const [state, setState] = useState({ territoryId: 1, editId: 2, locked: 0 })
+    const [state, setState] = useState({ territoryId: 100, editId: 2, locked: 0 })
     const [events, setEvents] = useState([])
     const [eventCheck, setEventCheck] = useState(false)
    
