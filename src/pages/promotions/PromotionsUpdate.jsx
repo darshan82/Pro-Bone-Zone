@@ -256,7 +256,7 @@ export default function index() {
                                             </div>
                                         </div>
                                         {
-                                            Boolean(lock) ?
+                                            !Boolean(lock) ?
                                                 <div className="w-full md:w-1/2 px-2 mb-4">
                                                     <label htmlFor="locked" className="block mb-2">
                                                         Lock:
