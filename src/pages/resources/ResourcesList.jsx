@@ -1,30 +1,26 @@
-import React, {  useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../../component/Footer";
 import Navbar from "../../component/Navbar/navbar";
 import axios from "axios";
-import { useNavigate, useNavigation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export default function index()
-{  
-    document.title ="Resources";
-    const [resourcesList , setResourcesList] = useState([])
+export default function index() {
+    document.title = "Resources";
+    const [resourcesList, setResourcesList] = useState([])
     const navigation = useNavigate()
-    
-    useEffect(() =>
-    {
+
+    useEffect(() => {
         window.scrollTo(0, 0)
+        getResources()
     }, [])
 
-    const getResources = ()=>{
-        axios.get(`/resource`).then((res)=>{
+    const getResources = () => {
+        axios.get(`/resource`).then((res) => {
             setResourcesList(res.data)
         })
     }
 
-    useEffect(()=>{
-            getResources()  
-        },[])
-        return (
+    return (
         <>
             <Navbar />
 
@@ -44,12 +40,11 @@ export default function index()
                         <h1
                             className=" text-[#2E5FB7]  lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5"
                         >
-                            Resources 
+                            Resources
                         </h1>
                         <div className="flex justify-end">
                             <button
-                                onClick={() =>
-                                {
+                                onClick={() => {
                                     navigation("/resources/add");
                                 }}
                                 className="bg-[#EC672C] mb-4 px-5 py-1 rounded-sm text-white"
@@ -59,27 +54,27 @@ export default function index()
                         </div>
                         <div className="overflow-x-auto">
 
-                        <table className="table-auto min-w-full">
-                            <thead>
-                                <tr>
-                                    <th className="border px-4 py-2 text-left">Category</th>
-                                    <th className="border px-4 py-2 text-left">Type</th>
-                                    <th className="border px-4 py-2 text-left">Title</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                    {resourcesList && resourcesList?.length !==0 && resourcesList?.map((item)=>(
-                                <tr>
+                            <table className="table-auto min-w-full">
+                                <thead>
+                                    <tr>
+                                        <th className="border px-4 py-2 text-left">Category</th>
+                                        <th className="border px-4 py-2 text-left">Type</th>
+                                        <th className="border px-4 py-2 text-left">Title</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {resourcesList && resourcesList?.length !== 0 && resourcesList?.map((item) => (
+                                        <tr>
 
-                                    <td className="border px-4 py-2">{item?.category}</td>
-                                    <td  className="border px-4 py-2 cursor-pointer text-purple-600"><a href={item?.filepath} download={item?.type == "file" ? true : false} target="_blank">{item?.type}</a></td>
-                                    <td onClick={()=>navigation(`/resources/${item?.id}`)} className="border px-4 py-2 cursor-pointer text-purple-600">{item?.title}</td>
-                                </tr>
-                                ))}
+                                            <td className="border px-4 py-2">{item?.category}</td>
+                                            <td className="border px-4 py-2 cursor-pointer text-purple-600"><a href={item?.filepath} download={item?.type == "file" ? true : false} target="_blank">{item?.type}</a></td>
+                                            <td onClick={() => navigation(`/resources/${item?.id}`)} className="border px-4 py-2 cursor-pointer text-purple-600">{item?.title}</td>
+                                        </tr>
+                                    ))}
 
-                            </tbody>
-                        </table>
-                                        </div>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

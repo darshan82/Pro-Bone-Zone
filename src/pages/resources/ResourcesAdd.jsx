@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import Footer from "../../component/Footer";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import Swal from 'sweetalert';
@@ -10,7 +10,8 @@ import { useNavigate } from "react-router-dom";
 export default function index() {
     document.title = "Add Resource";
     const navigation = useNavigate()
-    const [state, setState] = useState({ type: "file", editId: 1, status: "pending", category: "quick-start", viewers: "admin" })
+    const [state, setState] = useState({ type: "file", editId: 1, status: "pending" })
+
     const handleChange = (e) => {
         setState({
             ...state,
@@ -23,7 +24,6 @@ export default function index() {
         e.preventDefault()
         axios.post(`/resource/add`, state).then((res) => {
             if (!res.data.error) {
-                setState({})
                 Swal({
                     text: "Resources added successfully.",
                     icon: 'success',
@@ -118,7 +118,8 @@ export default function index() {
                                             <label htmlFor="viewers" className="block mb-2">
                                                 Viewers:
                                             </label>
-                                            <select
+                                            <Field
+                                                as="select"
                                                 id="viewers"
                                                 name="viewers"
                                                 value={state.viewers}
@@ -126,6 +127,8 @@ export default function index() {
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
                                             >
+                                                <option value={""}>{"Select Viewers"}</option>
+
                                                 {resourceViewers && resourceViewers.length !== 0 &&
                                                     resourceViewers?.map((option) => (
 
@@ -133,14 +136,15 @@ export default function index() {
                                                     ))
                                                 }
 
-                                            </select>
+                                            </Field>
                                             <ErrorMessage name="viewers" component="div" className="text-red-500" />
                                         </div>
                                         <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="category" className="block mb-2">
                                                 Category:
                                             </label>
-                                            <select
+                                            <Field
+                                                as="select"
                                                 id="category"
                                                 name="category"
                                                 value={state.category}
@@ -148,6 +152,7 @@ export default function index() {
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
                                             >
+                                                <option value={""}>{"Select Category"}</option>
 
                                                 {resourceCategory && resourceCategory.length !== 0 &&
                                                     resourceCategory?.map((option) => (
@@ -156,7 +161,7 @@ export default function index() {
                                                     ))
                                                 }
 
-                                            </select>
+                                            </Field>
                                             <ErrorMessage name="category" component="div" className="text-red-500" />
                                         </div>
                                         <div className="w-full md:w-1/2 px-2 mb-4">
@@ -165,7 +170,7 @@ export default function index() {
                                             </label>
                                             <div className="flex items-center">
                                                 <label className="mr-4">
-                                                    <input
+                                                    <Field
                                                         type="radio"
                                                         name="type"
                                                         value={"file"}
@@ -176,7 +181,7 @@ export default function index() {
                                                     File
                                                 </label>
                                                 <label>
-                                                    <input
+                                                    <Field
                                                         type="radio"
                                                         name="type"
                                                         value="link"
@@ -230,7 +235,7 @@ export default function index() {
                                             </label>
                                             <div className="flex items-center">
                                                 <label className="mr-4">
-                                                    <input
+                                                    <Field
                                                         type="radio"
                                                         name="status"
                                                         value={"pending"}
@@ -241,7 +246,7 @@ export default function index() {
                                                     Pending
                                                 </label>
                                                 <label>
-                                                    <input
+                                                    <Field
                                                         type="radio"
                                                         name="status"
                                                         value="live"

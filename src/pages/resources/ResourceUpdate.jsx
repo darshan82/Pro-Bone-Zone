@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../../component/Footer";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import Swal from 'sweetalert';
@@ -7,55 +7,49 @@ import Navbar from "../../component/Navbar/navbar";
 import { resourceCategory, resourceViewers } from "../../constants";
 import { useNavigate, useParams } from "react-router-dom";
 
-export default function index()
-{
+export default function index() {
 
     document.title = "Resource";
     const navigation = useNavigate()
-    const {id} = useParams()
+    const { id } = useParams()
     const [state, setState] = useState({})
-    const [resourceDetails , setResourceDetails] =useState({}) 
-    const handleChange = (e) =>
-    {
+    const [resourceDetails, setResourceDetails] = useState({})
+    const handleChange = (e) => {
         setState({
             ...state,
             [e.target.name]: e.target.value
         })
     }
 
-    useEffect(()=>{
-        if(id){
-                axios.get(`/resource/${id}`).then((res)=>{
-                    setResourceDetails(res?.data)
-                })
+    useEffect(() => {
+        if (id) {
+            axios.get(`/resource/${id}`).then((res) => {
+                setResourceDetails(res?.data)
+            })
         }
-    },[id])
+    }, [id])
 
 
-    useEffect(()=>{
-            if(resourceDetails && resourceDetails.length !==0){
-                const {title , category , viewers , type , status , filepath} = resourceDetails
+    useEffect(() => {
+        if (resourceDetails && resourceDetails.length !== 0) {
+            const { title, category, viewers, type, status, filepath } = resourceDetails
 
-                setState({
-                    ...state,
-                    title,
-                    category,
-                    viewers,
-                    type,
-                    status,
-                    filepath,
-                })
-            }
-    },[resourceDetails])
- 
-    const handleSubmit = (e) =>
-    {
+            setState({
+                ...state,
+                title,
+                category,
+                viewers,
+                type,
+                status,
+                filepath,
+            })
+        }
+    }, [resourceDetails])
+
+    const handleSubmit = (e) => {
         e.preventDefault()
-        axios.put(`/resource/${id}`, state).then((res) =>
-        {
-            if (!res.data.error)
-            {
-                setState({})
+        axios.put(`/resource/${id}`, state).then((res) => {
+            if (!res.data.error) {
                 Swal({
                     text: "Resources Updated successfully.",
                     icon: 'success',
@@ -64,8 +58,7 @@ export default function index()
                 navigation("/resources")
 
             }
-            else
-            {
+            else {
                 Swal({
                     text: res?.data?.message,
                     icon: 'error',
@@ -73,8 +66,7 @@ export default function index()
                 })
             }
 
-        }).catch((err) =>
-        {
+        }).catch((err) => {
             Swal({
                 title: err.response?.data?.message,
                 icon: 'error',
@@ -84,12 +76,9 @@ export default function index()
         })
     }
 
-    const handleDelete = () =>
-    {
-        axios.delete(`/resource/${id}`).then((res) =>
-        {
-            if (!res.data.error)
-            {
+    const handleDelete = () => {
+        axios.delete(`/resource/${id}`).then((res) => {
+            if (!res.data.error) {
                 Swal({
                     text: res.data.message,
                     icon: 'success',
@@ -97,18 +86,16 @@ export default function index()
                 })
                 navigation("/resources")
             }
-            else
-            {
+            else {
                 Swal({
                     text: res?.data?.message,
                     icon: 'error',
                     timer: 2000,
                 })
-                
+
             }
 
-        }).catch((err) =>
-        {
+        }).catch((err) => {
             Swal({
                 title: err.response?.data?.message,
                 icon: 'error',
@@ -120,9 +107,9 @@ export default function index()
 
 
 
- 
 
- 
+
+
     return (
         <>
             <Navbar />
@@ -134,7 +121,7 @@ export default function index()
                         <h1
                             className=" text-[#2E5FB7]  lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5"
                         >
-                          Resource {`(#${id})`}
+                            Resource {`(#${id})`}
 
                         </h1>
 
@@ -142,7 +129,7 @@ export default function index()
 
                         <div className="box  ">
                             <Formik initialValues={state} >
-                                <Form  onSubmit={handleSubmit}>
+                                <Form onSubmit={handleSubmit}>
                                     <div className="flex flex-wrap">
                                         <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="title" className="block mb-2">
@@ -159,12 +146,13 @@ export default function index()
                                             />
                                             <ErrorMessage name="title" component="div" className="text-red-500" />
                                         </div>
-                                        
+
                                         <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="viewers" className="block mb-2">
-                                            Viewers:
+                                                Viewers:
                                             </label>
-                                            <select
+                                            <Field
+                                                as="select"
                                                 id="viewers"
                                                 name="viewers"
                                                 value={state.viewers}
@@ -172,6 +160,8 @@ export default function index()
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
                                             >
+                                                <option value={""}>{"Select Viewers"}</option>
+
                                                 {resourceViewers && resourceViewers.length !== 0 &&
                                                     resourceViewers?.map((option) => (
 
@@ -179,14 +169,15 @@ export default function index()
                                                     ))
                                                 }
 
-                                            </select>
+                                            </Field>
                                             <ErrorMessage name="viewers" component="div" className="text-red-500" />
                                         </div>
                                         <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="category" className="block mb-2">
-                                            Category:
+                                                Category:
                                             </label>
-                                            <select
+                                            <Field
+                                                as="select"
                                                 id="category"
                                                 name="category"
                                                 value={state.category}
@@ -194,6 +185,7 @@ export default function index()
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
                                             >
+                                                <option value={""}>Select Category</option>
 
                                                 {resourceCategory && resourceCategory.length !== 0 &&
                                                     resourceCategory?.map((option) => (
@@ -202,7 +194,7 @@ export default function index()
                                                     ))
                                                 }
 
-                                            </select>
+                                            </Field>
                                             <ErrorMessage name="category" component="div" className="text-red-500" />
                                         </div>
                                         <div className="w-full md:w-1/2 px-2 mb-4">
@@ -211,7 +203,7 @@ export default function index()
                                             </label>
                                             <div className="flex items-center">
                                                 <label className="mr-4">
-                                                    <input
+                                                    <Field
                                                         type="radio"
                                                         name="type"
                                                         value={"file"}
@@ -219,10 +211,10 @@ export default function index()
                                                         onChange={handleChange}
                                                         className="mr-2"
                                                     />
-                                                   File
+                                                    File
                                                 </label>
                                                 <label>
-                                                    <input
+                                                    <Field
                                                         type="radio"
                                                         name="type"
                                                         value="link"
@@ -235,48 +227,48 @@ export default function index()
                                             </div>
                                             <ErrorMessage name="type" component="div" className="text-red-500" />
                                         </div>
-                                    {
-                                        state.type === "file" ?
+                                        {
+                                            state.type === "file" ?
 
-                                        <div className="w-full md:w-1/2 px-2 mb-4">
-                                            <label htmlFor="filepath" className="block mb-2">
-                                                Upload:
-                                            </label>
-                                            <Field
-                                                type="file"
-                                                id="filepath"
-                                                name="filepath"
-                                                className="w-full border border-gray-300 px-3 py-2 rounded-sm"
-                                                required
-                                                onChange={handleChange}
-                                                // value={state.filepath}
-                                            />
-                                            <ErrorMessage name="filepath" component="div" className="text-red-500" />
-                                        </div>
-                                        :
-                                        <div className="w-full md:w-1/2 px-2 mb-4">
-                                            <label htmlFor="filepath" className="block mb-2">
-                                                URL:
-                                            </label>
-                                            <Field
-                                                type="text"
-                                                id="filepath"
-                                                name="filepath"
-                                                className="w-full border border-gray-300 px-3 py-2 rounded-sm"
-                                                required
-                                                onChange={handleChange}
-                                                value={state.filepath}
-                                            />
-                                            <ErrorMessage name="filepath" component="div" className="text-red-500" />
-                                        </div>
-                                            }
+                                                <div className="w-full md:w-1/2 px-2 mb-4">
+                                                    <label htmlFor="filepath" className="block mb-2">
+                                                        Upload:
+                                                    </label>
+                                                    <Field
+                                                        type="file"
+                                                        id="filepath"
+                                                        name="filepath"
+                                                        className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                                        required
+                                                        onChange={handleChange}
+                                                    // value={state.filepath}
+                                                    />
+                                                    <ErrorMessage name="filepath" component="div" className="text-red-500" />
+                                                </div>
+                                                :
+                                                <div className="w-full md:w-1/2 px-2 mb-4">
+                                                    <label htmlFor="filepath" className="block mb-2">
+                                                        URL:
+                                                    </label>
+                                                    <Field
+                                                        type="text"
+                                                        id="filepath"
+                                                        name="filepath"
+                                                        className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                                        required
+                                                        onChange={handleChange}
+                                                        value={state.filepath}
+                                                    />
+                                                    <ErrorMessage name="filepath" component="div" className="text-red-500" />
+                                                </div>
+                                        }
                                         <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="status" className="block mb-2">
                                                 Status:
                                             </label>
                                             <div className="flex items-center">
                                                 <label className="mr-4">
-                                                    <input
+                                                    <Field
                                                         type="radio"
                                                         name="status"
                                                         value={"pending"}
@@ -284,10 +276,10 @@ export default function index()
                                                         onChange={handleChange}
                                                         className="mr-2"
                                                     />
-                                                   Pending
+                                                    Pending
                                                 </label>
                                                 <label>
-                                                    <input
+                                                    <Field
                                                         type="radio"
                                                         name="status"
                                                         value="live"
@@ -300,13 +292,13 @@ export default function index()
                                             </div>
                                             <ErrorMessage name="status" component="div" className="text-red-500" />
                                         </div>
-                                          
-                                        
+
+
                                     </div>
 
                                     <div className="flex justify-center">
 
-                                    <React.Fragment>
+                                        <React.Fragment>
                                             <button
                                                 type="submit"
                                                 className="bg-[#EC672C] mb-4 mr-2 px-5 py-1 rounded-sm text-white"
@@ -314,19 +306,19 @@ export default function index()
                                                 Update
                                             </button>
                                             <button
-                                                 onClick={() =>
-                                                    {
-                                                        Swal({
-                                                            text: 'Are you sure to remove this record ?',
-                                                            icon: 'warning',
-                                                            showCancelButton: true,
-                                                            confirmButtonColor: 'red',
-                                                            confirmButtonText: 'Delete',
-                                                            cancelButtonText: 'Cancel'
-                                                        }).then((result)=>{
-                                                                handleDelete()
-                                                        })
-                                                    }}
+                                                type="button"
+                                                onClick={() => {
+                                                    Swal({
+                                                        text: 'Are you sure to remove this record ?',
+                                                        icon: 'warning',
+                                                        showCancelButton: true,
+                                                        confirmButtonColor: 'red',
+                                                        confirmButtonText: 'Delete',
+                                                        cancelButtonText: 'Cancel'
+                                                    }).then((result) => {
+                                                        handleDelete()
+                                                    })
+                                                }}
                                                 className="bg-[#EC672C] mb-4 ml-2 px-5 py-1 rounded-sm text-white"
                                             >
                                                 Delete
