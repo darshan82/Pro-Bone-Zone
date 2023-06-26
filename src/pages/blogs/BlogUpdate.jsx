@@ -30,7 +30,7 @@ export default function index() {
     },[id])
 
     useEffect(()=>{
-        if(blogDetails && blogDetails !=={} ){
+        if(blogDetails ){
             const {author , blog_text , category , subcategory , status , title  } = blogDetails
             setState({
                 ...state , 
