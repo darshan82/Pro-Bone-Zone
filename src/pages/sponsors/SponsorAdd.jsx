@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Footer from "../../component/Footer";
-import { ErrorMessage, Formik } from 'formik';
+import { ErrorMessage, Field, Formik } from 'formik';
 import Swal from 'sweetalert';
 import axios from "axios";
 import { consultantCategory, promoterCategory, userTypes } from "../../constants";
 import Navbar from "../../component/Navbar/navbar";
+import { useNavigate } from "react-router-dom";
 
 export default function index() {
+    const navigation = useNavigate()
     document.title = "Add Sponsor"
     const [state, setState] = useState({ scategory: "consultant"  , territoryId:100, editId:2})
     const [type, setType] = useState([])
@@ -36,7 +38,9 @@ export default function index() {
                 title:  "Sponsor Created Successfully",
                 icon: 'success',
                 timer: 2000,
+
             })
+            navigation("/sponsors")
         }).catch((err) => {
             Swal({
                 title: err?.response?.data?.message,
@@ -66,17 +70,14 @@ export default function index() {
                                 <form onSubmit={handleSubmit}>
                                     <div className="flex flex-wrap">
                                         <div className="w-full md:w-1/2 px-2 mb-4">
-                                            <label htmlFor="name_first" className="block mb-2">
+                                            <label  className="block mb-2">
                                                 Territory:
                                             </label>
                                             <div className="mt-1">
-                                                <input
+                                                <Field
                                                     type="text"
-                                                    id="name_first"
-                                                    name="name_first"
-                                                    value={state.name_first}
+                                                    value={"state , county"}
                                                     onChange={handleChange}
-                                                    autoComplete="given-name"
                                                     className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                     required
                                                     disabled
@@ -89,7 +90,7 @@ export default function index() {
                                             </label>
                                             <div className="flex items-center">
                                                 <label className="mr-4">
-                                                    <input
+                                                    <Field
                                                         type="radio"
                                                         name="scategory"
                                                         value={"consultant"}
@@ -100,7 +101,7 @@ export default function index() {
                                                     Consultant
                                                 </label>
                                                 <label>
-                                                    <input
+                                                    <Field
                                                         type="radio"
                                                         name="scategory"
                                                         value="promoter"
@@ -118,7 +119,8 @@ export default function index() {
                                             <label htmlFor="stype" className="block mb-2">
                                                 Type:
                                             </label>
-                                            <select
+                                            <Field
+                                                as="select"
                                                 id="stype"
                                                 name="stype"
                                                 value={state.stype || "Select Sponsor Type"}
@@ -126,7 +128,7 @@ export default function index() {
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
                                             >
-                                                <option value={null} disabled>{"Select Licensee"}</option>
+                                                <option value={""} >{"Select Type"}</option>
 
                                                 {type && type.length !== 0 &&
                                                     type?.map((option) => (
@@ -135,7 +137,7 @@ export default function index() {
                                                     ))
                                                 }
 
-                                            </select>
+                                            </Field>
                                             <ErrorMessage name="rating" component="div" className="text-red-500" />
                                         </div>
 
@@ -144,7 +146,7 @@ export default function index() {
                                                 Name:
                                             </label>
                                             <div className="mt-1">
-                                                <input
+                                                <Field
                                                     type="text"
                                                     id="organizationName"
                                                     name="organizationName"
@@ -161,7 +163,7 @@ export default function index() {
                                                 Web Page:
                                             </label>
                                             <div className="mt-1">
-                                                <input
+                                                <Field
                                                     type="text"
                                                     id="webpage"
                                                     name="webpage"
@@ -179,9 +181,9 @@ export default function index() {
                                                 Logo:
                                             </label>
                                             <div className="mt-1">
-                                                <input
-                                                    type="text"
-                                                    id="password"
+                                                <Field
+                                                    type="file"
+                                                    id="logo"
                                                     name="logo"
                                                     value={state.logo}
                                                     onChange={handleChange}
@@ -191,32 +193,32 @@ export default function index() {
                                             </div>
                                         </div>
 
-                                        <div className="w-full md:w-1/2 px-2 mb-4">
+                                        <div className="w-full  px-2 mb-4">
                                             <label htmlFor="description" className="block mb-2">
                                                 Description:
                                             </label>
                                             <div className="mt-1">
-                                                <textarea
+                                                <Field
+                                                    as="textarea"
+                                                    rows={4}
                                                     id="description"
                                                     name="description"
                                                     value={state.description}
                                                     onChange={handleChange}
                                                     className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                     required
-                                                ></textarea>
+                                                />
                                             </div>
 
                                         </div>
                                     </div>
                                     <div className="flex flex-wrap">
-
-
                                         <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="contactName" className="block mb-2">
                                                 Contact:
                                             </label>
                                             <div className="mt-1">
-                                                <input
+                                                <Field
                                                     type="text"
                                                     id="contactName"
                                                     name="contactName"
@@ -232,7 +234,7 @@ export default function index() {
                                                 Email:
                                             </label>
                                             <div className="mt-1">
-                                                <input
+                                                <Field
                                                     type="email"
                                                     id="email"
                                                     name="email"
@@ -248,7 +250,7 @@ export default function index() {
                                                 Phone:
                                             </label>
                                             <div className="mt-1">
-                                                <input
+                                                <Field
                                                     type="number"
                                                     id="phone"
                                                     name="phone"
@@ -259,18 +261,19 @@ export default function index() {
                                                 />
                                             </div>
                                         </div>
-                                        <div className="w-full md:w-1/2 px-2 mb-4">
+                                        <div className="w-full  px-2 mb-4">
                                             <label htmlFor="notes" className="block mb-2">
                                                 Notes:
                                             </label>
                                             <div className="mt-1">
-                                                <textarea
+                                                <Field
+                                                    as="textarea"
                                                     id="notes"
                                                     name="notes"
                                                     value={state.notes}
                                                     onChange={handleChange}
                                                     className="w-full border border-gray-300 px-3 py-2 rounded-sm"
-                                                ></textarea>
+                                                />
                                             </div>
                                         </div>
 

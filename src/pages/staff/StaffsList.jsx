@@ -14,7 +14,7 @@ export default function index() {
     const getStaff = () => {
         axios.get(`/staff`).then((res) => {
             if (location?.state?.tId) {
-                let updatedList = res.data?.filter((item) => item.id == location?.state?.tId)
+                let updatedList = res.data?.filter((item) => item?.[`territory-id`] == location?.state?.tId)
                 setstaffList(updatedList)
             }
             else {

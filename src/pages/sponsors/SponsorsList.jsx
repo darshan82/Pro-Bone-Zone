@@ -14,6 +14,9 @@ export default function index() {
         if (location?.state?.tId) {
             axios.get(`/sponsor/${location?.state?.tId}`).then((res) => setSponsors(res?.data?.sponsors))
         }
+        else{
+            axios.get(`/sponsor`).then((res) => setSponsors(res?.data))
+        }
     }
 
     useEffect(() => {
@@ -46,7 +49,7 @@ export default function index() {
                         <div className="flex justify-end">
                             <button
                                 onClick={() => {
-                                    navigation("/staff/add");
+                                    navigation("/sponsors/add");
                                 }}
                                 className="bg-[#EC672C] mb-4 px-5 py-1 rounded-sm text-white"
                             >
@@ -71,7 +74,7 @@ export default function index() {
 
                                             <tr>
                                                 <td className="border px-4 py-2">{item?.id}</td>
-                                                <td onClick={() => navigation(`/sponsors/${item?.id}`)} className="border px-4 py-2 cursor-pointer text-purple-600 ">{item?.[`organization-name`]}</td>
+                                                <td onClick={() => navigation(`/sponsors/${item?.id}`)} className="border px-4 py-2 cursor-pointer text-purple-600 ">{item?.[`organization-name`] || item?.organizationName}</td>
                                                 <td className="border px-4 py-2">{item?.scategory}</td>
                                                 <td className="border px-4 py-2">{item?.stype}</td>
                                                 <td className="border px-4 py-2">{item?.webpage}</td>

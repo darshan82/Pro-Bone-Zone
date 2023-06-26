@@ -11,7 +11,8 @@ import { useNavigate } from "react-router";
 export default function index() {
     document.title = "Add staff"
     const navigation = useNavigate()
-    const [state, setState] = useState({ permit: userTypes.staff, edit_id: 2 })
+    const [state, setState] = useState({ permit: userTypes.staff, edit_id: 2 ,   territoryId: 100,
+    licenseeId: 1 })
 
 
 
@@ -25,7 +26,7 @@ export default function index() {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        axios.post(`/user/licensee/add`, state).then((res) => {
+        axios.post(`/user/signup` , state).then((res) => {
             Swal({
                 title: "Staff Created Successfully",
                 icon: 'success',
@@ -61,15 +62,15 @@ export default function index() {
                                 <form onSubmit={handleSubmit}>
                                     <div className="flex flex-wrap">
                                         <div className="w-full md:w-1/2 px-2 mb-4">
-                                            <label htmlFor="name_first" className="block mb-2">
+                                            <label htmlFor="nameFirst" className="block mb-2">
                                                 First Name:
                                             </label>
                                             <div className="mt-1">
                                                 <Field
                                                     type="text"
-                                                    id="name_first"
-                                                    name="name_first"
-                                                    value={state.name_first}
+                                                    id="nameFirst"
+                                                    name="nameFirst"
+                                                    value={state.nameFirst}
                                                     onChange={handleChange}
                                                     autoComplete="given-name"
                                                     className="w-full border border-gray-300 px-3 py-2 rounded-sm"
@@ -79,15 +80,15 @@ export default function index() {
                                         </div>
 
                                         <div className="w-full md:w-1/2 px-2 mb-4">
-                                            <label htmlFor="name_last" className="block mb-2">
+                                            <label htmlFor="nameLast" className="block mb-2">
                                                 Last Name:
                                             </label>
                                             <div className="mt-1">
                                                 <Field
                                                     type="text"
-                                                    id="name_last"
-                                                    name="name_last"
-                                                    value={state.name_last}
+                                                    id="nameLast"
+                                                    name="nameLast"
+                                                    value={state.nameLast}
                                                     onChange={handleChange}
                                                     autoComplete="family-name"
                                                     className="w-full border border-gray-300 px-3 py-2 rounded-sm"
