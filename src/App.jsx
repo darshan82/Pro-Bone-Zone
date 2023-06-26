@@ -2,6 +2,7 @@ import './App.css'
 import HomwPage from './Homepage/index'
 import Registration from './Homepage/register'
 import About from './About/index'
+import Blog from "./Blog"
 import SmartSol from './SmartSol/index'
 import FAQ from './FAQ/index'
 import Privacy from './Privacy/index'
@@ -47,6 +48,7 @@ function App(props)
           <Route path="/" element={<HomwPage />} />
           <Route path="/register/:id" element={<Registration />} />
           <Route path="/about" element={<About />} />
+          <Route path="/blog/:id" element={<Blog />} />
           <Route path="/solution" element={<SmartSol />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/privacy" element={<Privacy />} />

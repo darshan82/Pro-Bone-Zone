@@ -8,7 +8,7 @@ import { blogCategory, businessSubcategories, financialSubcategories, legalSubca
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function index() {
-    document.title = "Add Blog";
+    document.title = "Blog";
     const {id} = useParams()
     const navigation = useNavigate()
     const [state, setState] = useState({})
@@ -31,7 +31,7 @@ export default function index() {
 
     useEffect(()=>{
         if(blogDetails && blogDetails !=={} ){
-            const {author , blog_text , category , subcategory , status , title  } = blogCategory
+            const {author , blog_text , category , subcategory , status , title  } = blogDetails
             setState({
                 ...state , 
                 author,
@@ -42,7 +42,6 @@ export default function index() {
                 title
             })
             
-            console.log(blogDetails,"...............")
         }
     },[blogDetails])
 
@@ -61,10 +60,10 @@ export default function index() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post(`/blogs/add`, state).then((res) => {
+        axios.put(`/blogs/update/${id}`, state).then((res) => {
             if (!res.data.error) {
                 Swal({
-                    text: "Blog added successfully.",
+                    text: "Blog updated successfully.",
                     icon: 'success',
                     timer: 2000,
                 })
@@ -88,6 +87,40 @@ export default function index() {
             })
         })
     }
+    
+    const handleDelete = () =>
+    {
+        axios.delete(`/blogs/delete/${id}`).then((res) =>
+        {
+            if (!res.data.error)
+            {
+                Swal({
+                    text: res.data.message,
+                    icon: 'success',
+                    timer: 2000,
+                })
+                navigation("/blogs")
+            }
+            else
+            {
+                Swal({
+                    text: res?.data?.message,
+                    icon: 'error',
+                    timer: 2000,
+                })
+                
+            }
+
+        }).catch((err) =>
+        {
+            Swal({
+                title: err.response?.data?.message,
+                icon: 'error',
+                timer: 4000,
+
+            })
+        })
+    }
 
     return (
         <>
@@ -100,14 +133,14 @@ export default function index() {
                         <h1
                             className=" text-[#2E5FB7]  lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5"
                         >
-                            Add Blog
+                            Blog {`(#${id})`}
 
                         </h1>
 
 
 
                         <div className="box  ">
-                            <Formik initialValues={state}  >
+                            <Formik initialValues={state}   >
                                 <Form onSubmit={handleSubmit}>
                                     <div className="flex flex-wrap">
                                        
@@ -115,7 +148,8 @@ export default function index() {
                                             <label htmlFor="category" className="block mb-2">
                                                 Category:
                                             </label>
-                                            <select
+                                            <Field
+                                                as="select"
                                                 id="category"
                                                 name="category"
                                                 value={state.category}
@@ -123,6 +157,8 @@ export default function index() {
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
                                             >
+                                                     <option value="">Select Category</option>
+
                                                 {blogCategory && blogCategory.length !== 0 &&
                                                     blogCategory?.map((option) => (
 
@@ -130,14 +166,15 @@ export default function index() {
                                                     ))
                                                 }
 
-                                            </select>
+                                            </Field>
                                             <ErrorMessage name="subcategory" component="div" className="text-red-500" />
                                         </div>
                                         <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="subcategory" className="block mb-2">
                                                 Subcategory:
                                             </label>
-                                            <select
+                                            <Field
+                                                as="select"
                                                 id="subcategory"
                                                 name="subcategory"
                                                 value={state.subcategory}
@@ -145,6 +182,7 @@ export default function index() {
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
                                             >
+                                                     <option value="">Select SubCategory</option>
 
                                                 {blogSubcategory && blogSubcategory.length !== 0 &&
                                                     blogSubcategory?.map((option) => (
@@ -153,7 +191,7 @@ export default function index() {
                                                     ))
                                                 }
 
-                                            </select>
+                                            </Field>
                                             <ErrorMessage name="subcategory" component="div" className="text-red-500" />
                                         </div>
                                        
@@ -180,7 +218,7 @@ export default function index() {
                                             </label>
                                             <div className="flex items-center">
                                                 <label className="mr-4">
-                                                    <input
+                                                    <Field
                                                         type="radio"
                                                         name="status"
                                                         value={"pending"}
@@ -191,7 +229,7 @@ export default function index() {
                                                     Pending
                                                 </label>
                                                 <label>
-                                                    <input
+                                                    <Field
                                                         type="radio"
                                                         name="status"
                                                         value="live"
@@ -251,6 +289,7 @@ export default function index() {
                                             </button>
                                         
                                             <button
+                                            type="button"
                                             onClick={() =>
                                                 {
                                                         Swal({

@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../../component/Footer";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import Swal from 'sweetalert';
@@ -8,10 +8,10 @@ import { blogCategory, businessSubcategories, financialSubcategories, legalSubca
 import { useNavigate } from "react-router-dom";
 
 export default function index() {
-    document.title = "Blog";
+    document.title = "Add Blog";
     const navigation = useNavigate()
-    const [state, setState] = useState({edit_id:2})
-    const [blogSubcategory , setBlogSubcategory] = useState([])
+    const [state, setState] = useState({ edit_id: 2, subcategory: "" })
+    const [blogSubcategory, setBlogSubcategory] = useState([])
     const handleChange = (e) => {
         setState({
             ...state,
@@ -19,18 +19,18 @@ export default function index() {
         })
     }
 
-    useEffect(()=>{
-            if(state?.category === "legal"){
-                setBlogSubcategory(legalSubcategoris)
-            }
-            else if(state?.category==="business"){
-                setBlogSubcategory(businessSubcategories)
-            }
-            else if(state?.category === "financial"){
-                setBlogSubcategory(financialSubcategories)
-            }
-            
-    },[state.category])
+    useEffect(() => {
+        if (state?.category === "legal") {
+            setBlogSubcategory(legalSubcategoris)
+        }
+        else if (state?.category === "business") {
+            setBlogSubcategory(businessSubcategories)
+        }
+        else if (state?.category === "financial") {
+            setBlogSubcategory(financialSubcategories)
+        }
+
+    }, [state.category])
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -73,22 +73,23 @@ export default function index() {
                         <h1
                             className=" text-[#2E5FB7]  lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5"
                         >
-                           Blog {`(#${id})`}
+                            Add Blog
 
                         </h1>
 
 
 
                         <div className="box  ">
-                            <Formik initialValues={state}  >
+                            <Formik initialValues={{ ...state }}  >
                                 <Form onSubmit={handleSubmit}>
                                     <div className="flex flex-wrap">
-                                       
+
                                         <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="category" className="block mb-2">
                                                 Category:
                                             </label>
-                                            <select
+                                            <Field
+                                                as="select"
                                                 id="category"
                                                 name="category"
                                                 value={state.category}
@@ -96,6 +97,8 @@ export default function index() {
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
                                             >
+                                                <option value="">Select category</option>
+
                                                 {blogCategory && blogCategory.length !== 0 &&
                                                     blogCategory?.map((option) => (
 
@@ -103,14 +106,15 @@ export default function index() {
                                                     ))
                                                 }
 
-                                            </select>
+                                            </Field>
                                             <ErrorMessage name="subcategory" component="div" className="text-red-500" />
                                         </div>
                                         <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="subcategory" className="block mb-2">
                                                 Subcategory:
                                             </label>
-                                            <select
+                                            <Field
+                                                as="select"
                                                 id="subcategory"
                                                 name="subcategory"
                                                 value={state.subcategory}
@@ -118,6 +122,7 @@ export default function index() {
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
                                             >
+                                                <option value="">Select Subcategory</option>
 
                                                 {blogSubcategory && blogSubcategory.length !== 0 &&
                                                     blogSubcategory?.map((option) => (
@@ -126,27 +131,27 @@ export default function index() {
                                                     ))
                                                 }
 
-                                            </select>
+                                            </Field>
                                             <ErrorMessage name="subcategory" component="div" className="text-red-500" />
                                         </div>
-                                       
+
                                         <div className="w-full md:w-1/2 px-2 mb-4">
-                                                    <label htmlFor="author" className="block mb-2">
-                                                        Author:
-                                                    </label>
-                                                    <Field
-                                                        type="text"
-                                                        id="author"
-                                                        name="author"
-                                                        className="w-full border border-gray-300 px-3 py-2 rounded-sm"
-                                                        required
-                                                        onChange={handleChange}
-                                                        value={state.author}
-                                                    />
-                                                    <ErrorMessage name="filepath" component="div" className="text-red-500" />
-                                                </div>
-                                        
-                                        
+                                            <label htmlFor="author" className="block mb-2">
+                                                Author:
+                                            </label>
+                                            <Field
+                                                type="text"
+                                                id="author"
+                                                name="author"
+                                                className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                                required
+                                                onChange={handleChange}
+                                                value={state.author}
+                                            />
+                                            <ErrorMessage name="filepath" component="div" className="text-red-500" />
+                                        </div>
+
+
                                         <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="status" className="block mb-2">
                                                 Status:
@@ -177,39 +182,39 @@ export default function index() {
                                             </div>
                                             <ErrorMessage name="status" component="div" className="text-red-500" />
                                         </div>
-                                        
-                                                <div className="w-full md:w-1/2 px-2 mb-4">
-                                                    <label htmlFor="title" className="block mb-2">
-                                                        Title:
-                                                    </label>
-                                                    <Field
-                                                        type="text"
-                                                        id="title"
-                                                        name="title"
-                                                        className="w-full border border-gray-300 px-3 py-2 rounded-sm"
-                                                        required
-                                                        onChange={handleChange}
-                                                        value={state.title}
-                                                    />
-                                                    <ErrorMessage name="title" component="div" className="text-red-500" />
-                                                </div>
-                                        
-                                       
-                                                </div>  
-                                                <div className="w-full px-2 mb-4">
-                                            <label htmlFor="blog_text" className="block mb-2">
-                                                Blog-text:
+
+                                        <div className="w-full md:w-1/2 px-2 mb-4">
+                                            <label htmlFor="title" className="block mb-2">
+                                                Title:
                                             </label>
                                             <Field
-                                                as="textarea"
-                                                rows="4"
+                                                type="text"
+                                                id="title"
+                                                name="title"
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
-                                                name="blog_text"
-                                                id="blog_text"
-                                                value={state.blog_text}
+                                                required
                                                 onChange={handleChange}
+                                                value={state.title}
                                             />
-                                            <ErrorMessage name="blog_text" component="div" className="text-red-500" />
+                                            <ErrorMessage name="title" component="div" className="text-red-500" />
+                                        </div>
+
+
+                                    </div>
+                                    <div className="w-full px-2 mb-4">
+                                        <label htmlFor="blog_text" className="block mb-2">
+                                            Blog-text:
+                                        </label>
+                                        <Field
+                                            as="textarea"
+                                            rows="4"
+                                            className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                            name="blog_text"
+                                            id="blog_text"
+                                            value={state.blog_text}
+                                            onChange={handleChange}
+                                        />
+                                        <ErrorMessage name="blog_text" component="div" className="text-red-500" />
 
                                     </div>
 
