@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 export default function index() {
     document.title = "Add Blog";
     const navigation = useNavigate()
-    const [state, setState] = useState({ edit_id: 2, subcategory: "" })
+    const [state, setState] = useState({ edit_id: 2, status: "pending" })
     const [blogSubcategory, setBlogSubcategory] = useState([])
     const handleChange = (e) => {
         setState({
