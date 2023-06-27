@@ -418,8 +418,7 @@ export default function index()
                                                 onClick={() =>
                                                 {
                                                     Swal({
-                                                        title: 'Are you sure?',
-                                                        text: "You won't be able to revert this!",
+                                                        text: "Are you sure you want to remove this record?",
                                                         icon: 'warning',
                                                         buttons: 2,
                                                         showCancelButton: true,

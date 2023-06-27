@@ -73,7 +73,12 @@ export const setDefaultPath = (user) =>
 
 export const interests = [{ label: "Family Law", value: "family-law" }, { label: "Business Law", value: "business-law" }]
 export const ratings = [1, 2, 3, 4, 5] 
-export const PromotionTypes = [{label:"Law" , value:"law"},{label:"Business" , value:"business"},{label:"Finance" , value:"finance"}]
+
+
+//  promotions
+export const PromotionTypes = [{label:"Legal" , value:"legal"},{label:"Business" , value:"business"},{label:"Financial" , value:"financial"}]
+
+
 export const consultantCategory = [{label:"Law" , value:"law"},{label:"Business" , value:"business"},{label:"Finance" , value:"finance"}]
 export const promoterCategory=[{label:"Business" , value:"business"},{label:"Government" , value:"government"},{label:"Non-Profit" , value:"non-profit"},{label:"Other" , value:"other"}] 
 

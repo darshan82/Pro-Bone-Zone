@@ -281,7 +281,7 @@ export default function index() {
                                                 type="button"
                                                 onClick={() => {
                                                     Swal({
-                                                        text: 'Are you sure to remove this record ?',
+                                                        text: 'Are you sure you want to remove this record?',
                                                         icon: 'warning',
                                                         showCancelButton: true,
                                                         confirmButtonColor: 'red',
