@@ -13,7 +13,7 @@ export const navBar = (type) =>
             { name: "Territories", url: "/Territories" },
             { name: "Promotions", url: "/Promotions" },
             { name: "Events", url: "/Events" },
-            { name: "Personnel", subNav: [{ name: "Staff", url: "/staff" }, { name: "Sponsors", url: "/sponsors" }, { name: "Customers", url: "/customers" }] },
+            { name: "Personnel", subNav: [{ name: "Licensee", url: "/licensee" },{ name: "Staff", url: "/staff" }, { name: "Sponsors", url: "/sponsors" }, { name: "Customers", url: "/customers" }] },
             { name: "Resources", subNav: [{ name: "Training", url: "/training" }, { name: "Marketing", url: "/marketing" } , { name: "Blogs", url: "/blogs" }] },
             { name: "Settings", subNav: [{ name: "Profile", url: "/profile" }, { name: "Logout" }] }];
     }
@@ -81,8 +81,8 @@ export const eventTypes = [{label:"Law" , value:"law"},{label:"Business" , value
 //  promotions
 export const PromotionTypes = [{label:"Legal" , value:"legal"},{label:"Business" , value:"business"},{label:"Financial" , value:"financial"}]
 
-
-export const consultantCategory = [{label:"Law" , value:"law"},{label:"Business" , value:"business"},{label:"Finance" , value:"finance"}]
+//  sponsors
+export const consultantCategory = [{label:"Legal" , value:"Legal"},{label:"Business" , value:"Business"},{label:"Financial" , value:"Financial"}]
 export const promoterCategory=[{label:"Business" , value:"business"},{label:"Government" , value:"government"},{label:"Non-Profit" , value:"non-profit"},{label:"Other" , value:"other"}] 
 
 

@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Footer from "../../component/Footer";
 import {  useNavigate } from "react-router-dom";
 import Navbar from "../../component/Navbar/navbar";
 import axios from "axios";
+import { UserContext } from "../../context/UserContext";
+import { userTypes } from "../../constants";
 
 export default function index() {
+    let {user} = useContext(UserContext)
     let navigation = useNavigate()
 
     const [territories , setTerritories ] =  useState([])
@@ -16,8 +19,13 @@ export default function index() {
 
     useEffect(() => {
         window.scrollTo(0, 0)
-        getTerritories()
-    }, [])
+
+        if(userTypes.admin === user?.permit){
+
+            getTerritories()
+        }
+      
+    }, [user])
 
     return (
         <>
