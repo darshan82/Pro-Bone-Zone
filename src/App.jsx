@@ -12,9 +12,9 @@ import { useContext, useEffect, useRef, useState } from 'react'
 import { NAV_BAR, setDefaultPath } from './constants'
 import {  setAuthToken, setBaseUrl } from './helpingFunctions'
 import { UserContext, UserProvider } from './context/UserContext'
-import { AppointmentUpdate, ScheduleAdd, ScheduleList } from './pages/schedule'
+import { AppointmentUpdate, ScheduleList } from './pages/schedule'
 import { ResourceUpdate, ResourcesAdd, ResourcesList } from './pages/resources'
-import { EventList } from './pages/events'
+import { EventAdd, EventList, EventUpdate } from './pages/events'
 import { Signin, Signup } from './pages/auth'
 import { TerritoriesAdd, TerritoriesList, TerritoriesUpdate } from './pages/territories'
 import { createBrowserHistory } from 'history';
@@ -71,7 +71,6 @@ function App(props)
           <Route path="/blogs/:id" element={<BlogUpdate />} />
           
           <Route path="/schedule/:eventId/:date" element={<ScheduleList />} />
-          <Route path="/schedule/add" element={<ScheduleAdd />} />
           <Route path={`/${NAV_BAR[0].name}`} element={<TerritoriesList />} />
           <Route path={`/${NAV_BAR[1].name}`} element={< PromotionsList />} />
           <Route path={`/${NAV_BAR[2].name}`} element={<EventList />} />
@@ -81,14 +80,14 @@ function App(props)
 
           <Route path={`/${NAV_BAR[0].name}/add`} element={<TerritoriesAdd />} />
           <Route path={`/${NAV_BAR[1].name}/add`} element={<PromotionsAdd />} />
-          <Route path={`/${NAV_BAR[2].name}`} element={<TerritoriesList />} />
+          <Route path={`/${NAV_BAR[2].name}/add`} element={<EventAdd />} />
           <Route path={`/${NAV_BAR[3].name}`} element={<TerritoriesList />} />
           <Route path={`/${NAV_BAR[4].name}/add`} element={<ResourcesAdd />} />
           <Route path={`/${NAV_BAR[5].name}`} element={<TerritoriesList />} />
 
           <Route path={`/${NAV_BAR[0].name}/:id`} element={<TerritoriesUpdate />} />
           <Route path={`/${NAV_BAR[1].name}/:id`} element={<PromotionsUpdate />} />
-          <Route path={`/${NAV_BAR[2].name}/:value`} element={<TerritoriesUpdate />} />
+          <Route path={`/${NAV_BAR[2].name}/:id`} element={<EventUpdate />} />
           <Route path={`/${NAV_BAR[3].name}/:value`} element={<TerritoriesUpdate />} />
           <Route path={`/${NAV_BAR[4].name}/:id`} element={<ResourceUpdate />} />
           <Route path={`/${NAV_BAR[5].name}/:value`} element={<TerritoriesUpdate />} />

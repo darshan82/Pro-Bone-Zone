@@ -58,8 +58,8 @@ export default function index() {
                                 <thead>
                                     <tr>
                                         <th className="border px-4 py-2 text-left">Category</th>
-                                        <th className="border px-4 py-2 text-left">Type</th>
-                                        <th className="border px-4 py-2 text-left">Title</th>
+                                        <th className="border px-4 py-2 text-left">View</th>
+                                        <th className="border px-4 py-2 text-left">Update</th>
                                     </tr>
                                 </thead>
                                 <tbody>
