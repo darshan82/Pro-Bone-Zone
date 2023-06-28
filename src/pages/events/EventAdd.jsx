@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Footer from "../../component/Footer";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import Swal from 'sweetalert';
 import axios from "axios";
 import Navbar from "../../component/Navbar/navbar";
-import { eventTypes,  timeList } from "../../constants";
+import { eventTypes,  timeList, userTypes } from "../../constants";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
 
 export default function index() {
     document.title = "Add Event";
+    const {user} = useContext(UserContext)
     const navigation = useNavigate()
-    const [state, setState] = useState({ capacity:6 , territory_id:100, edit_id:2 , attendees:100 })
+    const [state, setState] = useState({ capacity:6 , })
 
     const handleChange = (e) => {
         setState({
@@ -18,6 +20,15 @@ export default function index() {
             [e.target.name]: e.target.value
         })
     }
+
+    useEffect(()=>{
+        if(user && user?.permit === userTypes.licensee){
+            setState({
+                ...state ,
+                territory_id:user?.territory?.id
+            }) 
+        }
+    },[user])
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -79,7 +90,7 @@ export default function index() {
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
                                                 disabled
-                                                value={"t state,  county"}
+                                                value={user?.territory ? user?.territory?.state+", "+user?.territory?.county : "" }
                                             />
                                             <ErrorMessage name="territory" component="div" className="text-red-500" />
                                         </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Footer from "../../component/Footer";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import Swal from 'sweetalert';
@@ -6,10 +6,12 @@ import axios from "axios";
 import Navbar from "../../component/Navbar/navbar";
 import { eventTypes,  timeList } from "../../constants";
 import { useNavigate, useParams } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
 
 export default function index() {
 
     document.title = "Event";
+    const {user} = useContext(UserContext)
     const navigation = useNavigate()
     const { id } = useParams()
     const [state, setState] = useState({})
@@ -140,7 +142,7 @@ export default function index() {
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
                                                 disabled
-                                                value={"t state,  county"}
+                                                value={user?.territory ? user?.territory?.state+", "+user?.territory?.county : ""  }
                                             />
                                             <ErrorMessage name="territory" component="div" className="text-red-500" />
                                         </div>

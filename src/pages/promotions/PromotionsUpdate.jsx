@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Footer from "../../component/Footer";
 import { Formik, Form, ErrorMessage, Field } from 'formik';
 import Swal from 'sweetalert';
@@ -8,9 +8,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { PromotionTypes } from "../../constants";
 import Checkbox from "./CheckBox";
 import moment from "moment";
+import { UserContext } from "../../context/UserContext";
 
 export default function index() {
     document.title = "Promotion";
+    const {user} = useContext(UserContext)
     const navigation = useNavigate()
     const { id } = useParams()
     const [events, setEvents] = useState([])
@@ -24,9 +26,6 @@ export default function index() {
             [e.target.name]: e.target.value
         })
     }
-
-
-
 
 
     useEffect(() => {
@@ -189,7 +188,7 @@ export default function index() {
                                             <div className="mt-1">
                                                 <Field
                                                     type="text"
-                                                    value={"teritoryState , counnty"}
+                                                    value={user?.territory ? user?.territory?.state +", "+ user?.territory?.country : ""}
                                                     className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                     required
                                                     disabled

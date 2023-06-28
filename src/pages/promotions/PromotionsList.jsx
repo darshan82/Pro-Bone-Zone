@@ -15,7 +15,6 @@ export default function index() {
     document.title = "Promotions";
     
     const getPromotions = () => {
-        if (location.state?.tId) {
             axios.get(`/promotion`).then((res) => {
 
                 if (location?.state?.tId) {
@@ -29,7 +28,6 @@ export default function index() {
             )
         }
 
-    }
     const getTerritories = () => {
         axios.get(`/territory`).then((res) => {
             setTerritories(res?.data)

@@ -1,18 +1,20 @@
-import React, {  useEffect, useRef, useState } from "react";
+import React, {  useContext, useEffect, useRef, useState } from "react";
 import Footer from "../../component/Footer";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import Swal from 'sweetalert';
 import axios from "axios";
 import Navbar from "../../component/Navbar/navbar";
-import { PromotionTypes } from "../../constants";
+import { PromotionTypes, userTypes } from "../../constants";
 import Checkbox from "./CheckBox";
 import moment from "moment";
 import { useNavigate } from "react-router";
+import { UserContext } from "../../context/UserContext";
 
 export default function index() {
     document.title = "Add Promotion";
+    const {user} = useContext(UserContext)
     const navigation = useNavigate()
-    const [state, setState] = useState({ territoryId: 100, editId: 2, locked: 0 })
+    const [state, setState] = useState({eventId1:1, locked: 0 })
     const [events, setEvents] = useState([])
     const [eventCheck, setEventCheck] = useState(false)
    
@@ -22,6 +24,15 @@ export default function index() {
             [e.target.name]: e.target.value
         })
     }
+
+    useEffect(()=>{
+        if(user && userTypes.licensee === user?.permit){
+            setState({
+                ...state , 
+                territoryId:user?.territory?.id
+            })
+        }
+    },[user])
 
     const getEvents = () => {
         axios.get(`/event`).then((res) => {
@@ -117,10 +128,9 @@ export default function index() {
                                             <Field
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
-                                                value={"state, county"}
+                                                value={user?.territory ? user?.territory?.state + ", " + user?.territory?.county :" " }
                                                 disabled={true}
                                             />
-                                            <ErrorMessage name="country" component="div" className="text-red-500" />
                                         </div>
 
                                         <div className="w-full md:w-1/2 px-2 mb-4">
