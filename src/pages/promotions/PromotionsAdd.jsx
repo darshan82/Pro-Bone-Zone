@@ -14,7 +14,7 @@ export default function index() {
     document.title = "Add Promotion";
     const {user} = useContext(UserContext)
     const navigation = useNavigate()
-    const [state, setState] = useState({eventId1:1, locked: 0 })
+    const [state, setState] = useState({ locked: 0 })
     const [events, setEvents] = useState([])
     const [eventCheck, setEventCheck] = useState(false)
    
