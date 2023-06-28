@@ -4,14 +4,14 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import Swal from 'sweetalert';
 import axios from "axios";
 import Navbar from "../../component/Navbar/navbar";
-import { useNavigate, useNavigation, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { userTypes } from "../../constants";
 
 export default function index() {
     document.title = "Licensee";
     const navigation = useNavigate()
     const { id } = useParams()
-    const [state, setState] = useState({ permit: userTypes.licensee, edit_id: 2 })
+    const [state, setState] = useState({ permit: userTypes.licensee })
     const [licenseeDetails, setLicenseeDetails] = useState({})
     const handleChange = (e) => {
         setState({
