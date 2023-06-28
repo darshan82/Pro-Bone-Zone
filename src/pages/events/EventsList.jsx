@@ -4,10 +4,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import moment from "moment/moment";
 import Navbar from "../../component/Navbar/navbar";
+import { userTypes } from "../../constants";
+import { UserContext } from "../../context/UserContext";
 
 export default function index()
 {
     let navigation = useNavigate()
+    const {user} = useContext(UserContext)
     const { pathname } = useLocation();
     const title = pathname.replace("/", "").charAt(0).toUpperCase() + pathname.slice(2)
     document.title = title;
@@ -58,7 +61,37 @@ export default function index()
                             </button>
                         </div> */}
                         <div className="overflow-x-auto">
+                         {
+                            user?.permit === userTypes.licensee ? 
                             <table className="table-auto min-w-full ">
+                            <thead>
+                            <tr>
+                                <th className="border px-4 py-2 text-left"> Location</th>
+                                <th className="border px-4 py-2 text-left"> Date</th>
+                                <th className="border px-4 py-2 text-left">Time </th>
+                                <th className="border px-4 py-2 text-left"> Schedule</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                eventList && eventList.length !== 0 ? eventList?.map((item) => (
+
+
+                                    <tr>
+                                        <td onClick={() => { navigation(`/schedule/${item?.id}/${item['time-start']}`) }} className="border px-4 py-2 cursor-pointer text-purple-600">state,{item?.city}</td>
+                                        <td
+                                             className="border px-4 py-2">{moment(item?.edate).format("ddd, MMMM D, YYYY")}</td>
+                                        <td className="border px-4 py-2">{item['time-start']}</td>
+                                        <td onClick={() => { navigation(`/events/${item?.id}/${item['time-start']}`) }} className="border px-4 py-2 cursor-pointer text-purple-600">Schedule</td>
+                                    </tr>
+                                ))
+
+                                    : ""}
+                        </tbody>
+                        </table>
+                            :(
+
+                                <table className="table-auto min-w-full ">
                                 <thead>
                                     <tr>
                                         <th className="border px-4 py-2 text-left"> Date</th>
@@ -80,9 +113,11 @@ export default function index()
                                             </tr>
                                         ))
 
-                                            : ""}
+                                        : ""}
                                 </tbody>
                             </table>
+                                )
+                        }
 
                         </div>
                     </div>

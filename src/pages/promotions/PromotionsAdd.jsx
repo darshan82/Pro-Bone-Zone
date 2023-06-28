@@ -168,7 +168,7 @@ export default function index() {
                                             </div>
                                         </div>
 
-                                        <div className="w-full md:w-1/2 px-2 mb-4">
+                                        {/* <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="attendees" className="block mb-2">
                                                 Attendees:
                                             </label>
@@ -183,7 +183,7 @@ export default function index() {
                                                     required
                                                 />
                                             </div>
-                                        </div>
+                                        </div> */}
                                     </div>
                                     <div className="w-full  px-2 mb-4">
                                         <p className="block mb-2">Events in Promotion:</p>

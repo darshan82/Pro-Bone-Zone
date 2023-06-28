@@ -1,24 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Footer from "../../component/Footer";
 import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../component/Navbar/navbar";
 import axios from "axios";
+import { UserContext } from "../../context/UserContext";
+import { userTypes } from "../../constants";
 
 export default function index() {
     let navigation = useNavigate()
+    const {user} = useContext(UserContext)
     const location = useLocation()
     const [promotions, setPromotions] = useState([])
     const [territoris, setTerritories] = useState([])
     document.title = "Promotions";
-
+    
     const getPromotions = () => {
-        if(location.state?.tId){
-            axios.get(`/promotion/detail/${location.state?.tId}`).then((res)=>setPromotions(res?.data))
-        }
-        else{
+        if (location.state?.tId) {
+            axios.get(`/promotion`).then((res) => {
 
-            axios.get("/promotion").then((res) => setPromotions(res?.data))
+                if (location?.state?.tId) {
+                    let updatedList = res?.data?.filter((item) => item?.[`territory-id`] === location.state?.tId)
+                    setPromotions(updatedList)
+                }
+                else{
+                    setPromotions(res?.data)
+                }
+            }
+            )
         }
+
     }
     const getTerritories = () => {
         axios.get(`/territory`).then((res) => {
@@ -29,7 +39,9 @@ export default function index() {
     useEffect(() => {
         window.scrollTo(0, 0)
         getPromotions()
-        getTerritories()
+        { user?.permit === userTypes.admin &&
+            getTerritories()
+        }
     }, [])
 
     return (
@@ -56,6 +68,7 @@ export default function index() {
                             >
                                 Promotions
                             </h1>
+                            {user?.permit ===userTypes.admin && 
                             <div className="w-full md:w-1/4 px-2 mb-4">
 
                                 <select
@@ -65,18 +78,19 @@ export default function index() {
                                     // onChange={handleChange}
                                     className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                     required
-                                >
+                                    >
                                     <option value={null} >{"ALL"}</option>
 
                                     {territoris && territoris.length !== 0 &&
                                         territoris?.map((option) => (
-
+                                            
                                             <option value={option?.id}>{option?.state + " " + option?.county}</option>
-                                        ))
+                                            ))
                                     }
 
                                 </select>
                             </div>
+                         }
                         </div>
 
                         <div className="flex justify-end">

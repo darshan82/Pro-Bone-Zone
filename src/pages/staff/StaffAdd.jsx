@@ -3,7 +3,6 @@ import Footer from "../../component/Footer";
 import { Field, Formik } from 'formik';
 import Swal from 'sweetalert';
 import axios from "axios";
-import { UserContext } from "../../context/UserContext";
 import { userTypes } from "../../constants";
 import Navbar from "../../component/Navbar/navbar";
 import { useNavigate } from "react-router";
@@ -11,10 +10,11 @@ import { useNavigate } from "react-router";
 export default function index() {
     document.title = "Add staff"
     const navigation = useNavigate()
-    const [state, setState] = useState({ permit: userTypes.staff, edit_id: 2 ,   territoryId: 100,
-    licenseeId: 1 })
+    const [state, setState] = useState({ permit: userTypes.staff })
 
 
+
+    console.log(user,'.............')
 
     const handleChange = (e) => {
         setState({
