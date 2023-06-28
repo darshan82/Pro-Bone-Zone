@@ -8,7 +8,7 @@ import Navbar from "../../component/Navbar/navbar";
 
 export default function index() {
     document.title = "Add Licensee"
-    const [state, setState] = useState({ permit: userTypes.licensee, edit_id: 2 })
+    const [state, setState] = useState({ permit: userTypes.licensee })
 
     const handleChange = (e) => {
         setState({
@@ -27,7 +27,6 @@ export default function index() {
                     icon: 'success',
                     timer: 2000,
                 })
-                navigation("/licensee")
 
             }
             else {
@@ -36,7 +35,6 @@ export default function index() {
                     icon: 'error',
                     timer: 2000,
                 })
-                console.log("clicked2")
             }
         }).catch((err) => {
             Swal({

@@ -4,8 +4,7 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import Swal from 'sweetalert';
 import axios from "axios";
 import Navbar from "../../component/Navbar/navbar";
-import { useNavigate, useNavigation, useParams } from "react-router-dom";
-import { userTypes } from "../../constants";
+import { useNavigate,  useParams } from "react-router-dom";
 
 export default function index() {
 
@@ -33,7 +32,6 @@ export default function index() {
             let { email, pass, notes, phone, permit } = staffDetails
             setState({
                 ...state,
-                edit_id: staffDetails?.[`edit-id`],
                 name_first: staffDetails?.[`name-first`],
                 name_last: staffDetails?.[`name-last`],
                 phone,

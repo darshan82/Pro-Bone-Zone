@@ -6,15 +6,14 @@ import axios from "axios";
 import { userTypes } from "../../constants";
 import Navbar from "../../component/Navbar/navbar";
 import { useNavigate } from "react-router";
-
+import { UserContext } from "../../context/UserContext";
 export default function index() {
+    const {user} = useContext(UserContext)
     document.title = "Add staff"
     const navigation = useNavigate()
     const [state, setState] = useState({ permit: userTypes.staff })
 
 
-
-    console.log(user,'.............')
 
     const handleChange = (e) => {
         setState({
@@ -22,6 +21,17 @@ export default function index() {
             [e.target.name]: e.target.value
         })
     }
+
+    useEffect(()=>{
+        if(user){
+            
+            setState({
+                ...state,
+                licenseeId:user.id,
+                territoryId:user?.territory?.id
+            })
+        }
+    },[user])
 
     const handleSubmit = (e) => {
         e.preventDefault()
