@@ -24,6 +24,7 @@ import { SponsorAdd, SponsorUpdate, SponsorsList } from './pages/sponsors'
 import { StaffAdd, StaffUpdate, StaffsList } from './pages/staff'
 import { BlogAdd, BlogUpdate, BlogsList } from './pages/blogs'
 import { Profile } from './pages/profile'
+import { CustomerList } from './pages/customer'
 function App(props)
 {
   const { user, loggedIn } = useContext(UserContext)
@@ -95,7 +96,7 @@ function App(props)
           <Route path={`/${NAV_BAR[5].name}/:value`} element={<TerritoriesUpdate />} />
 
 
-          <Route path={`/customers`} element={<center><h1>UNDER DEVELOPMENT</h1></center>} />
+          <Route path={`/customers`} element={<CustomerList/>} />
           <Route path={`/training`} element={<center><h1>UNDER DEVELOPMENT</h1></center>} />
           <Route path={`/marketing`} element={<center><h1>UNDER DEVELOPMENT</h1></center>} />
           <Route path={`/profile`} element={<center><h1>UNDER DEVELOPMENT</h1></center>} />

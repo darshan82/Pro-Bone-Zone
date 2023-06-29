@@ -5,7 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export default function index() {
-    document.title = "Resources";
+    document.title = "Customers";
     const [customerList, setCustomerList] = useState([])
     const navigation = useNavigate()
 
@@ -15,8 +15,8 @@ export default function index() {
     }, [])
 
     const getCustomer = () => {
-        axios.get(`/resource`).then((res) => {
-            setCustomerList(res.data)
+        axios.get(`/customer`).then((res) => {
+            setCustomerList(res.data?.customers)
         })
     }
 
@@ -40,9 +40,9 @@ export default function index() {
                         <h1
                             className=" text-[#2E5FB7]  lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5"
                         >
-                            Customer
+                            Customers
                         </h1>
-                        
+
                         <div className="overflow-x-auto">
 
                             <table className="table-auto min-w-full">
@@ -55,23 +55,27 @@ export default function index() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {resourcesList && resourcesList?.length !== 0 && resourcesList?.map((item) => (
+
+                                    {customerList && customerList.length !== 0 ? customerList?.map((item)=>(
                                         <tr>
 
-                                            <td className="border px-4 py-2">{item?.category}</td>
-                                            <td className="border px-4 py-2 cursor-pointer text-purple-600"><a href={item?.filepath} download={item?.type == "file" ? true : false} target="_blank">{item?.type}</a></td>
-                                            <td onClick={() => navigation(`/resources/${item?.id}`)} className="border px-4 py-2 cursor-pointer text-purple-600">{item?.title}</td>
-                                        </tr>
-                                    ))}
 
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                                            <td className="border px-4 py-2">{item?.id}</td>
+                                            <td className="border px-4 py-2 cursor-pointer text-purple-600">{item?.[`name-first`] + " "+ item?.[`name-last`]}</td>
+                                            <td className="border px-4 py-2 cursor-pointer text-purple-600">{item?.phone}</td>
+                                            <td className="border px-4 py-2 cursor-pointer text-purple-600">{item?.email}</td>
+                                        </tr>
+                                    ))
+                                    :""}
+
+                        </tbody>
+                    </table>
                 </div>
             </div>
+        </div >
+            </div >
 
-            <Footer />
+        <Footer />
 
         </>
     );
