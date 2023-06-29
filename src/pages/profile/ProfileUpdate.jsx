@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Footer from "../../component/Footer";
-import { Field, Formik } from 'formik';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
 import Swal from 'sweetalert';
 import axios from "axios";
-import { userTypes } from "../../constants";
 import Navbar from "../../component/Navbar/navbar";
+import { useNavigate, useParams } from "react-router-dom";
+import { userTypes } from "../../constants";
+import { UserContext } from "../../context/UserContext";
 
 export default function index() {
-    document.title = "Add Licensee"
-    const [state, setState] = useState({ permit: userTypes.licensee })
-
+    document.title = "Profile";
+    const {user} = useContext(UserContext)
+    const [state, setState] = useState({})
+    const [userDetails, setUserDetails] = useState({})
     const handleChange = (e) => {
         setState({
             ...state,
@@ -17,54 +20,83 @@ export default function index() {
         })
     }
 
+
+    useEffect(() => {
+        if(user){
+            axios.get(`/user/licensee/${user?.id}`).then((res) => {
+                setUserDetails(res?.data)
+            })
+
+        }
+    }, [user])
+
+    useEffect(() => {
+        if (userDetails) {
+            let { permit,email, phone, pass, notes } = userDetails
+            setState({
+                ...state,
+                email,
+                phone,
+                pass,
+                notes,
+                permit,
+                name_first: userDetails?.[`name-first`],
+                name_last: userDetails?.[`name-last`]
+            })
+        }
+    }, [userDetails])
+
     const handleSubmit = (e) => {
         e.preventDefault()
-
-        axios.post(`/user/licensee/add`, state).then((res) => {
-            if (res?.data?.message) {
+        axios.put(`/user/licensee/update/${user?.id}`, state).then((res) => {
+            if (!res.data.error) {
                 Swal({
-                    title:  "Licensee  Created Successfully",
+                    text: "Profile updated successfully.",
                     icon: 'success',
                     timer: 2000,
                 })
 
             }
             else {
-                console.log(res?.data?.error)
                 Swal({
-                    title: res?.data?.error,
+                    text: res?.data?.message,
                     icon: 'error',
                     timer: 2000,
                 })
             }
+
         }).catch((err) => {
             Swal({
-                title: err?.response?.data?.error,
+                title: err.response?.data?.message,
                 icon: 'error',
-                timer: 2000,
-            })
+                timer: 4000,
 
+            })
         })
-    };
+    }
+
+
 
     return (
         <>
             <Navbar />
 
-            <div className="bg-white p-2 pl-3 pr-5 lg:pr-9 lg:ml-44 mb-12">
-                <div className="max-w-full mb-10 ">
-                    <div className="container mx-auto py-8">
+            {/* A Smart Solution */}
+            <div className="bg-white pl-3 pr-5 lg:pr-9 lg:ml-44">
+                <div className="max-w-full mb-2 ">
+                    <div className="container mx-auto py-4">
                         <h1
                             className=" text-[#2E5FB7]  lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5"
                         >
-                            {"Add Licensee"}
+                            Profile
 
                         </h1>
 
-                        <div className="box">
-                            <Formik initialValues={state}>
 
-                                <form onSubmit={handleSubmit}>
+
+                        <div className="box  ">
+                            <Formik initialValues={state}  >
+                                <Form onSubmit={handleSubmit} >
                                     <div className="flex flex-wrap">
                                         <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="name_first" className="block mb-2">
@@ -134,6 +166,7 @@ export default function index() {
                                                     autoComplete="email"
                                                     className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                     required
+                                                    disabled
                                                 />
                                             </div>
                                         </div>
@@ -164,32 +197,42 @@ export default function index() {
                                         <div className="mt-1">
                                             <Field
                                                 as="textarea"
-                                                id="notes"
                                                 rows={4}
+                                                id="notes"
                                                 name="notes"
                                                 value={state.notes}
                                                 onChange={handleChange}
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
-                                            />
+                                            ></Field>
                                         </div>
+                                    </div>
+
+
+
+
+                                    <div className="flex justify-center">
+
+                                        <React.Fragment>
+                                            <button
+                                                type="submit"
+                                                className="bg-[#EC672C] mb-4 mr-2 px-5 py-1 rounded-sm text-white"
+                                            >
+                                                Update
+                                            </button>
+                                        </React.Fragment>
 
                                     </div>
-                                    <div className="flex justify-center">
-                                        <button
-                                            type="submit"
-                                            className="bg-[#EC672C] mb-4 mr-2 px-5 py-1 rounded-sm text-white"
-                                        >
-                                            Add
-                                        </button>
-                                    </div>
-                                </form>
+                                </Form>
                             </Formik>
+
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
+
             <Footer />
+
         </>
     );
 }

@@ -59,7 +59,7 @@ export default function index()
                             {title}
                         </h1>
                         {
-                            user && user?.permit !== userTypes.admin ? 
+                            user && user?.permit === userTypes.licensee ? 
                         <div className="flex justify-end">
                             <button
                                 onClick={() =>
@@ -71,7 +71,7 @@ export default function index()
                                 Add
                             </button>
                         </div>
-                          : 
+                         :  user?.permit === userTypes.admin ?
                           <div className="flex justify-end">
 
                             <div className=" w-full md:w-1/4 px-2 mb-4">
@@ -96,7 +96,7 @@ export default function index()
                                 </select>
                             </div>
                                         </div>
-                               }
+                              : "" }
                         <div className="overflow-x-auto">
                          {
                             user?.permit !== userTypes.staff ? 
@@ -115,7 +115,7 @@ export default function index()
 
 
                                     <tr>
-                                        <td onClick={() => { navigation(`/schedule/${item?.id}/${item['time-start']}`) }} className="border px-4 py-2 cursor-pointer text-purple-600">state,{item?.city}</td>
+                                        <td onClick={() => { navigation(`/schedule/${item?.id}/${item['time-start']}`) }} className="border px-4 py-2 cursor-pointer text-purple-600">{item?.state + ", "+item?.city}</td>
                                         <td
                                              className="border px-4 py-2">{moment(item?.edate).format("ddd, MMMM D, YYYY")}</td>
                                         <td className="border px-4 py-2">{item['time-start']}</td>

@@ -25,7 +25,8 @@ export default function index() {
         if(user && user?.permit === userTypes.licensee){
             setState({
                 ...state ,
-                territory_id:user?.territory?.id
+                territory_id:user?.territory?.id,
+                state:user?.territory?.state
             }) 
         }
     },[user])
