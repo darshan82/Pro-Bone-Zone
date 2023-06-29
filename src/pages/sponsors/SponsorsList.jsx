@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Footer from "../../component/Footer";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../component/Navbar/navbar";
 import axios from "axios";
+import { UserContext } from "../../context/UserContext";
+import { userTypes } from "../../constants";
 
 export default function index() {
+    const {user} = useContext(UserContext)
     let navigation = useNavigate()
     const location = useLocation()
     const [sponsors, setSponsors] = useState([])
@@ -46,16 +49,19 @@ export default function index() {
                         >
                             Sponsors
                         </h1>
+                        {
+                            user && userTypes.licensee === user?.permit &&
                         <div className="flex justify-end">
                             <button
                                 onClick={() => {
                                     navigation("/sponsors/add");
                                 }}
                                 className="bg-[#EC672C] mb-4 px-5 py-1 rounded-sm text-white"
-                            >
+                                >
                                 Add
                             </button>
                         </div>
+                            }
                         <div className="overflow-x-auto">
                             <table className="table-auto min-w-full ">
 

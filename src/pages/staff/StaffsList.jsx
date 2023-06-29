@@ -3,9 +3,12 @@ import Footer from "../../component/Footer";
 import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../component/Navbar/navbar";
 import axios from "axios";
+import { UserContext } from "../../context/UserContext";
+import { userTypes } from "../../constants";
 
 
 export default function index() {
+    const {user} = useContext(UserContext)
     const location = useLocation()
     let navigation = useNavigate()
     const [staffList, setstaffList] = useState([])
@@ -52,6 +55,8 @@ export default function index() {
                         >
                             Staff
                         </h1>
+                        {
+                            user && user?.permit === userTypes.licensee &&
                         <div className="flex justify-end">
                             <button
                                 onClick={() => {
@@ -62,6 +67,7 @@ export default function index() {
                                 Add
                             </button>
                         </div>
+                        }
                         <div className="overflow-x-auto">
                             <table className="table-auto min-w-full ">
 

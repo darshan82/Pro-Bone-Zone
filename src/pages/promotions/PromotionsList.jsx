@@ -90,6 +90,7 @@ export default function index() {
                             </div>
                          }
                         </div>
+                         {user && user?.permit === userTypes.licensee && 
 
                         <div className="flex justify-end">
                             <button
@@ -97,10 +98,11 @@ export default function index() {
                                     navigation("/promotions/add");
                                 }}
                                 className="bg-[#EC672C] mb-4 px-5 py-1 rounded-sm text-white"
-                            >
+                                >
                                 Add
                             </button>
                         </div>
+                            }
                         <div className="overflow-x-auto">
                             <table className="table-auto min-w-full ">
 

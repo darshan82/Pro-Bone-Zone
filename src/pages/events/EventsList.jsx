@@ -49,17 +49,20 @@ export default function index()
                         >
                             {title}
                         </h1>
-                        {/* <div className="flex justify-end">
+                        {
+                            user && user?.permit === userTypes.licensee && 
+                        <div className="flex justify-end">
                             <button
                                 onClick={() =>
-                                {
+                                    {
                                     navigation("/Territories/null/?id=add");
                                 }}
                                 className="bg-[#EC672C] mb-4 px-5 py-1 rounded-sm text-white"
                             >
                                 Add
                             </button>
-                        </div> */}
+                        </div>
+                                }
                         <div className="overflow-x-auto">
                          {
                             user?.permit === userTypes.licensee ? 
