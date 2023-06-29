@@ -1,19 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Footer from "../../component/Footer";
 import Navbar from "../../component/Navbar/navbar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import { UserContext } from "../../context/UserContext";
+import { userTypes } from "../../constants";
 export default function index() {
+    const {user} = useContext(UserContext)
     document.title = "Customers";
     const [customerList, setCustomerList] = useState([])
     const navigation = useNavigate()
-
+    const [territories , setTerritories] = useState([])
     useEffect(() => {
         window.scrollTo(0, 0)
         getCustomer()
-    }, [])
+        if(userTypes.admin === user?.permit){
+                getTerritories()
+        }
+    }, [user])
 
+    const getTerritories = () => {
+        axios.get(`/territory`).then((res) => {
+            setTerritories(res?.data)
+        })
+    }
     const getCustomer = () => {
         axios.get(`/customer`).then((res) => {
             setCustomerList(res.data?.customers)
@@ -42,6 +52,31 @@ export default function index() {
                         >
                             Customers
                         </h1>
+                        {user?.permit === userTypes.admin &&
+                            <div className="flex justify-end">
+
+                                <div className="w-full md:w-1/4 px-2 mb-4">
+                                    <select
+                                        id="licenseeId"
+                                        name="licenseeId"
+                                        // value={state.licenseeId || "Select Rating"}
+                                        // onChange={handleChange}
+                                        className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                        required
+                                    >
+                                        <option value={null} >{"ALL"}</option>
+
+                                        {territories && territories.length !== 0 &&
+                                            territories?.map((option) => (
+
+                                                <option value={option?.id}>{option?.state + " " + option?.county}</option>
+                                            ))
+                                        }
+
+                                    </select>
+                                </div>
+                            </div>
+}
 
                         <div className="overflow-x-auto">
 
@@ -56,14 +91,14 @@ export default function index() {
                                 </thead>
                                 <tbody>
 
-                                    {customerList && customerList.length !== 0 ? customerList?.map((item)=>(
-                                        <tr>
+                                    {customerList && customerList.length !== 0 ? customerList?.map((item,i)=>(
+                                        <tr key={i}>
 
 
                                             <td className="border px-4 py-2">{item?.id}</td>
-                                            <td className="border px-4 py-2 cursor-pointer text-purple-600">{item?.[`name-first`] + " "+ item?.[`name-last`]}</td>
-                                            <td className="border px-4 py-2 cursor-pointer text-purple-600">{item?.phone}</td>
-                                            <td className="border px-4 py-2 cursor-pointer text-purple-600">{item?.email}</td>
+                                            <td onClick={()=>navigation(`/appointment/update/${item?.id}`)} className="border px-4 py-2 cursor-pointer text-purple-600">{item?.[`name-first`] + " "+ item?.[`name-last`]}</td>
+                                            <td className="border px-4 py-2">{item?.phone}</td>
+                                            <td className="border px-4 py-2">{item?.email}</td>
                                         </tr>
                                     ))
                                     :""}
