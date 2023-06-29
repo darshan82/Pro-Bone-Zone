@@ -21,7 +21,7 @@ export default function index() {
         e.preventDefault()
 
         axios.post(`/user/licensee/add`, state).then((res) => {
-            if (!res?.data?.error) {
+            if (res?.data?.message) {
                 Swal({
                     title:  "Licensee  Created Successfully",
                     icon: 'success',
@@ -30,15 +30,16 @@ export default function index() {
 
             }
             else {
+                console.log(res?.data?.error)
                 Swal({
-                    title: res?.data?.message,
+                    title: res?.data?.error,
                     icon: 'error',
                     timer: 2000,
                 })
             }
         }).catch((err) => {
             Swal({
-                title: err?.response?.data?.message,
+                title: err?.response?.data?.error,
                 icon: 'error',
                 timer: 2000,
             })

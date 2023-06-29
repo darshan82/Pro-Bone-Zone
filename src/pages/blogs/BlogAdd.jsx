@@ -20,13 +20,13 @@ export default function index() {
     }
 
     useEffect(() => {
-        if (state?.category === "legal") {
+        if (state?.category === "Legal") {
             setBlogSubcategory(legalSubcategoris)
         }
-        else if (state?.category === "business") {
+        else if (state?.category === "Business") {
             setBlogSubcategory(businessSubcategories)
         }
-        else if (state?.category === "financial") {
+        else if (state?.category === "Financial") {
             setBlogSubcategory(financialSubcategories)
         }
 

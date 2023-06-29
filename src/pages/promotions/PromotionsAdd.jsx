@@ -36,7 +36,18 @@ export default function index() {
 
     const getEvents = () => {
         axios.get(`/event`).then((res) => {
-            setEvents(res.data)
+           if(res?.data){
+               
+               let data = res?.data?.filter((item)=>{
+                   let currentDate = new Date()
+                   const eventDate = new Date(item?.edate)
+                return eventDate > currentDate} )
+            setEvents(data)
+            
+           }
+           
+        //    console.timeLog()
+            // setEvents(res.data)
         })
     }
 

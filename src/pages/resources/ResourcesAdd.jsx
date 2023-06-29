@@ -59,7 +59,7 @@ export default function index() {
 
             axios.post(`/upload`, formData).then((res) => {
                 setState({
-                    ...state, filepath: res?.data?.file?.filename
+                    ...state, filepath: res?.data?.file?.path
                 })
 
             }).catch((err) => {
