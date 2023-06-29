@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 export default function index() {
     document.title = "Add Resource";
     const navigation = useNavigate()
-    const [state, setState] = useState({ type: "file", editId: 1, status: "pending" })
+    const [state, setState] = useState({ type: "File",  status: "Pending" })
 
     const handleChange = (e) => {
         setState({
@@ -173,8 +173,8 @@ export default function index() {
                                                     <Field
                                                         type="radio"
                                                         name="type"
-                                                        value={"file"}
-                                                        checked={state.type === 'file'}
+                                                        value={"File"}
+                                                        checked={state.type === 'File'}
                                                         onChange={handleChange}
                                                         className="mr-2"
                                                     />
@@ -184,8 +184,8 @@ export default function index() {
                                                     <Field
                                                         type="radio"
                                                         name="type"
-                                                        value="link"
-                                                        checked={state.type === 'link'}
+                                                        value="Link"
+                                                        checked={state.type === 'Link'}
                                                         onChange={handleChange}
                                                         className="mr-2"
                                                     />
@@ -195,7 +195,7 @@ export default function index() {
                                             <ErrorMessage name="type" component="div" className="text-red-500" />
                                         </div>
                                         {
-                                            state.type === "file" ?
+                                            state.type === "File" ?
 
                                                 <div className="w-full md:w-1/2 px-2 mb-4">
                                                     <label htmlFor="filepath" className="block mb-2">
@@ -238,8 +238,8 @@ export default function index() {
                                                     <Field
                                                         type="radio"
                                                         name="status"
-                                                        value={"pending"}
-                                                        checked={state.status === 'pending'}
+                                                        value={"Pending"}
+                                                        checked={state.status === 'Pending'}
                                                         onChange={handleChange}
                                                         className="mr-2"
                                                     />
@@ -249,8 +249,8 @@ export default function index() {
                                                     <Field
                                                         type="radio"
                                                         name="status"
-                                                        value="live"
-                                                        checked={state.status === 'live'}
+                                                        value="Live"
+                                                        checked={state.status === 'Live'}
                                                         onChange={handleChange}
                                                         className="mr-2"
                                                     />
