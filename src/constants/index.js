@@ -83,7 +83,7 @@ export const PromotionTypes = [{label:"Legal" , value:"Legal"},{label:"Business"
 
 //  sponsors
 export const consultantCategory = [{label:"Legal" , value:"Legal"},{label:"Business" , value:"Business"},{label:"Financial" , value:"Financial"}]
-export const promoterCategory=[{label:"Business" , value:"business"},{label:"Government" , value:"government"},{label:"Non-Profit" , value:"non-profit"},{label:"Other" , value:"other"}] 
+export const promoterCategory=[{label:"Business" , value:"Business"},{label:"Government" , value:"Government"},{label:"Non-Profit" , value:"Non-Profit"},{label:"Other" , value:"Other"}] 
 
 
 // resources Selections

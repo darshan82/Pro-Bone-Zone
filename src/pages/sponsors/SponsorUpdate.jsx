@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Footer from "../../component/Footer";
 import { ErrorMessage, Field, Formik } from 'formik';
 import Swal from 'sweetalert';
@@ -6,12 +6,14 @@ import axios from "axios";
 import { consultantCategory, promoterCategory } from "../../constants";
 import Navbar from "../../component/Navbar/navbar";
 import { useNavigate, useParams } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
 
 export default function index() {
     const navigation = useNavigate()
+    const {user} = useContext(UserContext)
     document.title = "Sponsor"
     const {id} = useParams()
-    const [state, setState] = useState({ territoryId:100, editId:2})
+    const [state, setState] = useState({})
     const [type, setType] = useState([])
     const [sponsorDetails , setSponsorDetails] = useState()
     const handleChange = (e) => {
@@ -141,7 +143,7 @@ export default function index() {
                                             <div className="mt-1">
                                                 <Field
                                                     type="text"
-                                                    value={"state,county"}
+                                                    value={user?.territory ? user?.territory?.state +", "+ user?.territory?.county : " "}
                                                     onChange={handleChange}
                                                     className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                     required

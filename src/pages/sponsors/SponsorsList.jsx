@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import Footer from "../../component/Footer";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import {  useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../component/Navbar/navbar";
 import axios from "axios";
 import { UserContext } from "../../context/UserContext";
@@ -11,6 +11,7 @@ export default function index() {
     let navigation = useNavigate()
     const location = useLocation()
     const [sponsors, setSponsors] = useState([])
+    const [territories , setTerritories] = useState([])
     document.title = "Sponsors";
 
     const getSponsors = () => {
@@ -21,11 +22,19 @@ export default function index() {
             axios.get(`/sponsor`).then((res) => setSponsors(res?.data))
         }
     }
+    const getTerritories = () => {
+        axios.get(`/territory`).then((res) => {
+            setTerritories(res?.data)
+        })
+    }
 
     useEffect(() => {
         window.scrollTo(0, 0)
         getSponsors()
-    }, [])
+        if(user && user?.permit === userTypes.admin){
+            getTerritories()
+        }
+    }, [user])
 
     return (
         <>
@@ -49,8 +58,32 @@ export default function index() {
                         >
                             Sponsors
                         </h1>
-                        {
-                            user && userTypes.licensee === user?.permit &&
+                        {user?.permit === userTypes.admin ?
+                            <div className="flex justify-end">
+
+                                <div className="w-full md:w-1/4 px-2 mb-4">
+                                    <select
+                                        id="licenseeId"
+                                        name="licenseeId"
+                                        // value={state.licenseeId || "Select Rating"}
+                                        // onChange={handleChange}
+                                        className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                        required
+                                    >
+                                        <option value={null} >{"ALL"}</option>
+
+                                        {territories && territories.length !== 0 &&
+                                            territories?.map((option) => (
+
+                                                <option value={option?.id}>{option?.state + " " + option?.county}</option>
+                                            ))
+                                        }
+
+                                    </select>
+                                </div>
+                            </div>
+                            :
+                        
                         <div className="flex justify-end">
                             <button
                                 onClick={() => {
