@@ -8,10 +8,11 @@ import { userTypes } from "../../constants";
 
 
 export default function index() {
-    const {user} = useContext(UserContext)
+    const { user } = useContext(UserContext)
     const location = useLocation()
     let navigation = useNavigate()
     const [staffList, setstaffList] = useState([])
+    const [territories, setTerritories] = useState([])
     document.title = "Staff";
 
     const getStaff = () => {
@@ -26,9 +27,19 @@ export default function index() {
         })
     }
 
+    const getTerritories = () => {
+        axios.get(`/territory`).then((res) => {
+            setTerritories(res?.data)
+        })
+    }
+
+
     useEffect(() => {
         window.scrollTo(0, 0)
         getStaff()
+        if (user && user?.permit === userTypes.admin) {
+            getTerritories()
+        }
 
     }, [])
 
@@ -55,18 +66,41 @@ export default function index() {
                         >
                             Staff
                         </h1>
-                        {
-                            user && user?.permit === userTypes.licensee &&
-                        <div className="flex justify-end">
-                            <button
-                                onClick={() => {
-                                    navigation("/staff/add");
-                                }}
-                                className="bg-[#EC672C] mb-4 px-5 py-1 rounded-sm text-white"
-                            >
-                                Add
-                            </button>
-                        </div>
+                        {user?.permit === userTypes.admin ?
+                            <div className="flex justify-end">
+
+                                <div className="w-full md:w-1/4 px-2 mb-4">
+                                    <select
+                                        id="licenseeId"
+                                        name="licenseeId"
+                                        // value={state.licenseeId || "Select Rating"}
+                                        // onChange={handleChange}
+                                        className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                        required
+                                    >
+                                        <option value={null} >{"ALL"}</option>
+
+                                        {territories && territories.length !== 0 &&
+                                            territories?.map((option) => (
+
+                                                <option value={option?.id}>{option?.state + " " + option?.county}</option>
+                                            ))
+                                        }
+
+                                    </select>
+                                </div>
+                            </div>
+                            :
+                            <div className="flex justify-end">
+                                <button
+                                    onClick={() => {
+                                        navigation("/staff/add");
+                                    }}
+                                    className="bg-[#EC672C] mb-4 px-5 py-1 rounded-sm text-white"
+                                >
+                                    Add
+                                </button>
+                            </div>
                         }
                         <div className="overflow-x-auto">
                             <table className="table-auto min-w-full ">

@@ -14,6 +14,7 @@ export default function index() {
     const [territories, setTerritories] = useState([])
     document.title = "Promotions";
 
+
     const getPromotions = () => {
         axios.get(`/promotion`).then((res) => {
 
@@ -40,7 +41,7 @@ export default function index() {
         getPromotions()
         {
             user?.permit === userTypes.admin &&
-            getTerritories()
+                getTerritories()
         }
     }, [])
 
