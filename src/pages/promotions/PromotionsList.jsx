@@ -8,25 +8,26 @@ import { userTypes } from "../../constants";
 
 export default function index() {
     let navigation = useNavigate()
-    const {user} = useContext(UserContext)
+    const { user } = useContext(UserContext)
     const location = useLocation()
     const [promotions, setPromotions] = useState([])
-    const [territoris, setTerritories] = useState([])
+    const [territories, setTerritories] = useState([])
     document.title = "Promotions";
-    
-    const getPromotions = () => {
-            axios.get(`/promotion`).then((res) => {
 
-                if (location?.state?.tId) {
-                    let updatedList = res?.data?.filter((item) => item?.[`territory-id`] === location.state?.tId)
-                    setPromotions(updatedList)
-                }
-                else{
-                    setPromotions(res?.data)
-                }
+    const getPromotions = () => {
+        axios.get(`/promotion`).then((res) => {
+
+            if (location?.state?.tId) {
+                let updatedList = res?.data?.filter((item) => item?.[`territory-id`] === location.state?.tId)
+                setPromotions(updatedList)
             }
-            )
+            else {
+                setPromotions(res?.data)
+            }
         }
+        )
+    }
+
 
     const getTerritories = () => {
         axios.get(`/territory`).then((res) => {
@@ -37,7 +38,8 @@ export default function index() {
     useEffect(() => {
         window.scrollTo(0, 0)
         getPromotions()
-        { user?.permit === userTypes.admin &&
+        {
+            user?.permit === userTypes.admin &&
             getTerritories()
         }
     }, [])
@@ -66,43 +68,46 @@ export default function index() {
                             >
                                 Promotions
                             </h1>
-                            {user?.permit ===userTypes.admin && 
-                            <div className="w-full md:w-1/4 px-2 mb-4">
+                        </div>
+                        {user?.permit === userTypes.admin ?
+                            <div className="flex justify-end">
 
-                                <select
-                                    id="licenseeId"
-                                    name="licenseeId"
-                                    // value={state.licenseeId || "Select Rating"}
-                                    // onChange={handleChange}
-                                    className="w-full border border-gray-300 px-3 py-2 rounded-sm"
-                                    required
+                                <div className="w-full md:w-1/4 px-2 mb-4">
+                                    <select
+                                        id="licenseeId"
+                                        name="licenseeId"
+                                        // value={state.licenseeId || "Select Rating"}
+                                        // onChange={handleChange}
+                                        className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                        required
                                     >
-                                    <option value={null} >{"ALL"}</option>
+                                        <option value={null} >{"ALL"}</option>
 
-                                    {territoris && territoris.length !== 0 &&
-                                        territoris?.map((option) => (
-                                            
-                                            <option value={option?.id}>{option?.state + " " + option?.county}</option>
+                                        {territories && territories.length !== 0 &&
+                                            territories?.map((option) => (
+
+                                                <option value={option?.id}>{option?.state + " " + option?.county}</option>
                                             ))
-                                    }
+                                        }
 
-                                </select>
+                                    </select>
+                                </div>
                             </div>
-                         }
-                        </div>
-                         {user && user?.permit === userTypes.licensee && 
+                            :
 
-                        <div className="flex justify-end">
-                            <button
-                                onClick={() => {
-                                    navigation("/promotions/add");
-                                }}
-                                className="bg-[#EC672C] mb-4 px-5 py-1 rounded-sm text-white"
+
+                            <div className="flex justify-end">
+                                <button
+                                    onClick={() => {
+                                        navigation("/promotions/add");
+                                    }}
+                                    className="bg-[#EC672C] mb-4 px-5 py-1 rounded-sm text-white"
                                 >
-                                Add
-                            </button>
-                        </div>
-                            }
+                                    Add
+                                </button>
+                            </div>
+                        }
+
                         <div className="overflow-x-auto">
                             <table className="table-auto min-w-full ">
 

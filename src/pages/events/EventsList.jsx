@@ -15,11 +15,20 @@ export default function index()
     const title = pathname.replace("/", "").charAt(0).toUpperCase() + pathname.slice(2)
     document.title = title;
     const [eventList, setEventList] = useState(null)
+    const [territories , setTerritories] = useState([])
+    const getTerritories = () => {
+        axios.get(`/territory`).then((res) => {
+            setTerritories(res?.data)
+        })
+    }
 
     useEffect(() =>
     {
         window.scrollTo(0, 0)
-    }, [])
+        if(user && user?.permit === userTypes.admin){
+            getTerritories()
+        }
+    }, [user])
 
     useEffect(() =>
     {
@@ -50,7 +59,7 @@ export default function index()
                             {title}
                         </h1>
                         {
-                            user && user?.permit === userTypes.licensee && 
+                            user && user?.permit !== userTypes.admin ? 
                         <div className="flex justify-end">
                             <button
                                 onClick={() =>
@@ -62,10 +71,35 @@ export default function index()
                                 Add
                             </button>
                         </div>
-                                }
+                          : 
+                          <div className="flex justify-end">
+
+                            <div className=" w-full md:w-1/4 px-2 mb-4">
+
+                                <select
+                                    id="licenseeId"
+                                    name="licenseeId"
+                                    // value={state.licenseeId || "Select Rating"}
+                                    // onChange={handleChange}
+                                    className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                    required
+                                    >
+                                    <option value={null} >{"ALL"}</option>
+
+                                    {territories && territories.length !== 0 &&
+                                        territories?.map((option) => (
+                                            
+                                            <option value={option?.id}>{option?.state + " " + option?.county}</option>
+                                            ))
+                                        }
+
+                                </select>
+                            </div>
+                                        </div>
+                               }
                         <div className="overflow-x-auto">
                          {
-                            user?.permit === userTypes.licensee ? 
+                            user?.permit !== userTypes.staff ? 
                             <table className="table-auto min-w-full ">
                             <thead>
                             <tr>

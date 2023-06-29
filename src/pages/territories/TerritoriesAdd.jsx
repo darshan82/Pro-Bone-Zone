@@ -202,7 +202,6 @@ export default function index() {
                                                 id="notes"
                                                 value={state.notes}
                                                 onChange={handleChange}
-                                                required
                                             />
                                             <ErrorMessage name="notes" component="div" className="text-red-500" />
 
