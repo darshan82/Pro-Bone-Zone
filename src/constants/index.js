@@ -71,7 +71,7 @@ export const setDefaultPath = (user) =>
 
 }
 
-export const interests = [{ label: "Family Law", value: "family-law" }, { label: "Business Law", value: "business-law" }]
+export const interests = [{ label: "Family Law", value: "Family law" }, { label: "Business Law", value: "Business Law" }]
 export const ratings = [1, 2, 3, 4, 5] 
 
 
@@ -88,12 +88,12 @@ export const promoterCategory=[{label:"Business" , value:"Business"},{label:"Gov
 
 // resources Selections
 export const resourceViewers=[{label:"Admin" , value:"admin"},{label:"Licensee" , value:"licensee"},{label:"Staff" , value:"staff"},{label:"Public" , value:"public"}] 
-export const resourceCategory=[{label:"Quick Start" , value:"quick-start"},{label:"Training" , value:"training"},{label:"Messaging" , value:"messaging"},{label:"Marketing" , value:"marketing"} ,{label:"Other" , value:"other"} ] 
+export const resourceCategory=[{label:"Quick Start" , value:"Quick Start"},{label:"Training" , value:"Training"},{label:"Messaging" , value:"Messaging"},{label:"Marketing" , value:"Marketing"} ,{label:"Other" , value:"Other"} ] 
 
 
 //  blog selections
 
-export const blogCategory = [{label:"Legal" , value:"legal"},{label:"Business" , value:"business"},{label:"Financial" , value:"financial"}]
-export const legalSubcategoris = [{label:"Family Law" , value:"family-law"},{label:"Business Law" , value:"business-law"},{label:"Litigation" , value:"litigation"},{label:"Labor & Employment" , value:"labor & employment"},{label:"Real Estate Law" , value:"Real-Estate-Law"}]
+export const blogCategory = [{label:"Legal" , value:"Legal"},{label:"Business" , value:"Business"},{label:"Financial" , value:"Financial"}]
+export const legalSubcategoris = [{label:"Family Law" , value:"Family Law"},{label:"Business Law" , value:"Business Law"},{label:"Litigation" , value:"Litigation"},{label:"Labor & Employment" , value:"Labor & Employment"},{label:"Real Estate Law" , value:"Real Estate Law"}]
 export const businessSubcategories=[{label:"1" , value:"1"},{label:"2" , value:"2"},{label:"3" , value:"3"},{label:"4" , value:"4"},{label:"5" , value:"5"}]
 export const financialSubcategories=[{label:"A" , value:"a"},{label:"B" , value:"b"},{label:"C" , value:"c"},{label:"D" , value:"d"},{label:"E" , value:"e"}]
