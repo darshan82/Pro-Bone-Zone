@@ -1,169 +1,232 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import ArrowRight from "../../assets/ArrowRight.png"
 import Footer from "../../component/Footer";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+import Swal from 'sweetalert';
 import axios from "axios";
-import moment from "moment";
-import { EventContext } from "../../context/EventContext";
 import Navbar from "../../component/Navbar/navbar";
+import { useNavigate, useParams } from "react-router-dom";
+import { userTypes } from "../../constants";
+import { UserContext } from "../../context/UserContext";
 
-export default function index()
-{
-    let navigation = useNavigate()
-    const { eventId, date } = useParams()
-    const { updateEvent } = useContext(EventContext)
-    const { pathname } = useLocation();
-    const title = pathname.replace("/", "").charAt(0).toUpperCase() + pathname.slice(2)
-    document.title = title;
-    const [scheduleList, setScheduleList] = useState([])
-
-    useEffect(() =>
-    {
-        window.scrollTo(0, 0)
-    }, [])
-
-
-    useEffect(() =>
-    {
-        axios.get(`/appointment?eventId=${eventId}`).then((res) =>
-        {
-            const data = res.data?.appointments
-            if (data && data.length !== 0)
-            {
-                // const updatedData = data?.filter((item) => item[`event-id`] == eventId && true)
-
-                function arrangeDataByEdate(data)
-                {
-                    const arrangedData = [];
-
-                    data.forEach((item) =>
-                    {
-                        const edate = item["time-start"]
-                        const existingItem = arrangedData.find((arrangedItem) => arrangedItem.value === edate);
-
-                        if (existingItem)
-                        {
-                            existingItem.data.push(item);
-                        } else
-                        {
-                            arrangedData.push({ value: edate, data: [item] });
-                        }
-                    });
-
-                    arrangedData.forEach((item) =>
-                    {
-                        item.data.sort((a, b) =>
-                        {
-                            const timeStartA = a['time-start'];
-                            const timeStartB = b['time-start'];
-                            return timeStartA.localeCompare(timeStartB, undefined, { numeric: true });
-                        });
-                    });
-
-                    return arrangedData;
-                }
-
-                setScheduleList(arrangeDataByEdate(data))
-            }
-
-
+export default function index() {
+    document.title = "Profile";
+    const {user} = useContext(UserContext)
+    const [state, setState] = useState({})
+    const [userDetails, setUserDetails] = useState({})
+    const handleChange = (e) => {
+        setState({
+            ...state,
+            [e.target.name]: e.target.value
         })
-    }, [])
-
-    const handleEventDetail = (data) =>
-    {
-        updateEvent(data)
-        navigation(`/appointment/update/${data[`customer-id`]}`)
     }
 
-    document.title = "Event Schedule"
+
+    useEffect(() => {
+        if(user){
+            axios.get(`/user/licensee/${user?.id}`).then((res) => {
+                setUserDetails(res?.data)
+            })
+
+        }
+    }, [user])
+
+    useEffect(() => {
+        if (userDetails) {
+            let { permit,email, phone, pass, notes } = userDetails
+            setState({
+                ...state,
+                email,
+                phone,
+                pass,
+                notes,
+                permit,
+                name_first: userDetails?.[`name-first`],
+                name_last: userDetails?.[`name-last`]
+            })
+        }
+    }, [userDetails])
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        axios.put(`/user/licensee/update/${user?.id}`, state).then((res) => {
+            if (!res.data.error) {
+                Swal({
+                    text: "Profile updated successfully.",
+                    icon: 'success',
+                    timer: 2000,
+                })
+
+            }
+            else {
+                Swal({
+                    text: res?.data?.message,
+                    icon: 'error',
+                    timer: 2000,
+                })
+            }
+
+        }).catch((err) => {
+            Swal({
+                title: err.response?.data?.message,
+                icon: 'error',
+                timer: 4000,
+
+            })
+        })
+    }
+
+
 
     return (
         <>
             <Navbar />
 
-            <div className="bg-[#EAEFF8] pt-2 pb-5">
-                {/* <Navbar /> */}
-                {/* Hero Section */}
-
-                <div className="flex flex-col  ml-10  md:ml-20 lg:ml-44  sm:ml-10 sm:justify-center md: items-start justify-center ">
-
-                </div>
-            </div>
-
             {/* A Smart Solution */}
-            <div className="bg-white p-2 pl-3 pr-5 lg:pr-9 lg:ml-44 mb-12">
-                <div className="max-w-full mb-10 ">
-                    <div className="container mx-auto py-8">
+            <div className="bg-white pl-3 pr-5 lg:pr-9 lg:ml-44">
+                <div className="max-w-full mb-2 ">
+                    <div className="container mx-auto py-4">
                         <h1
                             className=" text-[#2E5FB7]  lg:text-left font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-4xl leading-10  lg:w-[450px] w-full   mb-5"
                         >
-                            Event Schedule
+                            Profile
+
                         </h1>
-                        {/* <div className="flex justify-end">
-                            <button
-                                onClick={() =>
-                                {
-                                    navigation("/Territories/null/?id=add");
-                                }}
-                                className="bg-[#EC672C] mb-4 px-5 py-1 rounded-sm text-white"
-                            >
-                                Add
-                            </button>
-                        </div> */}
 
-                        <div style={{ overflowY: "auto" }}>
 
-                            Date:  {moment(scheduleList[0]?.data[0]?.edate).format("ddd, MMMM D, YYYY")}
-                            <div> Location: {scheduleList[0]?.data[0]?.city}</div>
-                            <div>  Focus:  {scheduleList[0]?.data[0]?.interest}</div>
 
-                            {
-                                scheduleList && scheduleList.length !== 0 && scheduleList.map((item) => (
-                                    <React.Fragment>
-                                        <div className="mt-5 capitalize"><b>  {item?.value}</b></div>
-                                        {
-                                            item.data.map(value =>
-                                            {
-                                                return (
-                                                    <div className=" cursor-pointer" onClick={() => handleEventDetail(value)}>  {value["name-first"]} {" "}{value["name-last"]}</div>
+                        <div className="box  ">
+                            <Formik initialValues={state}  >
+                                <Form onSubmit={handleSubmit} >
+                                    <div className="flex flex-wrap">
+                                        <div className="w-full md:w-1/2 px-2 mb-4">
+                                            <label htmlFor="name_first" className="block mb-2">
+                                                First Name:
+                                            </label>
+                                            <div className="mt-1">
+                                                <Field
+                                                    type="text"
+                                                    id="name_first"
+                                                    name="name_first"
+                                                    value={state.name_first}
+                                                    onChange={handleChange}
+                                                    autoComplete="given-name"
+                                                    className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                                    required
+                                                />
+                                            </div>
+                                        </div>
 
-                                                )
-                                            })
-                                        }
-                                    </React.Fragment>
-                                ))
-                            }
+                                        <div className="w-full md:w-1/2 px-2 mb-4">
+                                            <label htmlFor="name_last" className="block mb-2">
+                                                Last Name:
+                                            </label>
+                                            <div className="mt-1">
+                                                <Field
+                                                    type="text"
+                                                    id="name_last"
+                                                    name="name_last"
+                                                    value={state.name_last}
+                                                    onChange={handleChange}
+                                                    autoComplete="family-name"
+                                                    className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                                    required
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div className="w-full md:w-1/2 px-2 mb-4">
+                                            <label htmlFor="phone" className="block mb-2">
+                                                Phone:
+                                            </label>
+                                            <div className="mt-1">
+                                                <Field
+                                                    type="number"
+                                                    id="phone"
+                                                    name="phone"
+                                                    value={state.phone}
+                                                    onChange={handleChange}
+                                                    autoComplete="tel"
+                                                    className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                                    required
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div className="w-full md:w-1/2 px-2 mb-4">
+                                            <label htmlFor="email" className="block mb-2">
+                                                Email:
+                                            </label>
+                                            <div className="mt-1">
+                                                <Field
+                                                    type="email"
+                                                    id="email"
+                                                    name="email"
+                                                    value={state.email}
+                                                    onChange={handleChange}
+                                                    autoComplete="email"
+                                                    className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                                    required
+                                                    disabled
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div className="w-full md:w-1/2 px-2 mb-4">
+                                            <label htmlFor="password" className="block mb-2">
+                                                Password:
+                                            </label>
+                                            <div className="mt-1">
+                                                <Field
+                                                    type="password"
+                                                    id="password"
+                                                    name="pass"
+                                                    value={state.pass}
+                                                    onChange={handleChange}
+                                                    autoComplete="new-password"
+                                                    className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                                    required
+                                                />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div className="w-full  px-2 mb-4">
+                                        <label htmlFor="notes" className="block mb-2">
+                                            Notes:
+                                        </label>
+                                        <div className="mt-1">
+                                            <Field
+                                                as="textarea"
+                                                rows={4}
+                                                id="notes"
+                                                name="notes"
+                                                value={state.notes}
+                                                onChange={handleChange}
+                                                className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                                required
+                                            ></Field>
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <div className="flex justify-center">
+
+                                        <React.Fragment>
+                                            <button
+                                                type="submit"
+                                                className="bg-[#EC672C] mb-4 mr-2 px-5 py-1 rounded-sm text-white"
+                                            >
+                                                Update
+                                            </button>
+                                        </React.Fragment>
+
+                                    </div>
+                                </Form>
+                            </Formik>
 
                         </div>
-                        {/* <div className="overflow-x-auto">
-                            <table className="table-auto min-w-full">
-                                <thead>
-                                    <tr>
-                                        <th className="border px-4 py-2 text-left">Date</th>
-                                        <th className="border px-4 py-2 text-left">Customer Name</th>
-
-                                        <th className="border px-4 py-2 text-left">Location</th>
-
-                                        <th className="border px-4 py-2 text-left">Focus</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {scheduleList && scheduleList.length !== 0 ? scheduleList.map((item) => (
-                                        <tr>
-
-                                            <td className="border px-4 py-2">{moment(item?.edate).format("ddd, MMMM D, YYYY")}, {" "}{item["time-start"]}</td>
-                                            <td  className="border px-4 py-2 text-purple-600 cursor-pointer">{item["name-first"] + " " + item["name-last"]}</td>
-                                            <td className="border px-4 py-2">{item[`city`]}</td>
-                                            <td className="border px-4 py-2">{Boolean(item?.interest) ? item?.interest : ""}</td>
-                                        </tr>
-
-                                    ))
-
-                                        : ""}
-                                </tbody>
-                            </table>
-                        </div> */}
                     </div>
                 </div>
             </div >
