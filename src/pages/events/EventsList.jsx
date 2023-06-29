@@ -64,7 +64,7 @@ export default function index()
                             <button
                                 onClick={() =>
                                     {
-                                    navigation("/Territories/null/?id=add");
+                                    navigation("/events/add");
                                 }}
                                 className="bg-[#EC672C] mb-4 px-5 py-1 rounded-sm text-white"
                             >
