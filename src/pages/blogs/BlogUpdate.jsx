@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../../component/Footer";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import Swal from 'sweetalert';
@@ -6,34 +6,44 @@ import axios from "axios";
 import Navbar from "../../component/Navbar/navbar";
 import { blogCategory, businessSubcategories, financialSubcategories, legalSubcategoris } from "../../constants";
 import { useNavigate, useParams } from "react-router-dom";
-
-export default function index() {
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+export default function index()
+{
     document.title = "Blog";
-    const {id} = useParams()
+    const { id } = useParams()
     const navigation = useNavigate()
     const [state, setState] = useState({})
     const [blogDetails, setBlogDetails] = useState({})
-    const [blogSubcategory , setBlogSubcategory] = useState([])
-    const handleChange = (e) => {
+    const [blogSubcategory, setBlogSubcategory] = useState([])
+    const handleChange = (e) =>
+    {
         setState({
             ...state,
             [e.target.name]: e.target.value
         })
     }
+    const [value, setValue] = useState('');
 
-    useEffect(()=>{
-            if(id){
-                axios.get(`/blogs/${id}`).then((res)=>{
-                    setBlogDetails(res.data)
-                })
-            }
-    },[id])
+    useEffect(() =>
+    {
+        if (id)
+        {
+            axios.get(`/blogs/${id}`).then((res) =>
+            {
+                setBlogDetails(res.data)
+            })
+        }
+    }, [id])
 
-    useEffect(()=>{
-        if(blogDetails ){
-            const {author , blog_text , category , subcategory , status , title  } = blogDetails
+    useEffect(() =>
+    {
+        if (blogDetails)
+        {
+            console.log("blogDetails", blogDetails)
+            const { author, blog_text, category, subcategory, status, title } = blogDetails
             setState({
-                ...state , 
+                ...state,
                 author,
                 blog_text,
                 category,
@@ -41,27 +51,36 @@ export default function index() {
                 status,
                 title
             })
-            
+            if (blog_text)
+                setValue(blog_text)
         }
-    },[blogDetails])
+    }, [blogDetails])
 
-    useEffect(()=>{
-            if(state?.category === "legal"){
-                setBlogSubcategory(legalSubcategoris)
-            }
-            else if(state?.category==="business"){
-                setBlogSubcategory(businessSubcategories)
-            }
-            else if(state?.category === "financial"){
-                setBlogSubcategory(financialSubcategories)
-            }
-            
-    },[state.category])
+    useEffect(() =>
+    {
+        console.log("state?.category", state?.category)
+        if (state?.category?.toLowerCase() === "legal".toLowerCase())
+        {
+            setBlogSubcategory(legalSubcategoris)
+        }
+        else if (state?.category?.toLowerCase() === "business".toLowerCase())
+        {
+            setBlogSubcategory(businessSubcategories)
+        }
+        else if (state?.category?.toLowerCase() === "financial".toLowerCase())
+        {
+            setBlogSubcategory(financialSubcategories)
+        }
 
-    const handleSubmit = (e) => {
+    }, [state.category])
+
+    const handleSubmit = (e) =>
+    {
         e.preventDefault()
-        axios.put(`/blogs/update/${id}`, state).then((res) => {
-            if (!res.data.error) {
+        axios.put(`/blogs/update/${id}`, {...state,"blog_text": value }).then((res) =>
+        {
+            if (!res.data.error)
+            {
                 Swal({
                     text: "Blog updated successfully.",
                     icon: 'success',
@@ -70,7 +89,8 @@ export default function index() {
                 navigation("/blogs")
 
             }
-            else {
+            else
+            {
                 Swal({
                     text: res?.data?.message,
                     icon: 'error',
@@ -78,7 +98,8 @@ export default function index() {
                 })
             }
 
-        }).catch((err) => {
+        }).catch((err) =>
+        {
             Swal({
                 title: err.response?.data?.message,
                 icon: 'error',
@@ -87,7 +108,7 @@ export default function index() {
             })
         })
     }
-    
+
     const handleDelete = () =>
     {
         axios.delete(`/blogs/delete/${id}`).then((res) =>
@@ -108,7 +129,7 @@ export default function index() {
                     icon: 'error',
                     timer: 2000,
                 })
-                
+
             }
 
         }).catch((err) =>
@@ -143,7 +164,7 @@ export default function index() {
                             <Formik initialValues={state}   >
                                 <Form onSubmit={handleSubmit}>
                                     <div className="flex flex-wrap">
-                                       
+
                                         <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="category" className="block mb-2">
                                                 Category:
@@ -157,7 +178,7 @@ export default function index() {
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
                                             >
-                                                     <option value="">Select Category</option>
+                                                <option value="">Select Category</option>
 
                                                 {blogCategory && blogCategory.length !== 0 &&
                                                     blogCategory?.map((option) => (
@@ -182,8 +203,8 @@ export default function index() {
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
                                             >
-                                                     <option value="">Select SubCategory</option>
-
+                                                <option value="">Select SubCategory</option>
+                                                {console.log("blogSubcategory", blogSubcategory)}
                                                 {blogSubcategory && blogSubcategory.length !== 0 &&
                                                     blogSubcategory?.map((option) => (
 
@@ -194,24 +215,24 @@ export default function index() {
                                             </Field>
                                             <ErrorMessage name="subcategory" component="div" className="text-red-500" />
                                         </div>
-                                       
+
                                         <div className="w-full md:w-1/2 px-2 mb-4">
-                                                    <label htmlFor="author" className="block mb-2">
-                                                        Author:
-                                                    </label>
-                                                    <Field
-                                                        type="text"
-                                                        id="author"
-                                                        name="author"
-                                                        className="w-full border border-gray-300 px-3 py-2 rounded-sm"
-                                                        required
-                                                        onChange={handleChange}
-                                                        value={state.author}
-                                                    />
-                                                    <ErrorMessage name="filepath" component="div" className="text-red-500" />
-                                                </div>
-                                        
-                                        
+                                            <label htmlFor="author" className="block mb-2">
+                                                Author:
+                                            </label>
+                                            <Field
+                                                type="text"
+                                                id="author"
+                                                name="author"
+                                                className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                                required
+                                                onChange={handleChange}
+                                                value={state.author}
+                                            />
+                                            <ErrorMessage name="filepath" component="div" className="text-red-500" />
+                                        </div>
+
+
                                         <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="status" className="block mb-2">
                                                 Status:
@@ -242,68 +263,65 @@ export default function index() {
                                             </div>
                                             <ErrorMessage name="status" component="div" className="text-red-500" />
                                         </div>
-                                        
-                                                <div className="w-full md:w-1/2 px-2 mb-4">
-                                                    <label htmlFor="title" className="block mb-2">
-                                                        Title:
-                                                    </label>
-                                                    <Field
-                                                        type="text"
-                                                        id="title"
-                                                        name="title"
-                                                        className="w-full border border-gray-300 px-3 py-2 rounded-sm"
-                                                        required
-                                                        onChange={handleChange}
-                                                        value={state.title}
-                                                    />
-                                                    <ErrorMessage name="title" component="div" className="text-red-500" />
-                                                </div>
-                                        
-                                       
-                                                </div>  
-                                                <div className="w-full px-2 mb-4">
-                                            <label htmlFor="blog_text" className="block mb-2">
-                                                Blog-text:
+
+                                        <div className="w-full md:w-1/2 px-2 mb-4">
+                                            <label htmlFor="title" className="block mb-2">
+                                                Title:
                                             </label>
                                             <Field
-                                                as="textarea"
-                                                rows="4"
+                                                type="text"
+                                                id="title"
+                                                name="title"
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
-                                                name="blog_text"
-                                                id="blog_text"
-                                                value={state.blog_text}
+                                                required
                                                 onChange={handleChange}
+                                                value={state.title}
                                             />
-                                            <ErrorMessage name="blog_text" component="div" className="text-red-500" />
+                                            <ErrorMessage name="title" component="div" className="text-red-500" />
+                                        </div>
 
+
+                                    </div>
+                                    <div className="w-full px-2 mb-4">
+                                        <label htmlFor="blog_text" className="block mb-2">
+                                            Blog-text:
+                                        </label>
+                                        <ReactQuill
+                                            name="blog_text"
+                                            id="blog_text"
+                                            value={value}
+                                            onChange={setValue}
+                                            className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                            theme="snow" />
                                     </div>
 
                                     <div className="flex justify-center">
-                                                <React.Fragment>
+                                        <React.Fragment>
 
-                                        <button
-                                        type="submit"
-                                            className="bg-[#EC672C] mb-4 mr-2 px-5 py-1 rounded-sm text-white"
+                                            <button
+                                                type="submit"
+                                                className="bg-[#EC672C] mb-4 mr-2 px-5 py-1 rounded-sm text-white"
                                             >
                                                 Update
                                             </button>
-                                        
+
                                             <button
-                                            type="button"
-                                            onClick={() =>
+                                                type="button"
+                                                onClick={() =>
                                                 {
-                                                        Swal({
-                                                            text: 'Are you sure you want to remove this record?',
-                                                            icon: 'warning',
-                                                            showCancelButton: true,
-                                                            confirmButtonColor: 'red',
-                                                            confirmButtonText: 'Delete',
-                                                            cancelButtonText: 'Cancel'
-                                                        }).then((result)=>{
-                                                                handleDelete()
-                                                        })
-                                                    }}
-                                                    className="bg-[#EC672C] mb-4 ml-2 px-5 py-1 rounded-sm text-white"
+                                                    Swal({
+                                                        text: 'Are you sure you want to remove this record?',
+                                                        icon: 'warning',
+                                                        showCancelButton: true,
+                                                        confirmButtonColor: 'red',
+                                                        confirmButtonText: 'Delete',
+                                                        cancelButtonText: 'Cancel'
+                                                    }).then((result) =>
+                                                    {
+                                                        handleDelete()
+                                                    })
+                                                }}
+                                                className="bg-[#EC672C] mb-4 ml-2 px-5 py-1 rounded-sm text-white"
                                             >
                                                 Delete
                                             </button>

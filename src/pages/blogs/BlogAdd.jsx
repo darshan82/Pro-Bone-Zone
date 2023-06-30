@@ -6,36 +6,47 @@ import axios from "axios";
 import Navbar from "../../component/Navbar/navbar";
 import { blogCategory, businessSubcategories, financialSubcategories, legalSubcategoris } from "../../constants";
 import { useNavigate } from "react-router-dom";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
-export default function index() {
+export default function index()
+{
     document.title = "Add Blog";
     const navigation = useNavigate()
     const [state, setState] = useState({ edit_id: 2, status: "pending" })
     const [blogSubcategory, setBlogSubcategory] = useState([])
-    const handleChange = (e) => {
+    const handleChange = (e) =>
+    {
         setState({
             ...state,
             [e.target.name]: e.target.value
         })
     }
-
-    useEffect(() => {
-        if (state?.category === "Legal") {
+    const [value, setValue] = useState('');
+    useEffect(() =>
+    {
+        if (state?.category === "Legal")
+        {
             setBlogSubcategory(legalSubcategoris)
         }
-        else if (state?.category === "Business") {
+        else if (state?.category === "Business")
+        {
             setBlogSubcategory(businessSubcategories)
         }
-        else if (state?.category === "Financial") {
+        else if (state?.category === "Financial")
+        {
             setBlogSubcategory(financialSubcategories)
         }
 
     }, [state.category])
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e) =>
+    {
         e.preventDefault()
-        axios.post(`/blogs/add`, state).then((res) => {
-            if (!res.data.error) {
+        axios.post(`/blogs/add`, { ...state, "blog_text": value }).then((res) =>
+        {
+            if (!res.data.error)
+            {
                 Swal({
                     text: "Blog added successfully.",
                     icon: 'success',
@@ -44,7 +55,8 @@ export default function index() {
                 navigation("/blogs")
 
             }
-            else {
+            else
+            {
                 Swal({
                     text: res?.data?.message,
                     icon: 'error',
@@ -52,7 +64,8 @@ export default function index() {
                 })
             }
 
-        }).catch((err) => {
+        }).catch((err) =>
+        {
             Swal({
                 title: err.response?.data?.message,
                 icon: 'error',
@@ -205,16 +218,13 @@ export default function index() {
                                         <label htmlFor="blog_text" className="block mb-2">
                                             Blog-text:
                                         </label>
-                                        <Field
-                                            as="textarea"
-                                            rows="4"
-                                            className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                        <ReactQuill
                                             name="blog_text"
                                             id="blog_text"
-                                            value={state.blog_text}
-                                            onChange={handleChange}
-                                        />
-                                        <ErrorMessage name="blog_text" component="div" className="text-red-500" />
+                                            value={value}
+                                            onChange={setValue}
+                                            className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                            theme="snow" />
 
                                     </div>
 
