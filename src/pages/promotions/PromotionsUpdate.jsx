@@ -12,11 +12,13 @@ import { UserContext } from "../../context/UserContext";
 
 export default function index() {
     document.title = "Promotion";
-    const {user} = useContext(UserContext)
+    const { user } = useContext(UserContext)
     const navigation = useNavigate()
     const { id } = useParams()
-    const [events, setEvents] = useState([])
-    const [eventCheck, setEventCheck] = useState(false)
+    const [allEvents, setAllEvents] = useState([])
+    const [updatedEvents, setUpdatedEvents] = useState([])
+    const [eventSelected, setEventSelected] = useState([])
+    const [eventState, setEventState] = useState([])
     const [state, setState] = useState({ locked: 0 })
     const [pormotionDetail, setPromotionDetail] = useState({})
     const [lock, setLock] = useState(0)
@@ -39,6 +41,20 @@ export default function index() {
     }, [id])
 
     useEffect(() => {
+        const updatedEvents = allEvents?.filter((item) => {
+            let currentDate = new Date()
+            let eventDate = new Date(item?.edate)
+
+            return eventDate > currentDate && item?.etype == state.ptype
+        })
+
+        setUpdatedEvents(updatedEvents)
+        setEventSelected([])
+    }, [state.ptype])
+
+
+
+    useEffect(() => {
         if (pormotionDetail) {
             const { attendees, ptype, locked } = pormotionDetail
             setLock(locked)
@@ -48,16 +64,31 @@ export default function index() {
                 ptype,
                 locked,
                 pUrl: pormotionDetail?.[`p-url`],
-                eventId1: pormotionDetail?.[`event1-id`],
-                eventId2: pormotionDetail?.[`event2-id`],
-                eventId3: pormotionDetail?.[`event3-id`],
-                eventId4: pormotionDetail?.[`event4-id`],
-                territoryId: pormotionDetail?.[`territory-id`],
-
+                territoryId: pormotionDetail?.[`territory-id`]
 
             })
+            setEventSelected([pormotionDetail?.[`event1-id`], pormotionDetail?.[`event2-id`], pormotionDetail?.[`event3-id`], pormotionDetail?.[`event4-id`]]?.filter((item) => item !== null))
+
         }
     }, [pormotionDetail])
+
+
+
+
+    useEffect(() => {
+        if (eventSelected && eventSelected.length !== 0) {
+            const updatedObj = eventSelected?.reduce((acc, curr, i) => {
+                return { ...acc, [`eventId${i + 1}`]: curr }
+            }, {})
+            setEventState(updatedObj)
+        }
+
+        else {
+
+            setEventState([])
+        }
+
+    }, [eventSelected])
 
     const handleDelete = () => {
         axios.delete(`/promotion/${id}`).then((res) => {
@@ -91,7 +122,7 @@ export default function index() {
 
     const getEvents = () => {
         axios.get(`/event`).then((res) => {
-            setEvents(res.data)
+            setAllEvents(res.data)
         })
     }
 
@@ -99,27 +130,16 @@ export default function index() {
         getEvents()
     }, [])
 
-    useEffect(() => {
-        let { eventId1, eventId2, eventId3, eventId4 } = state
-        if (eventId1 || eventId2 || eventId3 || eventId4) {
-            setEventCheck(true)
-        }
-        else {
-            setEventCheck(false)
-        }
-    }, [state])
-
-
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (eventCheck) {
+        if (eventSelected.length !== 0) {
 
-            axios.put(`/promotion/${id}`, state).then((res) => {
+            axios.put(`/promotion/${id}`, { ...state, ...eventState }).then((res) => {
                 if (!res.data.error) {
                     setState({})
                     Swal({
-                        text: "Licensee updated successfully.",
+                        text: "Promotion updated successfully.",
                         icon: 'success',
                         timer: 2000,
                     })
@@ -188,7 +208,7 @@ export default function index() {
                                             <div className="mt-1">
                                                 <Field
                                                     type="text"
-                                                    value={user?.territory ? user?.territory?.state +", "+ user?.territory?.country : ""}
+                                                    value={user?.territory ? user?.territory?.state + ", " + user?.territory?.country : ""}
                                                     className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                     required
                                                     disabled
@@ -208,6 +228,7 @@ export default function index() {
                                                 onChange={handleChange}
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
+                                                disabled={Boolean(lock)}
                                             >
                                                 <option value={""} >{"Select Promotion Type"}</option>
 
@@ -304,10 +325,10 @@ export default function index() {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {events && events.length !== 0 && events?.map((item, i) => (
+                                                    {updatedEvents && updatedEvents.length !== 0 && updatedEvents?.map((item, i) => (
 
                                                         <tr>
-                                                            <td className="border px-4 py-2"><Checkbox key={i} event={`eventId${i + 1}`} eventId={item?.id} state={state} setState={setState} /></td>
+                                                            <td className="border px-4 py-2"><Checkbox key={item?.eventId} eventId={item?.id} eventSelected={eventSelected} setEventSelected={setEventSelected} disabled={Boolean(lock)} /></td>
                                                             <td className="border px-4 py-2">{moment(item?.edate).format("LL")}</td>
                                                             <td className="border px-4 py-2">{item?.[`time-start`]}</td>
                                                             <td className="border px-4 py-2">{item?.city}</td>

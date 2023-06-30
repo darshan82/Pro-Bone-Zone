@@ -1,4 +1,4 @@
-import React, {  useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Footer from "../../component/Footer";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import Swal from 'sweetalert';
@@ -12,12 +12,13 @@ import { UserContext } from "../../context/UserContext";
 
 export default function index() {
     document.title = "Add Promotion";
-    const {user} = useContext(UserContext)
+    const { user } = useContext(UserContext)
     const navigation = useNavigate()
     const [state, setState] = useState({ locked: 0 })
-    const [events, setEvents] = useState([])
-    const [eventCheck, setEventCheck] = useState(false)
-   
+    const [allevents, setAllEvents] = useState([])
+    const [updatedEvents, setUpdatedEvents] = useState([])
+    const [eventSelected, setEventSelected] = useState([])
+    const [eventState, setEventState] = useState([])
     const handleChange = (e) => {
         setState({
             ...state,
@@ -25,41 +26,36 @@ export default function index() {
         })
     }
 
-    useEffect(()=>{
-        if(user && userTypes.licensee === user?.permit){
+    useEffect(() => {
+        if (user && userTypes.licensee === user?.permit) {
             setState({
-                ...state , 
-                territoryId:user?.territory?.id
+                ...state,
+                territoryId: user?.territory?.id
             })
         }
-    },[user])
+    }, [user])
 
     const getEvents = () => {
         axios.get(`/event`).then((res) => {
-           if(res?.data){
-               
-               let data = res?.data?.filter((item)=>{
-                   let currentDate = new Date()
-                   const eventDate = new Date(item?.edate)
-                return eventDate > currentDate} )
-            setEvents(data)
-            
-           }
-           
-        //    console.timeLog()
-            // setEvents(res.data)
+            if (res?.data) {
+                setAllEvents(res?.data)
+            }
         })
     }
 
     useEffect(() => {
-        let { eventId1, eventId2, eventId3, eventId4 } = state
-        if (eventId1 || eventId2 || eventId3 || eventId4) {
-            setEventCheck(true)
-        }
-        else {
-            setEventCheck(false)
-        }
-    }, [state])
+        const updatedEvents = allevents?.filter((item) => {
+            let currentDate = new Date()
+            let eventDate = new Date(item?.edate)
+
+            return eventDate > currentDate && item?.etype == state.ptype
+        })
+
+        setUpdatedEvents(updatedEvents)
+        setEventSelected([])
+    }, [state.ptype])
+
+
 
 
     useEffect(() => {
@@ -68,9 +64,9 @@ export default function index() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (eventCheck) {
+        if (eventSelected?.length > 0) {
 
-            axios.post(`/promotion/add`, state).then((res) => {
+            axios.post(`/promotion/add`, { ...state, ...eventState }).then((res) => {
                 if (!res.data.error) {
                     setState({})
                     Swal({
@@ -109,6 +105,16 @@ export default function index() {
         }
     }
 
+    useEffect(() => {
+        if (eventSelected && eventSelected.length !== 0) {
+            const updatedObj = eventSelected?.reduce((acc, curr, i) => { return { ...acc, [`eventId${i + 1}`]: curr } }, {})
+            setEventState(updatedObj)
+        }
+        else {
+            setEventState([])
+        }
+
+    }, [eventSelected])
 
 
     return (
@@ -139,7 +145,7 @@ export default function index() {
                                             <Field
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
-                                                value={user?.territory ? user?.territory?.state + ", " + user?.territory?.county :" " }
+                                                value={user?.territory ? user?.territory?.state + ", " + user?.territory?.county : " "}
                                                 disabled={true}
                                             />
                                         </div>
@@ -221,10 +227,10 @@ export default function index() {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {events && events.length !== 0 && events?.map((item, i) => (
+                                                    {updatedEvents && updatedEvents.length !== 0 && updatedEvents?.map((item, i) => (
 
                                                         <tr>
-                                                            <td className="border px-4 py-2"><Checkbox key={i} event={`eventId${i + 1}`} eventId={item?.id} state={state} setState={setState} /></td>
+                                                            <td className="border px-4 py-2"><Checkbox key={item?.eventId} eventId={item?.id} eventSelected={eventSelected} setEventSelected={setEventSelected} /></td>
                                                             <td className="border px-4 py-2">{moment(item?.edate).format("LL")}</td>
                                                             <td className="border px-4 py-2">{item?.[`time-start`]}</td>
                                                             <td className="border px-4 py-2">{item?.city}</td>
