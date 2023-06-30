@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Checkbox({ eventId, eventSelected, setEventSelected }) {
+function Checkbox({ eventId, eventSelected, setEventSelected, disabled }) {
 
   const handleCheckboxChange = () => {
     updateState()
@@ -30,6 +30,7 @@ function Checkbox({ eventId, eventSelected, setEventSelected }) {
   return (
     <label className="flex items-center space-x-2 ">
       <input
+        disabled={disabled}
         type="checkbox"
         checked={eventSelected?.filter((item) => item === eventId).length > 0 ? true : false}
         onChange={handleCheckboxChange}

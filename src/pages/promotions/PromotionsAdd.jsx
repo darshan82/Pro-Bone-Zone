@@ -107,7 +107,8 @@ export default function index() {
 
     useEffect(() => {
         if (eventSelected && eventSelected.length !== 0) {
-            eventSelected?.map((item, i) => { setEventState({ ...eventState, [`eventId${i + 1}`]: item }, ".....") })
+            const updatedObj = eventSelected?.reduce((acc, curr, i) => { return { ...acc, [`eventId${i + 1}`]: curr } }, {})
+            setEventState(updatedObj)
         }
         else {
             setEventState([])
