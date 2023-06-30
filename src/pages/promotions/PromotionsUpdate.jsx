@@ -49,8 +49,7 @@ export default function index() {
         })
 
         setUpdatedEvents(updatedEvents)
-        // setEventSelected([])
-        console.log("hello..........")
+        setEventSelected([])
     }, [state.ptype])
 
 
@@ -70,14 +69,11 @@ export default function index() {
             })
             let arr = [pormotionDetail?.[`event1-id`], pormotionDetail?.[`event2-id`], pormotionDetail?.[`event3-id`], pormotionDetail?.[`event4-id`]]
             const updatedArr = arr.filter((item)=>item !==null)
-            hello(updatedArr)
+            setEventSelected(updatedArr)
 
         }
     }, [pormotionDetail])
 
-    const hello =(arr)=>{
-        setEventSelected(arr)
-    }
 
 
     
