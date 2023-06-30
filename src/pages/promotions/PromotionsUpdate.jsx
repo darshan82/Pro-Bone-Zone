@@ -67,7 +67,9 @@ export default function index() {
                 territoryId: pormotionDetail?.[`territory-id`]
 
             })
-            setEventSelected([pormotionDetail?.[`event1-id`], pormotionDetail?.[`event2-id`], pormotionDetail?.[`event3-id`], pormotionDetail?.[`event4-id`]]?.filter((item) => item !== null))
+            let arr = [pormotionDetail?.[`event1-id`], pormotionDetail?.[`event2-id`], pormotionDetail?.[`event3-id`], pormotionDetail?.[`event4-id`]]
+            const updatedArr = arr.filter((item)=>item !==null)
+            setEventSelected(updatedArr)
 
         }
     }, [pormotionDetail])
