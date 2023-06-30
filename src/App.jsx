@@ -52,7 +52,7 @@ function App(props)
           <Route path="/register/:id" element={<Registration />} />
           <Route path="/about" element={<About />} />
           <Route path="/blog/:id" element={<Blog />} />
-          <Route path="/solution" element={<SmartSol />} />
+          <Route path="/sponsor" element={<SmartSol />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Term />} />

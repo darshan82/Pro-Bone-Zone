@@ -10,6 +10,7 @@ export default function index()
     window.scrollTo(0, 0)
   }, [])
 
+  document.title = "Sponsors"
 
   return (
     <>
