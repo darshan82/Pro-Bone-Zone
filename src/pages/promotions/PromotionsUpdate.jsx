@@ -49,7 +49,8 @@ export default function index() {
         })
 
         setUpdatedEvents(updatedEvents)
-        setEventSelected([])
+        // setEventSelected([])
+        console.log("hello..........")
     }, [state.ptype])
 
 
