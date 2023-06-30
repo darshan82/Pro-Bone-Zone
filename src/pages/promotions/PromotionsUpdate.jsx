@@ -55,7 +55,7 @@ export default function index() {
 
 
     useEffect(() => {
-        if (pormotionDetail) {
+        if (pormotionDetail && pormotionDetail != {} ) {
             const { attendees, ptype, locked } = pormotionDetail
             setLock(locked)
             setState({
@@ -69,16 +69,15 @@ export default function index() {
             })
             let arr = [pormotionDetail?.[`event1-id`], pormotionDetail?.[`event2-id`], pormotionDetail?.[`event3-id`], pormotionDetail?.[`event4-id`]]
             const updatedArr = arr.filter((item)=>item !==null)
-            hello(updatedArr)
+            handleSelectedEvents(updatedArr)
         }
     }, [pormotionDetail])
     
-    const hello =(arr)=>{
+    const handleSelectedEvents =(arr)=>{
         setEventSelected(arr)
 
     }
 
-    console.log("hello2.........")
     
 
     useEffect(() => {
