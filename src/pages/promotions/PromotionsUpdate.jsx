@@ -78,7 +78,7 @@ export default function index() {
 
     }
 
-    console.loh("hello2.........")
+    console.log("hello2.........")
     
 
     useEffect(() => {
