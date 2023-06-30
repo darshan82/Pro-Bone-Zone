@@ -69,11 +69,14 @@ export default function index() {
             })
             let arr = [pormotionDetail?.[`event1-id`], pormotionDetail?.[`event2-id`], pormotionDetail?.[`event3-id`], pormotionDetail?.[`event4-id`]]
             const updatedArr = arr.filter((item)=>item !==null)
-            setEventSelected(updatedArr)
+            hello(updatedArr)
 
         }
     }, [pormotionDetail])
 
+    const hello =(arr)=>{
+        setEventSelected(arr)
+    }
 
 
     
