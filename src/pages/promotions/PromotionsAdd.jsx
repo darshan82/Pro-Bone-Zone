@@ -132,9 +132,6 @@ export default function index() {
 
                         </h1>
 
-
-
-                        <div className="box  ">
                             <Formik initialValues={state} >
                                 <Form onSubmit={handleSubmit} >
                                     <div className="flex flex-wrap">
