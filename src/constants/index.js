@@ -14,7 +14,7 @@ export const navBar = (type) =>
             { name: "Promotions", url: "/Promotions" },
             { name: "Events", url: "/Events" },
             { name: "Personnel", subNav: [{ name: "Licensee", url: "/licensee" },{ name: "Staff", url: "/staff" }, { name: "Sponsors", url: "/sponsors" }, { name: "Customers", url: "/customers" }] },
-            { name: "Resources", subNav: [{ name: "Training", url: "/training" }, { name: "Marketing", url: "/marketing" } , { name: "Blogs", url: "/blogs" }] },
+            { name: "Resources", subNav: [{ name: "Resources", url: "/resources" },{ name: "Training", url: "/training" }, { name: "Marketing", url: "/marketing" } , { name: "Blogs", url: "/blogs" }] },
             { name: "Settings", subNav: [{ name: "Profile", url: "/profile" }, { name: "Logout" }] }];
     }
     else if (userTypes.licensee == type)
@@ -23,7 +23,7 @@ export const navBar = (type) =>
         { name: "Events", url: "/Events" },
 
         { name: "Personnel", subNav: [{ name: "Staff", url: "/staff" }, { name: "Sponsors", url: "/sponsors" }, { name: "Customers", url: "/customers" }] },
-        { name: "Resources", subNav: [{ name: "Training", url: "/training" }, { name: "Marketing", url: "/marketing" }] },
+        { name: "Resources", subNav: [{ name: "Resources", url: "/resources" },{ name: "Training", url: "/training" }, { name: "Marketing", url: "/marketing" }] },
         { name: "Settings", subNav: [{ name: "Profile", url: "/profile" }, { name: "Logout" }] }
         ];
     }
@@ -32,7 +32,7 @@ export const navBar = (type) =>
         return [
             { name: "Events", url: "/Events" },
             // { name: "Personnel", subNav: [{ name: "Staff", url: "/staff" }, { name: "Sponsors", url: "/sponsors" }, { name: "Customers", url: "/customers" }] },
-            { name: "Resources", subNav: [{ name: "Training", url: "/training" }, { name: "Marketing", url: "/marketing" }] },
+            { name: "Resources", subNav: [{ name: "Resources", url: "/resources" },{ name: "Training", url: "/training" }, { name: "Marketing", url: "/marketing" }] },
             { name: "Settings", subNav: [{ name: "Profile", url: "/profile" }, { name: "Logout" }] }
         ];
     }
