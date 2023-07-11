@@ -48,7 +48,7 @@ function App(props)
     <div style={{ marginLeft: width > 1000 && - 90 }}>
       <Router history={history}>
         <Routes>
-          {/* <Route path="/" element={<HomwPage />} />
+          <Route path="/" element={<HomwPage />} />
           <Route path="/register/:id" element={<Registration />} />
           <Route path="/about" element={<About />} />
           <Route path="/blog/:id" element={<Blog />} />
@@ -100,7 +100,7 @@ function App(props)
           <Route path={`/training`} element={<center><h1>UNDER DEVELOPMENT</h1></center>} />
           <Route path={`/marketing`} element={<center><h1>UNDER DEVELOPMENT</h1></center>} />
           <Route path={`/profile`} element={<center><h1>UNDER DEVELOPMENT</h1></center>} />
- */}
+
 
 
 
