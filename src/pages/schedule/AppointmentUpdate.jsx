@@ -315,7 +315,7 @@ export default function index()
                                             </label>                                            <ErrorMessage name="status" component="div" className="text-red-500" />
                                         </div>  <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="advance" className="block mb-2">
-                                                Advance:
+                                            Retain:
                                             </label>
                                             <div className="flex items-center">
                                                 <label className="mr-4">
