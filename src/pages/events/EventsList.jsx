@@ -10,14 +10,16 @@ import { UserContext } from "../../context/UserContext";
 export default function index()
 {
     let navigation = useNavigate()
-    const {user} = useContext(UserContext)
+    const { user } = useContext(UserContext)
     const { pathname } = useLocation();
     const title = pathname.replace("/", "").charAt(0).toUpperCase() + pathname.slice(2)
     document.title = title;
     const [eventList, setEventList] = useState(null)
-    const [territories , setTerritories] = useState([])
-    const getTerritories = () => {
-        axios.get(`/territory`).then((res) => {
+    const [territories, setTerritories] = useState([])
+    const getTerritories = () =>
+    {
+        axios.get(`/territory`).then((res) =>
+        {
             setTerritories(res?.data)
         })
     }
@@ -25,7 +27,8 @@ export default function index()
     useEffect(() =>
     {
         window.scrollTo(0, 0)
-        if(user && user?.permit === userTypes.admin){
+        if (user && user?.permit === userTypes.admin)
+        {
             getTerritories()
         }
     }, [user])
@@ -59,102 +62,102 @@ export default function index()
                             {title}
                         </h1>
                         {
-                            user && user?.permit === userTypes.licensee ? 
-                        <div className="flex justify-end">
-                            <button
-                                onClick={() =>
-                                    {
-                                    navigation("/events/add");
-                                }}
-                                className="bg-[#EC672C] mb-4 px-5 py-1 rounded-sm text-white"
-                            >
-                                Add
-                            </button>
-                        </div>
-                         :  user?.permit === userTypes.admin ?
-                          <div className="flex justify-end">
-
-                            <div className=" w-full md:w-1/4 px-2 mb-4">
-
-                                <select
-                                    id="licenseeId"
-                                    name="licenseeId"
-                                    // value={state.licenseeId || "Select Rating"}
-                                    // onChange={handleChange}
-                                    className="w-full border border-gray-300 px-3 py-2 rounded-sm"
-                                    required
+                            user && user?.permit === userTypes.licensee ?
+                                <div className="flex justify-end">
+                                    <button
+                                        onClick={() =>
+                                        {
+                                            navigation("/events/add");
+                                        }}
+                                        className="bg-[#EC672C] mb-4 px-5 py-1 rounded-sm text-white"
                                     >
-                                    <option value={null} >{"ALL"}</option>
+                                        Add
+                                    </button>
+                                </div>
+                                : user?.permit === userTypes.admin ?
+                                    <div className="flex justify-end">
 
-                                    {territories && territories.length !== 0 &&
-                                        territories?.map((option) => (
-                                            
-                                            <option value={option?.id}>{option?.state + " " + option?.county}</option>
-                                            ))
-                                        }
+                                        <div className=" w-full md:w-1/4 px-2 mb-4">
 
-                                </select>
-                            </div>
+                                            <select
+                                                id="licenseeId"
+                                                name="licenseeId"
+                                                // value={state.licenseeId || "Select Rating"}
+                                                // onChange={handleChange}
+                                                className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                                required
+                                            >
+                                                <option value={null} >{"ALL"}</option>
+
+                                                {territories && territories.length !== 0 &&
+                                                    territories?.map((option) => (
+
+                                                        <option value={option?.id}>{option?.state + " " + option?.county}</option>
+                                                    ))
+                                                }
+
+                                            </select>
                                         </div>
-                              : "" }
-                        <div className="overflow-x-auto">
-                         {
-                            user?.permit !== userTypes.staff ? 
-                            <table className="table-auto min-w-full ">
-                            <thead>
-                            <tr>
-                                <th className="border px-4 py-2 text-left"> Location</th>
-                                <th className="border px-4 py-2 text-left"> Date</th>
-                                <th className="border px-4 py-2 text-left">Time </th>
-                                <th className="border px-4 py-2 text-left"> Schedule</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                eventList && eventList.length !== 0 ? eventList?.map((item) => (
-
-
-                                    <tr>
-                                        <td onClick={() => { navigation(`/schedule/${item?.id}/${item['time-start']}`) }} className="border px-4 py-2 cursor-pointer text-purple-600">{item?.state + ", "+item?.city}</td>
-                                        <td
-                                             className="border px-4 py-2">{moment(item?.edate).format("ddd, MMMM D, YYYY")}</td>
-                                        <td className="border px-4 py-2">{item['time-start']}</td>
-                                        <td onClick={() => { navigation(`/events/${item?.id}/${item['time-start']}`) }} className="border px-4 py-2 cursor-pointer text-purple-600">Schedule</td>
-                                    </tr>
-                                ))
-
+                                    </div>
                                     : ""}
-                        </tbody>
-                        </table>
-                            :(
-
-                                <table className="table-auto min-w-full ">
-                                <thead>
-                                    <tr>
-                                        <th className="border px-4 py-2 text-left"> Date</th>
-                                        <th className="border px-4 py-2 text-left">Time </th>
-                                        <th className="border px-4 py-2 text-left"> City</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {
-                                        eventList && eventList.length !== 0 ? eventList?.map((item) => (
-
-
+                        <div className="overflow-x-auto">
+                            {
+                                user?.permit !== userTypes.staff ?
+                                    <table className="table-auto min-w-full ">
+                                        <thead>
                                             <tr>
-
-                                                <td
-                                                    onClick={() => { navigation(`/schedule/${item?.id}/${item['time-start']}`) }} className="border px-4 py-2 cursor-pointer text-purple-600">{moment(item?.edate).format("ddd, MMMM D, YYYY")}</td>
-                                                <td className="border px-4 py-2">{item['time-start']}</td>
-                                                <td className="border px-4 py-2">{item['city']}</td>
+                                                <th className="border px-4 py-2 text-left"> Location</th>
+                                                <th className="border px-4 py-2 text-left"> Date</th>
+                                                <th className="border px-4 py-2 text-left">Time </th>
+                                                <th className="border px-4 py-2 text-left"> Schedule</th>
                                             </tr>
-                                        ))
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                eventList && eventList.length !== 0 ? eventList?.map((item) => (
 
-                                        : ""}
-                                </tbody>
-                            </table>
-                                )
-                        }
+
+                                                    <tr>
+                                                        <td onClick={() => { navigation(`/events/${item?.id}/${item['time-start']}`) }} className="border px-4 py-2 cursor-pointer text-purple-600">{item?.state + ", " + item?.city}</td>
+                                                        <td
+                                                            className="border px-4 py-2">{moment(item?.edate).format("ddd, MMMM D, YYYY")}</td>
+                                                        <td className="border px-4 py-2">{item['time-start']}</td>
+                                                        <td onClick={() => { navigation(`/schedule/${item?.id}/${item['time-start']}`) }} className="border px-4 py-2 cursor-pointer text-purple-600">Schedule</td>
+                                                    </tr>
+                                                ))
+
+                                                    : ""}
+                                        </tbody>
+                                    </table>
+                                    : (
+
+                                        <table className="table-auto min-w-full ">
+                                            <thead>
+                                                <tr>
+                                                    <th className="border px-4 py-2 text-left"> Date</th>
+                                                    <th className="border px-4 py-2 text-left">Time </th>
+                                                    <th className="border px-4 py-2 text-left"> City</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {
+                                                    eventList && eventList.length !== 0 ? eventList?.map((item) => (
+
+
+                                                        <tr>
+
+                                                            <td
+                                                                onClick={() => { navigation(`/schedule/${item?.id}/${item['time-start']}`) }} className="border px-4 py-2 cursor-pointer text-purple-600">{moment(item?.edate).format("ddd, MMMM D, YYYY")}</td>
+                                                            <td className="border px-4 py-2">{item['time-start']}</td>
+                                                            <td className="border px-4 py-2">{item['city']}</td>
+                                                        </tr>
+                                                    ))
+
+                                                        : ""}
+                                            </tbody>
+                                        </table>
+                                    )
+                            }
 
                         </div>
                     </div>

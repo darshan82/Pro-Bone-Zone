@@ -258,7 +258,6 @@ export default function index()
                     </div>
                 </div>
 
-
                 <div className="max-w-full mb-2 ">
                     <div className="container mx-auto py-4">
 
