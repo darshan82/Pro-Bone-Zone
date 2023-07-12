@@ -118,7 +118,7 @@ export default function index()
 
 
                                                     <tr>
-                                                        <td onClick={() => { navigation(`/events/${item?.id}}`) }} className="border px-4 py-2 cursor-pointer text-purple-600">{item?.state + ", " + item?.city}</td>
+                                                        <td onClick={() => { navigation(`/events/${item?.id}`) }} className="border px-4 py-2 cursor-pointer text-purple-600">{item?.state + ", " + item?.city}</td>
                                                         <td
                                                             className="border px-4 py-2">{moment(item?.edate).format("ddd, MMMM D, YYYY")}</td>
                                                         <td className="border px-4 py-2">{item['time-start']}</td>
