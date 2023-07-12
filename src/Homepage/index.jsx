@@ -23,11 +23,12 @@ import YouTube from "react-youtube";
 import Footer from "../component/Footer";
 const videId = "vD8X8qvhRxQ";
 import Navbar from "../component/Navbar/navbar";
+import { useLocation } from "react-router-dom";
 
 export default function index()
 {
   const formRef = useRef(null);
-
+  const {state} = useLocation()
   const form = useRef();
   const [isPlaying, setIsPlaying] = useState(false);
   const [chooseDate, setSelectedDate] = useState("Sat June 17th");
@@ -49,6 +50,11 @@ export default function index()
     }, 500)
   };
 
+    useEffect(()=>{
+      if(state?.contact === "contact"){
+        handleClick()
+      }
+    },[state?.contact])
   const sendEmail = (e) =>
   {
     e.preventDefault();
@@ -96,8 +102,7 @@ export default function index()
   };
   return (
     <>
-      <Navbar general={true} handleClick={handleClick} />
-
+      <Navbar general={true} />
       <div className="bg-[#EAEFF8] pt-2 pb-5">
         {/* Hero Section */}
         <div className="lg:ml-44  ">

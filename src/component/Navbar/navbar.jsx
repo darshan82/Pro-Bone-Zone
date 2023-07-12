@@ -4,13 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { GENERAL_NAV_BAR, USER_NAV_BAR, navBar } from "../../constants";
 import { useLocation } from 'react-router-dom';
 import { UserContext } from "../../context/UserContext";
-export default function navbar({ handleClick, general = false })
+export default function navbar({ general = false })
 {
   const [isNavOpen, setIsNavOpen] = useState(false);
   let navigation = useNavigate()
   const { pathname } = useLocation();
   const { loggedIn, logout, user } = useContext(UserContext)
-
 
 
   const handleLogout = () =>
@@ -20,6 +19,12 @@ export default function navbar({ handleClick, general = false })
     {
       navigation("/")
     }, 500)
+  }
+
+  const handleLink = ()=>{
+    setTimeout(()=>{
+      navigation("/",{state:{contact:"contact"}})
+    },100)
   }
   return (
     <>
@@ -63,7 +68,7 @@ export default function navbar({ handleClick, general = false })
                             setIsNavOpen(!isNavOpen)
                             if (values?.name === "Contact")
                             {
-                              handleClick()
+                              handleLink()
                             }
                           }}
 
@@ -131,11 +136,7 @@ export default function navbar({ handleClick, general = false })
 
                           if (values?.name === "Contact")
                           {
-                            setTimeout(() =>
-                            {
-
-                              handleClick()
-                            }, 2000)
+                           handleLink()
                           }
                         }}
                         to={values?.url} key={index + values?.name}>
