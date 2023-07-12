@@ -72,7 +72,7 @@ export default function index()
             lastName,
             email,
             phone,
-            type,
+            type: event?.etype,
             time,
             description,
         };
@@ -179,7 +179,7 @@ export default function index()
                                             promotion && promotion?.events && promotion?.events.length &&
                                             promotion.events.map((value, index) =>
                                             {
-                                                console.log("value",value)
+                                                console.log("value", value)
                                                 let d = moment(value?.edate).utc()
                                                     .format("ddd MMMM Do");
 
