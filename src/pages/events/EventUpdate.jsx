@@ -163,7 +163,7 @@ export default function index() {
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
                                             >
-                                                <option value={""}>{"Select Viewers"}</option>
+                                                <option value={""}>{"Select Type"}</option>
 
                                                 {eventTypes && eventTypes.length !== 0 &&
                                                     eventTypes?.map((option) => (
