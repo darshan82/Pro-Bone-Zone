@@ -17,7 +17,7 @@ export default function index()
         {
             let e = promotion.events[event?.target?.value]
             setEvent(e)
-            setSelectedDate(moment(e?.edate)
+            setSelectedDate(moment(e?.edate).utc()
                 .format("ddd MMMM Do"));
         }
     }
@@ -96,7 +96,7 @@ export default function index()
 
     return (
         <>
-            <Navbar general={true}/>
+            <Navbar general={true} />
 
             <div className="bg-[#EAEFF8] pt-2 pb-5">
                 {/* Hero Section */}
@@ -173,7 +173,7 @@ export default function index()
                                             promotion && promotion?.events && promotion?.events.length &&
                                             promotion.events.map((value, index) =>
                                             {
-                                                let d = moment(value?.edate)
+                                                let d = moment(value?.edate).utc()
                                                     .format("ddd MMMM Do");
 
                                                 return (

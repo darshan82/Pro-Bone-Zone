@@ -331,7 +331,7 @@ export default function index() {
 
                                                         <tr>
                                                             <td className="border px-4 py-2"><Checkbox key={item?.eventId} eventId={item?.id} eventSelected={eventSelected} setEventSelected={setEventSelected} disabled={Boolean(lock)} /></td>
-                                                            <td className="border px-4 py-2">{moment(item?.edate).format("LL")}</td>
+                                                            <td className="border px-4 py-2">{moment(item?.edate).utc().format("LL")}</td>
                                                             <td className="border px-4 py-2">{item?.[`time-start`]}</td>
                                                             <td className="border px-4 py-2">{item?.city}</td>
                                                         </tr>

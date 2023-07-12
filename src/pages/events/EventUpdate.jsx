@@ -42,7 +42,7 @@ export default function index() {
                 etype,
                 time_start: eventDetails?.[`time-start`],
                 time_end: eventDetails?.[`time-end`],
-                edate:moment(edate).format('YYYY-MM-DD'),
+                edate:moment(edate).utc().format('YYYY-MM-DD'),
                 city,
                 street1,
                 street2,
