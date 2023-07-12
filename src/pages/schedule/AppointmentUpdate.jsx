@@ -418,18 +418,19 @@ export default function index()
                                                 onClick={() =>
                                                 {
                                                     Swal({
-                                                        text: "Are you sure you want to remove this record?",
+                                                        text: 'Are you sure you want to remove this record?',
                                                         icon: 'warning',
-                                                        buttons: 2,
-                                                        showCancelButton: true,
-                                                        confirmButtonColor: 'red',
-                                                        confirmButtonText: 'Delete',
-                                                        cancelButtonText: 'Cancel'
-                                                    }).then((result) =>
-                                                    {
-                                                        if (result)
-                                                        {
+                                                        buttons:{
+                                                            cancel:"Cancel",
+                                                            confirm:"OK"
+                                                        },
+                                                    }).then((result) => {
+                                                        if(result){
+
                                                             handleDelete()
+                                                        }
+                                                        else{
+                                                            swal.close()
                                                         }
                                                     })
                                                 }}

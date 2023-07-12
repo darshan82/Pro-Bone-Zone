@@ -364,12 +364,18 @@ export default function index() {
                                                         Swal({
                                                             text: 'Are you sure you want to remove this record?',
                                                             icon: 'warning',
-                                                            showCancelButton: true,
-                                                            confirmButtonColor: 'red',
-                                                            confirmButtonText: 'Delete',
-                                                            cancelButtonText: 'Cancel'
-                                                        }).then((result)=>{
+                                                            buttons:{
+                                                                cancel:"Cancel",
+                                                                confirm:"OK"
+                                                            },
+                                                        }).then((result) => {
+                                                            if(result){
+    
                                                                 handleDelete()
+                                                            }
+                                                            else{
+                                                                swal.close()
+                                                            }
                                                         })
                                                     }}
                                                 className="bg-[#EC672C] mb-4 ml-2 px-5 py-1 rounded-sm text-white"
