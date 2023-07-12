@@ -175,7 +175,6 @@ export default function index() {
                                                 value={state.notes}
                                                 onChange={handleChange}
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
-                                                required
                                             />
                                         </div>
                                     </div>

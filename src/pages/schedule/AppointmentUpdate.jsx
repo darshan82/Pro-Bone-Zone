@@ -396,7 +396,6 @@ export default function index()
                                                 name="notes"
                                                 rows="4"
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
-                                                required
                                                 onChange={handleChange}
                                                 value={state.notes}
                                             />
