@@ -179,11 +179,12 @@ export default function index()
                                             promotion && promotion?.events && promotion?.events.length &&
                                             promotion.events.map((value, index) =>
                                             {
+                                                console.log("value",value)
                                                 let d = moment(value?.edate).utc()
                                                     .format("ddd MMMM Do");
 
                                                 return (
-                                                    <option value={index}>{event && event["time-start"]} {" "}{d}</option>
+                                                    <option value={index}>{value && value["time-start"]} {" "}{d}</option>
                                                 )
                                             })
                                         }
