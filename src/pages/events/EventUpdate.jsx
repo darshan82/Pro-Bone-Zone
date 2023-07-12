@@ -42,7 +42,7 @@ export default function index() {
                 etype,
                 time_start: eventDetails?.[`time-start`],
                 time_end: eventDetails?.[`time-end`],
-                edate,
+                edate:moment(edate).format('YYYY-MM-DD'),
                 city,
                 street1,
                 street2,
@@ -186,7 +186,7 @@ export default function index() {
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                 required
                                                 onChange={handleChange}
-                                                value={moment(state.edate).format('YYYY-MM-DD')}
+                                                value={state.edate}
                                             />
                                             <ErrorMessage name="edate" component="div" className="text-red-500" />
                                         </div>
