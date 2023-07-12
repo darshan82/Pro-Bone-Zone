@@ -10,6 +10,11 @@ import Navbar from "../component/Navbar/navbar";
 
 export default function index()
 {
+
+    let a = ["Family Law", "Business Law", "Litigation", "Labor & Employment", "Real Estate Law"];
+    let b = ["Structure", "Capitalization", "Marketing"];
+    let c = ["Estate", "Trusts", "Wills", "Investments"];
+
     const form = useRef();
     const handleChangeEventDate = (event, i) =>
     {
@@ -30,6 +35,7 @@ export default function index()
     const [promotion, setPromotion] = useState([]);
     const [event, setEvent] = useState(null);
 
+    console.log("event", event?.etype)
     const [date, setSelectedDate] = useState(null);
 
     useEffect(() =>
@@ -219,10 +225,45 @@ export default function index()
                                         className="h-10  md:w-[184px] lg:px-3 lg:py-2 bg-gray-100 text-sm text-[#414141] rounded-sm m-2"
                                     >
                                         <option value="" disabled selected>
-                                            Select a Category
+                                            Primary Interest
                                         </option>
-                                        <option value="family-law">Family Law</option>
-                                        <option value="business-law">Business Law</option>
+
+                                        {
+                                            event?.etype === "Legal" &&
+
+                                            a.map(value =>
+                                            {
+                                                return (
+                                                    <option value={value}>{value}</option>
+
+                                                )
+                                            })
+
+                                        }
+                                        {
+                                            event?.etype === "Business" &&
+
+                                            b.map(value =>
+                                            {
+                                                return (
+                                                    <option value={value}>{value}</option>
+
+                                                )
+                                            })
+
+                                        }
+                                        {
+                                            event?.etype === "Financial" &&
+
+                                            c.map(value =>
+                                            {
+                                                return (
+                                                    <option value={value}>{value}</option>
+
+                                                )
+                                            })
+
+                                        }
                                     </select>
 
                                     <select
