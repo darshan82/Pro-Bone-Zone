@@ -67,7 +67,7 @@ export default function index() {
                                         <tr>
 
                                             <td className="border px-4 py-2">{item?.category}</td>
-                                            <td className="border px-4 py-2 cursor-pointer text-purple-600"><a href={`https://probonozone-cea5b843ff95.herokuapp.com/${item?.filepath}`} download target="_blank">{item?.type}</a></td>
+                                            <td className="border px-4 py-2 cursor-pointer text-purple-600"><a href={item?.type === "File" ? `https://probonozone-cea5b843ff95.herokuapp.com/${item?.filepath}`:item?.filepath} download target="_blank">{item?.type}</a></td>
                                             <td onClick={() => navigation(`/resources/${item?.id}`)} className="border px-4 py-2 cursor-pointer text-purple-600">{item?.title}</td>
                                         </tr>
                                     ))}
