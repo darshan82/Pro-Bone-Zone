@@ -56,6 +56,7 @@ function App(props)
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Term />} />
           <Route path="/login" element={loggedIn ? <Navigate to={setDefaultPath(user)} /> : <Signin />} />
+          <Route path="/schedule/:eventId/:date" element={<ScheduleList />} />
 {
   user ? (
     <>
@@ -76,7 +77,6 @@ function App(props)
           <Route path="/blogs/:id" element={<BlogUpdate />} />
           <Route path="/Profile" element={< Profile/>} />
           
-          <Route path="/schedule/:eventId/:date" element={<ScheduleList />} />
           <Route path={`/${NAV_BAR[0].name}`} element={<TerritoriesList />} />
           <Route path={`/${NAV_BAR[1].name}`} element={< PromotionsList />} />
           <Route path={`/${NAV_BAR[2].name}`} element={<EventList />} />
