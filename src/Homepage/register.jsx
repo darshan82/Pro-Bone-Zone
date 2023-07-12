@@ -237,7 +237,7 @@ export default function index()
                                             promotion.availability.filter(value => value["event_id"] == event.id).map(value =>
                                             {
                                                 return (
-                                                    <option className="uppercase" value={value.timeslot}>{value.timeslot}</option>
+                                                    <option className="uppercase" value={value.timeslot}>{date && date}{value.timeslot}</option>
 
                                                 )
                                             })
