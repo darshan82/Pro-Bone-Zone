@@ -10,7 +10,7 @@ import Navbar from "../../component/Navbar/navbar";
 export default function index()
 {
     let navigation = useNavigate()
-    const { eventId, date } = useParams()
+    const { eventId, focus } = useParams()
     const { updateEvent } = useContext(EventContext)
     const { pathname } = useLocation();
     const title = pathname.replace("/", "").charAt(0).toUpperCase() + pathname.slice(2)
@@ -73,7 +73,7 @@ export default function index()
     const handleEventDetail = (data) =>
     {
         updateEvent(data)
-        console.log("data",data)
+        console.log("data", data)
         navigation(`/appointment/update/${data[`id`]}`)
     }
 
@@ -117,7 +117,7 @@ export default function index()
 
                             Date:  {moment(scheduleList[0]?.data[0]?.edate).format("ddd, MMMM D, YYYY")}
                             <div> Location: {scheduleList[0]?.data[0]?.city}</div>
-                            <div>  Focus:  {scheduleList[0]?.data[0]?.interest}</div>
+                            <div>  Focus:  {focus}</div>
 
                             {
                                 scheduleList && scheduleList.length !== 0 && scheduleList.map((item) => (

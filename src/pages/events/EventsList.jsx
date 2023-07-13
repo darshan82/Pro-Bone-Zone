@@ -15,10 +15,10 @@ export default function index()
     const title = pathname.replace("/", "").charAt(0).toUpperCase() + pathname.slice(2)
     document.title = title;
     const [eventList, setEventList] = useState(null)
-    const [filteredEvents , setFilteredEvents] = useState([])
+    const [filteredEvents, setFilteredEvents] = useState([])
     const [territories, setTerritories] = useState([])
-    const [selectedTid , setSelectedTid] = useState([])
-   
+    const [selectedTid, setSelectedTid] = useState([])
+
     const getTerritories = () =>
     {
         axios.get(`/territory`).then((res) =>
@@ -26,20 +26,24 @@ export default function index()
             setTerritories(res?.data)
         })
     }
-    const handleChange = (e)=>{
- 
+    const handleChange = (e) =>
+    {
+
         setSelectedTid(e.target.value)
     }
-    useEffect(()=>{
-        if(selectedTid){
+    useEffect(() =>
+    {
+        if (selectedTid)
+        {
             let updatedEvents = eventList?.filter(({ 'territory_id': territoryId }) => territoryId == selectedTid);
             setFilteredEvents(updatedEvents)
         }
-        else{
+        else
+        {
             setFilteredEvents(eventList)
         }
-        
-    },[selectedTid])
+
+    }, [selectedTid])
 
     useEffect(() =>
     {
@@ -139,7 +143,7 @@ export default function index()
                                                         <td
                                                             className="border px-4 py-2">{moment(item?.edate).utc().format("ddd, MMMM D, YYYY")}</td>
                                                         <td className="border px-4 py-2">{item['time-start']}</td>
-                                                        <td onClick={() => { navigation(`/schedule/${item?.id}/${item['time-start']}`) }} className="border px-4 py-2 cursor-pointer text-purple-600">Schedule</td>
+                                                        <td onClick={() => { navigation(`/schedule/${item?.id}/${item['etype']}`) }} className="border px-4 py-2 cursor-pointer text-purple-600">Schedule</td>
                                                     </tr>
                                                 ))
 
@@ -164,7 +168,7 @@ export default function index()
                                                         <tr>
 
                                                             <td
-                                                                onClick={() => { navigation(`/schedule/${item?.id}/${item['time-start']}`) }} className="border px-4 py-2 cursor-pointer text-purple-600">{moment(item?.edate).utc().format("ddd, MMMM D, YYYY")}</td>
+                                                                onClick={() => { navigation(`/schedule/${item?.id}/${item['etype']}`) }} className="border px-4 py-2 cursor-pointer text-purple-600">{moment(item?.edate).utc().format("ddd, MMMM D, YYYY")}</td>
                                                             <td className="border px-4 py-2">{item['time-start']}</td>
                                                             <td className="border px-4 py-2">{item['city']}</td>
                                                         </tr>
