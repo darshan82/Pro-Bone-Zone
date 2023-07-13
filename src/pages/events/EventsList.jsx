@@ -15,7 +15,10 @@ export default function index()
     const title = pathname.replace("/", "").charAt(0).toUpperCase() + pathname.slice(2)
     document.title = title;
     const [eventList, setEventList] = useState(null)
+    const [filteredEvents , setFilteredEvents] = useState([])
     const [territories, setTerritories] = useState([])
+    const [selectedTid , setSelectedTid] = useState([])
+   
     const getTerritories = () =>
     {
         axios.get(`/territory`).then((res) =>
@@ -23,6 +26,20 @@ export default function index()
             setTerritories(res?.data)
         })
     }
+    const handleChange = (e)=>{
+ 
+        setSelectedTid(e.target.value)
+    }
+    useEffect(()=>{
+        if(selectedTid){
+            let updatedEvents = eventList?.filter(({ 'territory_id': territoryId }) => territoryId == selectedTid);
+            setFilteredEvents(updatedEvents)
+        }
+        else{
+            setFilteredEvents(eventList)
+        }
+        
+    },[selectedTid])
 
     useEffect(() =>
     {
@@ -39,6 +56,7 @@ export default function index()
         {
             const data = res.data
             setEventList(data)
+            setFilteredEvents(data)
         })
     }, [])
     return (
@@ -83,11 +101,10 @@ export default function index()
                                                 id="licenseeId"
                                                 name="licenseeId"
                                                 // value={state.licenseeId || "Select Rating"}
-                                                // onChange={handleChange}
+                                                onChange={handleChange}
                                                 className="w-full border border-gray-300 px-3 py-2 rounded-sm"
-                                                required
                                             >
-                                                <option value={null} >{"ALL"}</option>
+                                                <option value={""} >{"ALL"}</option>
 
                                                 {territories && territories.length !== 0 &&
                                                     territories?.map((option) => (
@@ -114,7 +131,7 @@ export default function index()
                                         </thead>
                                         <tbody>
                                             {
-                                                eventList && eventList.length !== 0 ? eventList?.map((item) => (
+                                                filteredEvents && filteredEvents.length !== 0 ? filteredEvents?.map((item) => (
 
 
                                                     <tr>
@@ -141,7 +158,7 @@ export default function index()
                                             </thead>
                                             <tbody>
                                                 {
-                                                    eventList && eventList.length !== 0 ? eventList?.map((item) => (
+                                                    filteredEvents && filteredEvents.length !== 0 ? filteredEvents?.map((item) => (
 
 
                                                         <tr>
