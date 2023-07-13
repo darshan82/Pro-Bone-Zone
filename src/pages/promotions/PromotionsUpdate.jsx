@@ -10,12 +10,13 @@ import Checkbox from "./CheckBox";
 import moment from "moment";
 import { UserContext } from "../../context/UserContext";
 
-export default function index() {
+export default function index()
+{
     document.title = "Promotion";
     const { user } = useContext(UserContext)
     const navigation = useNavigate()
     const { id } = useParams()
-    const [tid , setTid] = useState("")
+    const [tid, setTid] = useState("")
     const [allEvents, setAllEvents] = useState([])
     const [updatedEvents, setUpdatedEvents] = useState([])
     const [eventSelected, setEventSelected] = useState([])
@@ -23,8 +24,9 @@ export default function index() {
     const [state, setState] = useState({ locked: 0 })
     const [pormotionDetail, setPromotionDetail] = useState({})
     const [lock, setLock] = useState(0)
-    const [territory , setTerritory]  = useState([])
-    const handleChange = (e) => {
+    const [territory, setTerritory] = useState([])
+    const handleChange = (e) =>
+    {
         setState({
             ...state,
             [e.target.name]: e.target.value
@@ -32,26 +34,34 @@ export default function index() {
     }
 
 
-    useEffect(() => {
-        if (id) {
+    useEffect(() =>
+    {
+        if (id)
+        {
 
-            axios.get(`/promotion/detail/${id}`).then((res) => {
+            axios.get(`/promotion/detail/${id}`).then((res) =>
+            {
                 setPromotionDetail(res?.data)
             })
         }
 
     }, [id])
 
-    useEffect(()=>{
-            if(tid){
-                    axios.get(`/territory/${tid}`).then((res)=>{
-                        setTerritory(res?.data)
-                    })
-            }
-    },[tid])
+    useEffect(() =>
+    {
+        if (tid)
+        {
+            axios.get(`/territory/${tid}`).then((res) =>
+            {
+                setTerritory(res?.data)
+            })
+        }
+    }, [tid])
 
-    useEffect(() => {
-        const updatedEvents = allEvents?.filter((item) => {
+    useEffect(() =>
+    {
+        const updatedEvents = allEvents?.filter((item) =>
+        {
             let currentDate = new Date()
             let eventDate = new Date(item?.edate)
 
@@ -63,8 +73,10 @@ export default function index() {
     }, [state.ptype])
 
 
-    useEffect(() => {
-        if (pormotionDetail) {
+    useEffect(() =>
+    {
+        if (pormotionDetail)
+        {
             const { attendees, ptype, locked } = pormotionDetail
             setLock(locked)
             setState({
@@ -84,26 +96,33 @@ export default function index() {
 
 
 
-    
 
-    useEffect(() => {
-        if (eventSelected && eventSelected.length !== 0) {
-            const updatedObj = eventSelected?.reduce((acc, curr, i) => {
+
+    useEffect(() =>
+    {
+        if (eventSelected && eventSelected.length !== 0)
+        {
+            const updatedObj = eventSelected?.reduce((acc, curr, i) =>
+            {
                 return { ...acc, [`eventId${i + 1}`]: curr }
             }, {})
             setEventState(updatedObj)
         }
 
-        else {
+        else
+        {
 
             setEventState([])
         }
 
     }, [eventSelected])
 
-    const handleDelete = () => {
-        axios.delete(`/promotion/${id}`).then((res) => {
-            if (!res.data.error) {
+    const handleDelete = () =>
+    {
+        axios.delete(`/promotion/${id}`).then((res) =>
+        {
+            if (!res.data.error)
+            {
                 Swal({
                     text: res.data.message,
                     icon: 'success',
@@ -111,7 +130,8 @@ export default function index() {
                 })
                 navigation("/promotions")
             }
-            else {
+            else
+            {
                 Swal({
                     text: res?.data?.message,
                     icon: 'error',
@@ -120,7 +140,8 @@ export default function index() {
 
             }
 
-        }).catch((err) => {
+        }).catch((err) =>
+        {
             Swal({
                 title: err.response?.data?.message,
                 icon: 'error',
@@ -131,23 +152,39 @@ export default function index() {
     }
 
 
-    const getEvents = () => {
-        axios.get(`/event`).then((res) => {
+    const getEvents = () =>
+    {
+        axios.get(`/event`).then((res) =>
+        {
             setAllEvents(res.data)
+            axios.get(`/territory/${tid}`).then((res) =>
+            {
+                setTerritory(res?.data)
+            })
+            axios.get(`/promotion/detail/${id}`).then((res) =>
+            {
+                setPromotionDetail(res?.data)
+            })
         })
     }
 
-    useEffect(() => {
+    useEffect(() =>
+    {
         getEvents()
+
     }, [])
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e) =>
+    {
         e.preventDefault()
-        if (eventSelected.length !== 0) {
+        if (eventSelected.length !== 0)
+        {
 
-            axios.put(`/promotion/${id}`, { ...state, ...eventState }).then((res) => {
-                if (!res.data.error) {
+            axios.put(`/promotion/${id}`, { ...state, ...eventState }).then((res) =>
+            {
+                if (!res.data.error)
+                {
                     setState({})
                     Swal({
                         text: "Promotion updated successfully.",
@@ -157,7 +194,8 @@ export default function index() {
 
                     navigation("/promotions")
                 }
-                else {
+                else
+                {
                     Swal({
                         text: res?.data?.message,
                         icon: 'error',
@@ -165,7 +203,8 @@ export default function index() {
                     })
                 }
 
-            }).catch((err) => {
+            }).catch((err) =>
+            {
                 Swal({
                     title: err.response?.data?.message,
                     icon: 'error',
@@ -174,7 +213,8 @@ export default function index() {
                 })
             })
         }
-        else {
+        else
+        {
             Swal({
                 title: "Add Event Alert",
                 text: "Please select atleast single event to Update the Promotion",
@@ -219,7 +259,7 @@ export default function index() {
                                             <div className="mt-1">
                                                 <Field
                                                     type="text"
-                                                    value={Object.keys(territory).length !==0 ? territory?.state + ", " + territory?.country : ""}
+                                                    value={Object.keys(territory).length !== 0 ? territory?.state + ", " + territory?.country : ""}
                                                     className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                     required
                                                     disabled
@@ -365,20 +405,24 @@ export default function index() {
                                                     ""}
                                             <button
                                                 type="button"
-                                                onClick={() => {
+                                                onClick={() =>
+                                                {
                                                     Swal({
                                                         text: 'Are you sure you want to remove this record?',
                                                         icon: 'warning',
-                                                        buttons:{
-                                                            cancel:"Cancel",
-                                                            confirm:"OK"
+                                                        buttons: {
+                                                            cancel: "Cancel",
+                                                            confirm: "OK"
                                                         },
-                                                    }).then((result) => {
-                                                        if(result){
+                                                    }).then((result) =>
+                                                    {
+                                                        if (result)
+                                                        {
 
                                                             handleDelete()
                                                         }
-                                                        else{
+                                                        else
+                                                        {
                                                             swal.close()
                                                         }
                                                     })
