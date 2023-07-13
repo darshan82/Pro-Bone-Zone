@@ -72,7 +72,7 @@ export default function index()
             lastName,
             email,
             phone,
-            type: event?.etype,
+            type,
             time,
             description,
         };
