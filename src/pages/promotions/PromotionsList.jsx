@@ -11,24 +11,38 @@ export default function index() {
     const { user } = useContext(UserContext)
     const location = useLocation()
     const [promotions, setPromotions] = useState([])
+    const [filterPromotions , setFilterPromotion] = useState([])
     const [territories, setTerritories] = useState([])
+    const [selectedTid , setSelectedTid] = useState([])
     document.title = "Promotions";
 
 
     const getPromotions = () => {
         axios.get(`/promotion`).then((res) => {
-
             if (location?.state?.tId) {
                 let updatedList = res?.data?.filter((item) => item?.[`territory-id`] === location.state?.tId)
                 setPromotions(updatedList)
+                setFilterPromotion(updatedList)
             }
             else {
                 setPromotions(res?.data)
+                setFilterPromotion(res?.data)
             }
         }
         )
     }
 
+    useEffect(()=>{
+        if(selectedTid){
+            let updatedProms = promotions?.filter(({ 'territory-id': territoryId }) => territoryId == selectedTid);
+            setFilterPromotion(updatedProms)
+        }
+        else{
+            setFilterPromotion(promotions)
+        }
+        
+    },[selectedTid])
+    
 
     const getTerritories = () => {
         axios.get(`/territory`).then((res) => {
@@ -44,6 +58,11 @@ export default function index() {
                 getTerritories()
         }
     }, [])
+
+    const handleChange = (e)=>{
+ 
+        setSelectedTid(e.target.value)
+    }
 
     return (
         <>
@@ -78,11 +97,11 @@ export default function index() {
                                         id="licenseeId"
                                         name="licenseeId"
                                         // value={state.licenseeId || "Select Rating"}
-                                        // onChange={handleChange}
+                                        onChange={handleChange}
                                         className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                         required
                                     >
-                                        <option value={null} >{"ALL"}</option>
+                                        <option value={""} >{"ALL"}</option>
 
                                         {territories && territories.length !== 0 &&
                                             territories?.map((option) => (
@@ -122,8 +141,8 @@ export default function index() {
                                 </thead>
 
                                 <tbody>
-                                    {promotions && promotions?.length !== 0 &&
-                                        promotions?.map((item) => (
+                                    {filterPromotions && filterPromotions?.length !== 0 &&
+                                        filterPromotions?.map((item) => (
 
                                             <tr>
                                                 <td onClick={() => navigation(`/promotions/${item?.id}`)} className="border px-4 py-2 cursor-pointer text-purple-600">{item?.id}</td>

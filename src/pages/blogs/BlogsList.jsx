@@ -3,7 +3,7 @@ import Footer from "../../component/Footer";
 import Navbar from "../../component/Navbar/navbar";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-
+import DocImage from "../../assets/BlogIcon.png"
 
 export default function index() {
     document.title = "Blogs";
@@ -71,7 +71,7 @@ export default function index() {
                                         <tr>
                                             <td className="border px-4 py-2">{item?.category}</td>
                                             <td className="border px-4 py-2">{item?.subcategory}</td>
-                                            <td className="border px-4 py-2 cursor-pointer text-purple-600"><div className="flex justify-between "><p onClick={() => navigation(`/blogs/${item?.id}`)}>{item?.title}</p> <Link to={`/blog/${item.id}`}><img src="/src/images/BlogIcon.png" width={15} height={5} alt="blogPage" /></Link></div></td>
+                                            <td className="border px-4 py-2 cursor-pointer text-purple-600"><div className="flex justify-between "><p onClick={() => navigation(`/blogs/${item?.id}`)}>{item?.title}</p> <Link to={`/blog/${item.id}`}><img src={DocImage} width={15} height={5} alt="blogPage" /></Link></div></td>
                                         </tr>
                                     ))}
 

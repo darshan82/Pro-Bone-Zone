@@ -13,6 +13,9 @@ export default function index() {
     let navigation = useNavigate()
     const [staffList, setstaffList] = useState([])
     const [territories, setTerritories] = useState([])
+    const [filteredStaff , setFilteredStaff] = useState([])
+    const [selectedTid , setSelectedTid] = useState([])
+  
     document.title = "Staff";
 
     const getStaff = () => {
@@ -20,9 +23,11 @@ export default function index() {
             if (location?.state?.tId) {
                 let updatedList = res.data?.filter((item) => item?.[`territory-id`] == location?.state?.tId)
                 setstaffList(updatedList)
+                setFilteredStaff(updatedList)
             }
             else {
                 setstaffList(res.data)
+                setFilteredStaff(res?.data)
             }
         })
     }
@@ -33,6 +38,21 @@ export default function index() {
         })
     }
 
+    useEffect(()=>{
+        if(selectedTid){
+            let updatedStaffList = staffList?.filter(({ 'territory-id': territoryId }) => territoryId == selectedTid);
+            setFilteredStaff(updatedStaffList)
+        }
+        else{
+            setFilteredStaff(staffList)
+        }
+        
+    },[selectedTid])
+
+    const handleChange = (e)=>{
+ 
+        setSelectedTid(e.target.value)
+    }
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -74,11 +94,11 @@ export default function index() {
                                         id="licenseeId"
                                         name="licenseeId"
                                         // value={state.licenseeId || "Select Rating"}
-                                        // onChange={handleChange}
+                                        onChange={handleChange}
                                         className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                         required
                                     >
-                                        <option value={null} >{"ALL"}</option>
+                                        <option value={""} >{"ALL"}</option>
 
                                         {territories && territories.length !== 0 &&
                                             territories?.map((option) => (
@@ -114,8 +134,8 @@ export default function index() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {staffList && staffList?.length !== 0 &&
-                                        staffList?.map((item) => (
+                                    {filteredStaff && filteredStaff?.length !== 0 &&
+                                        filteredStaff?.map((item) => (
 
                                             <tr>
                                                 <td className="border px-4 py-2">{item?.user_id}</td>

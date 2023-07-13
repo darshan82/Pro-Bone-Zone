@@ -5,23 +5,34 @@ import Swal from 'sweetalert';
 import axios from "axios";
 import { consultantCategory, promoterCategory } from "../../constants";
 import Navbar from "../../component/Navbar/navbar";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 
 export default function index() {
     const navigation = useNavigate()
     const {user} = useContext(UserContext)
+    const location = useLocation()
     document.title = "Sponsor"
     const {id} = useParams()
     const [state, setState] = useState({})
     const [type, setType] = useState([])
+    const [teritory , setTerritory] = useState([])
     const [sponsorDetails , setSponsorDetails] = useState()
+    const [tid , setTid] = useState("")
     const handleChange = (e) => {
         setState({
             ...state,
             [e.target.name]: e.target.value
         })
     }
+
+    useEffect(()=>{
+            if(tid){
+                axios.get(`/territory/${tid}`).then((res)=>{
+                    setTerritory(res.data)
+                })
+            }
+    },[tid])
 
     useEffect(() => {
         if (state.scategory == "consultant") {
@@ -97,7 +108,7 @@ export default function index() {
 
     useEffect(()=>{
         if(sponsorDetails && sponsorDetails.length !==0){
-            const {description , email , logo , notes , phone , scategory , stype , webpage} = sponsorDetails
+            const {territory_id,description , email , logo , notes , phone , scategory , stype , webpage} = sponsorDetails
 
             setState({
                 ...state,
@@ -114,9 +125,9 @@ export default function index() {
                 
 
             })
+            setTid(territory_id)
         }
     },[sponsorDetails])
-
     return (
         <>
             <Navbar />
@@ -143,7 +154,7 @@ export default function index() {
                                             <div className="mt-1">
                                                 <Field
                                                     type="text"
-                                                    value={user?.territory ? user?.territory?.state +", "+ user?.territory?.county : " "}
+                                                    value={Object.keys(teritory).length !==0 ? teritory?.state +", "+ teritory?.county : ""}
                                                     onChange={handleChange}
                                                     className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                     required

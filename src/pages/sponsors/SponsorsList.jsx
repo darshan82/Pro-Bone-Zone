@@ -12,14 +12,17 @@ export default function index() {
     const location = useLocation()
     const [sponsors, setSponsors] = useState([])
     const [territories , setTerritories] = useState([])
+    const [filteredSponsors , setFilteredSponsors] = useState([])
+    const [selectedTid , setSelectedTid] = useState([])
+    
     document.title = "Sponsors";
 
     const getSponsors = () => {
         if (location?.state?.tId) {
-            axios.get(`/sponsor/${location?.state?.tId}`).then((res) => setSponsors(res?.data?.sponsors))
+            axios.get(`/sponsor/${location?.state?.tId}`).then((res) => {setSponsors(res?.data?.sponsors); setFilteredSponsors(res?.data?.sponsors)})
         }
         else{
-            axios.get(`/sponsor`).then((res) => setSponsors(res?.data))
+            axios.get(`/sponsor`).then((res) => {setSponsors(res?.data) ; setFilteredSponsors(res?.data) })
         }
     }
     const getTerritories = () => {
@@ -35,6 +38,22 @@ export default function index() {
             getTerritories()
         }
     }, [user])
+
+    useEffect(()=>{
+        if(selectedTid){
+            let updatedSponsorsList = sponsors?.filter(({ 'territoryId': territoryId }) => territoryId == selectedTid);
+            setFilteredSponsors(updatedSponsorsList)
+        }
+        else{
+            setFilteredSponsors(sponsors)
+        }
+        
+    },[selectedTid])
+
+    const handleChange = (e)=>{
+ 
+        setSelectedTid(e.target.value)
+    }
 
     return (
         <>
@@ -66,11 +85,11 @@ export default function index() {
                                         id="licenseeId"
                                         name="licenseeId"
                                         // value={state.licenseeId || "Select Rating"}
-                                        // onChange={handleChange}
+                                        onChange={handleChange}
                                         className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                         required
                                     >
-                                        <option value={null} >{"ALL"}</option>
+                                        <option value={""} >{"ALL"}</option>
 
                                         {territories && territories.length !== 0 &&
                                             territories?.map((option) => (
@@ -108,8 +127,8 @@ export default function index() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {sponsors && sponsors?.length !== 0 &&
-                                        sponsors?.map((item) => (
+                                    {filteredSponsors && filteredSponsors?.length !== 0 &&
+                                        filteredSponsors?.map((item) => (
 
                                             <tr>
                                                 <td className="border px-4 py-2">{item?.id}</td>

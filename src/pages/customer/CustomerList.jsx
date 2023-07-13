@@ -11,6 +11,8 @@ export default function index() {
     const [customerList, setCustomerList] = useState([])
     const navigation = useNavigate()
     const [territories , setTerritories] = useState([])
+    const [selectedTid , setSelectedTid] = useState([])
+    const [filteredCustomer , setFilteredCustomer] = useState([])
     useEffect(() => {
         window.scrollTo(0, 0)
         getCustomer()
@@ -27,7 +29,24 @@ export default function index() {
     const getCustomer = () => {
         axios.get(`/customer`).then((res) => {
             setCustomerList(res.data?.customers)
+            setFilteredCustomer(res.data?.customers)
         })
+    }
+
+    useEffect(()=>{
+        if(selectedTid){
+            let updatedCustomerList = customerList?.filter(({ 'territory_id': territoryId }) => territoryId == selectedTid);
+            setFilteredCustomer(updatedCustomerList)
+        }
+        else{
+            setFilteredCustomer(customerList)
+        }
+        
+    },[selectedTid])
+
+    const handleChange = (e)=>{
+ 
+        setSelectedTid(e.target.value)
     }
 
     return (
@@ -60,11 +79,11 @@ export default function index() {
                                         id="licenseeId"
                                         name="licenseeId"
                                         // value={state.licenseeId || "Select Rating"}
-                                        // onChange={handleChange}
+                                        onChange={handleChange}
                                         className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                         required
                                     >
-                                        <option value={null} >{"ALL"}</option>
+                                        <option value={""} >{"ALL"}</option>
 
                                         {territories && territories.length !== 0 &&
                                             territories?.map((option) => (
@@ -91,7 +110,7 @@ export default function index() {
                                 </thead>
                                 <tbody>
 
-                                    {customerList && customerList.length !== 0 ? customerList?.map((item,i)=>(
+                                    {filteredCustomer && filteredCustomer.length !== 0 ? filteredCustomer?.map((item,i)=>(
                                         <tr key={i}>
 
 

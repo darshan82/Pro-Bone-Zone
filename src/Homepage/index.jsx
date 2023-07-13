@@ -21,7 +21,7 @@ import McIntoshTronton from "../assets/McIntoshTronton.png";
 import AyalaSmithDickens from "../assets/AyalaSmithDickens.png";
 import YouTube from "react-youtube";
 import Footer from "../component/Footer";
-const videId = "vD8X8qvhRxQ";
+const videId = "n8Qz9UC79rE";
 import Navbar from "../component/Navbar/navbar";
 import { useLocation } from "react-router-dom";
 
@@ -408,10 +408,11 @@ export default function index()
                     className="h-10  md:w-[184px] lg:px-3 lg:py-2 bg-gray-100 text-sm text-[#414141] rounded-sm m-2"
                   >
                     <option value="" disabled selected>
-                      Select a Interest
+                    Primary Interest
                     </option>
-                    <option value="family-law">Family Law</option>
-                    <option value="business-law">Business Law</option>
+                    <option value="Legal Consultation">Legal Consultation</option>
+                    <option value="Business Mentoring">Business Mentoring</option>
+                    <option value="Financial Planning">Financial Planning</option>
                   </select>
 
                 </div>
