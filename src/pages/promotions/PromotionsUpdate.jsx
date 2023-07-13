@@ -15,6 +15,7 @@ export default function index() {
     const { user } = useContext(UserContext)
     const navigation = useNavigate()
     const { id } = useParams()
+    const [tid , setTid] = useState("")
     const [allEvents, setAllEvents] = useState([])
     const [updatedEvents, setUpdatedEvents] = useState([])
     const [eventSelected, setEventSelected] = useState([])
@@ -22,6 +23,7 @@ export default function index() {
     const [state, setState] = useState({ locked: 0 })
     const [pormotionDetail, setPromotionDetail] = useState({})
     const [lock, setLock] = useState(0)
+    const [territory , setTerritory]  = useState([])
     const handleChange = (e) => {
         setState({
             ...state,
@@ -40,6 +42,14 @@ export default function index() {
 
     }, [id])
 
+    useEffect(()=>{
+            if(tid){
+                    axios.get(`/territory/${tid}`).then((res)=>{
+                        setTerritory(res?.data)
+                    })
+            }
+    },[tid])
+
     useEffect(() => {
         const updatedEvents = allEvents?.filter((item) => {
             let currentDate = new Date()
@@ -51,7 +61,6 @@ export default function index() {
         setUpdatedEvents(updatedEvents)
         setEventSelected([])
     }, [state.ptype])
-
 
 
     useEffect(() => {
@@ -69,7 +78,7 @@ export default function index() {
             })
             let arr = [pormotionDetail?.[`event1-id`], pormotionDetail?.[`event2-id`], pormotionDetail?.[`event3-id`], pormotionDetail?.[`event4-id`]]?.filter((item) => item !== null)
             setEventSelected(arr)
-
+            setTid(pormotionDetail?.[`territory-id`])
         }
     }, [pormotionDetail])
 
@@ -210,7 +219,7 @@ export default function index() {
                                             <div className="mt-1">
                                                 <Field
                                                     type="text"
-                                                    value={user?.territory ? user?.territory?.state + ", " + user?.territory?.country : ""}
+                                                    value={Object.keys(territory).length !==0 ? territory?.state + ", " + territory?.country : ""}
                                                     className="w-full border border-gray-300 px-3 py-2 rounded-sm"
                                                     required
                                                     disabled
