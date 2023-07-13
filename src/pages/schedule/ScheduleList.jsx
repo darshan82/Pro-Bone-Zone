@@ -73,7 +73,8 @@ export default function index()
     const handleEventDetail = (data) =>
     {
         updateEvent(data)
-        navigation(`/appointment/update/${data[`customer-id`]}`)
+        console.log("data",data)
+        navigation(`/appointment/update/${data[`id`]}`)
     }
 
     document.title = "Event Schedule"
