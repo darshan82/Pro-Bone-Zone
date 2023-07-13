@@ -65,7 +65,8 @@ export default function index()
 
     useEffect(() =>
     {
-        if (event)
+        console.log("event",)
+        if (event && event?.timeslots && event?.timeslots.length)
         {
             const sortableTimes = event?.timeslots.map(time =>
             {
@@ -305,7 +306,7 @@ export default function index()
                                             </label>                                            <ErrorMessage name="status" component="div" className="text-red-500" />
                                         </div>  <div className="w-full md:w-1/2 px-2 mb-4">
                                             <label htmlFor="advance" className="block mb-2">
-                                            Retain:
+                                                Retain:
                                             </label>
                                             <div className="flex items-center">
                                                 <label className="mr-4">
@@ -409,16 +410,19 @@ export default function index()
                                                     Swal({
                                                         text: 'Are you sure you want to remove this record?',
                                                         icon: 'warning',
-                                                        buttons:{
-                                                            cancel:"Cancel",
-                                                            confirm:"OK"
+                                                        buttons: {
+                                                            cancel: "Cancel",
+                                                            confirm: "OK"
                                                         },
-                                                    }).then((result) => {
-                                                        if(result){
+                                                    }).then((result) =>
+                                                    {
+                                                        if (result)
+                                                        {
 
                                                             handleDelete()
                                                         }
-                                                        else{
+                                                        else
+                                                        {
                                                             swal.close()
                                                         }
                                                     })

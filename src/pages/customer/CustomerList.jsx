@@ -5,47 +5,63 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 import { userTypes } from "../../constants";
-export default function index() {
-    const {user} = useContext(UserContext)
+import { EventContext } from "../../context/EventContext";
+
+export default function index()
+{
+
+    const { updateEvent } = useContext(EventContext)
+
+    const { user } = useContext(UserContext)
     document.title = "Customers";
     const [customerList, setCustomerList] = useState([])
     const navigation = useNavigate()
-    const [territories , setTerritories] = useState([])
-    const [selectedTid , setSelectedTid] = useState([])
-    const [filteredCustomer , setFilteredCustomer] = useState([])
-    useEffect(() => {
+    const [territories, setTerritories] = useState([])
+    const [selectedTid, setSelectedTid] = useState([])
+    const [filteredCustomer, setFilteredCustomer] = useState([])
+    useEffect(() =>
+    {
         window.scrollTo(0, 0)
         getCustomer()
-        if(userTypes.admin === user?.permit){
-                getTerritories()
+        if (userTypes.admin === user?.permit)
+        {
+            getTerritories()
         }
     }, [user])
 
-    const getTerritories = () => {
-        axios.get(`/territory`).then((res) => {
+    const getTerritories = () =>
+    {
+        axios.get(`/territory`).then((res) =>
+        {
             setTerritories(res?.data)
         })
     }
-    const getCustomer = () => {
-        axios.get(`/customer`).then((res) => {
+    const getCustomer = () =>
+    {
+        axios.get(`/customer`).then((res) =>
+        {
             setCustomerList(res.data?.customers)
             setFilteredCustomer(res.data?.customers)
         })
     }
 
-    useEffect(()=>{
-        if(selectedTid){
+    useEffect(() =>
+    {
+        if (selectedTid)
+        {
             let updatedCustomerList = customerList?.filter(({ 'territory_id': territoryId }) => territoryId == selectedTid);
             setFilteredCustomer(updatedCustomerList)
         }
-        else{
+        else
+        {
             setFilteredCustomer(customerList)
         }
-        
-    },[selectedTid])
 
-    const handleChange = (e)=>{
- 
+    }, [selectedTid])
+
+    const handleChange = (e) =>
+    {
+
         setSelectedTid(e.target.value)
     }
 
@@ -95,7 +111,7 @@ export default function index() {
                                     </select>
                                 </div>
                             </div>
-}
+                        }
 
                         <div className="overflow-x-auto">
 
@@ -110,26 +126,37 @@ export default function index() {
                                 </thead>
                                 <tbody>
 
-                                    {filteredCustomer && filteredCustomer.length !== 0 ? filteredCustomer?.map((item,i)=>(
+                                    {filteredCustomer && filteredCustomer.length !== 0 ? filteredCustomer?.map((item, i) => (
                                         <tr key={i}>
 
-
+                                            {console.log("item", item)}
                                             <td className="border px-4 py-2">{item?.id}</td>
-                                            <td onClick={()=>navigation(`/appointment/update/${item?.id}`)} className="border px-4 py-2 cursor-pointer text-purple-600">{item?.[`name-first`] + " "+ item?.[`name-last`]}</td>
+                                            <td onClick={() =>
+                                            {
+                                                if (item?.appointments[0]?.id)
+                                                {
+                                                    updateEvent({
+                                                        ...item,
+                                                        ...item?.appointments[0]
+                                                    })
+
+                                                    navigation(`/appointment/update/${item?.appointments[0]?.appointment_id}`)
+                                                }
+                                            }} className="border px-4 py-2 cursor-pointer text-purple-600">{item?.[`name-first`] + " " + item?.[`name-last`]}</td>
                                             <td className="border px-4 py-2">{item?.phone}</td>
                                             <td className="border px-4 py-2">{item?.email}</td>
                                         </tr>
                                     ))
-                                    :""}
+                                        : ""}
 
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div >
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div >
             </div >
 
-        <Footer />
+            <Footer />
 
         </>
     );
