@@ -114,7 +114,7 @@ export default function index()
 
                         <div style={{ overflowY: "auto" }}>
 
-                            Date:  {moment(scheduleList[0]?.data[0]?.edate).utc().format("ddd, MMMM D, YYYY")}
+                            Date:  {moment(scheduleList[0]?.data[0]?.edate).format("ddd, MMMM D, YYYY")}
                             <div> Location: {scheduleList[0]?.data[0]?.city}</div>
                             <div>  Focus:  {scheduleList[0]?.data[0]?.interest}</div>
 
