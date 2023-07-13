@@ -38,7 +38,7 @@ export default function index()
 
                     data.forEach((item) =>
                     {
-                        const edate = item["time-start"]
+                        const edate = item["timeslot"]
                         const existingItem = arrangedData.find((arrangedItem) => arrangedItem.value === edate);
 
                         if (existingItem)
@@ -54,8 +54,8 @@ export default function index()
                     {
                         item.data.sort((a, b) =>
                         {
-                            const timeStartA = a['time-start'];
-                            const timeStartB = b['time-start'];
+                            const timeStartA = a['timeslot'];
+                            const timeStartB = b['timeslot'];
                             return timeStartA.localeCompare(timeStartB, undefined, { numeric: true });
                         });
                     });

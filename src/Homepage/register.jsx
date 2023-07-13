@@ -72,7 +72,7 @@ export default function index()
             lastName,
             email,
             phone,
-            type,
+            type: event?.etype,
             time,
             description,
         };
@@ -96,7 +96,7 @@ export default function index()
         } catch (error)
         {
             console.error('Error sending email:', error);
-            alert('An error occurred while sending the email. Please try again later.');
+            // alert('An error occurred while sending the email. Please try again later.');
         }
     };
 
@@ -179,11 +179,12 @@ export default function index()
                                             promotion && promotion?.events && promotion?.events.length &&
                                             promotion.events.map((value, index) =>
                                             {
+                                                console.log("value", value)
                                                 let d = moment(value?.edate).utc()
                                                     .format("ddd MMMM Do");
 
                                                 return (
-                                                    <option value={index}>{event && event["time-start"]} {" "}{d}</option>
+                                                    <option value={index}>{value && value["time-start"]} {" "}{d}</option>
                                                 )
                                             })
                                         }
