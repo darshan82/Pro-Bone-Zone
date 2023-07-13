@@ -6,6 +6,8 @@ import { EventContext } from "../../context/EventContext";
 import axios from "axios";
 import { interests, ratings } from "../../constants";
 import Navbar from "../../component/Navbar/navbar";
+import { useLocation } from "react-router-dom"
+import queryString from 'query-string';
 
 export default function index()
 {
@@ -16,7 +18,10 @@ export default function index()
     const [appointmentId, setAppointmentId] = useState(null)
     const [customerId, setcustomerId] = useState(null)
 
-
+    const location = useLocation();
+    const queryParams = queryString.parse(location.search);
+    const type = queryParams.type;
+    console.log("type", type)
     const handleChange = (e) =>
     {
         setState({
@@ -65,7 +70,6 @@ export default function index()
 
     useEffect(() =>
     {
-        console.log("event",)
         if (event && event?.timeslots && event?.timeslots.length)
         {
             const sortableTimes = event?.timeslots.map(time =>
@@ -206,6 +210,7 @@ export default function index()
                                             </label>
                                             <select
                                                 id="interest"
+                                                disabled={type && type === "customer" ? true : false}
                                                 name="interest"
                                                 value={state.interest}
                                                 onChange={handleChange}

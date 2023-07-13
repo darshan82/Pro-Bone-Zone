@@ -140,7 +140,7 @@ export default function index()
                                                         ...item?.appointments[0]
                                                     })
 
-                                                    navigation(`/appointment/update/${item?.appointments[0]?.appointment_id}`)
+                                                    navigation(`/appointment/update/${item?.appointments[0]?.appointment_id}?type=customer`)
                                                 }
                                             }} className="border px-4 py-2 cursor-pointer text-purple-600">{item?.[`name-first`] + " " + item?.[`name-last`]}</td>
                                             <td className="border px-4 py-2">{item?.phone}</td>
