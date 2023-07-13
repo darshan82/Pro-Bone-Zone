@@ -56,13 +56,13 @@ function App(props)
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Term />} />
           <Route path="/login" element={loggedIn ? <Navigate to={setDefaultPath(user)} /> : <Signin />} />
-          <Route path="/schedule/:eventId/:date" element={<ScheduleList />} />
 {
   user ? (
     <>
   
   <Route path="/register" element={<Signup />} />
   <Route path="/appointment/update/:customerId" element={<AppointmentUpdate />} />
+  <Route path="/schedule/:eventId/:date" element={<ScheduleList />} />
   <Route path="/licensee" element={<LicenseesList />} />
           <Route path="/licensee/add" element={<LicenseesAdd />} />
           <Route path="/licensee/:id" element={<LicenseesUpdate />} /><Route path="/licensee" element={<LicenseesList />} />

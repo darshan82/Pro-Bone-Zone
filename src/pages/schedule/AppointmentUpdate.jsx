@@ -11,9 +11,7 @@ export default function index()
 {
     const { event } = useContext(EventContext)
     document.title = "Appointment";
-
     const [state, setState] = useState({ advance: "No", status: "No Show" })
-    const [sponsor, setSponsor] = useState([])
     const [timeslots, setTimeSlots] = useState([])
     const [appointmentId, setAppointmentId] = useState(null)
     const [customerId, setcustomerId] = useState(null)
@@ -62,14 +60,6 @@ export default function index()
             })
         })
     }
-
-    useEffect(() =>
-    {
-        axios.get("sponsor/100").then((res) =>
-        {
-            setSponsor(res.data?.sponsors)
-        })
-    }, [])
 
 
 
