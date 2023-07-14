@@ -156,7 +156,7 @@ export default function index()
                                         {event && event["street1"]}
                                         <br />
                                         {event && event["street2"]}
-                                        <br />
+                                        
                                         {event && event["city"]}
                                     </p>
                                 </div>
