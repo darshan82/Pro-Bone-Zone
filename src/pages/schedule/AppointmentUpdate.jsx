@@ -208,25 +208,40 @@ export default function index()
                                             <label htmlFor="interest" className="block mb-2">
                                                 Interest:
                                             </label>
-                                            <select
-                                                id="interest"
-                                                disabled={type && type === "customer" ? true : false}
-                                                name="interest"
-                                                value={state.interest}
-                                                onChange={handleChange}
-                                                className="w-full border border-gray-300 px-3 py-2 rounded-sm"
-                                                required
-                                            >
-                                                <option value={null} disabled>{"Select Interest"}</option>
 
-                                                {interests && interests.length !== 0 &&
-                                                    interests?.map((option) => (
+                                            {
+                                                type && type === "customer" ?
+                                                    <input
+                                                        id="interest"
+                                                        name="interest"
+                                                        value={state.interest}
+                                                        onChange={handleChange}
+                                                        className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                                        required
+                                                    /
+                                                    >
+                                                    :
+                                                    <select
+                                                        id="interest"
+                                                        name="interest"
+                                                        value={state.interest}
+                                                        onChange={handleChange}
+                                                        className="w-full border border-gray-300 px-3 py-2 rounded-sm"
+                                                        required
+                                                    >
+                                                        <option value={null} disabled>{"Select Interest"}</option>
 
-                                                        <option value={option.value}>{option.label}</option>
-                                                    ))
-                                                }
+                                                        {interests && interests.length !== 0 &&
+                                                            interests?.map((option) => (
 
-                                            </select>
+                                                                <option value={option.value}>{option.label}</option>
+                                                            ))
+                                                        }
+
+                                                    </select>
+
+                                            }
+
                                             <ErrorMessage name="interest" component="div" className="text-red-500" />
                                         </div>
                                         <div className="w-full md:w-1/2 px-2 mb-4">
