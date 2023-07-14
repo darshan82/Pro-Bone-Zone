@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Footer from "../../component/Footer";
 import Navbar from "../../component/Navbar/navbar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { userTypes } from "../../constants";
+import { UserContext } from "../../context/UserContext";
 
 export default function index() {
+    const {user} = useContext(UserContext)
     document.title = "Resources";
     const [resourcesList, setResourcesList] = useState([])
     const navigation = useNavigate()
@@ -42,6 +45,7 @@ export default function index() {
                         >
                             Resources
                         </h1>
+                        {user?.permit === userTypes.admin && 
                         <div className="flex justify-end">
                             <button
                                 onClick={() => {
@@ -52,6 +56,7 @@ export default function index() {
                                 Add
                             </button>
                         </div>
+                        }
                         <div className="overflow-x-auto">
 
                             <table className="table-auto min-w-full">
