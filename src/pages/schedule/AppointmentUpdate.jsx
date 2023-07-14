@@ -210,7 +210,7 @@ export default function index()
                                             </label>
 
                                             {
-                                                type && type === "customer" ?
+                                                true ?
                                                     <input
                                                         id="interest"
                                                         name="interest"
