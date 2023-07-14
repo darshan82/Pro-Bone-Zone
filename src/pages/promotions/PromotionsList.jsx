@@ -6,25 +6,30 @@ import axios from "axios";
 import { UserContext } from "../../context/UserContext";
 import { userTypes } from "../../constants";
 
-export default function index() {
+export default function index()
+{
     let navigation = useNavigate()
     const { user } = useContext(UserContext)
     const location = useLocation()
     const [promotions, setPromotions] = useState([])
-    const [filterPromotions , setFilterPromotion] = useState([])
+    const [filterPromotions, setFilterPromotion] = useState([])
     const [territories, setTerritories] = useState([])
-    const [selectedTid , setSelectedTid] = useState([])
+    const [selectedTid, setSelectedTid] = useState([])
     document.title = "Promotions";
 
 
-    const getPromotions = () => {
-        axios.get(`/promotion`).then((res) => {
-            if (location?.state?.tId) {
+    const getPromotions = () =>
+    {
+        axios.get(`/promotion`).then((res) =>
+        {
+            if (location?.state?.tId)
+            {
                 let updatedList = res?.data?.filter((item) => item?.[`territory-id`] === location.state?.tId)
                 setPromotions(updatedList)
                 setFilterPromotion(updatedList)
             }
-            else {
+            else
+            {
                 setPromotions(res?.data)
                 setFilterPromotion(res?.data)
             }
@@ -32,25 +37,31 @@ export default function index() {
         )
     }
 
-    useEffect(()=>{
-        if(selectedTid){
+    useEffect(() =>
+    {
+        if (selectedTid)
+        {
             let updatedProms = promotions?.filter(({ 'territory-id': territoryId }) => territoryId == selectedTid);
             setFilterPromotion(updatedProms)
         }
-        else{
+        else
+        {
             setFilterPromotion(promotions)
         }
-        
-    },[selectedTid])
-    
 
-    const getTerritories = () => {
-        axios.get(`/territory`).then((res) => {
+    }, [selectedTid])
+
+
+    const getTerritories = () =>
+    {
+        axios.get(`/territory`).then((res) =>
+        {
             setTerritories(res?.data)
         })
     }
 
-    useEffect(() => {
+    useEffect(() =>
+    {
         window.scrollTo(0, 0)
         getPromotions()
         {
@@ -59,8 +70,9 @@ export default function index() {
         }
     }, [])
 
-    const handleChange = (e)=>{
- 
+    const handleChange = (e) =>
+    {
+
         setSelectedTid(e.target.value)
     }
 
@@ -104,7 +116,7 @@ export default function index() {
                                         <option value={""} >{"ALL"}</option>
 
                                         {territories && territories.length !== 0 &&
-                                            territories?.map((option) => (
+                                            territories?.sort((a, b) => b.id - a.id)?.map((option) => (
 
                                                 <option value={option?.id}>{option?.state + " " + option?.county}</option>
                                             ))
@@ -118,7 +130,8 @@ export default function index() {
 
                             <div className="flex justify-end">
                                 <button
-                                    onClick={() => {
+                                    onClick={() =>
+                                    {
                                         navigation("/promotions/add");
                                     }}
                                     className="bg-[#EC672C] mb-4 px-5 py-1 rounded-sm text-white"
@@ -142,7 +155,7 @@ export default function index() {
 
                                 <tbody>
                                     {filterPromotions && filterPromotions?.length !== 0 &&
-                                        filterPromotions?.map((item) => (
+                                        filterPromotions?.sort((a, b) => b.id - a.id)?.map((item) => (
 
                                             <tr>
                                                 <td onClick={() => navigation(`/promotions/${item?.id}`)} className="border px-4 py-2 cursor-pointer text-purple-600">{item?.id}</td>

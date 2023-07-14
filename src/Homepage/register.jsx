@@ -156,7 +156,7 @@ export default function index()
                                         {event && event["street1"]}
                                         <br />
                                         {event && event["street2"]}
-                                        
+
                                         {event && event["city"]}
                                     </p>
                                 </div>
@@ -276,7 +276,7 @@ export default function index()
                                         </option>
                                         {
                                             promotion && promotion.availability && promotion.availability.length &&
-                                            promotion.availability.filter(value => value["event_id"] == event.id).map(value =>
+                                            promotion.availability.filter(value => value["event_id"] == event.id && value["seats"] > 0).map(value =>
                                             {
                                                 return (
                                                     <option className="uppercase" value={value.timeslot}>{value.timeslot}</option>

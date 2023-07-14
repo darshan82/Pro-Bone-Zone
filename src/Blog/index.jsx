@@ -59,7 +59,7 @@ export default function index()
         <h1 className="text-left text-[#414141]  sm:text-3xl   font-inter font-semibold   md:text-[27px] text-[23px] md:text-3xl lg:text-3xl leading-10  lg:w-[450px] w-full  my-1 mb-5 lg:pt-5 pr-5 lg:pr-9 lg:ml-44 pl-1">
           {blog?.title}
         </h1>
-      <div className="bg-white p-2   pr-5 lg:pr-9 lg:ml-44">
+      <div className="bg-white p-2   pr-5 lg:pr-9 lg:ml-44" style={{marginBottom:50}}>
         <div className=" mx-auto text-left">
           <p className="text-gray-700 text-lg leading-relaxed ">
             <div dangerouslySetInnerHTML={{ __html: blog?.blog_text }}></div>
