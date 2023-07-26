@@ -47,7 +47,7 @@ function App(props)
     <div style={{ marginLeft: width > 1000 && - 90 }}>
       <Router history={history}>
         <Routes>
-          {/* <Route path="/" element={<HomwPage />} />
+          <Route path="/" element={<HomwPage />} />
           <Route path="/register/:id" element={<Registration />} />
           <Route path="/about" element={<About />} />
           <Route path="/blog/:id" element={<Blog />} />
@@ -57,59 +57,58 @@ function App(props)
           <Route path="/terms" element={<Term />} />
           <Route path="/login" element={loggedIn ? <Navigate to={setDefaultPath(user)} /> : <Signin />} />
           {
-            user ? (
-              <>
+            user &&
+            <>
 
-                <Route path="/register" element={<Signup />} />
-                <Route path="/appointment/update/:customerId" element={<AppointmentUpdate />} />
-                <Route path="/schedule/:eventId/:focus" element={<ScheduleList />} />
-                <Route path="/licensee" element={<LicenseesList />} />
-                <Route path="/licensee/add" element={<LicenseesAdd />} />
-                <Route path="/licensee/:id" element={<LicenseesUpdate />} /><Route path="/licensee" element={<LicenseesList />} />
-                <Route path="/staff/add" element={<StaffAdd />} />
-                <Route path="/staff/:id" element={<StaffUpdate />} />
-                <Route path="/staff" element={<StaffsList />} />
-                <Route path="/sponsors" element={<SponsorsList />} />
-                <Route path="/sponsors/add" element={<SponsorAdd />} />
-                <Route path="/sponsors/:id" element={<SponsorUpdate />} />
-                <Route path="/blogs" element={<BlogsList />} />
-                <Route path="/blogs/add" element={<BlogAdd />} />
-                <Route path="/blogs/:id" element={<BlogUpdate />} />
-                <Route path="/Profile" element={< Profile />} />
+              <Route path="/register" element={<Signup />} />
+              <Route path="/appointment/update/:customerId" element={<AppointmentUpdate />} />
+              <Route path="/schedule/:eventId/:focus" element={<ScheduleList />} />
+              <Route path="/licensee" element={<LicenseesList />} />
+              <Route path="/licensee/add" element={<LicenseesAdd />} />
+              <Route path="/licensee/:id" element={<LicenseesUpdate />} /><Route path="/licensee" element={<LicenseesList />} />
+              <Route path="/staff/add" element={<StaffAdd />} />
+              <Route path="/staff/:id" element={<StaffUpdate />} />
+              <Route path="/staff" element={<StaffsList />} />
+              <Route path="/sponsors" element={<SponsorsList />} />
+              <Route path="/sponsors/add" element={<SponsorAdd />} />
+              <Route path="/sponsors/:id" element={<SponsorUpdate />} />
+              <Route path="/blogs" element={<BlogsList />} />
+              <Route path="/blogs/add" element={<BlogAdd />} />
+              <Route path="/blogs/:id" element={<BlogUpdate />} />
+              <Route path="/Profile" element={< Profile />} />
 
-                <Route path={`/${NAV_BAR[0].name}`} element={<TerritoriesList />} />
-                <Route path={`/${NAV_BAR[1].name}`} element={< PromotionsList />} />
-                <Route path={`/${NAV_BAR[2].name}`} element={<EventList />} />
-                <Route path={`/${NAV_BAR[3].name}`} element={<TerritoriesList />} />
-                <Route path={`/${NAV_BAR[4].name}`} element={<ResourcesList />} />
-                <Route path={`/${NAV_BAR[5].name}`} element={<TerritoriesList />} />
+              <Route path={`/${NAV_BAR[0].name}`} element={<TerritoriesList />} />
+              <Route path={`/${NAV_BAR[1].name}`} element={< PromotionsList />} />
+              <Route path={`/${NAV_BAR[2].name}`} element={<EventList />} />
+              <Route path={`/${NAV_BAR[3].name}`} element={<TerritoriesList />} />
+              <Route path={`/${NAV_BAR[4].name}`} element={<ResourcesList />} />
+              <Route path={`/${NAV_BAR[5].name}`} element={<TerritoriesList />} />
 
-                <Route path={`/${NAV_BAR[0].name}/add`} element={<TerritoriesAdd />} />
-                <Route path={`/${NAV_BAR[1].name}/add`} element={<PromotionsAdd />} />
-                <Route path={`/${NAV_BAR[2].name}/add`} element={<EventAdd />} />
-                <Route path={`/${NAV_BAR[3].name}`} element={<TerritoriesList />} />
-                <Route path={`/${NAV_BAR[4].name}/add`} element={<ResourcesAdd />} />
-                <Route path={`/${NAV_BAR[5].name}`} element={<TerritoriesList />} />
+              <Route path={`/${NAV_BAR[0].name}/add`} element={<TerritoriesAdd />} />
+              <Route path={`/${NAV_BAR[1].name}/add`} element={<PromotionsAdd />} />
+              <Route path={`/${NAV_BAR[2].name}/add`} element={<EventAdd />} />
+              <Route path={`/${NAV_BAR[3].name}`} element={<TerritoriesList />} />
+              <Route path={`/${NAV_BAR[4].name}/add`} element={<ResourcesAdd />} />
+              <Route path={`/${NAV_BAR[5].name}`} element={<TerritoriesList />} />
 
-                <Route path={`/${NAV_BAR[0].name}/:id`} element={<TerritoriesUpdate />} />
-                <Route path={`/${NAV_BAR[1].name}/:id`} element={<PromotionsUpdate />} />
-                <Route path={`/${NAV_BAR[2].name}/:id`} element={<EventUpdate />} />
-                <Route path={`/${NAV_BAR[3].name}/:value`} element={<TerritoriesUpdate />} />
-                <Route path={`/${NAV_BAR[4].name}/:id`} element={<ResourceUpdate />} />
-                <Route path={`/${NAV_BAR[5].name}/:value`} element={<TerritoriesUpdate />} />
-
-
-                <Route path={`/customers`} element={<CustomerList />} />
-                <Route path={`/training`} element={<center><h1>UNDER DEVELOPMENT</h1></center>} />
-                <Route path={`/marketing`} element={<center><h1>UNDER DEVELOPMENT</h1></center>} />
-                <Route path={`/profile`} element={<center><h1>UNDER DEVELOPMENT</h1></center>} />
+              <Route path={`/${NAV_BAR[0].name}/:id`} element={<TerritoriesUpdate />} />
+              <Route path={`/${NAV_BAR[1].name}/:id`} element={<PromotionsUpdate />} />
+              <Route path={`/${NAV_BAR[2].name}/:id`} element={<EventUpdate />} />
+              <Route path={`/${NAV_BAR[3].name}/:value`} element={<TerritoriesUpdate />} />
+              <Route path={`/${NAV_BAR[4].name}/:id`} element={<ResourceUpdate />} />
+              <Route path={`/${NAV_BAR[5].name}/:value`} element={<TerritoriesUpdate />} />
 
 
-              </>
-            )
+              <Route path={`/customers`} element={<CustomerList />} />
+              <Route path={`/training`} element={<center><h1>UNDER DEVELOPMENT</h1></center>} />
+              <Route path={`/marketing`} element={<center><h1>UNDER DEVELOPMENT</h1></center>} />
+              <Route path={`/profile`} element={<center><h1>UNDER DEVELOPMENT</h1></center>} />
 
-              : ""}
- */}
+
+            </>
+
+          }
+
 
 
         </Routes>
