@@ -1,8 +1,7 @@
 import axios from "axios"
 
 export const setBaseUrl = ()=>{
-    axios.defaults.baseURL = "https://probonozone-cea5b843ff95.herokuapp.com"
-    // axios.defaults.baseURL = "http://localhost:3000"
+    axios.defaults.baseURL = import.meta.env.VITE_API_URL || "https://probonozone-cea5b843ff95.herokuapp.com"
 
 }
 

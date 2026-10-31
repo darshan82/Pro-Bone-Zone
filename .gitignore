@@ -24,3 +24,6 @@ build
 *.sw?
 yarn.lock
 package-lock.json
+
+# env files
+.env
