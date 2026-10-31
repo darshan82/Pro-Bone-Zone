@@ -1,6 +1,6 @@
-# Pro Bone Zone — Frontend
+# Pro Bono Zone — Frontend
 
-Web app for **Pro Bone Zone**, a platform that runs free legal, business and financial consultation events. The public site lets visitors browse events, read blogs and register for a consultation. Behind the login, admins, licensees and staff each get a role-based dashboard to manage territories, events, promotions, sponsors, customers, appointments and a resource library.
+Web app for **Pro Bono Zone**, a platform that runs free legal, business and financial consultation events. The public site lets visitors browse events, read blogs and register for a consultation. Behind the login, admins, licensees and staff each get a role-based dashboard to manage territories, events, promotions, sponsors, customers, appointments and a resource library.
 
 Backend API: [pro-bone-zone-backend](https://github.com/darshan82/pro-bone-zone-backend)
 
